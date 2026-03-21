@@ -4,7 +4,6 @@
 <link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/%20antiart.ico" type="image/x-icon">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Science &amp; Poésie - Accueil</title>
-<script src="https://code.responsivevoice.org/responsivevoice.js?key=FREE"></script>
 <style type="text/css">
 ::-webkit-scrollbar { width: 16px; background-color: #C0C0C0; }
 ::-webkit-scrollbar-track { background-color: #C0C0C0; border-left: 1px solid #888888; border-right: 1px solid #FFFFFF; }
@@ -85,6 +84,9 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
 </head>
 <body>
 
+<!-- iframes vocales invisibles : une par onglet navbar, contexte audio indépendant -->
+<div id="voice-pool" style="position:absolute;width:0;height:0;overflow:hidden;"></div>
+
 <div id="star-cursor">
   <svg width="18" height="18" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
     <polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000000" stroke-width="0.6"/>
@@ -137,152 +139,141 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
   </tr>
 </table>
 
-<table class="main-layout" cellpadding="0" cellspacing="0">
-  <tr>
+<table class="main-layout" cellpadding="0" cellspacing="0"><tr>
 
-    <td class="sidebar-left">
-      <div class="sidebar-section">
-        <h3>Navigation</h3>
-        <ul>
-          <li><a href="#projets">&#9658; Projets</a></li>
-          <li><a href="#oeuvres">&#9658; &OElig;uvres</a></li>
-          <li><a href="#halloffame">&#9658; Hall of Fame</a></li>
-          <li><a href="#suckerlist">&#9658; Suckerlist</a></li>
-          <li><a href="#notreentente">&#9658; N. Entente</a></li>
-          <li><a href="#sociogonie">&#9658; Sociogonie</a></li>
-        </ul>
-      </div>
-      <div class="sidebar-section">
-        <h3>Statut</h3>
-        <p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;Fragment III&nbsp;&raquo;<br>en cours&hellip;</p>
-      </div>
-      <div class="sidebar-section">
-        <h3>Liens</h3>
-        <ul>
-          <li><a href="#">Archives</a></li>
-          <li><a href="#">Ressources</a></li>
-          <li><a href="#">R&eacute;f&eacute;rences</a></li>
-          <li><a href="#">Plan du site</a></li>
-        </ul>
-      </div>
-      <div class="sidebar-section" style="text-align:center;background-color:#000080;border:3px inset #888">
-        <p style="color:#FFFF00;font-family:'Courier New';font-size:10px;font-weight:bold;margin:0">
-          &#x2234; &#x2235; &#x2234;<br>ESPACE<br>EXP&Eacute;RIMENTAL<br>&#x2234; &#x2235; &#x2234;
-        </p>
-      </div>
-    </td>
+<td class="sidebar-left">
+  <div class="sidebar-section">
+    <h3>Navigation</h3>
+    <ul>
+      <li><a href="#projets">&#9658; Projets</a></li>
+      <li><a href="#oeuvres">&#9658; &OElig;uvres</a></li>
+      <li><a href="#halloffame">&#9658; Hall of Fame</a></li>
+      <li><a href="#suckerlist">&#9658; Suckerlist</a></li>
+      <li><a href="#notreentente">&#9658; N. Entente</a></li>
+      <li><a href="#sociogonie">&#9658; Sociogonie</a></li>
+    </ul>
+  </div>
+  <div class="sidebar-section">
+    <h3>Statut</h3>
+    <p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;Fragment III&nbsp;&raquo;<br>en cours&hellip;</p>
+  </div>
+  <div class="sidebar-section">
+    <h3>Liens</h3>
+    <ul>
+      <li><a href="#">Archives</a></li>
+      <li><a href="#">Ressources</a></li>
+      <li><a href="#">R&eacute;f&eacute;rences</a></li>
+      <li><a href="#">Plan du site</a></li>
+    </ul>
+  </div>
+  <div class="sidebar-section" style="text-align:center;background-color:#000080;border:3px inset #888">
+    <p style="color:#FFFF00;font-family:'Courier New';font-size:10px;font-weight:bold;margin:0">
+      &#x2234; &#x2235; &#x2234;<br>ESPACE<br>EXP&Eacute;RIMENTAL<br>&#x2234; &#x2235; &#x2234;
+    </p>
+  </div>
+</td>
 
-    <td class="center-content">
-      <div class="welcome-bar" style="text-align:center;">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
-      <div class="welcome-body">
-        <p>Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>science</strong>, de la <strong>po&eacute;sie</strong> et de l&rsquo;&eacute;sot&eacute;rique. D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p>
-      </div>
-      <hr class="rainbow">
-
-      <table class="cards-table" cellpadding="0" cellspacing="0">
-        <tr>
-          <td class="card c-crimson" id="projets" colspan="2">
-            <div class="card-header">&#x25BA; PROJET EN COURS</div>
-            <div class="card-body">
-              Enquetes, analyses et actions contre les organisations sectaires. Croisement des methodes sociologiques et des savoirs essoteriques pour decoder les mecanismes d'emprise.
-              <br><a href="#">&#9658; Acceder aux projets</a>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="card c-purple" id="oeuvres" colspan="2">
-            <div class="card-header">&#x2736; PUBLICATIONS</div>
-            <div class="card-body" style="padding:0">
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF">
-                    <strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br>
-                    <span style="font-size:11px">Publications, tirages, objets.</span><br>
-                    <a href="#" style="margin-top:4px">&#9658; Voir</a>
-                  </td>
-                  <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF5FF">
-                    <strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br>
-                    <span style="font-size:11px">Revue experimentale.</span><br>
-                    <a href="#" style="margin-top:4px">&#9658; Feuilleter</a>
-                  </td>
-                  <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF">
-                    <strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br>
-                    <span style="font-size:11px">Videos, captations, creations.</span><br>
-                    <a href="https://dashboard.twitch.tv/u/scienceetpoesie/stream-manager" target="_blank" style="margin-top:4px">&#9658; Regarder</a>
-                  </td>
-                  <td style="width:25%;padding:8px 10px;vertical-align:top;background:#FFF5FF">
-                    <strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br>
-                    <span style="font-size:11px">Images, oeuvres visuelles.</span><br>
-                    <a href="#" style="margin-top:4px">&#9658; Galerie</a>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="card c-gold" id="halloffame" style="width:50%">
-            <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
-            <div class="card-body">
-              Figures, contributions exceptionnelles honor&eacute;s par S&amp;P.
-              <br><a href="#">&#9658; Voir le palmares</a>
-            </div>
-          </td>
-          <td class="card c-black" id="suckerlist" style="width:50%">
-            <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
-            <div class="card-body" style="background:#1A1A1A;color:#CCCCCC">
-              Le revers de la medaille. Ceux qui ont decu, trahi ou simplement rate leur coup.
-              <br><a href="#" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="card c-sociogonie" id="sociogonie" colspan="2">
-            <div class="card-header" style="color:#E0CCFF;letter-spacing:3px">&#x2609; SOCIOGONIE</div>
-            <div class="card-body" style="background:#F5EEFF">
-              Theorie des origines sociales. A la croisee de la cosmogonie, de la sociologie et de l'esoterisme &mdash; une approche fondatrice des structures invisibles du collectif.
-              <br><a href="#" style="background:#2B0050;border-color:#9955FF">&#9658; Explorer la sociogonie</a>
-            </div>
-          </td>
-        </tr>
-      </table>
-      <hr class="rainbow">
-    </td>
-
-    <td class="sidebar-right">
-      <div class="rsidebar-section" style="background:#FF8000;border-bottom:3px solid #CC6600;padding:8px">
-        <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" target="_blank" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 6px 12px 6px">
-          <div style="font-family:'Arial Black',Arial,sans-serif;font-size:10px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
-          <div style="height:4px;background:#0000AA;margin:0 0 8px 0"></div>
-          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/blue%20book.jpg?raw=true" width="60" height="74" style="display:block;margin:0 auto 8px auto;position:relative;left:-2px;image-rendering:pixelated;" alt="Notre Entente">
-          <div style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#444;line-height:1.6;margin-bottom:8px">&laquo;&nbsp;po&egrave;me anti-&eacute;pique&nbsp;&raquo;<br><span style="font-size:9px;color:#999">(à ne pas lire)</span></div>
-          <span class="ne-cta" style="font-family:'Times New Roman',serif;font-size:11px;font-weight:bold;color:#0000AA;text-decoration:underline">Acc&eacute;der au site</span>
-        </a>
-      </div>
-      <div class="rsidebar-section">
-        <h3>Citation</h3>
-        <p style="font-style:italic;font-size:11px">&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;</p>
-      </div>
-      <div class="rsidebar-section">
-        <h3>Web Ring</h3>
-        <div class="webring-box">
-          <a href="#">&#9664; Pr&eacute;c.</a>
-          <a href="#" style="color:#FF0000;font-size:13px">&#9679;</a>
-          <a href="#">Suiv. &#9654;</a>
+<td class="center-content">
+  <div class="welcome-bar" style="text-align:center;">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
+  <div class="welcome-body">
+    <p>Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>science</strong>, de la <strong>po&eacute;sie</strong> et de l&rsquo;&eacute;sot&eacute;rique. D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p>
+  </div>
+  <hr class="rainbow">
+  <table class="cards-table" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="card c-crimson" id="projets" colspan="2">
+        <div class="card-header">&#x25BA; PROJET EN COURS</div>
+        <div class="card-body">
+          Enquetes, analyses et actions contre les organisations sectaires. Croisement des methodes sociologiques et des savoirs essoteriques pour decoder les mecanismes d'emprise.
+          <br><a href="#">&#9658; Acceder aux projets</a>
         </div>
-      </div>
-      <div class="rsidebar-section" style="text-align:center">
-        <p style="font-family:'Courier New';font-size:10px;font-weight:bold;color:#000">Optimis&eacute; pour<br><span style="font-size:13px">Netscape 3.0</span><br>800&times;600</p>
-      </div>
-      <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;">
-        <span style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#CC0000;line-height:1.5;display:block;margin-bottom:2px">c&eacute;l&eacute;bration<br>de l'arbitraire</span>
-        <span style="display:block;color:#CC0000;font-size:13px;line-height:1;">&#x2193;</span>
-        <a href="#" style="display:inline-block;width:22px;height:22px;background:#CC0000;border:2px outset #FF6666;border-right-color:#880000;border-bottom-color:#880000;border-radius:50%;text-decoration:none;margin-top:2px;" title="c&eacute;l&eacute;bration de l'arbitraire">&nbsp;</a>
-      </div>
-    </td>
+      </td>
+    </tr>
+    <tr>
+      <td class="card c-purple" id="oeuvres" colspan="2">
+        <div class="card-header">&#x2736; PUBLICATIONS</div>
+        <div class="card-body" style="padding:0">
+          <table width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF">
+              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br>
+              <span style="font-size:11px">Publications, tirages, objets.</span><br>
+              <a href="#" style="margin-top:4px">&#9658; Voir</a>
+            </td>
+            <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF5FF">
+              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br>
+              <span style="font-size:11px">Revue experimentale.</span><br>
+              <a href="#" style="margin-top:4px">&#9658; Feuilleter</a>
+            </td>
+            <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF">
+              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br>
+              <span style="font-size:11px">Videos, captations, creations.</span><br>
+              <a href="https://dashboard.twitch.tv/u/scienceetpoesie/stream-manager" target="_blank" style="margin-top:4px">&#9658; Regarder</a>
+            </td>
+            <td style="width:25%;padding:8px 10px;vertical-align:top;background:#FFF5FF">
+              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br>
+              <span style="font-size:11px">Images, oeuvres visuelles.</span><br>
+              <a href="#" style="margin-top:4px">&#9658; Galerie</a>
+            </td>
+          </tr></table>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="card c-gold" id="halloffame" style="width:50%">
+        <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
+        <div class="card-body">Figures, contributions exceptionnelles honor&eacute;s par S&amp;P.<br><a href="#">&#9658; Voir le palmares</a></div>
+      </td>
+      <td class="card c-black" id="suckerlist" style="width:50%">
+        <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
+        <div class="card-body" style="background:#1A1A1A;color:#CCCCCC">Le revers de la medaille. Ceux qui ont decu, trahi ou simplement rate leur coup.<br><a href="#" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="card c-sociogonie" id="sociogonie" colspan="2">
+        <div class="card-header" style="color:#E0CCFF;letter-spacing:3px">&#x2609; SOCIOGONIE</div>
+        <div class="card-body" style="background:#F5EEFF">
+          Theorie des origines sociales. A la croisee de la cosmogonie, de la sociologie et de l'esoterisme &mdash; une approche fondatrice des structures invisibles du collectif.
+          <br><a href="#" style="background:#2B0050;border-color:#9955FF">&#9658; Explorer la sociogonie</a>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <hr class="rainbow">
+</td>
 
-  </tr>
-</table>
+<td class="sidebar-right">
+  <div class="rsidebar-section" style="background:#FF8000;border-bottom:3px solid #CC6600;padding:8px">
+    <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" target="_blank" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 6px 12px 6px">
+      <div style="font-family:'Arial Black',Arial,sans-serif;font-size:10px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
+      <div style="height:4px;background:#0000AA;margin:0 0 8px 0"></div>
+      <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/blue%20book.jpg?raw=true" width="60" height="74" style="display:block;margin:0 auto 8px auto;position:relative;left:-2px;image-rendering:pixelated;" alt="Notre Entente">
+      <div style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#444;line-height:1.6;margin-bottom:8px">&laquo;&nbsp;po&egrave;me anti-&eacute;pique&nbsp;&raquo;<br><span style="font-size:9px;color:#999">(à ne pas lire)</span></div>
+      <span class="ne-cta" style="font-family:'Times New Roman',serif;font-size:11px;font-weight:bold;color:#0000AA;text-decoration:underline">Acc&eacute;der au site</span>
+    </a>
+  </div>
+  <div class="rsidebar-section">
+    <h3>Citation</h3>
+    <p style="font-style:italic;font-size:11px">&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;</p>
+  </div>
+  <div class="rsidebar-section">
+    <h3>Web Ring</h3>
+    <div class="webring-box">
+      <a href="#">&#9664; Pr&eacute;c.</a>
+      <a href="#" style="color:#FF0000;font-size:13px">&#9679;</a>
+      <a href="#">Suiv. &#9654;</a>
+    </div>
+  </div>
+  <div class="rsidebar-section" style="text-align:center">
+    <p style="font-family:'Courier New';font-size:10px;font-weight:bold;color:#000">Optimis&eacute; pour<br><span style="font-size:13px">Netscape 3.0</span><br>800&times;600</p>
+  </div>
+  <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;">
+    <span style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#CC0000;line-height:1.5;display:block;margin-bottom:2px">c&eacute;l&eacute;bration<br>de l'arbitraire</span>
+    <span style="display:block;color:#CC0000;font-size:13px;line-height:1;">&#x2193;</span>
+    <a href="#" style="display:inline-block;width:22px;height:22px;background:#CC0000;border:2px outset #FF6666;border-right-color:#880000;border-bottom-color:#880000;border-radius:50%;text-decoration:none;margin-top:2px;">&nbsp;</a>
+  </div>
+</td>
+
+</tr></table>
 
 <hr class="rainbow">
 
@@ -297,79 +288,107 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
   &nbsp;&bull;&nbsp; HTML 4.01 &nbsp;&bull;&nbsp; Pas de cookies &nbsp;&bull;&nbsp; Pas de pub
 </div>
 
-</div>
+</div><!-- end #page-wrapper -->
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-
 <script type="text/javascript">
+
   document.getElementById('fyear').innerHTML = new Date().getFullYear();
 
   var count = 4731, display = document.getElementById('vcounter');
-  var target = count + Math.floor(Math.random() * 3), current = count;
-  var interval = setInterval(function() {
-    if (current >= target) { clearInterval(interval); return; }
+  var target = count + Math.floor(Math.random()*3), current = count;
+  var iv = setInterval(function(){
+    if(current>=target){clearInterval(iv);return;}
     display.innerHTML = String(++current).padStart(6,'0');
-  }, 120);
+  },120);
 
   var cursor = document.getElementById('star-cursor');
-  document.addEventListener('mousemove', function(e) {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
+  document.addEventListener('mousemove',function(e){
+    cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px';
   });
 
-  document.addEventListener('click', function(e) {
-    var chars  = ['*','*','*','★','✦','·','+','*'];
-    var colors = ['#FFFF00','#FF0000','#00FFFF','#FF00FF','#FFFFFF','#FF8800','#00FF00','#FFFF00'];
-    for (var i = 0; i < 8; i++) {
-      (function(i) {
-        var el = document.createElement('div');
-        el.className = 'sparkle';
-        el.style.left = e.clientX + 'px'; el.style.top = e.clientY + 'px';
-        var angle = (i/8)*2*Math.PI, dist = 35+Math.random()*25;
-        el.style.setProperty('--tx',(Math.cos(angle)*dist)+'px');
-        el.style.setProperty('--ty',(Math.sin(angle)*dist)+'px');
-        el.style.fontSize = (i%2===0)?'16px':'10px';
-        el.style.color = colors[i]; el.innerHTML = chars[i];
-        document.body.appendChild(el);
-        setTimeout(function(){ el.parentNode && el.parentNode.removeChild(el); }, 460);
-      })(i);
-    }
+  document.addEventListener('click',function(e){
+    var chars=['*','*','*','★','✦','·','+','*'];
+    var colors=['#FFFF00','#FF0000','#00FFFF','#FF00FF','#FFFFFF','#FF8800','#00FF00','#FFFF00'];
+    for(var i=0;i<8;i++){(function(i){
+      var el=document.createElement('div'); el.className='sparkle';
+      el.style.left=e.clientX+'px'; el.style.top=e.clientY+'px';
+      var angle=(i/8)*2*Math.PI, dist=35+Math.random()*25;
+      el.style.setProperty('--tx',(Math.cos(angle)*dist)+'px');
+      el.style.setProperty('--ty',(Math.sin(angle)*dist)+'px');
+      el.style.fontSize=(i%2===0)?'16px':'10px';
+      el.style.color=colors[i]; el.innerHTML=chars[i];
+      document.body.appendChild(el);
+      setTimeout(function(){el.parentNode&&el.parentNode.removeChild(el);},460);
+    })(i);}
   });
 
-  /* ── VOICE HOVER — superposition vraie via ResponsiveVoice ── */
-  var labels = {
-    'PROJETS':      'Projets',
-    '\u0152UVRES':  '\u0152uvres',
-    'HALL OF FAME': 'Hall of Fame',
-    'SUCKERLIST':   'Suckerlist',
-    'PUBLICATIONS': 'Publications',
-    'SOCIOGONIE':   'Sociogonie'
-  };
+  /* ── VOIX POLYPHONIQUES via iframes sandboxées ──
+     Chaque onglet navbar a sa propre iframe avec son propre
+     SpeechSynthesis — ils ne partagent pas la même queue audio,
+     donc les voix se chevauchent vraiment.
+  ── */
 
-  var variants = [
-    { rate: 0.85, pitch: 1.0  },
-    { rate: 1.05, pitch: 0.85 },
-    { rate: 0.92, pitch: 1.15 },
-    { rate: 1.15, pitch: 0.78 },
-    { rate: 0.78, pitch: 1.22 },
-    { rate: 1.00, pitch: 0.93 }
+  var navData = [
+    { text: 'Projets',      pitch: 1.0,  rate: 0.88 },
+    { text: 'Œuvres',       pitch: 0.85, rate: 0.95 },
+    { text: 'Hall of Fame', pitch: 1.15, rate: 0.80 },
+    { text: 'Suckerlist',   pitch: 0.75, rate: 1.05 },
+    { text: 'Publications', pitch: 1.20, rate: 0.85 },
+    { text: 'Sociogonie',   pitch: 0.90, rate: 0.92 }
   ];
 
-  var counters = {};
+  var pool = document.getElementById('voice-pool');
+  var frames = [];
 
-  document.querySelectorAll('td.nav-cell a').forEach(function(link, i) {
-    var raw   = link.textContent.trim();
-    var label = labels[raw] || raw;
-    link.addEventListener('mouseenter', function() {
-      if (typeof responsiveVoice === 'undefined') return;
-      if (!counters[i]) counters[i] = 0;
-      var v = variants[counters[i]++ % variants.length];
-      /* chaque appel est indépendant — les sons se superposent */
-      responsiveVoice.speak(label, 'French Female', {
-        rate: v.rate, pitch: v.pitch, volume: 1
-      });
+  /* Contenu de chaque iframe : attend un message 'speak' et prononce le mot */
+  var iframeHTML = [
+    '<!DOCTYPE html><html><body><script>',
+    'window.addEventListener("message",function(e){',
+    '  if(e.data && e.data.type==="speak"){',
+    '    var u=new SpeechSynthesisUtterance(e.data.text);',
+    '    u.lang="fr-FR";',
+    '    u.pitch=e.data.pitch||1;',
+    '    u.rate=e.data.rate||1;',
+    '    u.volume=1;',
+    '    var voices=speechSynthesis.getVoices();',
+    '    var fr=voices.find(function(v){return v.lang.startsWith("fr");});',
+    '    if(fr) u.voice=fr;',
+    '    speechSynthesis.speak(u);',
+    '  }',
+    '});',
+    '<\/script></body></html>'
+  ].join('');
+
+  var blob = new Blob([iframeHTML], {type:'text/html'});
+  var blobURL = URL.createObjectURL(blob);
+
+  /* Créer 6 iframes, une par onglet */
+  for(var n=0; n<6; n++){
+    var f = document.createElement('iframe');
+    f.src = blobURL;
+    f.style.cssText = 'width:0;height:0;border:0;position:absolute;';
+    f.setAttribute('sandbox','allow-scripts allow-same-origin');
+    pool.appendChild(f);
+    frames.push(f);
+  }
+
+  /* Attacher les mouseenter après chargement des iframes */
+  var links = document.querySelectorAll('td.nav-cell a');
+  links.forEach(function(link, i){
+    link.addEventListener('mouseenter', function(){
+      var d = navData[i];
+      if(frames[i] && frames[i].contentWindow){
+        frames[i].contentWindow.postMessage({
+          type:  'speak',
+          text:  d.text,
+          pitch: d.pitch,
+          rate:  d.rate
+        }, '*');
+      }
     });
   });
+
 </script>
 </body>
 </html>
