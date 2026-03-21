@@ -79,8 +79,8 @@ table.header-table {
 
 td.header-left {
   background-color: #FF0000;
-  width: 220px;
-  padding: 14px 16px;
+  width: 160px;
+  padding: 14px 12px;
   vertical-align: middle;
   border-right: 4px solid #800000;
 }
@@ -94,8 +94,8 @@ td.header-center {
 
 td.header-right {
   background-color: #008000;
-  width: 180px;
-  padding: 14px 16px;
+  width: 130px;
+  padding: 14px 12px;
   vertical-align: middle;
   border-left: 4px solid #004000;
   text-align: center;
@@ -216,7 +216,7 @@ table.main-layout {
 /* ── LEFT SIDEBAR ── */
 td.sidebar-left {
   background-color: #FFFF00;
-  width: 170px;
+  width: 120px;
   vertical-align: top;
   padding: 0;
   border-right: 4px solid #CCCC00;
@@ -224,7 +224,7 @@ td.sidebar-left {
 
 .sidebar-section {
   border-bottom: 3px solid #CCCC00;
-  padding: 10px 12px;
+  padding: 10px 10px;
 }
 
 .sidebar-section h3 {
@@ -240,12 +240,12 @@ td.sidebar-left {
 
 .sidebar-section ul {
   margin: 0;
-  padding: 0 0 0 14px;
+  padding: 0 0 0 10px;
   list-style-type: square;
 }
 
 .sidebar-section ul li {
-  font-size: 12px;
+  font-size: 11px;
   line-height: 2;
   font-family: "Times New Roman", serif;
 }
@@ -262,7 +262,7 @@ td.sidebar-left {
 }
 
 .sidebar-section p {
-  font-size: 12px;
+  font-size: 11px;
   color: #000000;
   line-height: 1.7;
   font-family: "Courier New", monospace;
@@ -431,7 +431,7 @@ td.card:hover {
 /* ── RIGHT SIDEBAR ── */
 td.sidebar-right {
   background-color: #FF8000;
-  width: 170px;
+  width: 120px;
   vertical-align: top;
   padding: 0;
   border-left: 4px solid #CC6600;
@@ -439,7 +439,7 @@ td.sidebar-right {
 
 .rsidebar-section {
   border-bottom: 3px solid #CC6600;
-  padding: 10px 12px;
+  padding: 10px 10px;
 }
 
 .rsidebar-section h3 {
@@ -454,7 +454,7 @@ td.sidebar-right {
 }
 
 .rsidebar-section p {
-  font-size: 12px;
+  font-size: 11px;
   font-family: "Times New Roman", serif;
   color: #000000;
   line-height: 1.7;
@@ -620,11 +620,11 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
       <div class="sidebar-section">
         <h3>Navigation</h3>
         <ul>
-          <li><a href="#projets">&#9658; Projets / Sectes</a></li>
+          <li><a href="#projets">&#9658; Projets</a></li>
           <li><a href="#oeuvres">&#9658; &OElig;uvres</a></li>
           <li><a href="#halloffame">&#9658; Hall of Fame</a></li>
           <li><a href="#suckerlist">&#9658; Suckerlist</a></li>
-          <li><a href="#notreentente">&#9658; Notre Entente</a></li>
+          <li><a href="#notreentente">&#9658; N. Entente</a></li>
           <li><a href="#sociogonie">&#9658; Sociogonie</a></li>
         </ul>
       </div>
@@ -658,10 +658,9 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
 
       <hr class="rainbow">
 
-      <!-- CARDS : NOUVELLE ARCHITECTURE -->
+      <!-- CARDS -->
       <table class="cards-table" cellpadding="0" cellspacing="0">
 
-        <!-- ROW 1 : PROJETS pleine largeur -->
         <tr>
           <td class="card c-crimson" id="projets" colspan="2">
             <div class="card-header">&#x2620; PROJETS &mdash; LUTTE CONTRE LES SECTES</div>
@@ -672,7 +671,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
           </td>
         </tr>
 
-        <!-- ROW 2 : OEUVRES 4 colonnes -->
         <tr>
           <td class="card c-purple" id="oeuvres" colspan="2">
             <div class="card-header">&#x2736; &OElig;UVRES</div>
@@ -705,7 +703,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
           </td>
         </tr>
 
-        <!-- ROW 3 : HALL OF FAME + SUCKERLIST -->
         <tr>
           <td class="card c-gold" id="halloffame" style="width:50%">
             <div class="card-header">&#x2605; HALL OF FAME</div>
@@ -723,8 +720,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
           </td>
         </tr>
 
-
-        <!-- ROW 5 : SOCIOGONIE pleine largeur -->
         <tr>
           <td class="card c-sociogonie" id="sociogonie" colspan="2">
             <div class="card-header" style="color:#E0CCFF;letter-spacing:3px">&#x2609; SOCIOGONIE</div>
@@ -744,10 +739,10 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
     <!-- RIGHT SIDEBAR -->
     <td class="sidebar-right">
       <div class="rsidebar-section" style="background:#FF8000;border-bottom:3px solid #CC6600;padding:8px">
-        <a href="#" class="ne-pub-link" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 8px 12px 8px">
-          <div style="font-family:'Arial Black',Arial,sans-serif;font-size:11px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
+        <a href="#" class="ne-pub-link" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 6px 12px 6px">
+          <div style="font-family:'Arial Black',Arial,sans-serif;font-size:10px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
           <div style="height:4px;background:#0000AA;margin:0 0 8px 0"></div>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 100" width="60" height="75" style="display:block;margin:0 auto 8px auto">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 100" width="55" height="68" style="display:block;margin:0 auto 8px auto">
             <rect x="8" y="4" width="11" height="92" rx="1" fill="#000077"/>
             <rect x="17" y="4" width="55" height="92" rx="2" fill="#0000AA"/>
             <rect x="19" y="6" width="51" height="88" rx="1" fill="#1111CC"/>
@@ -761,28 +756,28 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
             <rect x="29" y="67" width="30" height="2" rx="1" fill="#FFFFFF" opacity="0.6"/>
             <rect x="19" y="6" width="4" height="88" fill="#FFFFFF" opacity="0.08"/>
           </svg>
-          <div style="font-family:'Times New Roman',serif;font-size:11px;font-style:italic;color:#444;line-height:1.6;margin-bottom:10px">&laquo;&nbsp;po&egrave;me anti-&eacute;pique&nbsp;&raquo;<br><span style="font-size:9px;color:#999">(à ne pas lire)</span></div>
-          <span class="ne-cta" style="font-family:'Times New Roman',serif;font-size:12px;font-weight:bold;color:#0000AA;text-decoration:underline">Acc&eacute;der au site</span>
+          <div style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#444;line-height:1.6;margin-bottom:8px">&laquo;&nbsp;po&egrave;me anti-&eacute;pique&nbsp;&raquo;<br><span style="font-size:9px;color:#999">(à ne pas lire)</span></div>
+          <span class="ne-cta" style="font-family:'Times New Roman',serif;font-size:11px;font-weight:bold;color:#0000AA;text-decoration:underline">Acc&eacute;der au site</span>
         </a>
       </div>
       <div class="rsidebar-section">
         <h3>Citation</h3>
-        <p style="font-style:italic;font-size:12px">
+        <p style="font-style:italic;font-size:11px">
           &laquo;&nbsp;La science sans la po&eacute;sie est aveugle, la po&eacute;sie sans la science est vide.&nbsp;&raquo;
         </p>
       </div>
       <div class="rsidebar-section">
         <h3>Web Ring</h3>
         <div class="webring-box">
-          <a href="#">&#9664; Pr&eacute;c&eacute;dent</a>
-          <a href="#" style="color:#FF0000;font-size:13px">&#9679; Accueil</a>
-          <a href="#">Suivant &#9654;</a>
+          <a href="#">&#9664; Pr&eacute;c.</a>
+          <a href="#" style="color:#FF0000;font-size:13px">&#9679;</a>
+          <a href="#">Suiv. &#9654;</a>
         </div>
       </div>
       <div class="rsidebar-section" style="text-align:center">
         <p style="font-family:'Courier New';font-size:10px;font-weight:bold;color:#000">
           Optimis&eacute; pour<br>
-          <span style="font-size:14px">Netscape 3.0</span><br>
+          <span style="font-size:13px">Netscape 3.0</span><br>
           800&times;600
         </p>
       </div>
@@ -810,7 +805,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
 <script type="text/javascript">
-  /* ── DATE & YEAR ── */
   var now = new Date();
   var dd = String(now.getDate()).padStart(2,'0');
   var mm = String(now.getMonth()+1).padStart(2,'0');
@@ -818,7 +812,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
   document.getElementById('datestr').innerHTML = dd+'/'+mm+'/'+yy;
   document.getElementById('fyear').innerHTML = yy;
 
-  /* ── VISITOR COUNTER (animated roll) ── */
   var count = 4731;
   var display = document.getElementById('vcounter');
   var target = count + Math.floor(Math.random() * 3);
@@ -829,7 +822,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
     display.innerHTML = String(current).padStart(6, '0');
   }, 120);
 
-  /* ── STAR CURSOR ── */
   var cursor = document.getElementById('star-cursor');
   var mx = -100, my = -100;
 
@@ -841,7 +833,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
     spawnTrail(mx, my);
   });
 
-  /* Trail throttle */
   var lastTrail = 0;
   var trailChars = ['✦','✧','★','☆','✶','✸','⋆','*','·','✺'];
 
@@ -856,7 +847,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
     el.style.top  = y + 'px';
     el.style.fontSize = (8 + Math.random() * 10) + 'px';
 
-    /* alternate yellow / cyan / white */
     var colors = ['#FFFF00','#00FFFF','#FF88FF','#FFFFFF','#FF8800'];
     el.style.color = colors[Math.floor(Math.random() * colors.length)];
     el.innerHTML = trailChars[Math.floor(Math.random() * trailChars.length)];
@@ -865,7 +855,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
     setTimeout(function() { el.parentNode && el.parentNode.removeChild(el); }, 820);
   }
 
-  /* ── CLICK SPARKLE BURST ── */
   document.addEventListener('click', function(e) {
     var burstChars = ['✦','★','✶','✸','✺','⚡','✨'];
     for (var i = 0; i < 8; i++) {
