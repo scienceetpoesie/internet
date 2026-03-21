@@ -7,6 +7,33 @@
 <title>SCIENCE &amp; POESIE - Page d'accueil</title>
 <style type="text/css">
 
+/* ── CURSOR ── */
+* { cursor: none !important; }
+
+#star-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 20px; height: 20px;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+}
+
+.trail-star {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  font-size: 12px;
+  animation: trailFade 0.8s linear forwards;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+@keyframes trailFade {
+  0%   { opacity: 1; transform: translate(-50%,-50%) scale(1.2); }
+  100% { opacity: 0; transform: translate(-50%,-120%) scale(0.3); }
+}
+
 body {
   background-color: #808080;
   margin: 0;
@@ -84,6 +111,12 @@ h1.site-title {
   letter-spacing: 4px;
   text-decoration: underline;
   text-shadow: 3px 3px #000000;
+  animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% { text-shadow: 3px 3px #000000; }
+  50%       { text-shadow: 3px 3px #000000, 0 0 18px #FFFF00, 0 0 32px #FF8800; }
 }
 
 .site-subtitle {
@@ -145,33 +178,34 @@ td.nav-cell a {
   text-decoration: none;
   letter-spacing: 0.5px;
   border-right: 3px outset #999999;
+  transition: letter-spacing 0.15s;
 }
 
 td.nav-cell:last-child a { border-right: none; }
 
 td.n1 { background-color: #FF0000; }
 td.n1 a { color: #FFFFFF; }
-td.n1 a:hover { background-color: #CC0000; }
+td.n1 a:hover { background-color: #CC0000; letter-spacing: 2px; }
 
 td.n2 { background-color: #FF8000; }
 td.n2 a { color: #000000; }
-td.n2 a:hover { background-color: #CC6600; }
+td.n2 a:hover { background-color: #CC6600; letter-spacing: 2px; }
 
 td.n3 { background-color: #FFFF00; }
 td.n3 a { color: #000000; }
-td.n3 a:hover { background-color: #CCCC00; }
+td.n3 a:hover { background-color: #CCCC00; letter-spacing: 2px; }
 
 td.n4 { background-color: #008000; }
 td.n4 a { color: #FFFFFF; }
-td.n4 a:hover { background-color: #006600; }
+td.n4 a:hover { background-color: #006600; letter-spacing: 2px; }
 
 td.n5 { background-color: #000080; }
 td.n5 a { color: #FFFFFF; }
-td.n5 a:hover { background-color: #000055; }
+td.n5 a:hover { background-color: #000055; letter-spacing: 2px; }
 
 td.n6 { background-color: #800080; }
 td.n6 a { color: #FFFFFF; }
-td.n6 a:hover { background-color: #600060; }
+td.n6 a:hover { background-color: #600060; letter-spacing: 2px; }
 
 /* ── MAIN LAYOUT ── */
 table.main-layout {
@@ -282,6 +316,11 @@ td.card {
   padding: 0;
   border: 3px outset #888888;
   width: 50%;
+  transition: border-style 0.1s;
+}
+
+td.card:hover {
+  border-style: inset;
 }
 
 .card-header {
@@ -315,6 +354,7 @@ td.card {
   text-decoration: none;
   padding: 3px 10px;
   border: 2px outset #8888FF;
+  transition: background-color 0.1s;
 }
 
 .card-body a:hover {
@@ -328,6 +368,11 @@ td.card {
 .c-green  .card-header { background-color: #006600; }
 .c-purple .card-header { background-color: #660066; }
 .c-teal   .card-header { background-color: #006666; }
+.c-crimson .card-header { background-color: #990000; }
+.c-black  .card-header { background-color: #111111; }
+.c-gold   .card-header { background-color: #886600; }
+.c-darkblue .card-header { background-color: #000055; }
+.c-sociogonie .card-header { background-color: #2B0050; }
 
 .c-red    .card-body { background-color: #FFF0F0; }
 .c-orange .card-body { background-color: #FFF5EE; }
@@ -335,6 +380,53 @@ td.card {
 .c-green  .card-body { background-color: #F0FFF0; }
 .c-purple .card-body { background-color: #FFF0FF; }
 .c-teal   .card-body { background-color: #F0FFFF; }
+.c-crimson .card-body { background-color: #FFF5F5; }
+.c-black  .card-body { background-color: #1A1A1A; color: #CCCCCC; }
+.c-gold   .card-body { background-color: #FFFBE8; }
+.c-darkblue .card-body { background-color: #F0F0FF; }
+.c-sociogonie .card-body { background-color: #F5EEFF; }
+
+/* ── HALL OF FAME / SUCKERLIST row ── */
+.c-black .card-body a { border-color: #888800; }
+
+/* ── NOTRE ENTENTE standalone card ── */
+.card-notre-entente {
+  background-color: #FFFFFF;
+  border: 4px solid #000080;
+  padding: 12px 16px;
+  margin: 6px 8px;
+  text-align: center;
+  font-family: "Times New Roman", serif;
+}
+.card-notre-entente .ne-title {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  color: #000080;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.card-notre-entente p {
+  font-size: 12px;
+  color: #333333;
+  margin: 4px 0 8px 0;
+  font-style: italic;
+}
+.card-notre-entente a.ne-btn {
+  display: inline-block;
+  background-color: #000080;
+  color: #FFFFFF;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 4px 14px;
+  border: 2px outset #8888FF;
+}
+.card-notre-entente a.ne-btn:hover {
+  background-color: #0000CC;
+  border-style: inset;
+}
 
 /* ── RIGHT SIDEBAR ── */
 td.sidebar-right {
@@ -408,8 +500,7 @@ td.sidebar-right {
 hr.rainbow {
   border: none;
   height: 6px;
-  background: linear-gradient(to right,
-    #FF0000, #FF7700, #FFFF00, #00BB00, #0000FF, #8800BB, #FF0000);
+  background: #0000AA;
   margin: 0;
 }
 
@@ -435,9 +526,35 @@ hr.rainbow {
   font-size: 10px;
 }
 
+a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
+
+/* ── SPARKLE BURST on click ── */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99997;
+  font-size: 16px;
+  animation: sparkleBurst 0.6s ease-out forwards;
+  transform-origin: center;
+  user-select: none;
+}
+
+@keyframes sparkleBurst {
+  0%   { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+}
+
 </style>
 </head>
 <body>
+
+<!-- CUSTOM CURSOR -->
+<div id="star-cursor">
+  <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="10,1 12.4,7.5 19.5,7.5 13.8,11.8 16.2,18.3 10,14 3.8,18.3 6.2,11.8 0.5,7.5 7.6,7.5"
+      fill="#FFFF00" stroke="#FF8800" stroke-width="1"/>
+  </svg>
+</div>
 
 <div id="page-wrapper">
 <!-- MARQUEE -->
@@ -486,11 +603,11 @@ hr.rainbow {
 <table class="navbar" cellpadding="0" cellspacing="0">
   <tr>
     <td class="nav-cell n1"><a href="#projets">PROJETS</a></td>
-    <td class="nav-cell n2"><a href="#galerie">GALERIE</a></td>
-    <td class="nav-cell n3"><a href="#textes">TEXTES</a></td>
-    <td class="nav-cell n4"><a href="#manifeste">MANIFESTE</a></td>
-    <td class="nav-cell n5"><a href="#evenements">&Eacute;V&Eacute;NEMENTS</a></td>
-    <td class="nav-cell n6"><a href="#contact">CONTACT</a></td>
+    <td class="nav-cell n6"><a href="#oeuvres">&OElig;UVRES</a></td>
+    <td class="nav-cell n3"><a href="#halloffame">HALL OF FAME</a></td>
+    <td class="nav-cell n5"><a href="#suckerlist">SUCKERLIST</a></td>
+    <td class="nav-cell n4"><a href="#notreentente">NOTRE ENTENTE</a></td>
+    <td class="nav-cell n2"><a href="#sociogonie">SOCIOGONIE</a></td>
   </tr>
 </table>
 
@@ -503,12 +620,12 @@ hr.rainbow {
       <div class="sidebar-section">
         <h3>Navigation</h3>
         <ul>
-          <li><a href="#projets">&#9658; Projets</a></li>
-          <li><a href="#galerie">&#9658; Galerie</a></li>
-          <li><a href="#textes">&#9658; Textes</a></li>
-          <li><a href="#manifeste">&#9658; Manifeste</a></li>
-          <li><a href="#evenements">&#9658; &Eacute;v&eacute;nements</a></li>
-          <li><a href="#contact">&#9658; Contact</a></li>
+          <li><a href="#projets">&#9658; Projets / Sectes</a></li>
+          <li><a href="#oeuvres">&#9658; &OElig;uvres</a></li>
+          <li><a href="#halloffame">&#9658; Hall of Fame</a></li>
+          <li><a href="#suckerlist">&#9658; Suckerlist</a></li>
+          <li><a href="#notreentente">&#9658; Notre Entente</a></li>
+          <li><a href="#sociogonie">&#9658; Sociogonie</a></li>
         </ul>
       </div>
       <div class="sidebar-section">
@@ -541,56 +658,83 @@ hr.rainbow {
 
       <hr class="rainbow">
 
-      <!-- CARDS ROW 1 -->
+      <!-- CARDS : NOUVELLE ARCHITECTURE -->
       <table class="cards-table" cellpadding="0" cellspacing="0">
-        <tr class="c-red">
-          <td class="card c-red" id="projets">
-            <div class="card-header">&#x2606; PROJETS</div>
-            <div class="card-body">
-              Recherches en cours, collaborations et &oelig;uvres exp&eacute;rimentales m&ecirc;lant &eacute;sot&eacute;rique et sociologie.
-              <br><a href="#">&#9658; Voir les projets</a>
-            </div>
-          </td>
-          <td class="card c-orange" id="galerie">
-            <div class="card-header">&#x25A6; PHOTOS / GALERIE</div>
-            <div class="card-body">
-              Photos, images et documents visuels li&eacute;s aux projets et aux &eacute;v&eacute;nements.
-              <br><a href="#">&#9658; Ouvrir la galerie</a>
-            </div>
-          </td>
-        </tr>
+
+        <!-- ROW 1 : PROJETS pleine largeur -->
         <tr>
-          <td class="card c-navy" id="textes">
-            <div class="card-header">&#x2736; TEXTES / PUBLICATIONS</div>
+          <td class="card c-crimson" id="projets" colspan="2">
+            <div class="card-header">&#x2620; PROJETS &mdash; LUTTE CONTRE LES SECTES</div>
             <div class="card-body">
-              Po&egrave;mes, essais, fragments &mdash; &eacute;criture exp&eacute;rimentale disponible &agrave; la lecture.
-              <br><a href="#">&#9658; Lire les textes</a>
-            </div>
-          </td>
-          <td class="card c-green" id="manifeste">
-            <div class="card-header">&#x221E; &Agrave; PROPOS / MANIFESTE</div>
-            <div class="card-body">
-              D&eacute;marche, intentions artistiques et scientifiques, pr&eacute;sentation du projet &eacute;ditorial.
-              <br><a href="#">&#9658; Lire le manifeste</a>
+              Enquetes, analyses et actions contre les organisations sectaires. Croisement des methodes sociologiques et des savoirs essoteriques pour decoder les mecanismes d'emprise.
+              <br><a href="#">&#9658; Acceder aux projets</a>
             </div>
           </td>
         </tr>
+
+        <!-- ROW 2 : OEUVRES 4 colonnes -->
         <tr>
-          <td class="card c-purple" id="evenements">
-            <div class="card-header">&#x25CE; &Eacute;V&Eacute;NEMENTS</div>
-            <div class="card-body">
-              Lectures, expositions, performances, r&eacute;sidences &agrave; venir et archives pass&eacute;es.
-              <br><a href="#">&#9658; Voir l&rsquo;agenda</a>
-            </div>
-          </td>
-          <td class="card c-teal" id="contact">
-            <div class="card-header">&#x2709; CONTACT</div>
-            <div class="card-body">
-              Collaborations, presse ou tout message destin&eacute; au projet Science &amp; Po&eacute;sie.
-              <br><a href="/cdn-cgi/l/email-protection#3d5e5253495c5e497d4e5e5458535e584d52584e5458135b4f">&#9658; &Eacute;crire un message</a>
+          <td class="card c-purple" id="oeuvres" colspan="2">
+            <div class="card-header">&#x2736; &OElig;UVRES</div>
+            <div class="card-body" style="padding:0">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF">
+                    <strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br>
+                    <span style="font-size:11px">Publications, tirages, objets.</span><br>
+                    <a href="#" style="margin-top:4px">&#9658; Voir</a>
+                  </td>
+                  <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF5FF">
+                    <strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br>
+                    <span style="font-size:11px">Revue experimentale.</span><br>
+                    <a href="#" style="margin-top:4px">&#9658; Feuilleter</a>
+                  </td>
+                  <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF">
+                    <strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br>
+                    <span style="font-size:11px">Videos, captations, creations.</span><br>
+                    <a href="#" style="margin-top:4px">&#9658; Regarder</a>
+                  </td>
+                  <td style="width:25%;padding:8px 10px;vertical-align:top;background:#FFF5FF">
+                    <strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br>
+                    <span style="font-size:11px">Images, oeuvres visuelles.</span><br>
+                    <a href="#" style="margin-top:4px">&#9658; Galerie</a>
+                  </td>
+                </tr>
+              </table>
             </div>
           </td>
         </tr>
+
+        <!-- ROW 3 : HALL OF FAME + SUCKERLIST -->
+        <tr>
+          <td class="card c-gold" id="halloffame" style="width:50%">
+            <div class="card-header">&#x2605; HALL OF FAME</div>
+            <div class="card-body">
+              Figures remarquables, contributions exceptionnelles, honores par Science &amp; Poesie.
+              <br><a href="#">&#9658; Voir le palmares</a>
+            </div>
+          </td>
+          <td class="card c-black" id="suckerlist" style="width:50%">
+            <div class="card-header" style="background:#111111;color:#FF3333">&#x2620; SUCKERLIST</div>
+            <div class="card-body" style="background:#1A1A1A;color:#CCCCCC">
+              Le revers de la medaille. Ceux qui ont decu, trahi ou simplement rate leur coup.
+              <br><a href="#" style="background:#660000;border-color:#FF3333">&#9658; Entrer dans l'enfer</a>
+            </div>
+          </td>
+        </tr>
+
+
+        <!-- ROW 5 : SOCIOGONIE pleine largeur -->
+        <tr>
+          <td class="card c-sociogonie" id="sociogonie" colspan="2">
+            <div class="card-header" style="color:#E0CCFF;letter-spacing:3px">&#x2609; SOCIOGONIE</div>
+            <div class="card-body" style="background:#F5EEFF">
+              Theorie des origines sociales. A la croisee de la cosmogonie, de la sociologie et de l'esoterisme &mdash; une approche fondatrice des structures invisibles du collectif.
+              <br><a href="#" style="background:#2B0050;border-color:#9955FF">&#9658; Explorer la sociogonie</a>
+            </div>
+          </td>
+        </tr>
+
       </table>
 
       <hr class="rainbow">
@@ -599,17 +743,27 @@ hr.rainbow {
 
     <!-- RIGHT SIDEBAR -->
     <td class="sidebar-right">
-      <div class="rsidebar-section">
-        <h3>Derniers ajouts</h3>
-        <div class="entry">
-          Fragment III<br><span>Mars 2026</span>
-        </div>
-        <div class="entry">
-          Galerie III<br><span>Jan. 2026</span>
-        </div>
-        <div class="entry">
-          &Eacute;v&eacute;nement Lyon<br><span>Nov. 2025</span>
-        </div>
+      <div class="rsidebar-section" style="background:#FF8000;border-bottom:3px solid #CC6600;padding:8px">
+        <a href="#" class="ne-pub-link" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 8px 12px 8px">
+          <div style="font-family:'Arial Black',Arial,sans-serif;font-size:11px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
+          <div style="height:4px;background:#0000AA;margin:0 0 8px 0"></div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 100" width="60" height="75" style="display:block;margin:0 auto 8px auto">
+            <rect x="8" y="4" width="11" height="92" rx="1" fill="#000077"/>
+            <rect x="17" y="4" width="55" height="92" rx="2" fill="#0000AA"/>
+            <rect x="19" y="6" width="51" height="88" rx="1" fill="#1111CC"/>
+            <rect x="10" y="6" width="4" height="88" rx="1" fill="#3333AA" opacity="0.5"/>
+            <rect x="24" y="20" width="36" height="2" rx="1" fill="#FFFFFF" opacity="0.8"/>
+            <rect x="24" y="26" width="30" height="2" rx="1" fill="#FFFFFF" opacity="0.5"/>
+            <rect x="24" y="32" width="33" height="2" rx="1" fill="#FFFFFF" opacity="0.5"/>
+            <rect x="24" y="38" width="22" height="2" rx="1" fill="#FFFFFF" opacity="0.4"/>
+            <rect x="19" y="56" width="51" height="24" rx="0" fill="#000077" opacity="0.7"/>
+            <rect x="25" y="61" width="40" height="2" rx="1" fill="#FFFFFF" opacity="0.9"/>
+            <rect x="29" y="67" width="30" height="2" rx="1" fill="#FFFFFF" opacity="0.6"/>
+            <rect x="19" y="6" width="4" height="88" fill="#FFFFFF" opacity="0.08"/>
+          </svg>
+          <div style="font-family:'Times New Roman',serif;font-size:11px;font-style:italic;color:#444;line-height:1.6;margin-bottom:10px">&laquo;&nbsp;po&egrave;me anti-&eacute;pique&nbsp;&raquo;<br><span style="font-size:9px;color:#999">(à ne pas lire)</span></div>
+          <span class="ne-cta" style="font-family:'Times New Roman',serif;font-size:12px;font-weight:bold;color:#0000AA;text-decoration:underline">Acc&eacute;der au site</span>
+        </a>
       </div>
       <div class="rsidebar-section">
         <h3>Citation</h3>
@@ -651,9 +805,12 @@ hr.rainbow {
   &nbsp;&bull;&nbsp; HTML 4.01 &nbsp;&bull;&nbsp; Pas de cookies &nbsp;&bull;&nbsp; Pas de pub
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></div><!-- end #page-wrapper -->
+</div><!-- end #page-wrapper -->
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
 <script type="text/javascript">
+  /* ── DATE & YEAR ── */
   var now = new Date();
   var dd = String(now.getDate()).padStart(2,'0');
   var mm = String(now.getMonth()+1).padStart(2,'0');
@@ -661,5 +818,78 @@ hr.rainbow {
   document.getElementById('datestr').innerHTML = dd+'/'+mm+'/'+yy;
   document.getElementById('fyear').innerHTML = yy;
 
+  /* ── VISITOR COUNTER (animated roll) ── */
   var count = 4731;
-  setI
+  var display = document.getElementById('vcounter');
+  var target = count + Math.floor(Math.random() * 3);
+  var current = count;
+  var interval = setInterval(function() {
+    if (current >= target) { clearInterval(interval); return; }
+    current++;
+    display.innerHTML = String(current).padStart(6, '0');
+  }, 120);
+
+  /* ── STAR CURSOR ── */
+  var cursor = document.getElementById('star-cursor');
+  var mx = -100, my = -100;
+
+  document.addEventListener('mousemove', function(e) {
+    mx = e.clientX;
+    my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
+    spawnTrail(mx, my);
+  });
+
+  /* Trail throttle */
+  var lastTrail = 0;
+  var trailChars = ['✦','✧','★','☆','✶','✸','⋆','*','·','✺'];
+
+  function spawnTrail(x, y) {
+    var now = Date.now();
+    if (now - lastTrail < 40) return;
+    lastTrail = now;
+
+    var el = document.createElement('div');
+    el.className = 'trail-star';
+    el.style.left = x + 'px';
+    el.style.top  = y + 'px';
+    el.style.fontSize = (8 + Math.random() * 10) + 'px';
+
+    /* alternate yellow / cyan / white */
+    var colors = ['#FFFF00','#00FFFF','#FF88FF','#FFFFFF','#FF8800'];
+    el.style.color = colors[Math.floor(Math.random() * colors.length)];
+    el.innerHTML = trailChars[Math.floor(Math.random() * trailChars.length)];
+
+    document.body.appendChild(el);
+    setTimeout(function() { el.parentNode && el.parentNode.removeChild(el); }, 820);
+  }
+
+  /* ── CLICK SPARKLE BURST ── */
+  document.addEventListener('click', function(e) {
+    var burstChars = ['✦','★','✶','✸','✺','⚡','✨'];
+    for (var i = 0; i < 8; i++) {
+      (function(i) {
+        var el = document.createElement('div');
+        el.className = 'sparkle';
+        el.style.left = e.clientX + 'px';
+        el.style.top  = e.clientY + 'px';
+        var angle = (i / 8) * 2 * Math.PI;
+        var dist  = 30 + Math.random() * 30;
+        var tx = Math.cos(angle) * dist;
+        var ty = Math.sin(angle) * dist;
+        el.style.setProperty('--tx', tx + 'px');
+        el.style.setProperty('--ty', ty + 'px');
+        el.style.fontSize = (10 + Math.random() * 8) + 'px';
+        var colors = ['#FFFF00','#FF8800','#00FFFF','#FF00FF','#FFFFFF'];
+        el.style.color = colors[Math.floor(Math.random() * colors.length)];
+        el.innerHTML = burstChars[Math.floor(Math.random() * burstChars.length)];
+        document.body.appendChild(el);
+        setTimeout(function() { el.parentNode && el.parentNode.removeChild(el); }, 650);
+      })(i);
+    }
+  });
+
+</script>
+</body>
+</html>
