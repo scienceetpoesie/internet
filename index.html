@@ -574,9 +574,11 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
 
 </style>
 </head>
-  <script type="text/javascript">
-  /* ── VOICE ON HOVER (navbar) ── */
-  (function() {
+<body>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    /* ── VOICE ON HOVER (navbar) ── */
     var synth = window.speechSynthesis;
     if (!synth) return;
 
@@ -603,11 +605,8 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
         utter.rate = 0.88;
         utter.pitch = 0.95;
         utter.volume = 1;
-        /* cherche une voix française si dispo */
         var voices = synth.getVoices();
-        var frVoice = voices.find(function(v) {
-          return v.lang.startsWith('fr') && !v.localService === false || v.lang.startsWith('fr');
-        });
+        var frVoice = voices.find(function(v) { return v.lang.startsWith('fr'); });
         if (frVoice) utter.voice = frVoice;
         synth.speak(utter);
         setTimeout(function() { lastSpoken = null; }, 1800);
@@ -618,13 +617,10 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
     navLinks.forEach(function(link) {
       var raw = link.textContent.trim();
       var label = labels[raw] || raw;
-      link.addEventListener('mouseenter', function() {
-        speak(label);
-      });
+      link.addEventListener('mouseenter', function() { speak(label); });
     });
-  })();
+  });
 </script>
-<body>
 
 <!-- CUSTOM CURSOR -->
 <div id="star-cursor">
