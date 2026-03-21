@@ -1,0 +1,659 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SCIENCE &amp; POESIE - Page d'accueil</title>
+<style type="text/css">
+
+body {
+  background-color: #C0C0C0;
+  margin: 0;
+  padding: 0;
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* ── MARQUEE BAND ── */
+.marquee-band {
+  background-color: #000080;
+  color: #FFFF00;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-inner {
+  display: inline-block;
+  animation: marquee 22s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(100vw); }
+  to   { transform: translateX(-100%); }
+}
+
+/* ── HEADER TABLE ── */
+table.header-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td.header-left {
+  background-color: #FF0000;
+  width: 220px;
+  padding: 14px 16px;
+  vertical-align: middle;
+  border-right: 4px solid #800000;
+}
+
+td.header-center {
+  background-color: #000080;
+  text-align: center;
+  padding: 18px 20px;
+  vertical-align: middle;
+}
+
+td.header-right {
+  background-color: #008000;
+  width: 180px;
+  padding: 14px 16px;
+  vertical-align: middle;
+  border-left: 4px solid #004000;
+  text-align: center;
+}
+
+h1.site-title {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 48px;
+  font-weight: bold;
+  color: #FFFF00;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 4px;
+  text-decoration: underline;
+  text-shadow: 3px 3px #000000;
+}
+
+.site-subtitle {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  color: #00FFFF;
+  margin-top: 6px;
+  letter-spacing: 2px;
+}
+
+.header-left-text {
+  color: #FFFFFF;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.8;
+}
+
+.visitor-box {
+  background-color: #000000;
+  color: #00FF00;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  font-weight: bold;
+  border: 3px inset #888888;
+  padding: 6px 10px;
+  letter-spacing: 3px;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.header-right-text {
+  color: #FFFFFF;
+  font-family: "Times New Roman", serif;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+/* ── NAV BAR ── */
+table.navbar {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 4px solid #800000;
+  border-bottom: 4px solid #800000;
+}
+
+td.nav-cell {
+  text-align: center;
+  padding: 0;
+}
+
+td.nav-cell a {
+  display: block;
+  padding: 8px 4px;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  border-right: 3px outset #999999;
+}
+
+td.nav-cell:last-child a { border-right: none; }
+
+td.n1 { background-color: #FF0000; }
+td.n1 a { color: #FFFFFF; }
+td.n1 a:hover { background-color: #CC0000; }
+
+td.n2 { background-color: #FF8000; }
+td.n2 a { color: #000000; }
+td.n2 a:hover { background-color: #CC6600; }
+
+td.n3 { background-color: #FFFF00; }
+td.n3 a { color: #000000; }
+td.n3 a:hover { background-color: #CCCC00; }
+
+td.n4 { background-color: #008000; }
+td.n4 a { color: #FFFFFF; }
+td.n4 a:hover { background-color: #006600; }
+
+td.n5 { background-color: #000080; }
+td.n5 a { color: #FFFFFF; }
+td.n5 a:hover { background-color: #000055; }
+
+td.n6 { background-color: #800080; }
+td.n6 a { color: #FFFFFF; }
+td.n6 a:hover { background-color: #600060; }
+
+/* ── MAIN LAYOUT ── */
+table.main-layout {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ── LEFT SIDEBAR ── */
+td.sidebar-left {
+  background-color: #FFFF00;
+  width: 170px;
+  vertical-align: top;
+  padding: 0;
+  border-right: 4px solid #CCCC00;
+}
+
+.sidebar-section {
+  border-bottom: 3px solid #CCCC00;
+  padding: 10px 12px;
+}
+
+.sidebar-section h3 {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  color: #000080;
+  margin: 0 0 6px 0;
+  text-transform: uppercase;
+  border-bottom: 2px solid #000080;
+  padding-bottom: 3px;
+}
+
+.sidebar-section ul {
+  margin: 0;
+  padding: 0 0 0 14px;
+  list-style-type: square;
+}
+
+.sidebar-section ul li {
+  font-size: 12px;
+  line-height: 2;
+  font-family: "Times New Roman", serif;
+}
+
+.sidebar-section ul li a {
+  color: #800000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.sidebar-section ul li a:hover {
+  text-decoration: underline;
+  color: #FF0000;
+}
+
+.sidebar-section p {
+  font-size: 12px;
+  color: #000000;
+  line-height: 1.7;
+  font-family: "Courier New", monospace;
+}
+
+.blink {
+  animation: blinker 0.9s step-start infinite;
+}
+@keyframes blinker { 50% { opacity: 0; } }
+
+/* ── CENTER ── */
+td.center-content {
+  background-color: #FFFFFF;
+  vertical-align: top;
+  padding: 0;
+}
+
+.welcome-bar {
+  background-color: #FF0000;
+  color: #FFFFFF;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  padding: 8px 16px;
+  letter-spacing: 2px;
+  border-bottom: 4px outset #CC0000;
+}
+
+.welcome-body {
+  padding: 14px 16px;
+  background-color: #FFFFFF;
+  border-bottom: 3px solid #C0C0C0;
+}
+
+.welcome-body p {
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+  color: #000000;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── SECTION CARDS ── */
+table.cards-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td.card {
+  vertical-align: top;
+  padding: 0;
+  border: 3px outset #888888;
+  width: 50%;
+}
+
+.card-header {
+  padding: 7px 10px;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #FFFFFF;
+  border-bottom: 3px inset #555555;
+}
+
+.card-body {
+  padding: 10px 12px;
+  background-color: #F0F0F0;
+  font-family: "Times New Roman", serif;
+  font-size: 13px;
+  color: #000000;
+  line-height: 1.6;
+  min-height: 80px;
+}
+
+.card-body a {
+  display: inline-block;
+  margin-top: 8px;
+  background-color: #000080;
+  color: #FFFFFF;
+  font-family: "Arial", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 3px 10px;
+  border: 2px outset #8888FF;
+}
+
+.card-body a:hover {
+  background-color: #0000CC;
+  border-style: inset;
+}
+
+.c-red    .card-header { background-color: #FF0000; }
+.c-orange .card-header { background-color: #FF6600; }
+.c-navy   .card-header { background-color: #000080; }
+.c-green  .card-header { background-color: #006600; }
+.c-purple .card-header { background-color: #660066; }
+.c-teal   .card-header { background-color: #006666; }
+
+.c-red    .card-body { background-color: #FFF0F0; }
+.c-orange .card-body { background-color: #FFF5EE; }
+.c-navy   .card-body { background-color: #F0F0FF; }
+.c-green  .card-body { background-color: #F0FFF0; }
+.c-purple .card-body { background-color: #FFF0FF; }
+.c-teal   .card-body { background-color: #F0FFFF; }
+
+/* ── RIGHT SIDEBAR ── */
+td.sidebar-right {
+  background-color: #FF8000;
+  width: 170px;
+  vertical-align: top;
+  padding: 0;
+  border-left: 4px solid #CC6600;
+}
+
+.rsidebar-section {
+  border-bottom: 3px solid #CC6600;
+  padding: 10px 12px;
+}
+
+.rsidebar-section h3 {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  color: #000000;
+  margin: 0 0 6px 0;
+  text-transform: uppercase;
+  border-bottom: 2px solid #000000;
+  padding-bottom: 3px;
+}
+
+.rsidebar-section p {
+  font-size: 12px;
+  font-family: "Times New Roman", serif;
+  color: #000000;
+  line-height: 1.7;
+}
+
+.rsidebar-section .entry {
+  font-size: 11px;
+  font-family: "Courier New", monospace;
+  border-left: 3px solid #000000;
+  padding-left: 6px;
+  margin-bottom: 6px;
+  color: #000000;
+  line-height: 1.6;
+}
+
+.rsidebar-section .entry span {
+  display: block;
+  font-size: 10px;
+  color: #400000;
+  font-weight: bold;
+}
+
+.webring-box {
+  background-color: #FFFFFF;
+  border: 3px inset #888888;
+  padding: 6px;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.webring-box a {
+  color: #000080;
+  text-decoration: none;
+  display: block;
+  line-height: 2;
+}
+
+.webring-box a:hover { text-decoration: underline; }
+
+/* ── HORIZONTAL RULE ── */
+hr.rainbow {
+  border: none;
+  height: 6px;
+  background: linear-gradient(to right,
+    #FF0000, #FF7700, #FFFF00, #00BB00, #0000FF, #8800BB, #FF0000);
+  margin: 0;
+}
+
+/* ── FOOTER ── */
+.footer-band {
+  background-color: #000080;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  border-top: 4px solid #000000;
+}
+
+.footer-band a { color: #FFFF00; }
+
+.footer-bottom {
+  background-color: #000000;
+  color: #C0C0C0;
+  text-align: center;
+  padding: 5px;
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <span class="marquee-inner">
+    &nbsp;&nbsp;&nbsp;*** BIENVENUE SUR SCIENCE &amp; POESIE ***&nbsp;&nbsp;&nbsp;
+    recherche esoterique * sociologie * litterature experimentale * arts visuels * evenements * publications&nbsp;&nbsp;&nbsp;
+    *** NOUVEAU : Fragment III en cours de redaction ***&nbsp;&nbsp;&nbsp;
+    *** BIENVENUE SUR SCIENCE &amp; POESIE ***&nbsp;&nbsp;&nbsp;
+  </span>
+</div>
+
+<!-- HEADER -->
+<table class="header-table" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="header-left">
+      <div class="header-left-text">
+        <span class="blink">&#9632;</span> SITE EN LIGNE<br>
+        Visiteurs&nbsp;:<br>
+        <div class="visitor-box" id="vcounter">004731</div><br>
+        Mis &agrave; jour&nbsp;:<br>
+        <span id="datestr" style="font-size:11px"></span>
+      </div>
+    </td>
+    <td class="header-center">
+      <h1 class="site-title">SCIENCE &amp; PO&Eacute;SIE</h1>
+      <div class="site-subtitle">&#x2234; recherche &middot; &eacute;criture &middot; exp&eacute;rimentation &#x2235;</div>
+    </td>
+    <td class="header-right">
+      <div class="header-right-text">
+        &laquo;&nbsp;O&ugrave; la mesure<br>
+        rencontre<br>
+        l&rsquo;indicible.&nbsp;&raquo;<br><br>
+        <strong style="font-style:normal;font-family:Arial;font-size:11px;color:#FFFF00">
+          &#x2605; EST. 2024 &#x2605;
+        </strong>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<!-- RAINBOW HR -->
+<hr class="rainbow">
+
+<!-- NAVBAR -->
+<table class="navbar" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="nav-cell n1"><a href="#projets">PROJETS</a></td>
+    <td class="nav-cell n2"><a href="#galerie">GALERIE</a></td>
+    <td class="nav-cell n3"><a href="#textes">TEXTES</a></td>
+    <td class="nav-cell n4"><a href="#manifeste">MANIFESTE</a></td>
+    <td class="nav-cell n5"><a href="#evenements">&Eacute;V&Eacute;NEMENTS</a></td>
+    <td class="nav-cell n6"><a href="#contact">CONTACT</a></td>
+  </tr>
+</table>
+
+<!-- MAIN -->
+<table class="main-layout" cellpadding="0" cellspacing="0">
+  <tr>
+
+    <!-- LEFT SIDEBAR -->
+    <td class="sidebar-left">
+      <div class="sidebar-section">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="#projets">&#9658; Projets</a></li>
+          <li><a href="#galerie">&#9658; Galerie</a></li>
+          <li><a href="#textes">&#9658; Textes</a></li>
+          <li><a href="#manifeste">&#9658; Manifeste</a></li>
+          <li><a href="#evenements">&#9658; &Eacute;v&eacute;nements</a></li>
+          <li><a href="#contact">&#9658; Contact</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h3>Statut</h3>
+        <p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;Fragment III&nbsp;&raquo;<br>en cours&hellip;</p>
+      </div>
+      <div class="sidebar-section">
+        <h3>Liens</h3>
+        <ul>
+          <li><a href="#">Archives</a></li>
+          <li><a href="#">Ressources</a></li>
+          <li><a href="#">R&eacute;f&eacute;rences</a></li>
+          <li><a href="#">Plan du site</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section" style="text-align:center;background-color:#000080;border:3px inset #888">
+        <p style="color:#FFFF00;font-family:'Courier New';font-size:11px;font-weight:bold;margin:0">
+          &#x2234; &#x2235; &#x2234;<br>ESPACE<br>EXP&Eacute;RIMENTAL<br>&#x2234; &#x2235; &#x2234;
+        </p>
+      </div>
+    </td>
+
+    <!-- CENTER -->
+    <td class="center-content">
+
+      <div class="welcome-bar">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
+      <div class="welcome-body">
+        <p>Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>science</strong>, de la <strong>po&eacute;sie</strong> et de l&rsquo;&eacute;sot&eacute;rique. D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p>
+      </div>
+
+      <hr class="rainbow">
+
+      <!-- CARDS ROW 1 -->
+      <table class="cards-table" cellpadding="0" cellspacing="0">
+        <tr class="c-red">
+          <td class="card c-red" id="projets">
+            <div class="card-header">&#x2606; PROJETS</div>
+            <div class="card-body">
+              Recherches en cours, collaborations et &oelig;uvres exp&eacute;rimentales m&ecirc;lant &eacute;sot&eacute;rique et sociologie.
+              <br><a href="#">&#9658; Voir les projets</a>
+            </div>
+          </td>
+          <td class="card c-orange" id="galerie">
+            <div class="card-header">&#x25A6; PHOTOS / GALERIE</div>
+            <div class="card-body">
+              Photos, images et documents visuels li&eacute;s aux projets et aux &eacute;v&eacute;nements.
+              <br><a href="#">&#9658; Ouvrir la galerie</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="card c-navy" id="textes">
+            <div class="card-header">&#x2736; TEXTES / PUBLICATIONS</div>
+            <div class="card-body">
+              Po&egrave;mes, essais, fragments &mdash; &eacute;criture exp&eacute;rimentale disponible &agrave; la lecture.
+              <br><a href="#">&#9658; Lire les textes</a>
+            </div>
+          </td>
+          <td class="card c-green" id="manifeste">
+            <div class="card-header">&#x221E; &Agrave; PROPOS / MANIFESTE</div>
+            <div class="card-body">
+              D&eacute;marche, intentions artistiques et scientifiques, pr&eacute;sentation du projet &eacute;ditorial.
+              <br><a href="#">&#9658; Lire le manifeste</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="card c-purple" id="evenements">
+            <div class="card-header">&#x25CE; &Eacute;V&Eacute;NEMENTS</div>
+            <div class="card-body">
+              Lectures, expositions, performances, r&eacute;sidences &agrave; venir et archives pass&eacute;es.
+              <br><a href="#">&#9658; Voir l&rsquo;agenda</a>
+            </div>
+          </td>
+          <td class="card c-teal" id="contact">
+            <div class="card-header">&#x2709; CONTACT</div>
+            <div class="card-body">
+              Collaborations, presse ou tout message destin&eacute; au projet Science &amp; Po&eacute;sie.
+              <br><a href="mailto:contact@sciencepoesie.fr">&#9658; &Eacute;crire un message</a>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <hr class="rainbow">
+
+    </td>
+
+    <!-- RIGHT SIDEBAR -->
+    <td class="sidebar-right">
+      <div class="rsidebar-section">
+        <h3>Derniers ajouts</h3>
+        <div class="entry">
+          Fragment III<br><span>Mars 2026</span>
+        </div>
+        <div class="entry">
+          Galerie III<br><span>Jan. 2026</span>
+        </div>
+        <div class="entry">
+          &Eacute;v&eacute;nement Lyon<br><span>Nov. 2025</span>
+        </div>
+      </div>
+      <div class="rsidebar-section">
+        <h3>Citation</h3>
+        <p style="font-style:italic;font-size:12px">
+          &laquo;&nbsp;La science sans la po&eacute;sie est aveugle, la po&eacute;sie sans la science est vide.&nbsp;&raquo;
+        </p>
+      </div>
+      <div class="rsidebar-section">
+        <h3>Web Ring</h3>
+        <div class="webring-box">
+          <a href="#">&#9664; Pr&eacute;c&eacute;dent</a>
+          <a href="#" style="color:#FF0000;font-size:13px">&#9679; Accueil</a>
+          <a href="#">Suivant &#9654;</a>
+        </div>
+      </div>
+      <div class="rsidebar-section" style="text-align:center">
+        <p style="font-family:'Courier New';font-size:10px;font-weight:bold;color:#000">
+          Optimis&eacute; pour<br>
+          <span style="font-size:14px">Netscape 3.0</span><br>
+          800&times;600
+        </p>
+      </div>
+    </td>
+
+  </tr>
+</table>
+
+<hr class="rainbow">
+
+<!-- FOOTER -->
+<div class="footer-band">
+  &copy; 1996&ndash;<span id="fyear"></span> SCIENCE &amp; PO&Eacute;SIE &nbsp;|&nbsp;
+  <a href="#">Plan du site</a> &nbsp;|&nbsp;
+  <a href="#">Mentions l&eacute;gales</a> &nbsp;|&nbsp;
+  <a href="#">Livre d&rsquo;or</a>
+</div>
+<div class="footer-bottom">
+  Ce site est un espace de cr&eacute;ation exp&eacute;rimentale. Tous droits r&eacute;serv&eacute;s.
+  &nbsp;&bull;&nbsp; HTML 4.01 &nbsp;&bull;&nbsp; Pas de cookies &nbsp;&bull;&nbsp; Pas de pub
+</div>
+
+<script type="text/javascript">
+  var now = new Date();
+  var dd = String(now.getDate()).padStart(2,'0');
+  var mm = String(now.getMonth()+1).padStart(2,'0');
+  var yy = now.getFullYear();
+  document.getElementById('datestr').innerHTML = dd+'/'+mm+'/'+yy;
+  document.getElementById('fyear').innerHTML = yy;
+
+  var count = 4731;
+  setInterval(function(){
+    count++;
+    document.getElementById('vcounter').innerHTML = String(count).padStart(6,'0');
+  }, 9000);
+</script>
+
+</body>
+</html>
