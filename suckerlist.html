@@ -3,7 +3,7 @@
 <head>
 <link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/crane%202.ico" type="image/x-icon">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>LA SUCKERLIST :: Bienvenue en Enfer</title>
+<title>SUCKERLIST :: Bienvenue en Enfer</title>
 <style type="text/css">
 
   body {
@@ -39,7 +39,6 @@
   .header {
     background: #000000; text-align: center;
     padding: 20px 12px 16px;
-    border-top: 4px ridge #CC0000;
     border-bottom: 4px ridge #CC0000;
   }
   hr.gazette {
@@ -50,24 +49,28 @@
   }
   .site-title {
     font-family: "Times New Roman", Times, serif;
-    font-size: 72px; font-weight: bold; color: #CC0000;
-    text-transform: uppercase; letter-spacing: 10px;
+    font-weight: bold; color: #CC0000;
+    text-transform: uppercase;
     display: block; line-height: 1;
     text-shadow: 3px 3px 0 #440000;
   }
-  .site-subtitle {
-    font-family: "Times New Roman", Times, serif;
-    font-size: 16px; color: #FF6600; letter-spacing: 6px;
-    text-transform: uppercase; display: block;
-    margin-top: 6px; font-style: italic;
+  .title-sucker {
+    font-size: 80px;
+    letter-spacing: 16px;
+    display: inline;
+  }
+  .title-list {
+    font-size: 80px;
+    letter-spacing: 16px;
+    display: inline;
+    margin-left: 24px;
   }
   .site-tagline {
     font-size: 11px; color: #884400;
     font-family: "Courier New", monospace;
-    letter-spacing: 2px; display: block; margin-top: 4px;
+    letter-spacing: 2px; display: block; margin-top: 8px;
   }
 
-  /* GALLERY — cartes en format portrait plus grand */
   .gallery {
     background: #000;
     border-top: 3px ridge #880000;
@@ -84,7 +87,6 @@
     to   { transform: translateX(-50%); }
   }
 
-  /* CARD — format portrait vertical */
   .portrait-card {
     display: inline-block; width: 130px; vertical-align: top;
     background: #1a0000; border: 3px outset #884444;
@@ -98,10 +100,8 @@
     display: flex; align-items: center; justify-content: center;
     border-bottom: 2px inset #550000; position: relative; overflow: hidden;
   }
-
   .card-photo-area img.portrait-img {
-    width: 100%; height: 100%;
-    object-fit: cover; display: block;
+    width: 100%; height: 100%; object-fit: cover; display: block;
   }
 
   .portrait-placeholder {
@@ -112,21 +112,19 @@
     border: 2px dashed #CC0000;
     box-sizing: border-box;
   }
-  .portrait-placeholder .ph-icon {
-    font-size: 44px; line-height: 1;
-    color: #CC0000; margin-bottom: 6px;
-  }
-  .portrait-placeholder .ph-label {
-    font-family: "Courier New", monospace;
-    font-size: 9px; color: #884400;
-    text-transform: uppercase; letter-spacing: 2px;
-    text-align: center; line-height: 1.4;
-  }
+  .portrait-placeholder .ph-icon { font-size: 44px; line-height: 1; color: #CC0000; margin-bottom: 6px; }
+  .portrait-placeholder .ph-label { font-family: "Courier New", monospace; font-size: 9px; color: #884400; text-transform: uppercase; letter-spacing: 2px; text-align: center; line-height: 1.4; }
 
   .card-body { padding: 6px 7px 8px; background: #150000; }
   .card-nom { font-size: 11px; color: #FF6600; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; line-height: 1.2; }
   .card-date { font-size: 10px; color: #884400; font-family: "Courier New", monospace; margin-bottom: 3px; letter-spacing: 1px; }
-  .card-crime { font-size: 10px; color: #CC0000; border-top: 1px dashed #440000; padding-top: 3px; line-height: 1.4; font-style: italic; }
+  .card-crime {
+    font-size: 10px; color: #CC0000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    border-top: 1px dashed #440000;
+    padding-top: 3px; line-height: 1.4;
+  }
 
   /* POPUP */
   .popup-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; }
@@ -140,28 +138,24 @@
   .popup-portrait-wrap {
     width: 110px; height: 140px;
     border: 2px inset #550000;
-    margin: 0 auto 12px;
-    overflow: hidden;
+    margin: 0 auto 12px; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     background: #0a0000;
   }
-  .popup-portrait-wrap img.portrait-img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-  }
-  .popup-portrait-wrap .portrait-placeholder {
-    width: 100%; height: 100%;
-    background: #0a0000;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    border: 2px dashed #CC0000;
-    box-sizing: border-box;
-  }
+  .popup-portrait-wrap img.portrait-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .popup-portrait-wrap .portrait-placeholder { width: 100%; height: 100%; background: #0a0000; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #CC0000; box-sizing: border-box; }
   .popup-portrait-wrap .portrait-placeholder .ph-icon { font-size: 50px; color: #CC0000; margin-bottom: 4px; }
   .popup-portrait-wrap .portrait-placeholder .ph-label { font-family: "Courier New", monospace; font-size: 9px; color: #884400; text-transform: uppercase; letter-spacing: 2px; }
 
   .popup-nom { font-size: 20px; color: #FF6600; font-weight: bold; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4px; }
   .popup-dob { font-size: 11px; color: #884400; font-family: "Courier New", monospace; letter-spacing: 2px; margin-bottom: 10px; }
-  .popup-inculpation { background: #CC0000; color: #FFFF00; font-size: 13px; font-style: italic; padding: 6px 10px; margin: 6px 0; letter-spacing: 1px; border: 2px inset #880000; }
+  .popup-inculpation {
+    background: #CC0000; color: #FFFF00;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    padding: 6px 10px; margin: 6px 0; letter-spacing: 1px; border: 2px inset #880000;
+  }
   .popup-peine { font-size: 11px; color: #FF6600; margin-top: 8px; font-style: italic; letter-spacing: 1px; }
   .popup-id { font-size: 9px; color: #550000; font-family: "Courier New", monospace; margin-top: 10px; border-top: 1px solid #330000; padding-top: 6px; letter-spacing: 1px; }
   .ok-btn { background: #D4D0C8; border: 2px outset #FFF; padding: 3px 18px; font-family: Arial, sans-serif; font-size: 12px; cursor: pointer; margin-top: 12px; }
@@ -173,17 +167,18 @@
 </head>
 <body>
 
-<div class="flame-border" id="flamesTop"></div>
-
 <div class="marquee-strip">
   <span class="marquee-inner">
-    &#x2620; BIENVENUE EN ENFER &#x2620; &nbsp;&nbsp;&nbsp; &mdash; LA SUCKERLIST &mdash; &nbsp;&nbsp;&nbsp; &#x2620; ATTENTION &#x2620; &nbsp;&nbsp;&nbsp; &mdash; LA SUCKERLIST &mdash; &nbsp;&nbsp;&nbsp; &#x2620; BIENVENUE EN ENFER &#x2620; &nbsp;&nbsp;&nbsp; &mdash; LA SUCKERLIST &mdash; &nbsp;&nbsp;&nbsp;
+    &#x2620; BIENVENUE EN ENFER &#x2620; &nbsp;&nbsp;&nbsp; &mdash; SUCKERLIST &mdash; &nbsp;&nbsp;&nbsp; &#x2620; ATTENTION &#x2620; &nbsp;&nbsp;&nbsp; &mdash; SUCKERLIST &mdash; &nbsp;&nbsp;&nbsp; &#x2620; BIENVENUE EN ENFER &#x2620; &nbsp;&nbsp;&nbsp; &mdash; SUCKERLIST &mdash; &nbsp;&nbsp;&nbsp;
   </span>
 </div>
 
 <div class="header">
   <hr class="gazette">
-  <span class="site-title">La Suckerlist</span>
+  <span class="site-title">
+    <span class="title-sucker">SUCKER</span>
+    <span class="title-list">LIST</span>
+  </span>
   <span class="site-tagline">Archives Chthoniennes &mdash; MCMXCVI</span>
   <hr class="gazette">
 </div>
@@ -237,31 +232,25 @@ function buildFlames(id) {
   }
   el.innerHTML = html;
 }
-buildFlames('flamesTop');
 buildFlames('flamesBot');
 
-/* ============================================================
-   DONNÉES
-   img : URL de la photo portrait
-         laisser "" pour afficher le placeholder
-   ============================================================ */
 var DAMNES = [
-  { nom:"Michel Onfray",        date:"03/06/1987", crime:"dégénéréscence volkisch",        peine:"Lèche-bottes éternel, 3e cercle",    id:"INF-001", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/MICHEL-ONFRAY_Photo_Joelle-Dolle.jpg?raw=true" },
-  { nom:"Carl André",           date:"14/02/1994", crime:"féminicide",                                    peine:"Copiste des ténèbres, 12 éons",       id:"INF-002", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/CarlAndre.jpeg?raw=true" },
-  { nom:"Enki Bilal",           date:"07/09/1978", crime:"islamophobie, bonnet de hipster, dessins moches",                 peine:"Jury perpétuel en sous-sol",          id:"INF-003", img:"https://github.com/scienceetpoesie/internet/raw/refs/heads/main/personnages/suckelist/enkibilal" },
-  { nom:"Jean-Claude Michéa",   date:"21/11/2001", crime:"social-chauvinisme",                           peine:"Potins infernaux sans fin",           id:"INF-004", img:"https://github.com/scienceetpoesie/internet/raw/refs/heads/main/personnages/suckelist/mich%C3%A9a" },
-  { nom:"",      date:"05/03/1969", crime:"carriérisme chronique avancé",                 peine:"Réunion PowerPoint éternelle",        id:"INF-005", img:"" /* PHOTO_URL_ICI */ },
-  { nom:"Alain Soral",       date:"18/08/1990", crime:"antisémite payé par Israël pour ruiner la réputation de l'antisionnisme ",       peine:"Mannequin figé, 7e cercle",           id:"INF-006", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/1ebc253_10961-yxptsb.t3lii442t9.png?raw=true" /* PHOTO_URL_ICI */ },
-  { nom:"Phillipe Val",         date:"29/04/1983", crime:"islamophobie, gachîs de la culture française",                peine:"DJ de l'abîme sans platines",         id:"INF-007", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/ABACA_901283_066.png?raw=true" /* PHOTO_URL_ICI */ },
-  { nom:"Gérard Bally",       date:"13/01/2003", crime:"Plieur de Banane",               peine:"Conférencier sans micro, éternité",   id:"INF-008", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/G%C3%A9rard%20Bally.png?raw=true" /* PHOTO_URL_ICI */ },
-  { nom:"Michel Maffessoli",         date:"31/10/1966", crime:"pseudo-sociologie pour fasciste ",                   peine:"Fuite perpétuelle, couloirs inf.",    id:"INF-009", img:"" /* PHOTO_URL_ICI */ },
-  { nom:"Jacques Henric",        date:"06/06/1966", crime:"six vies volées pour une villa",               peine:"Gardien des limbes sans clés",        id:"INF-010", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/jacques%20henric.png?raw=true" /* PHOTO_URL_ICI */ },
-  { nom:"Jean-Marc Morandini",       date:"22/07/1988", crime:"pédocriminalité organisée",               peine:"Note d'audience zéro, éternelle",    id:"INF-011", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/photo-jean-marc-morandini-cette-tradition-familiale-a-laquelle-l-animateur-renonce-avec-tristesse-pour-noel.jpg?raw=true" /* PHOTO_URL_ICI */ },
-  { nom:"Francis Cousin",         date:"09/12/1997", crime:"racisme situationnismt heideggero-débile",                  peine:"Miroir brisé, 6e cercle",             id:"INF-012", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/hqdefault%20-%20Copie.jpg?raw=true" /* PHOTO_URL_ICI */ },
-  { nom:"Emil Cioran",       date:"15/05/2005", crime:"imposture artistique de 20 ans",               peine:"Public vide, scène sans fin",         id:"INF-013", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/cioran%20color.png?raw=true" /* PHOTO_URL_ICI */ },
-  { nom:"Anselm Kieffer", date:"02/02/1975", crime:"népotisme familial industriel",                peine:"Portier de sa propre cage",           id:"INF-014", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/kieffer.jpg?raw=true" /* PHOTO_URL_ICI */ },
-  { nom:"Jean Roucas", date:"19/09/2009", crime:"médiocrité",      peine:"Comptable des regrets, néant",        id:"INF-015", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/jean-roucas.jpg?raw=true" /* PHOTO_URL_ICI */ },
-  { nom:"",          date:"31/03/1971", crime:"vampirisme d'idées, récidive",                 peine:"Plagiat de son propre vide",          id:"INF-016", img:"" /* PHOTO_URL_ICI */ },
+  { nom:"Michel Onfray",        date:"03/06/1987", crime:"dégénéréscence volkisch",                                              peine:"Lèche-bottes éternel, 3e cercle",  id:"INF-001", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/MICHEL-ONFRAY_Photo_Joelle-Dolle.jpg?raw=true" },
+  { nom:"Carl André",           date:"14/02/1994", crime:"féminicide",                                                           peine:"Copiste des ténèbres, 12 éons",     id:"INF-002", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/CarlAndre.jpeg?raw=true" },
+  { nom:"Enki Bilal",           date:"07/09/1978", crime:"islamophobie, bonnet de hipster, dessins moches",                     peine:"Jury perpétuel en sous-sol",        id:"INF-003", img:"https://github.com/scienceetpoesie/internet/raw/refs/heads/main/personnages/suckelist/enkibilal" },
+  { nom:"Jean-Claude Michéa",   date:"21/11/2001", crime:"social-chauvinisme",                                                   peine:"Potins infernaux sans fin",         id:"INF-004", img:"https://github.com/scienceetpoesie/internet/raw/refs/heads/main/personnages/suckelist/mich%C3%A9a" },
+  { nom:"",                     date:"05/03/1969", crime:"carriérisme chronique avancé",                                         peine:"Réunion PowerPoint éternelle",      id:"INF-005", img:"" /* PHOTO_URL_ICI */ },
+  { nom:"Alain Soral",          date:"18/08/1990", crime:"antisémite payé par Israël pour ruiner la réputation de l'antisionnisme", peine:"Mannequin figé, 7e cercle",      id:"INF-006", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/1ebc253_10961-yxptsb.t3lii442t9.png?raw=true" },
+  { nom:"Philippe Val",         date:"29/04/1983", crime:"islamophobie, gachîs de la culture française",                        peine:"DJ de l'abîme sans platines",       id:"INF-007", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/ABACA_901283_066.png?raw=true" },
+  { nom:"Gérard Bally",         date:"13/01/2003", crime:"plieur de banane",                                                     peine:"Conférencier sans micro, éternité", id:"INF-008", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/G%C3%A9rard%20Bally.png?raw=true" },
+  { nom:"Michel Maffessoli",    date:"31/10/1966", crime:"pseudo-sociologie pour fasciste",                                      peine:"Fuite perpétuelle, couloirs inf.",  id:"INF-009", img:"" /* PHOTO_URL_ICI */ },
+  { nom:"Jacques Henric",       date:"06/06/1966", crime:"six vies volées pour une villa",                                      peine:"Gardien des limbes sans clés",      id:"INF-010", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/jacques%20henric.png?raw=true" },
+  { nom:"Jean-Marc Morandini",  date:"22/07/1988", crime:"pédocriminalité organisée",                                            peine:"Note d'audience zéro, éternelle",  id:"INF-011", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/photo-jean-marc-morandini-cette-tradition-familiale-a-laquelle-l-animateur-renonce-avec-tristesse-pour-noel.jpg?raw=true" },
+  { nom:"Francis Cousin",       date:"09/12/1997", crime:"racisme situationniste heideggero-débile",                             peine:"Miroir brisé, 6e cercle",           id:"INF-012", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/hqdefault%20-%20Copie.jpg?raw=true" },
+  { nom:"Emil Cioran",          date:"15/05/2005", crime:"imposture artistique de 20 ans",                                       peine:"Public vide, scène sans fin",       id:"INF-013", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/cioran%20color.png?raw=true" },
+  { nom:"Anselm Kiefer",        date:"02/02/1975", crime:"népotisme familial industriel",                                        peine:"Portier de sa propre cage",         id:"INF-014", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/kieffer.jpg?raw=true" },
+  { nom:"Jean Roucas",          date:"19/09/2009", crime:"médiocrité",                                                           peine:"Comptable des regrets, néant",      id:"INF-015", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/jean-roucas.jpg?raw=true" },
+  { nom:"",                     date:"31/03/1971", crime:"vampirisme d'idées, récidive",                                         peine:"Plagiat de son propre vide",        id:"INF-016", img:"" /* PHOTO_URL_ICI */ },
 ];
 
 function photoHTML(img) {
