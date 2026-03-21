@@ -1,17 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <link rel="icon" href="https://github.com/scienceetpoesie-coder/site-internet-science-et-poesie/raw/refs/heads/main/assets/favicon.ico" type="image/x-icon">
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SCIENCE &amp; POESIE - Page d'accueil</title>
 <style type="text/css">
 
 body {
-  background-color: #C0C0C0;
+  background-color: #808080;
   margin: 0;
   padding: 0;
   font-family: "Times New Roman", Times, serif;
+}
+
+#page-wrapper {
+  width: 800px;
+  margin: 0 auto;
+  background-color: #C0C0C0;
+  border-left: 2px solid #444;
+  border-right: 2px solid #444;
 }
 
 /* ── MARQUEE BAND ── */
@@ -431,6 +437,7 @@ hr.rainbow {
 </head>
 <body>
 
+<div id="page-wrapper">
 <!-- MARQUEE -->
 <div class="marquee-band">
   <span class="marquee-inner">
@@ -578,7 +585,7 @@ hr.rainbow {
             <div class="card-header">&#x2709; CONTACT</div>
             <div class="card-body">
               Collaborations, presse ou tout message destin&eacute; au projet Science &amp; Po&eacute;sie.
-              <br><a href="mailto:contact@sciencepoesie.fr">&#9658; &Eacute;crire un message</a>
+              <br><a href="/cdn-cgi/l/email-protection#3d5e5253495c5e497d4e5e5458535e584d52584e5458135b4f">&#9658; &Eacute;crire un message</a>
             </div>
           </td>
         </tr>
@@ -642,6 +649,8 @@ hr.rainbow {
   &nbsp;&bull;&nbsp; HTML 4.01 &nbsp;&bull;&nbsp; Pas de cookies &nbsp;&bull;&nbsp; Pas de pub
 </div>
 
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></div><!-- end #page-wrapper -->
+
 <script type="text/javascript">
   var now = new Date();
   var dd = String(now.getDate()).padStart(2,'0');
@@ -651,11 +660,4 @@ hr.rainbow {
   document.getElementById('fyear').innerHTML = yy;
 
   var count = 4731;
-  setInterval(function(){
-    count++;
-    document.getElementById('vcounter').innerHTML = String(count).padStart(6,'0');
-  }, 9000);
-</script>
-
-</body>
-</html>
+  setI
