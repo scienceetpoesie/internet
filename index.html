@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/asset/splogo.ico" type="image/x-icon">
+<link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/antiart.ico" type="image/x-icon">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SCIENCE &amp; POESIE - Page d'accueil</title>
@@ -13,25 +13,10 @@
 #star-cursor {
   position: fixed;
   top: 0; left: 0;
-  width: 20px; height: 20px;
+  width: 14px; height: 14px;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-}
-
-.trail-star {
-  position: fixed;
-  pointer-events: none;
-  z-index: 99998;
-  font-size: 12px;
-  animation: trailFade 0.8s linear forwards;
-  transform: translate(-50%, -50%);
-  user-select: none;
-}
-
-@keyframes trailFade {
-  0%   { opacity: 1; transform: translate(-50%,-50%) scale(1.2); }
-  100% { opacity: 0; transform: translate(-50%,-120%) scale(0.3); }
 }
 
 body {
@@ -79,8 +64,8 @@ table.header-table {
 
 td.header-left {
   background-color: #FF0000;
-  width: 160px;
-  padding: 14px 12px;
+  width: 100px;
+  padding: 14px 10px;
   vertical-align: middle;
   border-right: 4px solid #800000;
 }
@@ -94,8 +79,8 @@ td.header-center {
 
 td.header-right {
   background-color: #008000;
-  width: 130px;
-  padding: 14px 12px;
+  width: 80px;
+  padding: 14px 8px;
   vertical-align: middle;
   border-left: 4px solid #004000;
   text-align: center;
@@ -111,7 +96,7 @@ h1.site-title {
   letter-spacing: 4px;
   text-decoration: underline;
   text-shadow: 3px 3px #000000;
-  animation: titlePulse 3s ease-in-out infinite;
+  animation: titlePulse 10s ease-in-out infinite;
 }
 
 @keyframes titlePulse {
@@ -216,7 +201,7 @@ table.main-layout {
 /* ── LEFT SIDEBAR ── */
 td.sidebar-left {
   background-color: #FFFF00;
-  width: 120px;
+  width: 75px;
   vertical-align: top;
   padding: 0;
   border-right: 4px solid #CCCC00;
@@ -431,7 +416,7 @@ td.card:hover {
 /* ── RIGHT SIDEBAR ── */
 td.sidebar-right {
   background-color: #FF8000;
-  width: 120px;
+  width: 75px;
   vertical-align: top;
   padding: 0;
   border-left: 4px solid #CC6600;
@@ -550,9 +535,9 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
 
 <!-- CUSTOM CURSOR -->
 <div id="star-cursor">
-  <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="10,1 12.4,7.5 19.5,7.5 13.8,11.8 16.2,18.3 10,14 3.8,18.3 6.2,11.8 0.5,7.5 7.6,7.5"
-      fill="#FFFF00" stroke="#FF8800" stroke-width="1"/>
+  <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5"
+      fill="#FFFF00" stroke="none"/>
   </svg>
 </div>
 
@@ -575,8 +560,7 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
         <span class="blink">&#9632;</span> SITE EN LIGNE<br>
         Visiteurs&nbsp;:<br>
         <div class="visitor-box" id="vcounter">004731</div><br>
-        Mis &agrave; jour&nbsp;:<br>
-        <span id="datestr" style="font-size:11px"></span>
+        
       </div>
     </td>
     <td class="header-center">
@@ -651,7 +635,7 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
     <!-- CENTER -->
     <td class="center-content">
 
-      <div class="welcome-bar">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
+      <div class="welcome-bar" style="text-align:center;">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
       <div class="welcome-body">
         <p>Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>science</strong>, de la <strong>po&eacute;sie</strong> et de l&rsquo;&eacute;sot&eacute;rique. D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p>
       </div>
@@ -739,7 +723,7 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
     <!-- RIGHT SIDEBAR -->
     <td class="sidebar-right">
       <div class="rsidebar-section" style="background:#FF8000;border-bottom:3px solid #CC6600;padding:8px">
-        <a href="#" class="ne-pub-link" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 6px 12px 6px">
+        <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" target="_blank" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 6px 12px 6px">
           <div style="font-family:'Arial Black',Arial,sans-serif;font-size:10px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
           <div style="height:4px;background:#0000AA;margin:0 0 8px 0"></div>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 100" width="55" height="68" style="display:block;margin:0 auto 8px auto">
@@ -809,7 +793,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
   var dd = String(now.getDate()).padStart(2,'0');
   var mm = String(now.getMonth()+1).padStart(2,'0');
   var yy = now.getFullYear();
-  document.getElementById('datestr').innerHTML = dd+'/'+mm+'/'+yy;
   document.getElementById('fyear').innerHTML = yy;
 
   var count = 4731;
@@ -823,58 +806,28 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
   }, 120);
 
   var cursor = document.getElementById('star-cursor');
-  var mx = -100, my = -100;
 
   document.addEventListener('mousemove', function(e) {
-    mx = e.clientX;
-    my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top  = my + 'px';
-    spawnTrail(mx, my);
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
   });
 
-  var lastTrail = 0;
-  var trailChars = ['✦','✧','★','☆','✶','✸','⋆','*','·','✺'];
-
-  function spawnTrail(x, y) {
-    var now = Date.now();
-    if (now - lastTrail < 40) return;
-    lastTrail = now;
-
-    var el = document.createElement('div');
-    el.className = 'trail-star';
-    el.style.left = x + 'px';
-    el.style.top  = y + 'px';
-    el.style.fontSize = (8 + Math.random() * 10) + 'px';
-
-    var colors = ['#FFFF00','#00FFFF','#FF88FF','#FFFFFF','#FF8800'];
-    el.style.color = colors[Math.floor(Math.random() * colors.length)];
-    el.innerHTML = trailChars[Math.floor(Math.random() * trailChars.length)];
-
-    document.body.appendChild(el);
-    setTimeout(function() { el.parentNode && el.parentNode.removeChild(el); }, 820);
-  }
-
   document.addEventListener('click', function(e) {
-    var burstChars = ['✦','★','✶','✸','✺','⚡','✨'];
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 4; i++) {
       (function(i) {
         var el = document.createElement('div');
         el.className = 'sparkle';
         el.style.left = e.clientX + 'px';
         el.style.top  = e.clientY + 'px';
-        var angle = (i / 8) * 2 * Math.PI;
-        var dist  = 30 + Math.random() * 30;
-        var tx = Math.cos(angle) * dist;
-        var ty = Math.sin(angle) * dist;
-        el.style.setProperty('--tx', tx + 'px');
-        el.style.setProperty('--ty', ty + 'px');
-        el.style.fontSize = (10 + Math.random() * 8) + 'px';
-        var colors = ['#FFFF00','#FF8800','#00FFFF','#FF00FF','#FFFFFF'];
-        el.style.color = colors[Math.floor(Math.random() * colors.length)];
-        el.innerHTML = burstChars[Math.floor(Math.random() * burstChars.length)];
+        var angle = (i / 4) * 2 * Math.PI;
+        var dist  = 20 + Math.random() * 20;
+        el.style.setProperty('--tx', (Math.cos(angle) * dist) + 'px');
+        el.style.setProperty('--ty', (Math.sin(angle) * dist) + 'px');
+        el.style.fontSize = '12px';
+        el.style.color = '#FFFF00';
+        el.innerHTML = '✦';
         document.body.appendChild(el);
-        setTimeout(function() { el.parentNode && el.parentNode.removeChild(el); }, 650);
+        setTimeout(function() { el.parentNode && el.parentNode.removeChild(el); }, 500);
       })(i);
     }
   });
