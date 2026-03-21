@@ -7,6 +7,49 @@
 <title>SCIENCE &amp; POESIE - Page d'accueil</title>
 <style type="text/css">
 
+/* ── SCROLLBAR VINTAGE ── */
+::-webkit-scrollbar {
+  width: 16px;
+  background-color: #C0C0C0;
+}
+::-webkit-scrollbar-track {
+  background-color: #C0C0C0;
+  border-left: 1px solid #888888;
+  border-right: 1px solid #FFFFFF;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #C0C0C0;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #444444;
+  border-bottom: 2px solid #444444;
+  box-shadow: inset 1px 1px 0 #DFDFDF, inset -1px -1px 0 #808080;
+  min-height: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #B0B0B0;
+}
+::-webkit-scrollbar-button {
+  background-color: #C0C0C0;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #444444;
+  border-bottom: 2px solid #444444;
+  height: 16px;
+  width: 16px;
+  display: block;
+}
+::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpolygon points='8,4 13,11 3,11' fill='%23000000'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpolygon points='8,12 13,5 3,5' fill='%23000000'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 /* ── CURSOR ── */
 * { cursor: none !important; }
 
@@ -24,6 +67,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Times New Roman", Times, serif;
+  scrollbar-color: #C0C0C0 #C0C0C0;
+  scrollbar-width: auto;
 }
 
 #page-wrapper {
@@ -687,15 +732,17 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
         </tr>
 
         <tr>
+          <!-- HALL OF FAME : couronne plus grande, overflow hidden pour ne pas déformer la grille -->
           <td class="card c-gold" id="halloffame" style="width:50%">
-            <div class="card-header"><!-- PLACEHOLDER COURONNE : remplacer src par votre image --><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/crown.png?raw=true" width="18" height="18" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;" alt="couronne"> HALL OF FAME</div>
+            <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/crown.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
             <div class="card-body">
               Figures, contributions exceptionnelles honor&eacute;s par S&amp;P.
               <br><a href="#">&#9658; Voir le palmares</a>
             </div>
           </td>
+          <!-- SUCKERLIST : crâne plus grand, même traitement -->
           <td class="card c-black" id="suckerlist" style="width:50%">
-            <div class="card-header" style="background:#111111;color:#FF3333"><!-- PLACEHOLDER CRANE : remplacer src par votre image --><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/skull.png?raw=true" width="16" height="16" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;" alt="crane"> SUCKERLIST</div>
+            <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/skull.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
             <div class="card-body" style="background:#1A1A1A;color:#CCCCCC">
               Le revers de la medaille. Ceux qui ont decu, trahi ou simplement rate leur coup.
               <br><a href="#" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a>
@@ -725,8 +772,8 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
         <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" target="_blank" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 6px 12px 6px">
           <div style="font-family:'Arial Black',Arial,sans-serif;font-size:10px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
           <div style="height:4px;background:#0000AA;margin:0 0 8px 0"></div>
-          <!-- PLACEHOLDER LIVRE BLEU : remplacer src par votre image -->
-          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/blue%20book.jpg?raw=true" width="55" height="68" style="display:block;margin:0 auto 8px auto;image-rendering:pixelated;" alt="Notre Entente">
+          <!-- Image livre : légèrement plus grande, décalée de 3px vers la gauche -->
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/blue%20book.jpg?raw=true" width="60" height="74" style="display:block;margin:0 auto 8px -3px;image-rendering:pixelated;" alt="Notre Entente">
           <div style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#444;line-height:1.6;margin-bottom:8px">&laquo;&nbsp;po&egrave;me anti-&eacute;pique&nbsp;&raquo;<br><span style="font-size:9px;color:#999">(à ne pas lire)</span></div>
           <span class="ne-cta" style="font-family:'Times New Roman',serif;font-size:11px;font-weight:bold;color:#0000AA;text-decoration:underline">Acc&eacute;der au site</span>
         </a>
