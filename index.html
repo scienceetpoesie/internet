@@ -574,6 +574,56 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
 
 </style>
 </head>
+  <script type="text/javascript">
+  /* ── VOICE ON HOVER (navbar) ── */
+  (function() {
+    var synth = window.speechSynthesis;
+    if (!synth) return;
+
+    var labels = {
+      'PROJETS':      'Projets',
+      'ŒUVRES':       'Œuvres',
+      'HALL OF FAME': 'Hall of Fame',
+      'SUCKERLIST':   'Suckerlist',
+      'PUBLICATIONS': 'Publications',
+      'SOCIOGONIE':   'Sociogonie'
+    };
+
+    var lastSpoken = null;
+    var speakTimeout = null;
+
+    function speak(text) {
+      if (text === lastSpoken) return;
+      lastSpoken = text;
+      synth.cancel();
+      clearTimeout(speakTimeout);
+      speakTimeout = setTimeout(function() {
+        var utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'fr-FR';
+        utter.rate = 0.88;
+        utter.pitch = 0.95;
+        utter.volume = 1;
+        /* cherche une voix française si dispo */
+        var voices = synth.getVoices();
+        var frVoice = voices.find(function(v) {
+          return v.lang.startsWith('fr') && !v.localService === false || v.lang.startsWith('fr');
+        });
+        if (frVoice) utter.voice = frVoice;
+        synth.speak(utter);
+        setTimeout(function() { lastSpoken = null; }, 1800);
+      }, 60);
+    }
+
+    var navLinks = document.querySelectorAll('td.nav-cell a');
+    navLinks.forEach(function(link) {
+      var raw = link.textContent.trim();
+      var label = labels[raw] || raw;
+      link.addEventListener('mouseenter', function() {
+        speak(label);
+      });
+    });
+  })();
+</script>
 <body>
 
 <!-- CUSTOM CURSOR -->
