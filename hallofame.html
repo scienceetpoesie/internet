@@ -1,0 +1,559 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/crane%202.ico" type="image/x-icon">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>HALL OF FAME :: Archives Célestes :: Bienvenue au Paradis</title>
+<style type="text/css">
+
+  /* =====================================================================
+     BACKGROUND
+     Remplace __BACKGROUND_IMAGE_URL__ par l'URL de ton image de ciel.
+     background-color sert de fallback si l'image ne charge pas.
+     ===================================================================== */
+  body {
+    margin: 0; padding: 0;
+    font-family: "Times New Roman", Times, serif;
+    color: #3a1a00;
+    background-color: #7aaad0;
+    background-image: url("__BACKGROUND_IMAGE_URL__");
+    /* ↑ REMPLACE __BACKGROUND_IMAGE_URL__ PAR TON URL D'IMAGE DE CIEL */
+    /* Exemple : url("https://monrepo.github.io/assets/ciel.jpg")       */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+
+  /* ===== FRISE GIF — structure commune ===== */
+  /* =====================================================================
+     3 frises distinctes :
+       gifTop    → remplace GIF_FRISE_A dans le JS  (ex: colombes)
+       gifMiddle → remplace GIF_FRISE_B dans le JS  (ex: anges / fleurs)
+       gifBot    → remplace GIF_FRISE_C dans le JS  (ex: nuages / rayons)
+     Chaque frise a sa propre hauteur et fallback visuel différent.
+     ===================================================================== */
+  .gif-border {
+    width: 100%; display: flex; flex-wrap: nowrap;
+    overflow: hidden; line-height: 0; font-size: 0;
+    background: transparent;
+  }
+  .gif-border img {
+    display: block; flex-shrink: 0; width: auto;
+  }
+  /* Hauteurs distinctes selon la frise */
+  #gifTop    img { height: 60px; }
+  #gifMiddle img { height: 50px; }
+  #gifBot    img { height: 60px; }
+
+  /* ===== BANDEAU DÉFILANT — gauche vers droite ===== */
+  .marquee-wrap {
+    border-top: 3px double #FFD700;
+    border-bottom: 3px double #cc8800;
+    background: linear-gradient(180deg, #fff8cc 0%, #FFD700 40%, #cc8800 60%, #fff8aa 100%);
+  }
+  .marquee-strip {
+    padding: 5px 0; overflow: hidden; white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    font-size: 16px; font-weight: bold; letter-spacing: 5px;
+    font-family: "Times New Roman", serif;
+    color: #3a1a00;
+    text-shadow: 0 1px 0 #fff8a0aa, 1px 1px 0 #aa660077;
+    animation: marqueeReverse 36s linear infinite;
+  }
+  @keyframes marqueeReverse {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(100vw); }
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.55) 0%,
+      rgba(255,248,200,0.45) 40%,
+      rgba(200,160,80,0.20) 100%);
+    text-align: center;
+    padding: 30px 12px 22px;
+    border-bottom: 5px double #FFD700;
+  }
+
+  hr.gazette-double {
+    border: none;
+    height: 6px;
+    background: linear-gradient(180deg, #FFD700 0%, #cc8800 49%, #FFD700 100%);
+    width: 85%; margin: 10px auto;
+    box-shadow: 0 2px 6px #FFD70055;
+  }
+  hr.gazette-ornament {
+    border: none;
+    border-top:    1px solid #FFD70088;
+    border-bottom: 1px solid #cc880044;
+    width: 65%; margin: 4px auto;
+  }
+
+  .site-title {
+    display: block; line-height: 0.9;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold; text-transform: uppercase;
+  }
+  .title-hall {
+    font-size: 90px; letter-spacing: 18px; display: inline;
+    color: #FFD700;
+    text-shadow:
+      3px  3px 0 #7a3a00,
+      -1px -1px 0 #fff8a0,
+      0 0 20px #FFD700aa,
+      0 0 50px #FFAA0055;
+  }
+  .title-of {
+    font-size: 40px; letter-spacing: 10px; display: block;
+    color: #cc8800;
+    text-shadow: 2px 2px 0 #5a2a00, 0 0 12px #FFD70077;
+    margin: -8px 0 -4px;
+  }
+  .title-fame {
+    font-size: 90px; letter-spacing: 18px; display: inline;
+    color: #cc8800;
+    text-shadow:
+      3px  3px 0 #5a2a00,
+      -1px -1px 0 #fff5a0,
+      0 0 20px #FFD700aa;
+  }
+
+  /* ===== GALLERY ===== */
+  .gallery-wrap {
+    border-top: 4px double #FFD700;
+    border-bottom: 4px double #FFD700;
+  }
+  .gallery-inner-border {
+    border-top: 2px solid #cc880055;
+    border-bottom: 2px solid #cc880055;
+    background: rgba(255,255,255,0.18);
+  }
+  .gallery {
+    padding: 16px 0; overflow: hidden;
+  }
+  .scroll-inner {
+    display: inline-flex; gap: 16px;
+    white-space: nowrap;
+    animation: scrollCardsReverse 70s linear infinite;
+  }
+  .scroll-inner:hover { animation-play-state: paused; }
+  @keyframes scrollCardsReverse {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0%); }
+  }
+
+  /* ===== PORTRAIT CARD ===== */
+  .portrait-card {
+    display: inline-block; width: 135px; vertical-align: top;
+    background: linear-gradient(180deg, #fffef5 0%, #fff8d0 100%);
+    border-left:   3px outset #FFD700;
+    border-right:  3px outset #cc9900;
+    border-bottom: 3px outset #aa7700;
+    border-top: none;
+    cursor: pointer; white-space: normal; flex-shrink: 0;
+    font-family: "Times New Roman", serif;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.25), inset 0 0 6px #FFD70011;
+  }
+  .portrait-card:hover {
+    background: linear-gradient(180deg, #fffce0 0%, #fff0aa 100%);
+    box-shadow: 0 0 18px #FFD70088, 3px 3px 10px rgba(0,0,0,0.3);
+    border-left-style: inset; border-right-style: inset; border-bottom-style: inset;
+  }
+
+  /* =====================================================================
+     PLACEHOLDER PORTRAIT
+     Remplis img:"URL" dans le tableau ELUS pour chaque personne.
+     ===================================================================== */
+  .card-photo-area {
+    background: linear-gradient(180deg, #e8f0ff 0%, #c8daf5 100%);
+    width: 100%; height: 175px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    border-bottom: 2px ridge #FFD700;
+  }
+  .card-photo-area img.portrait-img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: sepia(10%) saturate(1.1) brightness(1.04);
+  }
+  .portrait-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #ddeeff 0%, #bbccee 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; box-sizing: border-box;
+    border: 2px dashed #FFD70099;
+  }
+  .portrait-placeholder .ph-icon {
+    font-size: 44px; line-height: 1; margin-bottom: 6px;
+    color: #FFD700;
+    text-shadow: 0 0 10px #FFD700bb, 2px 2px 0 #aa660055;
+    animation: iconBreath 4s ease-in-out infinite alternate;
+  }
+  @keyframes iconBreath {
+    from { transform: scale(0.93); opacity: 0.7; }
+    to   { transform: scale(1.07); opacity: 1; text-shadow: 0 0 18px #FFD700, 2px 2px 0 #aa660077; }
+  }
+  .portrait-placeholder .ph-label {
+    font-family: "Courier New", monospace; font-size: 8px;
+    color: #6688aa; text-transform: uppercase; letter-spacing: 2px;
+    text-align: center; line-height: 1.6;
+  }
+
+  .card-body {
+    padding: 5px 6px 7px;
+    background: linear-gradient(180deg, #fffef5 0%, #fff8cc 100%);
+    border-top: 1px solid #FFD70044;
+  }
+  .card-nom {
+    font-size: 10.5px; font-weight: bold; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 2px; line-height: 1.2;
+    color: #994400; text-shadow: 0 1px 0 #fff8a0aa;
+  }
+  .card-date {
+    font-size: 9px; font-family: "Courier New", monospace;
+    margin-bottom: 3px; letter-spacing: 1px; color: #886600;
+  }
+  .card-merite {
+    font-size: 9.5px; color: #553300;
+    font-family: Arial, Helvetica, sans-serif;
+    border-top: 1px dashed #FFD70077;
+    padding-top: 3px; line-height: 1.4;
+  }
+
+  /* ===== POPUP ===== */
+  .popup-overlay {
+    display: none; position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(20, 40, 80, 0.82);
+    z-index: 9999; align-items: center; justify-content: center;
+  }
+  .popup-overlay.open { display: flex; }
+  .popup-window {
+    background: #D4D0C8; border: 3px outset #FFFFFF; width: 380px;
+    font-family: "Times New Roman", serif;
+    box-shadow: 0 0 50px #FFD70099, 0 0 100px #FFD70033;
+  }
+  .popup-titlebar {
+    background: linear-gradient(90deg, #774400, #cc8800, #FFD700, #fff5a0, #FFD700, #cc8800, #774400);
+    background-size: 300% 100%;
+    animation: goldTitlebar 6s ease-in-out infinite alternate;
+    color: #3a1a00; font-size: 12px; font-weight: bold;
+    font-family: Arial, sans-serif; padding: 4px 8px;
+    display: flex; justify-content: space-between; align-items: center;
+    text-shadow: 0 1px 0 #fff8a0;
+    border-bottom: 2px ridge #aa7700;
+  }
+  @keyframes goldTitlebar {
+    from { background-position: 0% 0%; }
+    to   { background-position: 300% 0%; }
+  }
+  .popup-close-btn {
+    background: #D4D0C8; border: 2px outset #FFF; font-size: 10px;
+    font-family: Arial, sans-serif; width: 17px; height: 15px; cursor: pointer; padding: 0;
+  }
+  .popup-close-btn:active { border-style: inset; }
+  .popup-content {
+    padding: 18px 16px; text-align: center;
+    background: linear-gradient(180deg, #e8f0ff 0%, #ddeeff 40%, #c8d8f8 100%);
+    border: 3px inset #aabbdd;
+  }
+  .popup-portrait-wrap {
+    width: 115px; height: 145px;
+    border: 3px ridge #FFD700;
+    box-shadow: 0 0 14px #FFD70099, 0 0 30px #FFAA0044, inset 0 0 6px #FFD70022;
+    margin: 0 auto 14px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(160deg, #ddeeff 0%, #bbccee 100%);
+  }
+  .popup-portrait-wrap img.portrait-img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: sepia(10%) saturate(1.1) brightness(1.04);
+  }
+  .popup-portrait-wrap .portrait-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #ddeeff 0%, #bbccee 100%);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; box-sizing: border-box;
+  }
+  .popup-portrait-wrap .portrait-placeholder .ph-icon {
+    font-size: 54px; color: #FFD700; margin-bottom: 4px;
+    text-shadow: 0 0 16px #FFD700bb, 2px 2px 0 #aa660055;
+  }
+  .popup-portrait-wrap .portrait-placeholder .ph-label {
+    font-family: "Courier New", monospace; font-size: 9px;
+    color: #6688aa; text-transform: uppercase; letter-spacing: 2px;
+  }
+  .popup-nom {
+    font-size: 19px; color: #994400; font-weight: bold;
+    text-transform: uppercase; letter-spacing: 3px; margin-bottom: 3px;
+    text-shadow: 0 1px 0 #fff8a0, 2px 2px 0 #aa660055;
+  }
+  .popup-dob {
+    font-size: 11px; color: #886600;
+    font-family: "Courier New", monospace; letter-spacing: 2px; margin-bottom: 10px;
+  }
+  .popup-merite {
+    background: rgba(255,248,200,0.8); color: #3a1a00;
+    font-size: 12px; font-family: Arial, Helvetica, sans-serif;
+    padding: 7px 10px; margin: 6px 0; letter-spacing: 0.5px;
+    border: 1px solid #FFD70077;
+    border-left: 4px solid #FFD700;
+    border-right: 4px solid #FFD700;
+    text-align: left;
+    box-shadow: inset 0 0 8px #FFD70011;
+  }
+  .popup-recompense {
+    font-size: 11px; color: #886600; margin-top: 8px;
+    font-style: italic; letter-spacing: 1px;
+    border-top: 1px dashed #FFD70055; padding-top: 6px;
+  }
+  .popup-id {
+    font-size: 9px; color: #7799bb;
+    font-family: "Courier New", monospace; margin-top: 10px;
+    border-top: 1px solid #aabbdd55; padding-top: 6px; letter-spacing: 1px;
+  }
+  .ok-btn {
+    background: #D4D0C8; border: 2px outset #FFF;
+    padding: 3px 20px; font-family: Arial, sans-serif;
+    font-size: 12px; cursor: pointer; margin-top: 12px;
+  }
+  .ok-btn:active { border-style: inset; }
+
+  /* ===== FOOTER ===== */
+  .footer-wrap {
+    border-top: 5px double #FFD700;
+    background: linear-gradient(180deg,
+      rgba(255,248,180,0.6) 0%,
+      rgba(255,240,120,0.4) 50%,
+      rgba(200,160,80,0.2) 100%);
+  }
+  .footer {
+    text-align: center; padding: 18px 12px 20px;
+  }
+  .footer-text {
+    font-size: 14px; letter-spacing: 5px; text-transform: uppercase; margin: 6px 0;
+    color: #994400;
+    text-shadow: 0 1px 0 #fff8a0aa, 2px 2px 0 #aa660033;
+  }
+  .footer-sub {
+    font-size: 10px; font-family: "Courier New", monospace;
+    margin-top: 5px; letter-spacing: 2px; color: #886600;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     FRISE GIF A — HAUT DE PAGE
+     Remplace GIF_FRISE_A dans le JS par ton URL (ex: colombes, anges…)
+     ===================================================================== -->
+<div class="gif-border" id="gifTop"></div>
+
+<!-- BANDEAU DÉFILANT -->
+<div class="marquee-wrap">
+  <div class="marquee-strip">
+    <span class="marquee-inner">
+      &#x2726; HALL OF FAME &#x2726; GLOIRE &Eacute;TERNELLE &#x2726; ARCHIVES C&Eacute;LESTES &#x2726; HALL OF FAME &#x2726; GLOIRE &Eacute;TERNELLE &#x2726; ARCHIVES C&Eacute;LESTES &#x2726; HALL OF FAME &#x2726; GLOIRE &Eacute;TERNELLE &#x2726; ARCHIVES C&Eacute;LESTES &#x2726;
+    </span>
+  </div>
+</div>
+
+<!-- =====================================================================
+     FRISE GIF B — ENTRE BANDEAU ET TITRE
+     Remplace GIF_FRISE_B dans le JS (ex: fleurs de lotus, rayons, roses…)
+     ===================================================================== -->
+<div class="gif-border" id="gifMiddle"></div>
+
+<!-- HEADER -->
+<div class="header">
+  <hr class="gazette-double">
+  <hr class="gazette-ornament">
+  <span class="site-title">
+    <span class="title-hall">HALL</span>
+    <span class="title-of">&#x2014; &nbsp; OF &nbsp; &#x2014;</span>
+    <span class="title-fame">FAME</span>
+  </span>
+  <hr class="gazette-ornament">
+  <hr class="gazette-double">
+</div>
+
+<!-- GALERIE PORTRAIT -->
+<div class="gallery-wrap">
+  <div class="gallery-inner-border">
+    <div class="gallery">
+      <div class="scroll-inner" id="stripInner"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     FRISE GIF C — BAS DE PAGE
+     Remplace GIF_FRISE_C dans le JS (ex: nuages, rayons solaires, lotus…)
+     ===================================================================== -->
+<div class="gif-border" id="gifBot"></div>
+
+<!-- FOOTER -->
+<div class="footer-wrap">
+  <div class="footer">
+    <hr class="gazette-double">
+    <p class="footer-text">&#x2726; &nbsp; Archives C&eacute;lestes &copy; MCMXCVI &nbsp; &#x2726;</p>
+    <p class="footer-sub">HALL OF FAME PRODUCTIONS &middot; WEBMASTER &nbsp; : &nbsp; GABRIEL</p>
+    <hr class="gazette-double">
+  </div>
+</div>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-window">
+    <div class="popup-titlebar">
+      <span>&#x2726; &nbsp; Archives C&eacute;lestes &nbsp; &#x2726;</span>
+      <button class="popup-close-btn" onclick="closePopup()">&#10005;</button>
+    </div>
+    <div class="popup-content">
+      <div class="popup-portrait-wrap" id="p-portrait"></div>
+      <div class="popup-nom" id="p-nom"></div>
+      <div class="popup-dob" id="p-dob"></div>
+      <div class="popup-merite" id="p-merite"></div>
+      <div class="popup-recompense" id="p-recompense"></div>
+      <div class="popup-id" id="p-id"></div>
+      <br>
+      <button class="ok-btn" onclick="closePopup()">&nbsp; OK &nbsp;</button>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+/* =========================================================================
+   FRISE A — HAUT DE PAGE
+   Remplace __GIF_FRISE_A__ par l'URL de ton GIF (colombes, anges…)
+   Hauteur affichée : 60px
+   ========================================================================= */
+var GIF_FRISE_A = "__GIF_FRISE_A__";
+
+/* =========================================================================
+   FRISE B — ENTRE BANDEAU ET TITRE
+   Remplace __GIF_FRISE_B__ par l'URL de ton GIF (fleurs, lotus, rayons…)
+   Hauteur affichée : 50px
+   ========================================================================= */
+var GIF_FRISE_B = "__GIF_FRISE_B__";
+
+/* =========================================================================
+   FRISE C — BAS DE PAGE
+   Remplace __GIF_FRISE_C__ par l'URL de ton GIF (nuages, soleil, lotus…)
+   Hauteur affichée : 60px
+   ========================================================================= */
+var GIF_FRISE_C = "__GIF_FRISE_C__";
+
+/* Fallbacks distincts par frise */
+var FALLBACKS = {
+  gifTop:    { h:"60px", bg:"rgba(255,248,180,0.25)", msg:"[ GIF FRISE A — colombes / anges ]",    col:"#cc8800" },
+  gifMiddle: { h:"50px", bg:"rgba(220,240,255,0.30)", msg:"[ GIF FRISE B — fleurs / rayons ]",     col:"#6688aa" },
+  gifBot:    { h:"60px", bg:"rgba(255,248,180,0.25)", msg:"[ GIF FRISE C — nuages / soleil ]",     col:"#cc8800" }
+};
+
+function buildGif(id, url, height) {
+  var el = document.getElementById(id);
+  var fb = FALLBACKS[id];
+  if (!url || url.indexOf("__") === 0) {
+    el.style.cssText =
+      "display:block;width:100%;text-align:center;padding:10px 0;" +
+      "background:" + fb.bg + ";" +
+      "font-size:11px;font-family:'Courier New',monospace;letter-spacing:3px;" +
+      "color:" + fb.col + ";border-top:1px dashed " + fb.col + "55;" +
+      "border-bottom:1px dashed " + fb.col + "55;";
+    el.innerHTML = fb.msg;
+    return;
+  }
+  var count = Math.ceil(window.innerWidth / 80) + 4;
+  var html = '';
+  for (var i = 0; i < count; i++) {
+    html += '<img src="' + url + '" height="' + height + '" alt="">';
+  }
+  el.innerHTML = html;
+}
+
+buildGif('gifTop',    GIF_FRISE_A, 60);
+buildGif('gifMiddle', GIF_FRISE_B, 50);
+buildGif('gifBot',    GIF_FRISE_C, 60);
+
+
+/* =========================================================================
+   PORTRAITS — renseigne img:"URL" pour chaque élu·e
+   ========================================================================= */
+var ELUS = [
+  /* CEL-001 */ { nom:"Andre Williams",             date:"\u2746 1936",          merite:"funky proto-punk, voix de l'enfer au service du bien, indestructible",                                                    recompense:"DJ du Paradis, sono parfaite, \xe9ternit\xe9",                              id:"CEL-001", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-002 */ { nom:"Jean-Pierre Petit",          date:"\u2746 1937",          merite:"astrophysicien h\xe9r\xe9tique, bandes dessin\xe9es cosmologiques pour les enfants et les sages",                          recompense:"T\xe9lescope infini, 1er rang",                                              id:"CEL-002", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-003 */ { nom:"Lucien de Samosate",         date:"\u2746 ~125 ap. J.C.", merite:"inventeur de l'ironie, satiriste des dieux, proto-fumiste avant la lettre",                                               recompense:"Dialogue \xe9ternel avec les dieux qu'il a moqu\xe9s",                      id:"CEL-003", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-004 */ { nom:"Yorgos Batis",               date:"\u2746 1885",          merite:"reb\xe9tiko des bas-fonds, \xe2me du Pir\xe9e, musique des proscrits",                                                    recompense:"Bouzouki accord\xe9 \xe0 jamais, taverne c\xe9leste",                        id:"CEL-004", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-005 */ { nom:"Francis Bebey",              date:"\u2746 1929",          merite:"polymathe camerounais, romancier, guitariste, ethnomusicologue, g\xe9nie discret",                                         recompense:"Orchestre cosmique, biblioth\xe8que infinie",                                id:"CEL-005", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-006 */ { nom:"Athanasius Kircher",         date:"\u2746 1602",          merite:"encyclop\xe9diste baroque, d\xe9chiffreur de l'ind\xe9chiffrable, machine \xe0 merveilles",                               recompense:"Mus\xe9e des curiosit\xe9s universelles, acc\xe8s illimit\xe9",               id:"CEL-006", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-007 */ { nom:"Hans le Malin",              date:"\u2746 ~1480",         merite:"trickster m\xe9di\xe9val, farceur philosophique, premier situationniste de l'histoire",                                   recompense:"Cour des miracles c\xe9leste, licence perp\xe9tuelle",                       id:"CEL-007", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-008 */ { nom:"Tony Clifton",               date:"\u2746 1945",          merite:"lounge singer incr\xe9\xe9, alter ego plus r\xe9el que son cr\xe9ateur, insulte au principe de r\xe9alit\xe9",            recompense:"Sc\xe8ne permanente, public captif, \xe9ternit\xe9",                         id:"CEL-008", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-009 */ { nom:"Norm MacDonald",             date:"\u2746 1959",          merite:"comique de l'absurde pur, anti-punchline \xe9rig\xe9e en syst\xe8me, seul \xe0 avoir vaincu le rire par le rire",         recompense:"Talk-show infini, invit\xe9s illimit\xe9s",                                 id:"CEL-009", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-010 */ { nom:"Valerie Solanas",            date:"\u2746 1936",          merite:"SCUM Manifesto, pamphlet-simulacre, ironie totale mal comprise par ses propres admirateurs",                               recompense:"Salle de r\xe9daction sans r\xe9daction, \xe9ternit\xe9",                    id:"CEL-010", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-011 */ { nom:"Divine",                     date:"\u2746 1945",          merite:"drag pionnière, icône du cinéma trash sublimé, a mangé des excréments de chien pour l'art et n'a pas cillé",              recompense:"Robe cosmique taille unique, tapis c\xe9leste permanent",                    id:"CEL-011", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-012 */ { nom:"Claude Cahun",               date:"\u2746 1894",          merite:"auto-portrait comme arme, identit\xe9 liquide avant le concept, r\xe9sistance surr\xe9aliste",                            recompense:"Miroir infini, chambre noire \xe9ternelle",                                  id:"CEL-012", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-013 */ { nom:"E. von Freytag-Loringhoven", date:"\u2746 1874",          merite:"dada\xefste avant Dada, urinoir pr\xe9c\xe9d\xe9 par elle, corps comme ready-made vivant",                               recompense:"Atelier cosmique, mat\xe9riaux illimit\xe9s",                                id:"CEL-013", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-014 */ { nom:"Andrea Fraser",              date:"\u2746 1965",          merite:"critique institutionnelle incarn\xe9e, a vendu l'acte d'art \xe0 un collectionneur pour d\xe9noncer l'acte d'art",        recompense:"Institution c\xe9leste dont elle est seule \xe0 conna\xeetre les r\xe8gles",  id:"CEL-014", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-015 */ { nom:"H\xe9l\xe8ne & W. Beltracchi", date:"\u2746 ~1951",       merite:"faussaires g\xe9niaux, ont prouv\xe9 que l'authenticit\xe9 est une convention sociale, duo l\xe9gendaire",                 recompense:"Mus\xe9e c\xe9leste enti\xe8rement de leurs mains",                           id:"CEL-015", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-016 */ { nom:"Herrade de Landsberg",       date:"\u2746 ~1130",         merite:"Hortus Deliciarum, encyclop\xe9die enluminee du monde, abbesse visionnaire du XIIe si\xe8cle",                             recompense:"Scriptorium \xe9ternel, encre qui ne s\xe8che jamais",                       id:"CEL-016", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-017 */ { nom:"Korla Pandit",               date:"\u2746 1921",          merite:"organiste hypnotique, identit\xe9 invent\xe9e et maintenue 40 ans, exotisme comme performance pure",                       recompense:"Orgue cosmique, audience perp\xe9tuellement envo\xfbt\xe9e",                id:"CEL-017", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-018 */ { nom:"Patrick Dewaere",            date:"\u2746 1947",          merite:"acteur br\xfbl\xe9 vif, incarnation totale, a jou\xe9 sa propre mort dans chaque r\xf4le",                                recompense:"R\xf4le unique et infini, sans fin de tournage",                             id:"CEL-018", img:"" /* \u2190 PORTRAIT */ },
+  /* CEL-019 */ { nom:"Marvin Heemeyer",            date:"\u2746 1951",          merite:"soudeur du Colorado, a blind\xe9 seul son bulldozer pendant 18 mois et d\xe9moli la ville qui l'avait \xe9cras\xe9",       recompense:"Garage infini, acier illimit\xe9, personne pour l'emmerder",                 id:"CEL-019", img:"" /* \u2190 PORTRAIT */ }
+];
+
+
+function photoHTML(img) {
+  if (img && img !== "") {
+    return '<img class="portrait-img" src="' + img + '" alt="">';
+  }
+  return '<div class="portrait-placeholder">'
+    + '<span class="ph-icon">&#x2726;</span>'
+    + '<span class="ph-label">portrait<br>c\xe9leste</span>'
+    + '</div>';
+}
+
+function makeCard(d) {
+  var div = document.createElement('div');
+  div.className = 'portrait-card';
+  div.innerHTML =
+    '<div class="card-photo-area">' + photoHTML(d.img) + '</div>' +
+    '<div class="card-body">' +
+      '<div class="card-nom">' + d.nom + '</div>' +
+      '<div class="card-date">' + d.date + '</div>' +
+      '<div class="card-merite">' + d.merite + '</div>' +
+    '</div>';
+  div.onclick = function() { openPopup(d); };
+  return div;
+}
+
+var strip = document.getElementById('stripInner');
+var ALL = ELUS.concat(ELUS).concat(ELUS).concat(ELUS);
+for (var i = 0; i < ALL.length; i++) strip.appendChild(makeCard(ALL[i]));
+
+function openPopup(d) {
+  document.getElementById('p-portrait').innerHTML = photoHTML(d.img);
+  document.getElementById('p-nom').textContent = d.nom;
+  document.getElementById('p-dob').textContent = d.date;
+  document.getElementById('p-merite').textContent = d.merite;
+  document.getElementById('p-recompense').textContent = d.recompense;
+  document.getElementById('p-id').textContent = 'Dossier ' + d.id + ' \xB7 Archives C\xE9lestes \xA9 MCMXCVI';
+  document.getElementById('popup').classList.add('open');
+}
+
+function closePopup() {
+  document.getElementById('popup').classList.remove('open');
+}
+
+document.getElementById('popup').addEventListener('click', function(e) {
+  if (e.target === this) closePopup();
+});
+
+</script>
+</body>
+</html>
