@@ -45,13 +45,7 @@ h1.site-title {
   100% { text-shadow: 3px 3px #000000; }
 }
 
-td.header-center::after {
-  display: none;
-}
-@keyframes scanMove {
-  from { background-position: 0 0; }
-  to   { background-position: 0 100px; }
-}
+td.header-center::after { display: none; }
 
 .site-subtitle { font-family: "Courier New", Courier, monospace; font-size: 13px; color: #00FFFF; margin-top: 6px; letter-spacing: 2px; position: relative; z-index: 3; }
 .header-left-text { color: #FFFFFF; font-family: "Courier New", Courier, monospace; font-size: 12px; font-weight: bold; line-height: 1.8; }
@@ -94,15 +88,6 @@ td.sidebar-left { background-color: #FFFF00; width: 50px; vertical-align: top; p
   image-rendering: pixelated;
   display: block;
   margin: 0 auto 2px auto;
-}
-.gif-placeholder {
-  width: 44px; height: 44px;
-  background: #000;
-  border: 2px inset #444;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 3px auto;
-  overflow: hidden;
-  position: relative;
 }
 .gif-placeholder-canvas {
   width: 44px; height: 44px;
@@ -261,8 +246,6 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
 }
 @keyframes msgFlicker { 50% { opacity: 0.7; color: #FFFF00; text-shadow: 0 0 20px #FFFF00; } }
 
-
-
 /* ===================== STATIC NOISE FOOTER ===================== */
 .footer-band { position: relative; overflow: hidden; }
 .footer-band::before {
@@ -323,25 +306,6 @@ input[type=range].tslider{-webkit-appearance:none;appearance:none;width:24px;hei
 input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4px;height:5px;background:#c4b990;cursor:pointer;border-radius:1px;}
 .bpm-lbl{font-family:'Courier New',monospace;font-size:3px;color:#7a6a48;}
 .synth-scale-wrapper{transform:scale(1.43);transform-origin:top left;margin-left:-120px;margin-top:40px;}
-
-/* ===================== GIF PLACEHOLDER FRAME ===================== */
-.gif-frame-placeholder {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  background: #0a0a0a;
-  border: 1px dashed #333;
-  box-sizing: border-box;
-}
-.gif-frame-placeholder span {
-  font-family: "Courier New", monospace;
-  font-size: 7px;
-  color: #444;
-  letter-spacing: 1px;
-  display: block;
-  text-align: center;
-  line-height: 1.8;
-}
 </style>
 </head>
 <body>
@@ -399,7 +363,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
   <div class="gif-zone-left">
     <canvas class="gif-placeholder-canvas" id="gif-canvas-1" width="44" height="44"></canvas>
-    <span class="gif-slot-label"> <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/BMQ6224VRQT36SCUDQAM6CH7R6HNE2M7.gif?raw=true"></span>
+    <span class="gif-slot-label"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/BMQ6224VRQT36SCUDQAM6CH7R6HNE2M7.gif?raw=true"></span>
   </div>
 
   <div class="sidebar-section"><h3>Liens</h3><ul>
@@ -424,107 +388,127 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   <div class="welcome-bar" style="text-align:center;">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
   <div class="welcome-body"><p>Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>Science</strong> et de la <strong>Po&eacute;sie</strong>. D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p></div>
 
-  <!-- GIF BANNER — gauche=texture bleue (conservée), droite=placeholder GIF -->
+  <!-- GIF BANNER -->
   <div class="gif-banner">
-    <div class="gif-banner-slot" title="GIF ZONE 2a — remplacer par img src">
+    <div class="gif-banner-slot">
       <canvas id="gif-canvas-2a" width="60" height="60"></canvas>
     </div>
     <div class="gif-banner-text">
       <span class="glitch-text" data-text="&nbsp;** FRAGMENT III EN COURS **&nbsp;">&nbsp;** FRAGMENT III EN COURS **&nbsp;</span><br>
       <span style="font-size:9px;color:#00FFFF;letter-spacing:1px">sociologie &middot; &eacute;sot&eacute;risme &middot; exp&eacute;rimentation</span>
     </div>
-  <div class="gif-banner-slot">
-  <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/funny%20face.gif?raw=true"
-       style="width:100%; height:100%; object-fit:contain; image-rendering:pixelated;">
-</div>
+    <div class="gif-banner-slot">
+      <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/funny%20face.gif?raw=true"
+           style="width:100%; height:100%; object-fit:contain; image-rendering:pixelated;">
+    </div>
+  </div>
 
   <hr class="rainbow">
 
   <table class="cards-table" cellpadding="0" cellspacing="0">
+
+    <!-- PROJET EN COURS — pleine largeur -->
     <tr><td class="card c-crimson" id="projets" colspan="2">
       <div class="card-header">&#x25BA; PROJET EN COURS</div>
       <div class="card-body">Enquetes, analyses et actions contre les organisations sectaires. Croisement des methodes sociologiques et des savoirs essoteriques pour decoder les mecanismes d'emprise.<br><a href="#">&#9658; Acceder aux projets</a></div>
     </td></tr>
 
-<tr><td class="card c-purple" id="oeuvres" colspan="2">
-  <div class="card-header">&#x2736; PUBLICATIONS</div>
-  <div class="card-body" style="padding:0">
-    <table width="100%" cellpadding="0" cellspacing="0"><tr>
+    <!-- PUBLICATIONS — pleine largeur -->
+    <tr><td class="card c-purple" id="oeuvres" colspan="2">
+      <div class="card-header">&#x2736; PUBLICATIONS</div>
+      <div class="card-body" style="padding:0">
+        <table width="100%" cellpadding="0" cellspacing="0"><tr>
 
-      <!-- BOUTIQUE -->
-      <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF8FF;">
-        <div style="width:100%;height:90px;background:#0a0010;border-bottom:1px solid #330033;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/ezgif-25b0768ca135783c.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="boutique">
-        </div>
-        <div style="padding:6px 8px;text-align:center;">
-          <strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br>
-          <span style="font-size:11px">...........................</span><br>
-          <a href="#" style="margin-top:4px">&#9658; Voir</a>
+          <!-- BOUTIQUE -->
+          <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF8FF;">
+            <div style="width:100%;height:90px;background:#0a0010;border-bottom:1px solid #330033;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+              <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/ezgif-25b0768ca135783c.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="boutique">
+            </div>
+            <div style="padding:6px 8px;text-align:center;">
+              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br>
+              <span style="font-size:11px">...........................</span><br>
+              <a href="#" style="margin-top:4px">&#9658; Voir</a>
+            </div>
+          </td>
+
+          <!-- MAGAZINE -->
+          <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF5FF;">
+            <div style="width:100%;height:90px;background:#100010;border-bottom:1px solid #330033;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+              <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/bite.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="magazine">
+            </div>
+            <div style="padding:6px 8px;text-align:center;">
+              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br>
+              <span style="font-size:11px">...........................</span><br>
+              <a href="#" style="margin-top:4px">&#9658; Feuilleter</a>
+            </div>
+          </td>
+
+          <!-- TELEVISION -->
+          <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF;">
+            <div style="width:100%;height:90px;background:#001020;border-bottom:1px solid #003344;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+              <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/WS3PYONRZ7JP6AG2QBSA7RZMSTD4FEBI.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="television">
+            </div>
+            <div style="padding:6px 8px;text-align:center;">
+              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br>
+              <span style="font-size:11px">...........................</span><br>
+              <a href="https://dashboard.twitch.tv/u/scienceetpoesie/stream-manager" target="_blank" style="margin-top:4px">&#9658; Parcourir</a>
+            </div>
+          </td>
+
+          <!-- GALERIE -->
+          <td style="width:25%;padding:0;vertical-align:top;background:#FFF5FF;">
+            <div style="width:100%;height:90px;background:#100800;border-bottom:1px solid #442200;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+              <img src="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/peinture" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="galerie">
+            </div>
+            <div style="padding:6px 8px;text-align:center;">
+              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br>
+              <span style="font-size:11px">...........................</span><br>
+              <a href="#" style="margin-top:4px">&#9658; Galerie</a>
+            </div>
+          </td>
+
+        </tr></table>
+      </div>
+    </td></tr>
+
+    <!-- HALL OF FAME (gauche) + PLACEHOLDER (droite, rowspan 2) -->
+    <tr>
+      <td class="card c-gold" id="hallofame" style="width:50%">
+        <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
+        <div class="card-body">
+          Figures, contributions exceptionnelles, honor&eacute;s par S&amp;P.<br><a href="hallofame.html">&#9658; D&eacute;couvrir le palmar&egrave;s</a>
         </div>
       </td>
-
-      <!-- MAGAZINE -->
-      <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF5FF;">
-        <div style="width:100%;height:90px;background:#100010;border-bottom:1px solid #330033;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/bite.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="magazine">
-        </div>
-        <div style="padding:6px 8px;text-align:center;">
-          <strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br>
-          <span style="font-size:11px">...........................</span><br>
-          <a href="#" style="margin-top:4px">&#9658; Feuilleter</a>
-        </div>
+      <td class="card" rowspan="2" style="width:50%;vertical-align:top;background:#C0C0C0">
+        <div class="card-header" style="background:#808080;color:#AAAAAA;letter-spacing:2px">&#x25A1; PLACEHOLDER</div>
+        <div class="card-body" style="background:#C0C0C0;color:#888888;font-style:italic;text-align:center;padding-top:40px">[ à venir ]</div>
       </td>
+    </tr>
 
-      <!-- TELEVISION -->
-      <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF;">
-        <div style="width:100%;height:90px;background:#001020;border-bottom:1px solid #003344;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/WS3PYONRZ7JP6AG2QBSA7RZMSTD4FEBI.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="television">
-        </div>
-        <div style="padding:6px 8px;text-align:center;">
-          <strong style="font-family:'Arial Black';font-size:11px;color:#660066">TÉLÉVISION</strong><br>
-          <span style="font-size:11px">...........................</span><br>
-          <a href="https://dashboard.twitch.tv/u/scienceetpoesie/stream-manager" target="_blank" style="margin-top:4px">&#9658; Parcourir</a>
-        </div>
-      </td>
-
-      <!-- GALERIE -->
-      <td style="width:25%;padding:0;vertical-align:top;background:#FFF5FF;">
-        <div style="width:100%;height:90px;background:#100800;border-bottom:1px solid #442200;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-          <img src="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/peinture" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="galerie">
-        </div>
-        <div style="padding:6px 8px;text-align:center;">
-          <strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br>
-          <span style="font-size:11px">...........................</span><br>
-          <a href="#" style="margin-top:4px">&#9658; Galerie</a>
-        </div>
-      </td>
-
-    </tr></table>
-  </div>
-</td>
-
-</tr>
+    <!-- SUCKERLIST (gauche) -->
+    <tr>
       <td class="card c-black" id="suckerlist" style="width:50%">
         <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
-        <div class="card-body" style="background:#1A1A1A;color:#CCCCCC;background-image:none;background-size:cover;background-position:center;">
-          Figures, contributions répugnantes, honnis par S&P<br>
+        <div class="card-body" style="background:#1A1A1A;color:#CCCCCC;">
+          Figures, contributions r&eacute;pugnantes, honnis par S&amp;P<br>
           <a href="suckerlist.html" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a>
         </div>
       </td>
     </tr>
 
-    <!-- SOCIOGONIE avec spirale (conservée) -->
+    <!-- SOCIOGONIE — pleine largeur -->
     <tr><td class="card c-sociogonie" id="sociogonie" colspan="2">
       <div class="card-header" style="color:#E0CCFF;letter-spacing:3px">&#x2609; SOCIOGONIE</div>
       <div class="card-body" style="background:#F5EEFF">
         <div class="sociogonie-with-gif">
-          <div class="sociogonie-gif-slot" title="GIF ZONE 3 — remplacer par img src">
+          <div class="sociogonie-gif-slot">
             <canvas id="gif-canvas-3" width="52" height="52"></canvas>
           </div>
           <div>Theorie des origines sociales. &mdash; Une approche fondatrice des structures invisibles du collectif.<br><a href="#" style="background:#2B0050;border-color:#9955FF">&#9658; Explorer la sociogonie</a></div>
         </div>
       </div>
     </td></tr>
+
   </table>
   <hr class="rainbow">
 </td>
@@ -597,17 +581,14 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
 <!-- ===================== SCRIPTS ===================== -->
 <script>
-/* === INIT === */
 document.getElementById('fyear').innerHTML = new Date().getFullYear();
-/* compteur visiteurs : base basse, variation réaliste lente */
 var baseCount = 1847;
 var disp = document.getElementById('vcounter');
 var sessionAdd = Math.floor(Math.random()*4) + 1;
 var cur = baseCount;
 var tgt = baseCount + sessionAdd;
 function tickCounter(){
-  if(cur >= tgt){ 
-    /* après l'arrivée, petites variations aléatoires sporadiques */
+  if(cur >= tgt){
     setTimeout(function(){
       if(Math.random() < 0.3){ cur++; disp.innerHTML=String(cur).padStart(6,'0'); }
       tickCounter();
@@ -620,11 +601,9 @@ function tickCounter(){
 }
 tickCounter();
 
-/* === CURSOR === */
 var cursor=document.getElementById('star-cursor');
 document.addEventListener('mousemove',function(e){ cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px'; });
 
-/* === SPARKLES === */
 document.addEventListener('click',function(e){
   var chars=['*','*','*','★','✦','·','+','*'], colors=['#FFFF00','#FF0000','#00FFFF','#FF00FF','#FFFFFF','#FF8800','#00FF00','#FFFF00'];
   for(var i=0;i<8;i++){(function(i){
@@ -638,7 +617,6 @@ document.addEventListener('click',function(e){
   })(i);}
 });
 
-/* === SPEECH NAV (maintenu sans tooltip, sans touch mp3-nav) === */
 var navData = [
   { text:'Projets', pitch:1.0 }, { text:'Galerie', pitch:0.85 },
   { text:'Encyclopédie', pitch:1.15 }, { text:null, pitch:0 },
@@ -669,7 +647,7 @@ for(var n=0;n<6;n++){
 }
 document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   link.addEventListener('mouseenter',function(){
-    if(i===3) return; // slot mp3 — géré séparément ci-dessous
+    if(i===3) return;
     if(!frames[i]||!frames[i].contentWindow)return;
     var d=navData[i];
     if(!d.text)return;
@@ -681,40 +659,22 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   });
 });
 
-/* ========================================================
-   SECTION MYSTÈRE — son joué au hover, coupé au déhover
-   Remplacer mp3src par votre fichier audio
-   ======================================================== */
 (function(){
   var mp3NavLink = document.getElementById('mp3-nav');
   if(!mp3NavLink) return;
-
   var mp3src = 'https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/maxheadroom.mp3';
   var audio = null;
-
   mp3NavLink.addEventListener('mouseenter', function(){
-    if(!audio){
-      audio = new Audio(mp3src);
-      audio.loop = false;
-      audio.volume = 0.85;
-    }
+    if(!audio){ audio = new Audio(mp3src); audio.loop = false; audio.volume = 0.85; }
     audio.currentTime = 0;
     audio.play().catch(function(){});
   });
-
   mp3NavLink.addEventListener('mouseleave', function(){
-    if(audio){
-      audio.pause();
-      audio.currentTime = 0;
-    }
+    if(audio){ audio.pause(); audio.currentTime = 0; }
   });
 })();
 
-/* ========================================================
-   GIF PLACEHOLDERS — ANIMATIONS CANVAS
-   ======================================================== */
-
-/* Placeholder 1 — sidebar gauche : texture bleue défilante (conservée) */
+/* GIF CANVAS 1 — sidebar gauche */
 (function(){
   var cv=document.getElementById('gif-canvas-1');
   if(!cv)return;
@@ -736,7 +696,7 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   draw();
 })();
 
-/* Placeholder 2a — bannière gauche : texture bleue carrés (conservée) */
+/* GIF CANVAS 2a — bannière gauche */
 (function(){
   var cv=document.getElementById('gif-canvas-2a');
   if(!cv)return;
@@ -759,7 +719,7 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   draw();
 })();
 
-/* Placeholder 3 — sociogonie : spirale cosmique (conservée) */
+/* GIF CANVAS 3 — sociogonie spirale */
 (function(){
   var cv=document.getElementById('gif-canvas-3');
   if(!cv)return;
@@ -784,9 +744,7 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   draw();
 })();
 
-/* ========================================================
-   EASTER EGG 1 — KONAMI CODE
-   ======================================================== */
+/* KONAMI */
 var konamiSeq=[38,38,40,40,37,39,37,39,66,65];
 var konamiIdx=0;
 document.addEventListener('keydown',function(e){
@@ -805,10 +763,7 @@ function triggerKonamiEgg(){
     var img=c.createImageData(cv.width,cv.height);
     for(var i=0;i<img.data.length;i+=4){
       var v=Math.random()*255;
-      img.data[i]=v>240?0:0;
-      img.data[i+1]=v>240?255:0;
-      img.data[i+2]=0;
-      img.data[i+3]=v>240?255:0;
+      img.data[i]=v>240?0:0; img.data[i+1]=v>240?255:0; img.data[i+2]=0; img.data[i+3]=v>240?255:0;
     }
     c.putImageData(img,0,0);
     for(var j=0;j<8;j++){
@@ -825,9 +780,7 @@ function triggerKonamiEgg(){
   glitchFrame();
 }
 
-/* ========================================================
-   EASTER EGG 2 — Citation rotative (click)
-   ======================================================== */
+/* Citations */
 var citations=[
   '&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;',
   '&laquo;&nbsp;Le collectif précède l\'individu.&nbsp;&raquo;',
@@ -846,41 +799,30 @@ if(citEl){
     e.preventDefault();
     citIdx=(citIdx+1)%citations.length;
     citEl.style.opacity='0';
-    setTimeout(function(){
-      citEl.innerHTML=citations[citIdx];
-      citEl.style.opacity='1';
-    },150);
+    setTimeout(function(){ citEl.innerHTML=citations[citIdx]; citEl.style.opacity='1'; },150);
     citEl.style.transition='opacity 0.15s';
   });
 }
 
-/* === BOUTON GRATUITE : s'appuie au clic === */
+/* Bouton Gratuité */
 (function(){
   var btn = document.getElementById('btn-gratuite');
   if(!btn) return;
   btn.addEventListener('mousedown', function(){
-    btn.style.borderTopColor   = '#880000';
-    btn.style.borderLeftColor  = '#880000';
-    btn.style.borderRightColor = '#FF6666';
-    btn.style.borderBottomColor= '#FF6666';
-    btn.style.transform = 'translateY(1px)';
+    btn.style.borderTopColor='#880000'; btn.style.borderLeftColor='#880000';
+    btn.style.borderRightColor='#FF6666'; btn.style.borderBottomColor='#FF6666';
+    btn.style.transform='translateY(1px)';
   });
-  function release(){ 
-    btn.style.borderTopColor   = '#FF6666';
-    btn.style.borderLeftColor  = '#FF6666';
-    btn.style.borderRightColor = '#880000';
-    btn.style.borderBottomColor= '#880000';
-    btn.style.transform = ''; 
+  function release(){
+    btn.style.borderTopColor='#FF6666'; btn.style.borderLeftColor='#FF6666';
+    btn.style.borderRightColor='#880000'; btn.style.borderBottomColor='#880000';
+    btn.style.transform='';
   }
   btn.addEventListener('mouseup', release);
   btn.addEventListener('mouseleave', release);
 })();
 
-/* titre : lueur uniquement, pas d'easter egg clic */
-
-/* ========================================================
-   SYNTH (inchangé)
-   ======================================================== */
+/* SYNTH */
 var ctx=null,osc=null,osc2=null,gn=null,gn2=null,octave=4,vol=0.6,mouseDown=false,currentKeyEl=null;
 var waveType='sine',analyser=null,dataArr=null,oscRaf=null;
 var noteLabels={'C':'Do','D':'Ré','E':'Mi','F':'Fa','G':'Sol','A':'La','B':'Si','C#':'Do#','D#':'Ré#','F#':'Fa#','G#':'Sol#','A#':'La#'};
