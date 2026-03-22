@@ -16,19 +16,61 @@
 #star-cursor { position: fixed; top: 0; left: 0; width: 18px; height: 18px; pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); }
 body { background-color: #808080; margin: 0; padding: 0; font-family: "Times New Roman", Times, serif; scrollbar-color: #C0C0C0 #C0C0C0; scrollbar-width: auto; }
 #page-wrapper { width: 900px; margin: 0 auto; background-color: #C0C0C0; border-left: 2px solid #444; border-right: 2px solid #444; }
+
+/* ===================== MARQUEE ===================== */
 .marquee-band { background-color: #000080; color: #FFFF00; font-family: "Courier New", Courier, monospace; font-size: 13px; font-weight: bold; padding: 4px 0; overflow: hidden; white-space: nowrap; }
 .marquee-inner { display: inline-block; animation: marquee 22s linear infinite; }
 @keyframes marquee { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
+
+/* ===================== HEADER ===================== */
 table.header-table { width: 100%; border-collapse: collapse; }
 td.header-left { background-color: #FF0000; width: 115px; padding: 14px 10px; vertical-align: middle; border-right: 4px solid #800000; }
-td.header-center { background-color: #000080; text-align: center; padding: 18px 20px; vertical-align: middle; }
+td.header-center { background-color: #000080; text-align: center; padding: 18px 20px; vertical-align: middle; position: relative; overflow: hidden; }
 td.header-right { background-color: #008000; width: 60px; padding: 14px 6px; vertical-align: middle; border-left: 4px solid #004000; text-align: center; }
-h1.site-title { font-family: "Times New Roman", Times, serif; font-size: 48px; font-weight: bold; color: #FFFF00; margin: 0; padding: 0; letter-spacing: 4px; text-decoration: underline; text-shadow: 3px 3px #000000; animation: titlePulse 12s ease-in-out infinite; }
-@keyframes titlePulse { 0% { text-shadow: 3px 3px #000000; } 10% { text-shadow: 3px 3px #000000, 0 0 18px #FFFF00, 0 0 32px #FF8800; } 20% { text-shadow: 3px 3px #000000; } 100% { text-shadow: 3px 3px #000000; } }
-.site-subtitle { font-family: "Courier New", Courier, monospace; font-size: 13px; color: #00FFFF; margin-top: 6px; letter-spacing: 2px; }
+
+/* ===================== TITRE ===================== */
+h1.site-title {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 58px; font-weight: bold; color: #FFFF00;
+  margin: 0; padding: 0; letter-spacing: 4px;
+  text-decoration: underline;
+  text-shadow: 3px 3px #000000;
+  position: relative;
+  animation: titlePulse 12s ease-in-out infinite;
+}
+@keyframes titlePulse {
+  0%   { text-shadow: 3px 3px #000000; }
+  10%  { text-shadow: 3px 3px #000000, 0 0 18px #FFFF00, 0 0 32px #FF8800; }
+  20%  { text-shadow: 3px 3px #000000; }
+  100% { text-shadow: 3px 3px #000000; }
+}
+
+/* Scanlines overlay sur le header-center */
+td.header-center::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: scanMove 8s linear infinite;
+}
+@keyframes scanMove {
+  from { background-position: 0 0; }
+  to   { background-position: 0 100px; }
+}
+
+.site-subtitle { font-family: "Courier New", Courier, monospace; font-size: 13px; color: #00FFFF; margin-top: 6px; letter-spacing: 2px; position: relative; z-index: 3; }
 .header-left-text { color: #FFFFFF; font-family: "Courier New", Courier, monospace; font-size: 12px; font-weight: bold; line-height: 1.8; }
 .visitor-box { background-color: #000000; color: #00FF00; font-family: "Courier New", Courier, monospace; font-size: 20px; font-weight: bold; border: 3px inset #888888; padding: 8px 10px 10px 10px; letter-spacing: 3px; display: inline-block; margin-top: 6px; margin-bottom: 8px; }
 .header-right-text { color: #FFFFFF; font-family: "Times New Roman", serif; font-size: 12px; font-style: italic; line-height: 1.7; }
+
+/* ===================== NAVBAR ===================== */
 table.navbar { width: 100%; border-collapse: collapse; border-top: 4px solid #800000; border-bottom: 4px solid #800000; }
 td.nav-cell { text-align: center; padding: 0; }
 td.nav-cell a { display: block; padding: 8px 4px; font-family: "Arial Black", Arial, sans-serif; font-size: 13px; font-weight: 900; text-decoration: none; letter-spacing: 0.5px; border-right: 3px outset #999999; transition: letter-spacing 0.15s; }
@@ -39,6 +81,8 @@ td.n3 { background-color: #FFFF00; } td.n3 a { color: #000000; } td.n3 a:hover {
 td.n4 { background-color: #008000; } td.n4 a { color: #FFFFFF; } td.n4 a:hover { background-color: #006600; letter-spacing: 2px; }
 td.n5 { background-color: #000080; } td.n5 a { color: #FFFFFF; } td.n5 a:hover { background-color: #000055; letter-spacing: 2px; }
 td.n6 { background-color: #800080; } td.n6 a { color: #FFFFFF; } td.n6 a:hover { background-color: #600060; letter-spacing: 2px; }
+
+/* ===================== LAYOUT ===================== */
 table.main-layout { width: 100%; border-collapse: collapse; }
 td.sidebar-left { background-color: #FFFF00; width: 50px; vertical-align: top; padding: 0; border-right: 4px solid #CCCC00; }
 .sidebar-section { border-bottom: 3px solid #CCCC00; padding: 6px 5px; }
@@ -48,12 +92,109 @@ td.sidebar-left { background-color: #FFFF00; width: 50px; vertical-align: top; p
 .sidebar-section ul li a { color: #800000; font-weight: bold; text-decoration: none; }
 .sidebar-section ul li a:hover { text-decoration: underline; color: #FF0000; }
 .sidebar-section p { font-size: 9px; color: #000000; line-height: 1.5; font-family: "Courier New", monospace; }
+
+/* ===================== GIF ZONE — SIDEBAR GAUCHE ===================== */
+.gif-zone-left {
+  border-bottom: 3px solid #CCCC00;
+  padding: 4px 3px;
+  background: #000000;
+  text-align: center;
+  overflow: hidden;
+}
+.gif-zone-left img {
+  width: 44px;
+  image-rendering: pixelated;
+  display: block;
+  margin: 0 auto 2px auto;
+}
+/* Placeholder animé quand pas de GIF */
+.gif-placeholder {
+  width: 44px; height: 44px;
+  background: #000;
+  border: 2px inset #444;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 3px auto;
+  overflow: hidden;
+  position: relative;
+}
+.gif-placeholder-canvas {
+  width: 44px; height: 44px;
+  display: block;
+}
+.gif-slot-label {
+  font-family: "Courier New", monospace;
+  font-size: 6px;
+  color: #00FF00;
+  display: block;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-top: 1px;
+}
+
 .blink { animation: blinker 0.9s step-start infinite; }
 @keyframes blinker { 50% { opacity: 0; } }
+
+/* ===================== CENTER CONTENT ===================== */
 td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; }
 .welcome-bar { background-color: #FF0000; color: #FFFFFF; font-family: "Arial Black", Arial, sans-serif; font-size: 16px; font-weight: 900; padding: 8px 16px; letter-spacing: 2px; border-bottom: 4px outset #CC0000; }
 .welcome-body { padding: 14px 16px; background-color: #FFFFFF; border-bottom: 3px solid #C0C0C0; }
 .welcome-body p { font-family: "Times New Roman", serif; font-size: 14px; color: #000000; line-height: 1.7; margin: 0; }
+
+/* ===================== GIF BANNER — ENTRE WELCOME ET CARDS ===================== */
+.gif-banner {
+  /* PLACEHOLDER FOND : remplacer background par : background-image: url("votre-image.jpg"); background-size: cover; background-position: center; */
+  background: #303030;
+  border-top: 3px solid #000000;
+  border-bottom: 3px solid #000000;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.gif-banner-slot {
+  flex-shrink: 0;
+  width: 60px; height: 60px;
+  background: #000;
+  border: 2px inset #666;
+  overflow: hidden;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.gif-banner-slot img {
+  width: 60px;
+  image-rendering: pixelated;
+}
+.gif-banner-text {
+  flex: 1;
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  color: #FFFF00;
+  line-height: 1.6;
+  text-align: center;
+}
+/* Glitch sur le texte bannière */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+.glitch-text::before {
+  content: attr(data-text);
+  position: absolute; left: 0; top: 0;
+  color: #FF0000;
+  animation: textGlitch 4s steps(1) infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+@keyframes textGlitch {
+  0%,90%  { opacity:0; transform:none; }
+  91%     { opacity:1; transform:translate(-2px,1px); }
+  92%     { opacity:0; }
+  94%     { opacity:1; transform:translate(2px,0); }
+  95%     { opacity:0; }
+}
+
+/* ===================== CARDS ===================== */
 table.cards-table { width: 100%; border-collapse: collapse; }
 td.card { vertical-align: top; padding: 0; border: 3px outset #888888; width: 50%; }
 .card-header { padding: 7px 10px; font-family: "Arial Black", Arial, sans-serif; font-size: 14px; font-weight: 900; letter-spacing: 1px; color: #FFFFFF; border-bottom: 3px inset #555555; }
@@ -66,6 +207,30 @@ td.card { vertical-align: top; padding: 0; border: 3px outset #888888; width: 50
 .c-black .card-header { background-color: #111111; } .c-black .card-body { background-color: #1A1A1A; color: #CCCCCC; }
 .c-black .card-body a { border-color: #888800; }
 .c-sociogonie .card-header { background-color: #2B0050; } .c-sociogonie .card-body { background-color: #F5EEFF; }
+
+/* GIF dans la card sociogonie */
+.sociogonie-with-gif {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.sociogonie-gif-slot {
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  background: #000;
+  border: 2px inset #5500AA;
+  overflow: hidden;
+}
+.sociogonie-gif-slot img {
+  width: 52px;
+  image-rendering: pixelated;
+}
+.sociogonie-gif-slot canvas {
+  width: 52px; height: 52px;
+  display: block;
+}
+
+/* ===================== SIDEBAR DROITE ===================== */
 td.sidebar-right { background-color: #FF8000; width: 90px; vertical-align: top; padding: 0; border-left: 4px solid #CC6600; }
 .rsidebar-section { border-bottom: 3px solid #CC6600; padding: 6px 6px; }
 .rsidebar-section h3 { font-family: "Arial Black", Arial, sans-serif; font-size: 10px; font-weight: 900; color: #000000; margin: 0 0 4px 0; text-transform: uppercase; border-bottom: 2px solid #000000; padding-bottom: 2px; }
@@ -73,94 +238,91 @@ td.sidebar-right { background-color: #FF8000; width: 90px; vertical-align: top; 
 .webring-box { background-color: #FFFFFF; border: 3px inset #888888; padding: 6px; text-align: center; font-family: "Arial", sans-serif; font-size: 11px; font-weight: bold; }
 .webring-box a { color: #000080; text-decoration: none; display: block; line-height: 2; }
 .webring-box a:hover { text-decoration: underline; }
-hr.rainbow { border: none; height: 6px; background: #0000AA; margin: 0; }
 hr.rainbow { border: none; height: 6px; background: linear-gradient(to right, #6B0000, #7A3800, #5C5C00, #005500, #00004A, #380038, #6B0000); margin: 0; opacity: 0.65; }
 .footer-band { background-color: #000080; color: #FFFFFF; text-align: center; padding: 10px; font-family: "Courier New", Courier, monospace; font-size: 12px; border-top: 4px solid #000000; }
 .footer-band a { color: #FFFF00; }
 .footer-bottom { background-color: #000000; color: #C0C0C0; text-align: center; padding: 5px; font-family: "Courier New", monospace; font-size: 10px; }
 a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
+
+/* ===================== SPARKLES ===================== */
 .sparkle { position: fixed; pointer-events: none; z-index: 99997; animation: sparkleBurst 0.45s linear forwards; transform-origin: center; user-select: none; font-family: "Courier New", monospace; font-weight: bold; }
 @keyframes sparkleBurst { 0% { opacity: 1; transform: translate(-50%,-50%); } 100% { opacity: 0; transform: translate(var(--tx), var(--ty)); } }
-</style>
-</head>
-<body>
 
-<div id="voice-pool" style="position:absolute;width:0;height:0;overflow:hidden;"></div>
+/* ===================== EASTER EGG — KONAMI / GLITCH SCREEN ===================== */
+#glitch-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  z-index: 999998;
+  background: #000;
+  overflow: hidden;
+  pointer-events: none;
+}
+#glitch-overlay.active { display: block; pointer-events: all; }
+#glitch-overlay canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#glitch-msg {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Courier New", monospace;
+  font-size: 28px;
+  font-weight: bold;
+  color: #00FF00;
+  text-align: center;
+  text-shadow: 0 0 20px #00FF00, 0 0 40px #00FF00;
+  letter-spacing: 4px;
+  z-index: 2;
+  animation: msgFlicker 0.3s steps(1) infinite;
+}
+@keyframes msgFlicker { 50% { opacity: 0.7; color: #FFFF00; text-shadow: 0 0 20px #FFFF00; } }
 
-<div id="star-cursor">
-  <svg width="18" height="18" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000000" stroke-width="0.6"/>
-  </svg>
-</div>
+/* ===================== EASTER EGG — TOOLTIP MYSTÉRIEUX ===================== */
+.mystery-tooltip {
+  position: absolute;
+  background: #000080;
+  color: #FFFF00;
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  padding: 4px 8px;
+  border: 2px outset #8888FF;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+  white-space: nowrap;
+  max-width: 200px;
+}
 
-<div id="page-wrapper">
-<div class="marquee-band"><span class="marquee-inner">&nbsp;&nbsp;&nbsp;*** BIENVENUE SUR SCIENCE &amp; POESIE ***&nbsp;&nbsp;&nbsp;recherche en sociologie ésotérique * litterature experimentale * arts visuels * evenements * publications&nbsp;&nbsp;&nbsp;*** NOUVEAU : Contre la Musique ***&nbsp;&nbsp;&nbsp;*** BIENVENUE SUR SCIENCE &amp; POESIE ***&nbsp;&nbsp;&nbsp;</span></div>
+/* ===================== GLITCH SUR HOVER DES CARDS ===================== */
+.card-header:hover {
+  animation: headerGlitch 0.4s steps(1) 1;
+}
+@keyframes headerGlitch {
+  0%   { filter: none; }
+  20%  { filter: hue-rotate(90deg) saturate(3); transform: translateX(2px); }
+  40%  { filter: hue-rotate(-90deg); transform: translateX(-2px); }
+  60%  { filter: invert(0.3); transform: translateX(1px); }
+  80%  { filter: none; transform: translateX(-1px); }
+  100% { filter: none; transform: none; }
+}
 
-<table class="header-table" cellpadding="0" cellspacing="0"><tr>
-  <td class="header-left"><div class="header-left-text"><span class="blink">&#9632;</span> SITE EN LIGNE<br>Visiteurs&nbsp;:<br><div class="visitor-box" id="vcounter">064731</div><br></div></td>
-  <td class="header-center"><h1 class="site-title">SCIENCE &amp; PO&Eacute;SIE</h1><div class="site-subtitle">&#x2234; recherche &middot; &eacute;criture &middot; exp&eacute;rimentation &#x2235;</div></td>
-  <td class="header-right"><div class="header-right-text">La Science<br>pour croire,<br>la Po&eacute;sie<br>pour r&ecirc;ver.<br><br><strong style="font-style:normal;font-family:Arial;font-size:11px;color:#FFFF00">&#x2605; EST. 2024 &#x2605;</strong></div></td>
-</tr></table>
+/* ===================== STATIC NOISE FOOTER ===================== */
+.footer-band { position: relative; overflow: hidden; }
+.footer-band::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  pointer-events: none;
+  animation: noiseShift 0.5s steps(1) infinite;
+}
+@keyframes noiseShift {
+  0%  { transform: translate(0,0); }
+  25% { transform: translate(-3px,2px); }
+  50% { transform: translate(2px,-3px); }
+  75% { transform: translate(-2px,-2px); }
+  100%{ transform: translate(3px,1px); }
+}
 
-<hr class="rainbow">
-
-<table class="navbar" cellpadding="0" cellspacing="0"><tr>
-  <td class="nav-cell n1"><a href="#projets">PROJETS</a></td>
-  <td class="nav-cell n6"><a href="#oeuvres">&OElig;UVRES</a></td>
-  <td class="nav-cell n3"><a href="#encyclopédie">ENCYCLOPÉDIE</a></td>
-  <td class="nav-cell n5"><a href="#ϪꙮʘɮҨȢɮꙚ">ϪꙮʘɮҨȢɮꙚ</a></td>
-  <td class="nav-cell n4"><a href="#oeuvres">PUBLICATIONS</a></td>
-  <td class="nav-cell n2"><a href="#sociogonie">SOCIOGONIE</a></td>
-</tr></table>
-
-<table class="main-layout" cellpadding="0" cellspacing="0"><tr>
-<td class="sidebar-left">
-  <div class="sidebar-section"><h3>Navigation</h3><ul><li><a href="#projets">&#9658; Projets</a></li><li><a href="#oeuvres">&#9658; &OElig;uvres</a></li><li><a href="#hallofame">&#9658; Hall of Fame</a></li><li><a href="#suckerlist">&#9658; Suckerlist</a></li><li><a href="#notreentente">&#9658; N. Entente</a></li><li><a href="#sociogonie">&#9658; Sociogonie</a></li></ul></div>
-  <div class="sidebar-section"><h3>Statut</h3><p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;Fragment III&nbsp;&raquo;<br>en cours&hellip;</p></div>
-  <div class="sidebar-section"><h3>Liens</h3><ul><li><a href="#">Archives</a></li><li><a href="#">Ressources</a></li><li><a href="#">R&eacute;f&eacute;rences</a></li><li><a href="#">Plan du site</a></li></ul></div>
-  <div class="sidebar-section" style="text-align:center;background-color:#000080;border:3px inset #888"><p style="color:#FFFF00;font-family:'Courier New';font-size:10px;font-weight:bold;margin:0">&#x2234; &#x2235; &#x2234;<br>ESPACE<br>EXP&Eacute;RIMENTAL<br>&#x2234; &#x2235; &#x2234;</p></div>
-</td>
-<td class="center-content">
-  <div class="welcome-bar" style="text-align:center;">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
-  <div class="welcome-body"><p>Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>Science</strong> et de la <strong>Po&eacute;sie</strong>. D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p></div>
-  <hr class="rainbow">
-  <table class="cards-table" cellpadding="0" cellspacing="0">
-    <tr><td class="card c-crimson" id="projets" colspan="2"><div class="card-header">&#x25BA; PROJET EN COURS</div><div class="card-body">Enquetes, analyses et actions contre les organisations sectaires. Croisement des methodes sociologiques et des savoirs essoteriques pour decoder les mecanismes d'emprise.<br><a href="#">&#9658; Acceder aux projets</a></div></td></tr>
-    <tr><td class="card c-purple" id="oeuvres" colspan="2"><div class="card-header">&#x2736; PUBLICATIONS</div><div class="card-body" style="padding:0"><table width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF"><strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br><span style="font-size:11px">Publications, tirages, objets.</span><br><a href="#" style="margin-top:4px">&#9658; Voir</a></td>
-      <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF5FF"><strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br><span style="font-size:11px">Revue experimentale.</span><br><a href="#" style="margin-top:4px">&#9658; Feuilleter</a></td>
-      <td style="width:25%;padding:8px 10px;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF"><strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br><span style="font-size:11px">Videos, captations, creations.</span><br><a href="https://dashboard.twitch.tv/u/scienceetpoesie/stream-manager" target="_blank" style="margin-top:4px">&#9658; Regarder</a></td>
-      <td style="width:25%;padding:8px 10px;vertical-align:top;background:#FFF5FF"><strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br><span style="font-size:11px">Images, oeuvres visuelles.</span><br><a href="#" style="margin-top:4px">&#9658; Galerie</a></td>
-    </tr></table></div></td></tr>
-    <tr>
-      <td class="card c-gold" id="halloffame" style="width:50%"><div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div><div class="card-body">Figures, contributions exceptionnelles honor&eacute;s par S&amp;P.<br><a href="hallofame.html">&#9658; Voir le palmares</a></div></td>
-      <td class="card" rowspan="2" style="width:50%;vertical-align:top;background:#C0C0C0"><div class="card-header" style="background:#808080;color:#AAAAAA;letter-spacing:2px">&#x25A1; PLACEHOLDER</div><div class="card-body" style="background:#C0C0C0;color:#888888;font-style:italic;text-align:center;padding-top:40px">[ à venir ]</div></td>
-    </tr>
-    <tr>
-      <td class="card c-black" id="suckerlist" style="width:50%"><div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div><div class="card-body" style="background:#1A1A1A;color:#CCCCCC">Le revers de la medaille. Ceux qui ont decu, trahi ou simplement rate leur coup.<br><a href="suckerlist.html" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a></div></td>
-    </tr>
-    <tr><td class="card c-sociogonie" id="sociogonie" colspan="2"><div class="card-header" style="color:#E0CCFF;letter-spacing:3px">&#x2609; SOCIOGONIE</div><div class="card-body" style="background:#F5EEFF">Theorie des origines sociales. A la croisee de la cosmogonie, de la sociologie et de l'esoterisme &mdash; une approche fondatrice des structures invisibles du collectif.<br><a href="#" style="background:#2B0050;border-color:#9955FF">&#9658; Explorer la sociogonie</a></div></td></tr>
-  </table>
-  <hr class="rainbow">
-</td>
-<td class="sidebar-right">
-  <div class="rsidebar-section" style="background:#FF8000;border-bottom:3px solid #CC6600;padding:8px">
-    <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" target="_blank" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 6px 12px 6px">
-      <div style="font-family:'Arial Black',Arial,sans-serif;font-size:10px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
-      <div style="height:4px;background:#0000AA;margin:0 0 8px 0"></div>
-      <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/blue%20book.jpg?raw=true" width="60" height="74" style="display:block;margin:0 auto 8px auto;position:relative;left:-2px;image-rendering:pixelated;" alt="Notre Entente">
-      <div style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#444;line-height:1.6;margin-bottom:8px">&laquo;&nbsp;po&egrave;me anti-&eacute;pique&nbsp;&raquo;<br><span style="font-size:9px;color:#999">(à ne pas lire)</span></div>
-      <span class="ne-cta" style="font-family:'Times New Roman',serif;font-size:15px;font-weight:bold;color:#0000AA;text-decoration:underline">Acc&eacute;der au site</span>
-    </a>
-  </div>
-  <div class="rsidebar-section"><h3>Citation</h3><p style="font-style:italic;font-size:11px">&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;</p></div>
-  <div class="rsidebar-section"><h3>Web Ring</h3><div class="webring-box"><a href="#">&#9664; Pr&eacute;c.</a><a href="#" style="color:#FF0000;font-size:13px">&#9679;</a><a href="#">Suiv. &#9654;</a></div></div>
-  <div class="rsidebar-section" style="text-align:center"><p style="font-family:'Courier New';font-size:10px;font-weight:bold;color:#000">Optimis&eacute; pour<br><span style="font-size:13px">Netscape 3.0</span><br>800&times;600</p></div>
-  <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;">
-    <span style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#CC0000;line-height:1.5;display:block;margin-bottom:2px">Gratuit&eacute;</span>
-    <span style="display:block;color:#CC0000;font-size:13px;line-height:1;">&#x2193;</span>
-    <a href="#" style="display:inline-block;width:22px;height:22px;background:#CC0000;border:2px outset #FF6666;border-right-color:#880000;border-bottom-color:#880000;border-radius:50%;text-decoration:none;margin-top:2px;">&nbsp;</a>
-<style>
+/* ===================== SYNTH (inchangé) ===================== */
 .sw{background:#d4c9a8;padding:3px 4px 0 4px;display:inline-block;border-top:2px solid #e8dfc0;border-left:2px solid #e8dfc0;border-right:2px solid #7a6a48;border-bottom:2px solid #7a6a48;box-sizing:border-box;}
 .screen{background:#1c1a0e;border-top:1px solid #3a3220;border-left:1px solid #3a3220;border-right:1px solid #c8b880;border-bottom:1px solid #c8b880;padding:2px 3px;margin-bottom:3px;display:flex;align-items:center;gap:3px;height:16px;}
 .osc-canvas{flex:1;height:12px;display:block;}
@@ -183,26 +345,229 @@ input[type=range].wslider::-webkit-slider-thumb{-webkit-appearance:none;width:5p
 .keys-wrap{background:#1a1408;border-top:2px solid #0a0804;border-left:2px solid #0a0804;border-right:2px solid #7a6a40;border-bottom:0;padding:1px 1px 0 1px;box-sizing:border-box;position:relative;display:inline-block;flex-shrink:0;}
 .wkeys{display:flex;gap:1px;align-items:flex-start;}
 .wk{width:8px;flex-shrink:0;height:36px;background:#f0ebe0;border-top:1px solid #d8d0bc;border-left:1px solid #e8e0cc;border-right:1px solid #a09080;border-bottom:2px solid #706050;border-radius:0 0 2px 2px;cursor:pointer;box-sizing:border-box;}
-.wk.pressed{background:#e8701a;border-top-color:#c05010;border-left-color:#c05010;border-right-color:#803008;border-bottom-color:#501e04;border-bottom-width:1px;}
-.wk.arp-held{background:#e8701a;border-top-color:#c05010;border-left-color:#c05010;border-right-color:#803008;border-bottom-color:#501e04;border-bottom-width:1px;}
+.wk.pressed{background:#e8701a;}
+.wk.arp-held{background:#e8701a;}
 .wk.arp-ping{background:#e8c030;}
 .bkeys{position:absolute;top:1px;left:1px;height:22px;pointer-events:none;}
 .bk{position:absolute;height:22px;width:5px;background:#1e180e;border-top:1px solid #3a3020;border-left:1px solid #3a3020;border-right:1px solid #080604;border-bottom:2px solid #080604;border-radius:0 0 1px 1px;cursor:pointer;pointer-events:all;box-sizing:border-box;}
-.bk.pressed{background:#b05010;border-top-color:#d07020;border-left-color:#d07020;border-right-color:#602808;border-bottom-color:#301404;border-bottom-width:1px;}
-.bk.arp-held{background:#b05010;border-top-color:#d07020;border-left-color:#d07020;border-right-color:#602808;border-bottom-color:#301404;border-bottom-width:1px;}
+.bk.pressed{background:#b05010;}
+.bk.arp-held{background:#b05010;}
 .bk.arp-ping{background:#c09020;border-bottom-color:#301404;border-bottom-width:1px;}
 .arp-corner{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;flex:1;}
 .arp-top{display:flex;flex-direction:column;align-items:center;gap:1px;margin-bottom:4px;}
 .arp-lbl{font-family:'Courier New',monospace;font-size:3px;color:#7a6a48;letter-spacing:1px;}
 .arp-sw{width:11px;height:5px;background:#1a1408;border-top:1px solid #0a0804;border-left:1px solid #0a0804;border-right:1px solid #7a6a40;border-bottom:1px solid #7a6a40;cursor:pointer;position:relative;box-sizing:border-box;}
 .arp-thumb{width:4px;height:3px;background:#b8a870;border-top:1px solid #d8c890;border-left:1px solid #d8c890;border-right:1px solid #5a4a20;border-bottom:1px solid #5a4a20;position:absolute;top:0;left:0;transition:left 0.09s;}
-.arp-sw.on .arp-thumb{left:5px;background:#e8c030;border-top-color:#f8d848;border-left-color:#f8d848;border-right-color:#806010;border-bottom-color:#806010;}
+.arp-sw.on .arp-thumb{left:5px;background:#e8c030;}
 .arp-bot{display:flex;flex-direction:column;align-items:center;gap:1px;}
-input[type=range].tslider{-webkit-appearance:none;appearance:none;width:24px;height:2px;background:#8a7a60;border-top:1px solid #5a4a30;border-left:1px solid #5a4a30;border-right:1px solid #d0c4a0;border-bottom:1px solid #d0c4a0;outline:none;padding:0;margin:0;display:block;}
-input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4px;height:5px;background:#c4b990;border-top:1px solid #e0d4a8;border-left:1px solid #e0d4a8;border-right:1px solid #5a4a28;border-bottom:1px solid #5a4a28;cursor:pointer;border-radius:1px;}
+input[type=range].tslider{-webkit-appearance:none;appearance:none;width:24px;height:2px;background:#8a7a60;outline:none;padding:0;margin:0;display:block;}
+input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4px;height:5px;background:#c4b990;cursor:pointer;border-radius:1px;}
 .bpm-lbl{font-family:'Courier New',monospace;font-size:3px;color:#7a6a48;}
-.synth-scale-wrapper{transform:scale(1.43);transform-origin:top left; margin-left: -120px; margin-top: 40px;}
+.synth-scale-wrapper{transform:scale(1.43);transform-origin:top left;margin-left:-120px;margin-top:40px;}
 </style>
+</head>
+<body>
+
+<div id="voice-pool" style="position:absolute;width:0;height:0;overflow:hidden;"></div>
+<div id="mystery-tooltip" class="mystery-tooltip"></div>
+
+<!-- EASTER EGG KONAMI OVERLAY -->
+<div id="glitch-overlay">
+  <canvas id="glitch-canvas"></canvas>
+  <div id="glitch-msg">Ϫꙮ TRANSMISSION REÇUE ꙮϪ<br><span style="font-size:14px;letter-spacing:2px">↑↑↓↓←→←→BA</span></div>
+</div>
+
+<div id="star-cursor">
+  <svg width="18" height="18" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000000" stroke-width="0.6"/>
+  </svg>
+</div>
+
+<div id="page-wrapper">
+<div class="marquee-band"><span class="marquee-inner">&nbsp;&nbsp;&nbsp;*** BIENVENUE SUR SCIENCE &amp; POESIE ***&nbsp;&nbsp;&nbsp;recherche en sociologie ésotérique * litterature experimentale * arts visuels * evenements * publications&nbsp;&nbsp;&nbsp;*** NOUVEAU : Contre la Musique ***&nbsp;&nbsp;&nbsp;*** BIENVENUE SUR SCIENCE &amp; POESIE ***&nbsp;&nbsp;&nbsp;</span></div>
+
+<table class="header-table" cellpadding="0" cellspacing="0"><tr>
+  <td class="header-left"><div class="header-left-text"><span class="blink">&#9632;</span> SITE EN LIGNE<br>Visiteurs&nbsp;:<br><div class="visitor-box" id="vcounter">064731</div><br></div></td>
+  <td class="header-center">
+    <h1 class="site-title">SCIENCE &amp; PO&Eacute;SIE</h1>
+    <div class="site-subtitle">&#x2234; recherche &middot; &eacute;criture &middot; exp&eacute;rimentation &#x2235;</div>
+  </td>
+  <td class="header-right"><div class="header-right-text">La Science<br>pour croire,<br>la Po&eacute;sie<br>pour r&ecirc;ver.<br><br><strong style="font-style:normal;font-family:Arial;font-size:11px;color:#FFFF00">&#x2605; EST. 2024 &#x2605;</strong></div></td>
+</tr></table>
+
+<hr class="rainbow">
+
+<table class="navbar" cellpadding="0" cellspacing="0"><tr>
+  <td class="nav-cell n1"><a href="#projets">PROJETS</a></td>
+  <td class="nav-cell n6"><a href="#oeuvres">GALERIE</a></td>
+  <td class="nav-cell n3"><a href="#encyclopédie">ENCYCLOPÉDIE</a></td>
+  <td class="nav-cell n5"><a href="#" id="mp3-nav">Ϫʬ҂ꙮʘɮҨȢɮꙚ</a></td>
+  <td class="nav-cell n4"><a href="#oeuvres">PUBLICATIONS</a></td>
+  <td class="nav-cell n2"><a href="#sociogonie">SOCIOGONIE</a></td>
+</tr></table>
+
+<table class="main-layout" cellpadding="0" cellspacing="0"><tr>
+
+<!-- ===== SIDEBAR GAUCHE ===== -->
+<td class="sidebar-left">
+  <div class="sidebar-section"><h3>Navigation</h3><ul>
+    <li><a href="#projets">&#9658; Projets</a></li>
+    <li><a href="#oeuvres">&#9658; &OElig;uvres</a></li>
+    <li><a href="#hallofame">&#9658; Hall of Fame</a></li>
+    <li><a href="#suckerlist">&#9658; Suckerlist</a></li>
+    <li><a href="#notreentente">&#9658; N. Entente</a></li>
+    <li><a href="#sociogonie">&#9658; Sociogonie</a></li>
+  </ul></div>
+  <div class="sidebar-section"><h3>Statut</h3><p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;Fragment III&nbsp;&raquo;<br>en cours&hellip;</p></div>
+
+  <!-- GIF ZONE 1 — sidebar gauche -->
+  <!-- Pour remplacer par un vrai GIF : <img src="TON-GIF.gif" alt=""> -->
+  <div class="gif-zone-left" title="GIF ZONE — remplacer src par votre gif">
+    <canvas class="gif-placeholder-canvas" id="gif-canvas-1" width="44" height="44"></canvas>
+    <span class="gif-slot-label">[ GIF ]</span>
+  </div>
+
+  <div class="sidebar-section"><h3>Liens</h3><ul>
+    <li><a href="#">Archives</a></li>
+    <li><a href="#">Ressources</a></li>
+    <li><a href="#">R&eacute;f&eacute;rences</a></li>
+    <li><a href="#">Plan du site</a></li>
+  </ul></div>
+  <div class="sidebar-section" style="text-align:center;background-color:#000080;border:3px inset #888">
+    <p style="color:#FFFF00;font-family:'Courier New';font-size:10px;font-weight:bold;margin:0">&#x2234; &#x2235; &#x2234;<br>ESPACE<br>EXP&Eacute;RIMENTAL<br>&#x2234; &#x2235; &#x2234;</p>
+  </div>
+</td>
+
+<!-- ===== CENTRE ===== -->
+<td class="center-content">
+  <div class="welcome-bar" style="text-align:center;">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
+  <div class="welcome-body"><p>Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>Science</strong> et de la <strong>Po&eacute;sie</strong>. D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p></div>
+
+  <!-- GIF BANNER ZONE 2 — bande entre welcome et cards -->
+  <!-- Remplacer les <canvas> par des <img src="GIF.gif"> selon vos contenus -->
+  <div class="gif-banner">
+    <div class="gif-banner-slot" title="GIF ZONE 2a — remplacer par img src">
+      <canvas id="gif-canvas-2a" width="60" height="60"></canvas>
+    </div>
+    <div class="gif-banner-text">
+      <span class="glitch-text" data-text="&nbsp;** FRAGMENT III EN COURS **&nbsp;">&nbsp;** FRAGMENT III EN COURS **&nbsp;</span><br>
+      <span style="font-size:9px;color:#00FFFF;letter-spacing:1px">sociologie &middot; &eacute;sot&eacute;risme &middot; exp&eacute;rimentation</span>
+    </div>
+    <div class="gif-banner-slot" title="GIF ZONE 2b — remplacer par img src">
+      <canvas id="gif-canvas-2b" width="60" height="60"></canvas>
+    </div>
+  </div>
+
+  <hr class="rainbow">
+
+  <table class="cards-table" cellpadding="0" cellspacing="0">
+    <tr><td class="card c-crimson" id="projets" colspan="2">
+      <div class="card-header">&#x25BA; PROJET EN COURS</div>
+      <div class="card-body">Enquetes, analyses et actions contre les organisations sectaires. Croisement des methodes sociologiques et des savoirs essoteriques pour decoder les mecanismes d'emprise.<br><a href="#">&#9658; Acceder aux projets</a></div>
+    </td></tr>
+
+    <tr><td class="card c-purple" id="oeuvres" colspan="2">
+      <div class="card-header">&#x2736; PUBLICATIONS</div>
+      <div class="card-body" style="padding:0"><table width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF;position:relative;">
+          <!-- GIF CELLULE 1 : remplacer canvas par <img src="gif.gif" style="width:100%;display:block"> -->
+          <canvas id="gif-cell-1" width="120" height="90" style="display:block;width:100%;"></canvas>
+          <div style="padding:6px 8px;">
+            <strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br>
+            <span style="font-size:11px">Publications, tirages, objets.</span><br>
+            <a href="#" style="margin-top:4px">&#9658; Voir</a>
+          </div>
+        </td>
+        <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF5FF;">
+          <!-- GIF CELLULE 2 : remplacer canvas par <img src="gif.gif" style="width:100%;display:block"> -->
+          <canvas id="gif-cell-2" width="120" height="90" style="display:block;width:100%;"></canvas>
+          <div style="padding:6px 8px;">
+            <strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br>
+            <span style="font-size:11px">Revue experimentale.</span><br>
+            <a href="#" style="margin-top:4px">&#9658; Feuilleter</a>
+          </div>
+        </td>
+        <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF;">
+          <!-- GIF CELLULE 3 : remplacer canvas par <img src="gif.gif" style="width:100%;display:block"> -->
+          <canvas id="gif-cell-3" width="120" height="90" style="display:block;width:100%;"></canvas>
+          <div style="padding:6px 8px;">
+            <strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br>
+            <span style="font-size:11px">Videos, captations, creations.</span><br>
+            <a href="https://dashboard.twitch.tv/u/scienceetpoesie/stream-manager" target="_blank" style="margin-top:4px">&#9658; Regarder</a>
+          </div>
+        </td>
+        <td style="width:25%;padding:0;vertical-align:top;background:#FFF5FF;">
+          <!-- GIF CELLULE 4 : remplacer canvas par <img src="gif.gif" style="width:100%;display:block"> -->
+          <canvas id="gif-cell-4" width="120" height="90" style="display:block;width:100%;"></canvas>
+          <div style="padding:6px 8px;">
+            <strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br>
+            <span style="font-size:11px">Images, oeuvres visuelles.</span><br>
+            <a href="#" style="margin-top:4px">&#9658; Galerie</a>
+          </div>
+        </td>
+      </tr></table></div>
+    </td></tr>
+
+    <tr>
+      <td class="card c-gold" id="halloffame" style="width:50%">
+        <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
+        <!-- PLACEHOLDER FOND HALL OF FAME : ajouter style="background-image:url('img.jpg');background-size:cover;" sur le div ci-dessous -->
+        <div class="card-body" style="background-image:none;/* remplacer none par url('votre-image.jpg') */;background-size:cover;background-position:center;">
+          Figures, contributions exceptionnelles honor&eacute;s par S&amp;P.<br><a href="hallofame.html">&#9658; Voir le palmares</a>
+        </div>
+      </td>
+      <td class="card" rowspan="2" style="width:50%;vertical-align:top;background:#C0C0C0">
+        <div class="card-header" style="background:#808080;color:#AAAAAA;letter-spacing:2px">&#x25A1; PLACEHOLDER</div>
+        <div class="card-body" style="background:#C0C0C0;color:#888888;font-style:italic;text-align:center;padding-top:40px">[ à venir ]</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="card c-black" id="suckerlist" style="width:50%">
+        <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
+        <!-- PLACEHOLDER FOND SUCKERLIST : ajouter url('votre-image.jpg') dans background-image ci-dessous -->
+        <div class="card-body" style="background:#1A1A1A;color:#CCCCCC;background-image:none;/* remplacer none par url('votre-image.jpg') */;background-size:cover;background-position:center;">
+          Le revers de la medaille. Ceux qui ont decu, trahi ou simplement rate leur coup.<br>
+          <a href="suckerlist.html" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a>
+        </div>
+      </td>
+    </tr>
+
+    <!-- SOCIOGONIE avec GIF ZONE 3 -->
+    <tr><td class="card c-sociogonie" id="sociogonie" colspan="2">
+      <div class="card-header" style="color:#E0CCFF;letter-spacing:3px">&#x2609; SOCIOGONIE</div>
+      <div class="card-body" style="background:#F5EEFF">
+        <div class="sociogonie-with-gif">
+          <!-- GIF ZONE 3 — dans la card Sociogonie -->
+          <!-- Remplacer <canvas> par <img src="GIF.gif" width="52" height="52"> -->
+          <div class="sociogonie-gif-slot" title="GIF ZONE 3 — remplacer par img src">
+            <canvas id="gif-canvas-3" width="52" height="52"></canvas>
+          </div>
+          <div>Theorie des origines sociales. A la croisee de la cosmogonie, de la sociologie et de l'esoterisme &mdash; une approche fondatrice des structures invisibles du collectif.<br><a href="#" style="background:#2B0050;border-color:#9955FF">&#9658; Explorer la sociogonie</a></div>
+        </div>
+      </div>
+    </td></tr>
+  </table>
+  <hr class="rainbow">
+</td>
+
+<!-- ===== SIDEBAR DROITE ===== -->
+<td class="sidebar-right">
+  <div class="rsidebar-section" style="background:#FF8000;border-bottom:3px solid #CC6600;padding:8px">
+    <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" target="_blank" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 6px 12px 6px">
+      <div style="font-family:'Arial Black',Arial,sans-serif;font-size:10px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
+      <div style="height:4px;background:#0000AA;margin:0 0 8px 0"></div>
+      <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/blue%20book.jpg?raw=true" width="60" height="74" style="display:block;margin:0 auto 8px auto;position:relative;left:-2px;image-rendering:pixelated;" alt="Notre Entente">
+      <div style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#444;line-height:1.6;margin-bottom:8px">&laquo;&nbsp;po&egrave;me anti-&eacute;pique&nbsp;&raquo;<br><span style="font-size:9px;color:#999">(à ne pas lire)</span></div>
+      <span class="ne-cta" style="font-family:'Times New Roman',serif;font-size:15px;font-weight:bold;color:#0000AA;text-decoration:underline">Acc&eacute;der au site</span>
+    </a>
+  </div>
+  <div class="rsidebar-section"><h3>Citation</h3><p id="citation-text" style="font-style:italic;font-size:11px" title="cliquer pour suivant">&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;</p></div>
+  <div class="rsidebar-section"><h3>Web Ring</h3><div class="webring-box"><a href="#">&#9664; Pr&eacute;c.</a><a href="#" style="color:#FF0000;font-size:13px">&#9679;</a><a href="#">Suiv. &#9654;</a></div></div>
+  <div class="rsidebar-section" style="text-align:center"><p style="font-family:'Courier New';font-size:10px;font-weight:bold;color:#000">Optimis&eacute; pour<br><span style="font-size:13px">Netscape 3.0</span><br>800&times;600</p></div>
+  <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;">
+    <span style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#CC0000;line-height:1.5;display:block;margin-bottom:2px">Gratuit&eacute;</span>
+    <span style="display:block;color:#CC0000;font-size:13px;line-height:1;">&#x2193;</span>
+    <a href="#" style="display:inline-block;width:22px;height:22px;background:#CC0000;border:2px outset #FF6666;border-right-color:#880000;border-bottom-color:#880000;border-radius:50%;text-decoration:none;margin-top:2px;">&nbsp;</a>
 
 <div class="synth-scale-wrapper">
 <div class="sw">
@@ -242,216 +607,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 </div>
 </div>
 
-<script>
-var ctx=null,osc=null,osc2=null,gn=null,gn2=null,octave=4,vol=0.6,mouseDown=false,currentKeyEl=null;
-var waveType='sine',analyser=null,dataArr=null,oscRaf=null;
-var noteLabels={'C':'Do','D':'Ré','E':'Mi','F':'Fa','G':'Sol','A':'La','B':'Si','C#':'Do#','D#':'Ré#','F#':'Fa#','G#':'Sol#','A#':'La#'};
-var freqs={
-  'C':[32.70,65.41,130.81,261.63,523.25,1046.50,2093.00],
-  'C#':[34.65,69.30,138.59,277.18,554.37,1108.73],
-  'D':[36.71,73.42,146.83,293.66,587.33,1174.66],
-  'D#':[38.89,77.78,155.56,311.13,622.25,1244.51],
-  'E':[41.20,82.41,164.81,329.63,659.25,1318.51],
-  'F':[43.65,87.31,174.61,349.23,698.46,1396.91],
-  'F#':[46.25,92.50,185.00,369.99,739.99,1479.98],
-  'G':[49.00,98.00,196.00,392.00,783.99,1567.98],
-  'G#':[51.91,103.83,207.65,415.30,830.61,1661.22],
-  'A':[55.00,110.00,220.00,440.00,880.00,1760.00],
-  'A#':[58.27,116.54,233.08,466.16,932.33,1864.66],
-  'B':[61.74,123.47,246.94,493.88,987.77,1975.53]
-};
-var notes=['C','D','E','F','G','A','B','C'];
-var arpOn=false,arpNotes=[],arpIdx=0,arpDir=1,arpTimer=null,tempo=120;
-
-function bpmFromSlider(v){var t=v/100;return Math.round(60+t*t*(1200-60));}
-function setTempo(v){tempo=bpmFromSlider(parseInt(v));document.getElementById('bpm-lbl').textContent=tempo;if(arpOn&&arpTimer){stopArp();arpStep();}}
-function setWave(v){waveType=v=='0'?'sine':'triangle';if(osc)osc.type=waveType;if(osc2)osc2.type=waveType;}
-function changeOct(d){octave=Math.max(2,Math.min(6,octave+d));}
-function microDetune(){return (Math.random()-0.5)*0.018;}
-
-function initCtx(){
-  if(!ctx){
-    ctx=new(window.AudioContext||window.webkitAudioContext)();
-    analyser=ctx.createAnalyser();
-    analyser.fftSize=512;analyser.smoothingTimeConstant=0.6;
-    dataArr=new Uint8Array(analyser.fftSize);
-    analyser.connect(ctx.destination);
-  }
-  if(ctx.state==='suspended')ctx.resume();
-}
-
-function startSound(f){
-  stopRawSound();
-  var detune=microDetune();
-  var f1=f*(1+detune);
-  var f2=f*(1-detune*0.6+microDetune()*0.008);
-  osc=ctx.createOscillator();gn=ctx.createGain();
-  osc.type=waveType;osc.frequency.setValueAtTime(f1,ctx.currentTime);
-  gn.gain.setValueAtTime(0,ctx.currentTime);
-  gn.gain.linearRampToValueAtTime(vol*0.38,ctx.currentTime+0.012);
-  osc.connect(gn);gn.connect(analyser);osc.start();
-  osc2=ctx.createOscillator();gn2=ctx.createGain();
-  osc2.type=waveType;osc2.frequency.setValueAtTime(f2,ctx.currentTime);
-  gn2.gain.setValueAtTime(0,ctx.currentTime);
-  gn2.gain.linearRampToValueAtTime(vol*0.18,ctx.currentTime+0.016);
-  osc2.connect(gn2);gn2.connect(analyser);osc2.start();
-  document.getElementById('led').classList.add('on');
-  drawOsc();
-}
-
-function slideSound(f){
-  if(!osc||!gn) return startSound(f);
-  var detune=microDetune();
-  osc.frequency.setTargetAtTime(f*(1+detune),ctx.currentTime,0.003);
-  if(osc2) osc2.frequency.setTargetAtTime(f*(1-detune*0.6),ctx.currentTime,0.005);
-}
-
-function stopRawSound(){
-  if(osc&&gn){
-    try{gn.gain.setValueAtTime(gn.gain.value,ctx.currentTime);gn.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.08);var o=osc;setTimeout(function(){try{o.stop();}catch(e){}},100);}catch(e){}
-    osc=null;gn=null;
-  }
-  if(osc2&&gn2){
-    try{gn2.gain.setValueAtTime(gn2.gain.value,ctx.currentTime);gn2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.10);var o2=osc2;setTimeout(function(){try{o2.stop();}catch(e){}},120);}catch(e){}
-    osc2=null;gn2=null;
-  }
-}
-
-function pressKey(el){if(currentKeyEl&&currentKeyEl!==el)currentKeyEl.classList.remove('pressed');currentKeyEl=el;el.classList.add('pressed');}
-function releaseKey(){if(currentKeyEl){currentKeyEl.classList.remove('pressed');currentKeyEl=null;}}
-
-function getFreq(note,octShift){
-  var oct=octave+(octShift||0);
-  return freqs[note]?freqs[note][oct-2]:null;
-}
-
-function play(note,octShift,el){
-  if(arpOn){addArpNote(note,octShift,el);return;}
-  initCtx();
-  var f=getFreq(note,octShift);if(!f)return;
-  if(el)pressKey(el);
-  document.getElementById('nval').textContent=noteLabels[note];
-  document.getElementById('fval').textContent=Math.round(f)+'Hz';
-  if(osc&&gn) slideSound(f);
-  else startSound(f);
-}
-
-function stopSound(){
-  releaseKey();
-  stopRawSound();
-  document.getElementById('nval').textContent='--';
-  document.getElementById('fval').textContent='--Hz';
-  document.getElementById('led').classList.remove('on');
-  stopOsc();
-}
-
-function pingArpNote(n){
-  initCtx();
-  var f=getFreq(n.note,n.octShift);if(!f)return;
-  document.getElementById('nval').textContent=noteLabels[n.note];
-  document.getElementById('fval').textContent=Math.round(f)+'Hz';
-  clearArpPing();
-  if(n.el){n.el.classList.add('arp-ping');setTimeout(function(){if(n.el)n.el.classList.remove('arp-ping');},100);}
-  if(osc&&gn) slideSound(f);
-  else startSound(f);
-}
-
-function toggleArp(){
-  arpOn=!arpOn;
-  document.getElementById('arp-sw').classList.toggle('on',arpOn);
-  if(!arpOn){stopArp();clearArpHeld();arpNotes=[];stopSound();}
-  else if(arpNotes.length)startArp();
-}
-function startArp(){stopArp();arpIdx=0;arpDir=1;arpStep();}
-function stopArp(){if(arpTimer){clearTimeout(arpTimer);arpTimer=null;}}
-function arpStep(){
-  if(!arpOn||!arpNotes.length){stopArp();return;}
-  var len=arpNotes.length;
-  if(len===1){arpIdx=0;}
-  else{if(arpIdx>=len){arpIdx=len-2;arpDir=-1;}if(arpIdx<0){arpIdx=1;arpDir=1;}}
-  var n=arpNotes[arpIdx];
-  if(n)pingArpNote(n);
-  if(len>1)arpIdx+=arpDir;
-  arpTimer=setTimeout(arpStep,Math.round(60000/tempo));
-}
-function clearArpPing(){document.querySelectorAll('.arp-ping').forEach(function(e){e.classList.remove('arp-ping');});}
-function clearArpHeld(){document.querySelectorAll('.arp-held').forEach(function(e){e.classList.remove('arp-held');});}
-function addArpNote(note,octShift,el){
-  for(var i=0;i<arpNotes.length;i++){
-    if(arpNotes[i].note===note&&arpNotes[i].octShift===(octShift||0)){
-      arpNotes.splice(i,1);
-      if(el){el.classList.remove('arp-held');el.classList.remove('arp-ping');}
-      if(arpIdx>=arpNotes.length)arpIdx=Math.max(0,arpNotes.length-1);
-      if(!arpNotes.length){stopArp();stopSound();}
-      return;
-    }
-  }
-  arpNotes.push({note:note,octShift:octShift||0,el:el});
-  if(el)el.classList.add('arp-held');
-  if(arpNotes.length===1)startArp();
-}
-
-function findStart(d){for(var i=1;i<d.length-1;i++)if(d[i-1]<128&&d[i]>=128)return i;return 0;}
-function drawOsc(){
-  if(oscRaf)cancelAnimationFrame(oscRaf);
-  var cv=document.getElementById('osc'),c=cv.getContext('2d'),W=cv.width,H=cv.height;
-  function frame(){
-    if(!osc){stopOsc();return;}
-    analyser.getByteTimeDomainData(dataArr);
-    c.fillStyle='#1c1a0e';c.fillRect(0,0,W,H);
-    c.strokeStyle='#332e18';c.lineWidth=0.5;
-    c.beginPath();c.moveTo(0,H/2);c.lineTo(W,H/2);c.stroke();
-    var start=findStart(dataArr);
-    var len=Math.min(dataArr.length-start,Math.floor(dataArr.length*0.35));
-    c.strokeStyle='#b89a3a';c.lineWidth=1.2;c.beginPath();
-    for(var i=0;i<len;i++){var x=(i/len)*W;var y=H/2-((dataArr[start+i]-128)/128)*(H/2-1);if(i===0)c.moveTo(x,y);else c.lineTo(x,y);}
-    c.stroke();oscRaf=requestAnimationFrame(frame);
-  }
-  frame();
-}
-function stopOsc(){
-  if(oscRaf){cancelAnimationFrame(oscRaf);oscRaf=null;}
-  var cv=document.getElementById('osc'),c=cv.getContext('2d');
-  c.fillStyle='#1c1a0e';c.fillRect(0,0,cv.width,cv.height);
-  c.strokeStyle='#332e18';c.lineWidth=0.5;
-  c.beginPath();c.moveTo(0,cv.height/2);c.lineTo(cv.width,cv.height/2);c.stroke();
-}
-
-document.addEventListener('mouseup',function(){mouseDown=false;if(!arpOn)stopSound();});
-document.addEventListener('touchend',function(){mouseDown=false;if(!arpOn)stopSound();});
-
-(function build(){
-  var wc=document.getElementById('wkeys'),bc=document.getElementById('bkeys');
-  var wkW=8,gap=1;
-  notes.forEach(function(n,i){
-    var isHighC=(i===7);
-    var k=document.createElement('div');k.className='wk';
-    k.addEventListener('mousedown',function(e){e.preventDefault();mouseDown=true;play(n,isHighC?1:0,k);});
-    k.addEventListener('mouseenter',function(){if(!arpOn&&mouseDown)play(n,isHighC?1:0,k);});
-    k.addEventListener('mouseup',function(){if(!arpOn)stopSound();});
-    k.addEventListener('touchstart',function(e){e.preventDefault();mouseDown=true;play(n,isHighC?1:0,k);},{passive:false});
-    k.addEventListener('touchend',function(e){e.preventDefault();if(!arpOn)stopSound();},{passive:false});
-    wc.appendChild(k);
-  });
-  var blacks=[{n:'C#',between:[0,1]},{n:'D#',between:[1,2]},{n:'F#',between:[3,4]},{n:'G#',between:[4,5]},{n:'A#',between:[5,6]}];
-  blacks.forEach(function(b){
-    var bk=document.createElement('div');bk.className='bk';
-    var li=b.between[0],ri=b.between[1];
-    var lc=li*(wkW+gap)+(wkW/2),rc=ri*(wkW+gap)+(wkW/2);
-    bk.style.left=((lc+rc)/2-2.5)+'px';
-    bk.addEventListener('mousedown',function(e){e.stopPropagation();e.preventDefault();mouseDown=true;play(b.n,0,bk);});
-    bk.addEventListener('mouseenter',function(e){e.stopPropagation();if(!arpOn&&mouseDown)play(b.n,0,bk);});
-    bk.addEventListener('mouseup',function(e){e.stopPropagation();if(!arpOn)stopSound();});
-    bk.addEventListener('touchstart',function(e){e.stopPropagation();e.preventDefault();mouseDown=true;play(b.n,0,bk);},{passive:false});
-    bk.addEventListener('touchend',function(e){e.stopPropagation();e.preventDefault();if(!arpOn)stopSound();},{passive:false});
-    bc.appendChild(bk);
-  });
-  var totalW=8*(wkW+gap)-gap;
-  wc.style.width=totalW+'px';bc.style.width=totalW+'px';
-  document.getElementById('kw').style.width=(totalW+2)+'px';
-})();
-setTimeout(stopOsc,200);
-</script>
   </div>
 </td>
 </tr></table>
@@ -461,81 +616,397 @@ setTimeout(stopOsc,200);
 <div class="footer-bottom">Ce site est un espace de cr&eacute;ation exp&eacute;rimentale. Tous droits r&eacute;serv&eacute;s. &nbsp;&bull;&nbsp; HTML 4.01 &nbsp;&bull;&nbsp; Pas de cookies &nbsp;&bull;&nbsp; Pas de pub</div>
 </div>
 
+<!-- ===================== SCRIPTS ===================== -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-  document.getElementById('fyear').innerHTML = new Date().getFullYear();
+/* === INIT === */
+document.getElementById('fyear').innerHTML = new Date().getFullYear();
+var count=4731, disp=document.getElementById('vcounter');
+var tgt=count+Math.floor(Math.random()*3), cur=count;
+var iv=setInterval(function(){ if(cur>=tgt){clearInterval(iv);return;} disp.innerHTML=String(++cur).padStart(6,'0'); },120);
 
-  var count=4731, disp=document.getElementById('vcounter');
-  var tgt=count+Math.floor(Math.random()*3), cur=count;
-  var iv=setInterval(function(){ if(cur>=tgt){clearInterval(iv);return;} disp.innerHTML=String(++cur).padStart(6,'0'); },120);
+/* === CURSOR === */
+var cursor=document.getElementById('star-cursor');
+document.addEventListener('mousemove',function(e){ cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px'; });
 
-  var cursor=document.getElementById('star-cursor');
-  document.addEventListener('mousemove',function(e){ cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px'; });
-  document.addEventListener('click',function(e){
-    var chars=['*','*','*','★','✦','·','+','*'], colors=['#FFFF00','#FF0000','#00FFFF','#FF00FF','#FFFFFF','#FF8800','#00FF00','#FFFF00'];
-    for(var i=0;i<8;i++){(function(i){
-      var el=document.createElement('div'); el.className='sparkle';
-      el.style.left=e.clientX+'px'; el.style.top=e.clientY+'px';
-      var a=(i/8)*2*Math.PI, d=35+Math.random()*25;
-      el.style.setProperty('--tx',(Math.cos(a)*d)+'px'); el.style.setProperty('--ty',(Math.sin(a)*d)+'px');
-      el.style.fontSize=(i%2===0)?'16px':'10px'; el.style.color=colors[i]; el.innerHTML=chars[i];
-      document.body.appendChild(el);
-      setTimeout(function(){ el.parentNode&&el.parentNode.removeChild(el); },460);
-    })(i);}
+/* === SPARKLES === */
+document.addEventListener('click',function(e){
+  var chars=['*','*','*','★','✦','·','+','*'], colors=['#FFFF00','#FF0000','#00FFFF','#FF00FF','#FFFFFF','#FF8800','#00FF00','#FFFF00'];
+  for(var i=0;i<8;i++){(function(i){
+    var el=document.createElement('div'); el.className='sparkle';
+    el.style.left=e.clientX+'px'; el.style.top=e.clientY+'px';
+    var a=(i/8)*2*Math.PI, d=35+Math.random()*25;
+    el.style.setProperty('--tx',(Math.cos(a)*d)+'px'); el.style.setProperty('--ty',(Math.sin(a)*d)+'px');
+    el.style.fontSize=(i%2===0)?'16px':'10px'; el.style.color=colors[i]; el.innerHTML=chars[i];
+    document.body.appendChild(el);
+    setTimeout(function(){ el.parentNode&&el.parentNode.removeChild(el); },460);
+  })(i);}
+});
+
+/* === SPEECH NAV === */
+var navData = [
+  { text:'Projets', pitch:1.0 }, { text:'Galerie', pitch:0.85 },
+  { text:'Encyclopédie', pitch:1.15 }, { text:null, pitch:0 },
+  { text:'Publications', pitch:1.20 }, { text:'Sociogonie', pitch:0.90 }
+];
+var iframeCode = [
+  '<!DOCTYPE html><html><body><script>',
+  'var vx=[];function lv(){vx=speechSynthesis.getVoices();}lv();',
+  'if(speechSynthesis.onvoiceschanged!==undefined)speechSynthesis.onvoiceschanged=lv;',
+  'window.addEventListener("message",function(e){',
+  '  if(!e.data||e.data.t!=="s")return;',
+  '  speechSynthesis.cancel();',
+  '  var u=new SpeechSynthesisUtterance(e.data.w);',
+  '  u.lang="fr-FR";u.pitch=e.data.p;u.rate=e.data.r;u.volume=1;',
+  '  var fr=vx.find(function(v){return v.lang.startsWith("fr");});',
+  '  if(fr)u.voice=fr;speechSynthesis.speak(u);',
+  '});<\/script></body></html>'
+].join('');
+var blob=new Blob([iframeCode],{type:'text/html'});
+var burl=URL.createObjectURL(blob);
+var pool=document.getElementById('voice-pool');
+var frames=[];
+for(var n=0;n<6;n++){
+  var f=document.createElement('iframe');
+  f.src=burl; f.style.cssText='width:0;height:0;border:0;position:absolute;';
+  f.setAttribute('sandbox','allow-scripts allow-same-origin');
+  pool.appendChild(f); frames.push(f);
+}
+document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
+  link.addEventListener('mouseenter',function(){
+    if(i===3){
+      /* SLOT MP3 — remplacer le src par votre fichier audio */
+      var mp3src='https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/maxheadroom.mp3'; /* <-- REMPLACER ICI */
+      if(mp3src==='https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/maxheadroom.mp3') return; /* pas encore branché */
+      var a=new Audio(mp3src); a.volume=0.8; a.play().catch(function(){});
+      return;
+    }
+    if(!frames[i]||!frames[i].contentWindow)return;
+    var d=navData[i];
+    if(!d.text)return;
+    frames[i].contentWindow.postMessage({
+      t:'s', w:d.text,
+      p:d.pitch+(Math.random()*0.2-0.1),
+      r:0.85+Math.random()*0.2
+    },'*');
   });
+});
 
-  var navData = [
-    { text:'Projets',      pitch:1.0  },
-    { text:'Œuvres',       pitch:0.85 },
-    { text:'Encyclopédie', pitch:1.15 },
-    { text:'ϪꙮʘɮҨȢɮꙚ',   pitch:0.70 },
-    { text:'Publications', pitch:1.20 },
-    { text:'Sociogonie',   pitch:0.90 }
-  ];
+/* ========================================================
+   GIF PLACEHOLDERS — ANIMATIONS CANVAS
+   Remplacez chaque canvas par <img src="votre.gif">
+   ======================================================== */
 
-  var iframeCode = [
-    '<!DOCTYPE html><html><body><script>',
-    'var vx=[];',
-    'function lv(){vx=speechSynthesis.getVoices();}',
-    'lv(); if(speechSynthesis.onvoiceschanged!==undefined) speechSynthesis.onvoiceschanged=lv;',
-    'window.addEventListener("message",function(e){',
-    '  if(!e.data||e.data.t!=="s") return;',
-    '  speechSynthesis.cancel();',
-    '  var u=new SpeechSynthesisUtterance(e.data.w);',
-    '  u.lang="fr-FR"; u.pitch=e.data.p; u.rate=e.data.r; u.volume=1;',
-    '  var fr=vx.find(function(v){return v.lang.startsWith("fr");});',
-    '  if(fr) u.voice=fr;',
-    '  speechSynthesis.speak(u);',
-    '});',
-    '<\/script></body></html>'
-  ].join('');
-
-  var blob=new Blob([iframeCode],{type:'text/html'});
-  var burl=URL.createObjectURL(blob);
-  var pool=document.getElementById('voice-pool');
-  var frames=[];
-
-  for(var n=0;n<6;n++){
-    var f=document.createElement('iframe');
-    f.src=burl;
-    f.style.cssText='width:0;height:0;border:0;position:absolute;';
-    f.setAttribute('sandbox','allow-scripts allow-same-origin');
-    pool.appendChild(f);
-    frames.push(f);
+/* Placeholder 1 — sidebar gauche : scanlines vertes */
+(function(){
+  var cv=document.getElementById('gif-canvas-1');
+  if(!cv)return;
+  var c=cv.getContext('2d'), W=44, H=44, t=0;
+  function draw(){
+    t++;
+    c.fillStyle='#000'; c.fillRect(0,0,W,H);
+    // Forme qui pulse
+    var r=10+Math.sin(t*0.08)*4;
+    var grd=c.createRadialGradient(W/2,H/2,0,W/2,H/2,r*1.8);
+    grd.addColorStop(0,'#00FF00'); grd.addColorStop(1,'transparent');
+    c.fillStyle=grd; c.beginPath(); c.arc(W/2,H/2,r,0,Math.PI*2); c.fill();
+    // Scanlines
+    for(var y=0;y<H;y+=2){ c.fillStyle='rgba(0,0,0,0.3)'; c.fillRect(0,y,W,1); }
+    // Noise aléatoire
+    if(Math.random()<0.15){
+      c.fillStyle='rgba(0,255,0,0.6)';
+      c.fillRect(Math.random()*W,Math.random()*H,Math.random()*8+2,1);
+    }
+    requestAnimationFrame(draw);
   }
+  draw();
+})();
 
-  document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
-    link.addEventListener('mouseenter',function(){
-      if(!frames[i]||!frames[i].contentWindow) return;
-      var d=navData[i];
-      frames[i].contentWindow.postMessage({
-        t:'s',
-        w: d.text,
-        p: d.pitch + (Math.random()*0.2 - 0.1),
-        r: 0.85 + Math.random()*0.2
-      },'*');
-    });
+/* Placeholder 2a — bannière gauche : plasma cyan */
+(function(){
+  var cv=document.getElementById('gif-canvas-2a');
+  if(!cv)return;
+  var c=cv.getContext('2d'), W=60, H=60, t=0;
+  function draw(){
+    t+=0.04;
+    var img=c.createImageData(W,H);
+    for(var y=0;y<H;y++){
+      for(var x=0;x<W;x++){
+        var v=Math.sin(x/4+t)+Math.sin(y/4+t)+Math.sin((x+y)/8+t)+Math.sin(Math.sqrt(x*x+y*y)/6+t);
+        v=(v+4)/8;
+        var r=Math.floor(v*50); var g=Math.floor(v*180+50); var b=Math.floor(v*200+55);
+        var idx=(y*W+x)*4;
+        img.data[idx]=r; img.data[idx+1]=g; img.data[idx+2]=b; img.data[idx+3]=255;
+      }
+    }
+    c.putImageData(img,0,0);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* Placeholder 2b — bannière droite : étoile tournante */
+(function(){
+  var cv=document.getElementById('gif-canvas-2b');
+  if(!cv)return;
+  var c=cv.getContext('2d'), W=60, H=60, t=0;
+  function drawStar(cx,cy,r1,r2,pts,angle,color){
+    c.beginPath(); c.fillStyle=color;
+    for(var i=0;i<pts*2;i++){
+      var a=angle+i*Math.PI/pts;
+      var r=i%2===0?r1:r2;
+      var x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r;
+      if(i===0)c.moveTo(x,y); else c.lineTo(x,y);
+    }
+    c.closePath(); c.fill();
+  }
+  function draw(){
+    t+=0.04;
+    c.fillStyle='#110020'; c.fillRect(0,0,W,H);
+    drawStar(W/2,H/2,22,9,5,t,'#FF00FF');
+    drawStar(W/2,H/2,16,6,5,t+0.5,'#FFFF00');
+    drawStar(W/2,H/2,8,3,5,t*1.5,'#FFFFFF');
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* Placeholder 3 — sociogonie : spirale cosmique */
+(function(){
+  var cv=document.getElementById('gif-canvas-3');
+  if(!cv)return;
+  var c=cv.getContext('2d'), W=52, H=52, t=0;
+  function draw(){
+    t+=0.03;
+    c.fillStyle='rgba(10,0,30,0.18)'; c.fillRect(0,0,W,H);
+    // Spirale
+    c.strokeStyle='#9955FF'; c.lineWidth=1;
+    c.beginPath();
+    for(var i=0;i<200;i++){
+      var a=0.15*i+t;
+      var r=0.12*i;
+      var x=W/2+Math.cos(a)*r, y=H/2+Math.sin(a)*r;
+      if(i===0)c.moveTo(x,y); else c.lineTo(x,y);
+    }
+    c.stroke();
+    // Point central
+    var grd=c.createRadialGradient(W/2,H/2,0,W/2,H/2,6);
+    grd.addColorStop(0,'#FFFFFF'); grd.addColorStop(1,'transparent');
+    c.fillStyle=grd; c.beginPath(); c.arc(W/2,H/2,6,0,Math.PI*2); c.fill();
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ========================================================
+   EASTER EGG 1 — KONAMI CODE → écran glitch
+   ↑ ↑ ↓ ↓ ← → ← → B A
+   ======================================================== */
+var konamiSeq=[38,38,40,40,37,39,37,39,66,65];
+var konamiIdx=0;
+document.addEventListener('keydown',function(e){
+  if(e.keyCode===konamiSeq[konamiIdx]){ konamiIdx++; } else { konamiIdx=0; }
+  if(konamiIdx===konamiSeq.length){ konamiIdx=0; triggerKonamiEgg(); }
+});
+function triggerKonamiEgg(){
+  var ov=document.getElementById('glitch-overlay');
+  ov.classList.add('active');
+  var cv=document.getElementById('glitch-canvas');
+  cv.width=window.innerWidth; cv.height=window.innerHeight;
+  var c=cv.getContext('2d');
+  var frames=0, maxFrames=90;
+  function glitchFrame(){
+    frames++;
+    // Noise
+    var img=c.createImageData(cv.width,cv.height);
+    for(var i=0;i<img.data.length;i+=4){
+      var v=Math.random()*255;
+      img.data[i]=v>240?0:0;
+      img.data[i+1]=v>240?255:0;
+      img.data[i+2]=0;
+      img.data[i+3]=v>240?255:0;
+    }
+    c.putImageData(img,0,0);
+    // Barres de glitch
+    for(var j=0;j<8;j++){
+      if(Math.random()<0.5){
+        var y=Math.random()*cv.height;
+        var h=Math.random()*8+1;
+        var col=Math.random()<0.5?'rgba(0,255,0,0.6)':'rgba(255,255,0,0.4)';
+        c.fillStyle=col; c.fillRect(0,y,cv.width,h);
+      }
+    }
+    if(frames<maxFrames) requestAnimationFrame(glitchFrame);
+    else { ov.classList.remove('active'); c.clearRect(0,0,cv.width,cv.height); }
+  }
+  glitchFrame();
+}
+
+/* ========================================================
+   GIF CELLULES PUBLICATIONS — canvas placeholder
+   Pour chaque cellule : remplacer le <canvas id="gif-cell-N">
+   par <img src="votre.gif" style="width:100%;display:block">
+   ======================================================== */
+(function(){
+  var cells=[
+    {id:'gif-cell-1',color:'#AA55CC',bg:'#1a0033'},
+    {id:'gif-cell-2',color:'#FF3366',bg:'#1a0010'},
+    {id:'gif-cell-3',color:'#00CCFF',bg:'#001a2a'},
+    {id:'gif-cell-4',color:'#FFAA00',bg:'#1a1000'}
+  ];
+  cells.forEach(function(cfg,ci){
+    var cv=document.getElementById(cfg.id); if(!cv)return;
+    var c=cv.getContext('2d'), W=cv.width, H=cv.height, t=0;
+    (function draw(){
+      t+=0.06;
+      c.fillStyle=cfg.bg; c.fillRect(0,0,W,H);
+      for(var j=0;j<3;j++){
+        if(Math.random()<0.3){
+          var y2=Math.floor(Math.random()*H);
+          c.fillStyle='rgba(255,255,255,0.06)';
+          c.fillRect(0,y2,W,Math.random()*3+1);
+        }
+      }
+      var r=H*0.22+Math.sin(t+ci)*H*0.07;
+      var grd=c.createRadialGradient(W/2,H/2,0,W/2,H/2,r*2);
+      grd.addColorStop(0,cfg.color); grd.addColorStop(1,'transparent');
+      c.fillStyle=grd; c.beginPath(); c.arc(W/2,H/2,r,0,Math.PI*2); c.fill();
+      c.fillStyle='rgba(0,0,0,0.22)';
+      for(var y=0;y<H;y+=2) c.fillRect(0,y,W,1);
+      c.fillStyle='rgba(0,0,0,0.5)'; c.fillRect(0,H-14,W,14);
+      c.fillStyle=cfg.color;
+      c.font='bold 8px Courier New'; c.textAlign='center';
+      c.fillText('[ GIF ]',W/2,H-4);
+      requestAnimationFrame(draw);
+    })();
   });
+})();
+
+/* ========================================================
+   EASTER EGG 2 — slot MP3 nav : tooltip au hover
+   ======================================================== */
+var mp3NavLink=document.getElementById('mp3-nav');
+var tooltip=document.getElementById('mystery-tooltip');
+if(mp3NavLink && tooltip){
+  var mp3Messages=[
+    '[ son à venir ]',
+    'fichier audio non chargé',
+    'hover → lecture MP3',
+    'remplacer votre-son.mp3',
+    '♪ silence temporaire ♪'
+  ];
+  mp3NavLink.addEventListener('mouseenter',function(e){
+    tooltip.textContent=mp3Messages[Math.floor(Math.random()*mp3Messages.length)];
+    tooltip.style.display='block';
+    tooltip.style.left=(e.clientX+12)+'px';
+    tooltip.style.top=(e.clientY-8)+'px';
+  });
+  mp3NavLink.addEventListener('mousemove',function(e){
+    tooltip.style.left=(e.clientX+12)+'px';
+    tooltip.style.top=(e.clientY-8)+'px';
+  });
+  mp3NavLink.addEventListener('mouseleave',function(){
+    tooltip.style.display='none';
+  });
+}
+
+/* ========================================================
+   EASTER EGG 3 — Citation rotative (click)
+   ======================================================== */
+var citations=[
+  '&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;',
+  '&laquo;&nbsp;Le collectif précède l\'individu.&nbsp;&raquo;',
+  '&laquo;&nbsp;Tout signe est une serrure.&nbsp;&raquo;',
+  '&laquo;&nbsp;L\'ésotérisme est une sociologie inversée.&nbsp;&raquo;',
+  '&laquo;&nbsp;La structure invisible gouverne.&nbsp;&raquo;',
+  '&laquo;&nbsp;Fragment III : en attente de réception.&nbsp;&raquo;',
+  '&laquo;&nbsp;ϪꙮʘɮҨȢɮꙚ&nbsp;&raquo;',
+  '&laquo;&nbsp;Croire sans comprendre est une technique.&nbsp;&raquo;'
+];
+var citIdx=0;
+var citEl=document.getElementById('citation-text');
+if(citEl){
+  citEl.style.cursor='pointer';
+  citEl.addEventListener('click',function(e){
+    e.preventDefault();
+    citIdx=(citIdx+1)%citations.length;
+    citEl.style.opacity='0';
+    setTimeout(function(){
+      citEl.innerHTML=citations[citIdx];
+      citEl.style.opacity='1';
+    },150);
+    citEl.style.transition='opacity 0.15s';
+  });
+}
+
+/* ========================================================
+   EASTER EGG 4 — Triple-click sur le titre → glitch intense
+   ======================================================== */
+var titleEl=document.querySelector('h1.site-title');
+if(titleEl){
+  var titleClicks=0, titleTimer=null;
+  titleEl.addEventListener('click',function(){
+    titleClicks++;
+    clearTimeout(titleTimer);
+    titleTimer=setTimeout(function(){ titleClicks=0; },600);
+    if(titleClicks>=3){
+      titleClicks=0;
+      titleEl.style.animation='none';
+      titleEl.style.filter='hue-rotate(180deg) invert(0.2)';
+      titleEl.style.transform='skewX(-5deg)';
+      titleEl.style.letterSpacing='8px';
+      setTimeout(function(){
+        titleEl.style.filter='hue-rotate(0deg)';
+        titleEl.style.transform='skewX(3deg)';
+        setTimeout(function(){
+          titleEl.style.filter='';
+          titleEl.style.transform='';
+          titleEl.style.letterSpacing='4px';
+          titleEl.style.animation='titlePulse 12s ease-in-out infinite';
+        },120);
+      },80);
+    }
+  });
+}
+
+/* ========================================================
+   SYNTH (inchangé)
+   ======================================================== */
+var ctx=null,osc=null,osc2=null,gn=null,gn2=null,octave=4,vol=0.6,mouseDown=false,currentKeyEl=null;
+var waveType='sine',analyser=null,dataArr=null,oscRaf=null;
+var noteLabels={'C':'Do','D':'Ré','E':'Mi','F':'Fa','G':'Sol','A':'La','B':'Si','C#':'Do#','D#':'Ré#','F#':'Fa#','G#':'Sol#','A#':'La#'};
+var freqs={'C':[32.70,65.41,130.81,261.63,523.25,1046.50,2093.00],'C#':[34.65,69.30,138.59,277.18,554.37,1108.73],'D':[36.71,73.42,146.83,293.66,587.33,1174.66],'D#':[38.89,77.78,155.56,311.13,622.25,1244.51],'E':[41.20,82.41,164.81,329.63,659.25,1318.51],'F':[43.65,87.31,174.61,349.23,698.46,1396.91],'F#':[46.25,92.50,185.00,369.99,739.99,1479.98],'G':[49.00,98.00,196.00,392.00,783.99,1567.98],'G#':[51.91,103.83,207.65,415.30,830.61,1661.22],'A':[55.00,110.00,220.00,440.00,880.00,1760.00],'A#':[58.27,116.54,233.08,466.16,932.33,1864.66],'B':[61.74,123.47,246.94,493.88,987.77,1975.53]};
+var notes=['C','D','E','F','G','A','B','C'];
+var arpOn=false,arpNotes=[],arpIdx=0,arpDir=1,arpTimer=null,tempo=120;
+function bpmFromSlider(v){var t=v/100;return Math.round(60+t*t*(1200-60));}
+function setTempo(v){tempo=bpmFromSlider(parseInt(v));document.getElementById('bpm-lbl').textContent=tempo;if(arpOn&&arpTimer){stopArp();arpStep();}}
+function setWave(v){waveType=v=='0'?'sine':'triangle';if(osc)osc.type=waveType;if(osc2)osc2.type=waveType;}
+function changeOct(d){octave=Math.max(2,Math.min(6,octave+d));}
+function microDetune(){return(Math.random()-0.5)*0.018;}
+function initCtx(){if(!ctx){ctx=new(window.AudioContext||window.webkitAudioContext)();analyser=ctx.createAnalyser();analyser.fftSize=512;analyser.smoothingTimeConstant=0.6;dataArr=new Uint8Array(analyser.fftSize);analyser.connect(ctx.destination);}if(ctx.state==='suspended')ctx.resume();}
+function startSound(f){stopRawSound();var detune=microDetune();var f1=f*(1+detune);var f2=f*(1-detune*0.6+microDetune()*0.008);osc=ctx.createOscillator();gn=ctx.createGain();osc.type=waveType;osc.frequency.setValueAtTime(f1,ctx.currentTime);gn.gain.setValueAtTime(0,ctx.currentTime);gn.gain.linearRampToValueAtTime(vol*0.38,ctx.currentTime+0.012);osc.connect(gn);gn.connect(analyser);osc.start();osc2=ctx.createOscillator();gn2=ctx.createGain();osc2.type=waveType;osc2.frequency.setValueAtTime(f2,ctx.currentTime);gn2.gain.setValueAtTime(0,ctx.currentTime);gn2.gain.linearRampToValueAtTime(vol*0.18,ctx.currentTime+0.016);osc2.connect(gn2);gn2.connect(analyser);osc2.start();document.getElementById('led').classList.add('on');drawOsc();}
+function slideSound(f){if(!osc||!gn)return startSound(f);var detune=microDetune();osc.frequency.setTargetAtTime(f*(1+detune),ctx.currentTime,0.003);if(osc2)osc2.frequency.setTargetAtTime(f*(1-detune*0.6),ctx.currentTime,0.005);}
+function stopRawSound(){if(osc&&gn){try{gn.gain.setValueAtTime(gn.gain.value,ctx.currentTime);gn.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.08);var o=osc;setTimeout(function(){try{o.stop();}catch(e){}},100);}catch(e){}osc=null;gn=null;}if(osc2&&gn2){try{gn2.gain.setValueAtTime(gn2.gain.value,ctx.currentTime);gn2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.10);var o2=osc2;setTimeout(function(){try{o2.stop();}catch(e){}},120);}catch(e){}osc2=null;gn2=null;}}
+function pressKey(el){if(currentKeyEl&&currentKeyEl!==el)currentKeyEl.classList.remove('pressed');currentKeyEl=el;el.classList.add('pressed');}
+function releaseKey(){if(currentKeyEl){currentKeyEl.classList.remove('pressed');currentKeyEl=null;}}
+function getFreq(note,octShift){var oct=octave+(octShift||0);return freqs[note]?freqs[note][oct-2]:null;}
+function play(note,octShift,el){if(arpOn){addArpNote(note,octShift,el);return;}initCtx();var f=getFreq(note,octShift);if(!f)return;if(el)pressKey(el);document.getElementById('nval').textContent=noteLabels[note];document.getElementById('fval').textContent=Math.round(f)+'Hz';if(osc&&gn)slideSound(f);else startSound(f);}
+function stopSound(){releaseKey();stopRawSound();document.getElementById('nval').textContent='--';document.getElementById('fval').textContent='--Hz';document.getElementById('led').classList.remove('on');stopOsc();}
+function pingArpNote(n){initCtx();var f=getFreq(n.note,n.octShift);if(!f)return;document.getElementById('nval').textContent=noteLabels[n.note];document.getElementById('fval').textContent=Math.round(f)+'Hz';clearArpPing();if(n.el){n.el.classList.add('arp-ping');setTimeout(function(){if(n.el)n.el.classList.remove('arp-ping');},100);}if(osc&&gn)slideSound(f);else startSound(f);}
+function toggleArp(){arpOn=!arpOn;document.getElementById('arp-sw').classList.toggle('on',arpOn);if(!arpOn){stopArp();clearArpHeld();arpNotes=[];stopSound();}else if(arpNotes.length)startArp();}
+function startArp(){stopArp();arpIdx=0;arpDir=1;arpStep();}
+function stopArp(){if(arpTimer){clearTimeout(arpTimer);arpTimer=null;}}
+function arpStep(){if(!arpOn||!arpNotes.length){stopArp();return;}var len=arpNotes.length;if(len===1){arpIdx=0;}else{if(arpIdx>=len){arpIdx=len-2;arpDir=-1;}if(arpIdx<0){arpIdx=1;arpDir=1;}}var n=arpNotes[arpIdx];if(n)pingArpNote(n);if(len>1)arpIdx+=arpDir;arpTimer=setTimeout(arpStep,Math.round(60000/tempo));}
+function clearArpPing(){document.querySelectorAll('.arp-ping').forEach(function(e){e.classList.remove('arp-ping');});}
+function clearArpHeld(){document.querySelectorAll('.arp-held').forEach(function(e){e.classList.remove('arp-held');});}
+function addArpNote(note,octShift,el){for(var i=0;i<arpNotes.length;i++){if(arpNotes[i].note===note&&arpNotes[i].octShift===(octShift||0)){arpNotes.splice(i,1);if(el){el.classList.remove('arp-held');el.classList.remove('arp-ping');}if(arpIdx>=arpNotes.length)arpIdx=Math.max(0,arpNotes.length-1);if(!arpNotes.length){stopArp();stopSound();}return;}}arpNotes.push({note:note,octShift:octShift||0,el:el});if(el)el.classList.add('arp-held');if(arpNotes.length===1)startArp();}
+function findStart(d){for(var i=1;i<d.length-1;i++)if(d[i-1]<128&&d[i]>=128)return i;return 0;}
+function drawOsc(){if(oscRaf)cancelAnimationFrame(oscRaf);var cv=document.getElementById('osc'),c=cv.getContext('2d'),W=cv.width,H=cv.height;function frame(){if(!osc){stopOsc();return;}analyser.getByteTimeDomainData(dataArr);c.fillStyle='#1c1a0e';c.fillRect(0,0,W,H);c.strokeStyle='#332e18';c.lineWidth=0.5;c.beginPath();c.moveTo(0,H/2);c.lineTo(W,H/2);c.stroke();var start=findStart(dataArr);var len=Math.min(dataArr.length-start,Math.floor(dataArr.length*0.35));c.strokeStyle='#b89a3a';c.lineWidth=1.2;c.beginPath();for(var i=0;i<len;i++){var x=(i/len)*W;var y=H/2-((dataArr[start+i]-128)/128)*(H/2-1);if(i===0)c.moveTo(x,y);else c.lineTo(x,y);}c.stroke();oscRaf=requestAnimationFrame(frame);}frame();}
+function stopOsc(){if(oscRaf){cancelAnimationFrame(oscRaf);oscRaf=null;}var cv=document.getElementById('osc'),c=cv.getContext('2d');c.fillStyle='#1c1a0e';c.fillRect(0,0,cv.width,cv.height);c.strokeStyle='#332e18';c.lineWidth=0.5;c.beginPath();c.moveTo(0,cv.height/2);c.lineTo(cv.width,cv.height/2);c.stroke();}
+document.addEventListener('mouseup',function(){mouseDown=false;if(!arpOn)stopSound();});
+document.addEventListener('touchend',function(){mouseDown=false;if(!arpOn)stopSound();});
+(function build(){var wc=document.getElementById('wkeys'),bc=document.getElementById('bkeys');var wkW=8,gap=1;notes.forEach(function(n,i){var isHighC=(i===7);var k=document.createElement('div');k.className='wk';k.addEventListener('mousedown',function(e){e.preventDefault();mouseDown=true;play(n,isHighC?1:0,k);});k.addEventListener('mouseenter',function(){if(!arpOn&&mouseDown)play(n,isHighC?1:0,k);});k.addEventListener('mouseup',function(){if(!arpOn)stopSound();});k.addEventListener('touchstart',function(e){e.preventDefault();mouseDown=true;play(n,isHighC?1:0,k);},{passive:false});k.addEventListener('touchend',function(e){e.preventDefault();if(!arpOn)stopSound();},{passive:false});wc.appendChild(k);});var blacks=[{n:'C#',between:[0,1]},{n:'D#',between:[1,2]},{n:'F#',between:[3,4]},{n:'G#',between:[4,5]},{n:'A#',between:[5,6]}];blacks.forEach(function(b){var bk=document.createElement('div');bk.className='bk';var li=b.between[0],ri=b.between[1];var lc=li*(wkW+gap)+(wkW/2),rc=ri*(wkW+gap)+(wkW/2);bk.style.left=((lc+rc)/2-2.5)+'px';bk.addEventListener('mousedown',function(e){e.stopPropagation();e.preventDefault();mouseDown=true;play(b.n,0,bk);});bk.addEventListener('mouseenter',function(e){e.stopPropagation();if(!arpOn&&mouseDown)play(b.n,0,bk);});bk.addEventListener('mouseup',function(e){e.stopPropagation();if(!arpOn)stopSound();});bk.addEventListener('touchstart',function(e){e.stopPropagation();e.preventDefault();mouseDown=true;play(b.n,0,bk);},{passive:false});bk.addEventListener('touchend',function(e){e.stopPropagation();e.preventDefault();if(!arpOn)stopSound();},{passive:false});bc.appendChild(bk);});var totalW=8*(wkW+gap)-gap;wc.style.width=totalW+'px';bc.style.width=totalW+'px';document.getElementById('kw').style.width=(totalW+2)+'px';})();
+setTimeout(stopOsc,200);
 </script>
 </body>
 </html>
