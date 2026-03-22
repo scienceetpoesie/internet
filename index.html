@@ -459,25 +459,12 @@ document.addEventListener('click',function(e){
     setTimeout(function(){ el.parentNode&&el.parentNode.removeChild(el); },460);
   })(i);}
 });
-
-/* ===================== NOTRE ENTENTE — SON AU HOVER ===================== */
-/*
-  PLACEHOLDER : remplacer l'URL ci-dessous par le chemin vers votre fichier mp3.
-  Exemple : 'https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/notre-entente.mp3'
-
-  Comportement :
-  - mouseenter : prend le pas sur TOUS les autres sons (synthé + voix nav).
-    Le synthé est mis en silence (gain à 0) sans être détruit — il reprend au mouseleave.
-    La synthèse vocale est annulée.
-  - Le mp3 reprend là où il a été laissé (currentTime non réinitialisé au re-enter).
-    Il ne repart au début que si le fichier est arrivé à sa fin naturelle.
-  - mouseleave : le mp3 est mis en pause (position mémorisée).
-    Le synthé reprend si une note était active.
+  
 */
 (function(){
   var neLink = document.getElementById('ne-pub-link');
   if(!neLink) return;
-  var mp3src = 'PLACEHOLDER_NOTRE_ENTENTE.mp3'; /* ← REMPLACER PAR L'URL DU MP3 */
+  var mp3src = 'https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/Johann%20Sebastian%20Bach%20-%20Fantasia%20&%20Fugue%20In%20G%20Minor,%20BWV%20542_%20I.%20Fantasia.mp3'; /* ← REMPLACER PAR L'URL DU MP3 */
   var audio = null;
   /* état du synthé sauvegardé au mouseenter pour restauration au mouseleave */
   var synthWasSounding = false;
