@@ -76,6 +76,28 @@ td.sidebar-left { background-color: #FFFF00; width: 50px; vertical-align: top; p
 .sidebar-section p { font-size: 9px; color: #000000; line-height: 1.5; font-family: "Courier New", monospace; }
 
 /* ===================== GIF ZONE — SIDEBAR GAUCHE ===================== */
+/* MODIFICATION 1 : le gif remplace le carré noir "ESPACE EXPÉRIMENTAL"
+   → on supprime la gif-zone séparée, le gif va dans le bloc dark bleu
+   On utilise la même zone .sidebar-section style dark mais avec l'img centrée */
+.gif-zone-sidebar-exp {
+  border-bottom: 3px solid #CCCC00;
+  padding: 6px 0;
+  background: #000080;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gif-zone-sidebar-exp img {
+  width: 50px;
+  height: auto;
+  image-rendering: pixelated;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ancienne gif-zone conservée pour rétro-compat si besoin */
 .gif-zone-left {
   border-bottom: 3px solid #CCCC00;
   padding: 4px 3px;
@@ -112,11 +134,11 @@ td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; 
 .welcome-body { padding: 14px 16px; background-color: #FFFFFF; border-bottom: 3px solid #C0C0C0; }
 .welcome-body p { font-family: "Times New Roman", serif; font-size: 14px; color: #000000; line-height: 1.7; margin: 0; }
 
-/* ===================== GIF BANNER ===================== */
+/* ===================== GIF BANNER — MODIFICATION 5 : plus claire ===================== */
 .gif-banner {
-  background: #303030;
-  border-top: 3px solid #000000;
-  border-bottom: 3px solid #000000;
+  background: #686868;  /* was #303030 — plus clair */
+  border-top: 3px solid #444444;
+  border-bottom: 3px solid #444444;
   padding: 6px 10px;
   display: flex;
   align-items: center;
@@ -127,8 +149,8 @@ td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; 
 .gif-banner-slot {
   flex-shrink: 0;
   width: 60px; height: 60px;
-  background: #000;
-  border: 2px inset #666;
+  background: #888;   /* was #000 */
+  border: 2px inset #999;
   overflow: hidden;
   position: relative;
   display: flex; align-items: center; justify-content: center;
@@ -141,7 +163,7 @@ td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; 
   flex: 1;
   font-family: "Courier New", monospace;
   font-size: 11px;
-  color: #FFFF00;
+  color: #FFFFD0;   /* was #FFFF00 — légèrement adouci */
   line-height: 1.6;
   text-align: center;
 }
@@ -152,7 +174,7 @@ td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; 
 .glitch-text::before {
   content: attr(data-text);
   position: absolute; left: 0; top: 0;
-  color: #FF0000;
+  color: #FF4444;
   animation: textGlitch 4s steps(1) infinite;
   clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
 }
@@ -173,11 +195,30 @@ td.card { vertical-align: top; padding: 0; border: 3px outset #888888; width: 50
 .card-body a:hover { background-color: #0000CC; border-style: inset; }
 .c-crimson .card-header { background-color: #990000; } .c-crimson .card-body { background-color: #FFF5F5; }
 .c-purple .card-header { background-color: #660066; } .c-purple .card-body { background-color: #FFF0FF; }
-.c-gold .card-header { background-color: #886600; } .c-gold .card-body { background-color: #FFFBE8; }
-.c-gold:hover .card-body { background-color: #d4f0c8; }
+
+/* MODIFICATION 3 : Hall of Fame — hover uniquement sur le bouton, pas la card entière */
+.c-gold .card-header { background-color: #886600; }
+.c-gold .card-body { background-color: #FFFBE8; }
+/* suppression du hover vert sur toute la card-body */
+/* le hover vert fluo est sur le lien uniquement */
+.c-gold .card-body a:hover {
+  background-color: #22FF22 !important;
+  border-color: #00CC00;
+  border-style: inset;
+  color: #003300;
+}
+
+/* MODIFICATION 4 : Suckerlist — bouton marron clair au hover */
 .c-black .card-header { background-color: #111111; } .c-black .card-body { background-color: #1A1A1A; color: #CCCCCC; }
-.c-black:hover .card-body { background-color: #3a1a08; color: #DDCCBB; }
+/* suppression du hover marron sur toute la card */
 .c-black .card-body a { border-color: #888800; }
+.c-black .card-body a:hover {
+  background-color: #7A4010 !important;
+  border-color: #A06020;
+  border-style: inset;
+  color: #FFD090;
+}
+
 .c-sociogonie .card-header { background-color: #2B0050; } .c-sociogonie .card-body { background-color: #F5EEFF; }
 
 .sociogonie-with-gif {
@@ -264,7 +305,7 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
   100%{ transform: translate(3px,1px); }
 }
 
-/* ===================== SYNTH ===================== */
+/* ===================== SYNTH (placeholder — script à remettre) ===================== */
 .sw{background:#d4c9a8;padding:3px 4px 0 4px;display:inline-block;border-top:2px solid #e8dfc0;border-left:2px solid #e8dfc0;border-right:2px solid #7a6a48;border-bottom:2px solid #7a6a48;box-sizing:border-box;}
 .screen{background:#1c1a0e;border-top:1px solid #3a3220;border-left:1px solid #3a3220;border-right:1px solid #c8b880;border-bottom:1px solid #c8b880;padding:2px 3px;margin-bottom:3px;display:flex;align-items:center;gap:3px;height:16px;}
 .osc-canvas{flex:1;height:12px;display:block;}
@@ -361,9 +402,10 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   </ul></div>
   <div class="sidebar-section"><h3>Statut</h3><p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;Fragment III&nbsp;&raquo;<br>en cours&hellip;</p></div>
 
-  <div class="gif-zone-left">
-    <canvas class="gif-placeholder-canvas" id="gif-canvas-1" width="44" height="44"></canvas>
-    <span class="gif-slot-label"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/BMQ6224VRQT36SCUDQAM6CH7R6HNE2M7.gif?raw=true"></span>
+  <!-- MODIFICATION 1 : GIF remplace le carré canvas + le bloc ESPACE EXPÉRIMENTAL
+       → un seul bloc avec fond #000080 qui contient le gif redimensionné à 50px de large -->
+  <div class="gif-zone-sidebar-exp">
+    <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/BMQ6224VRQT36SCUDQAM6CH7R6HNE2M7.gif?raw=true" alt="gif">
   </div>
 
   <div class="sidebar-section"><h3>Liens</h3><ul>
@@ -372,9 +414,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     <li><a href="#">R&eacute;f&eacute;rences</a></li>
     <li><a href="#">Plan du site</a></li>
   </ul></div>
-  <div class="sidebar-section" style="text-align:center;background-color:#000080;border:3px inset #888">
-    <p style="color:#FFFF00;font-family:'Courier New';font-size:10px;font-weight:bold;margin:0">&#x2234; &#x2235; &#x2234;<br>ESPACE<br>EXP&Eacute;RIMENTAL<br>&#x2234; &#x2235; &#x2234;</p>
-  </div>
+
   <div class="gif-zone-left" title="GIF ZONE — remplacer src par votre gif">
     <div style="width:44px;height:44px;margin:0 auto;background:#060010;border:1px dashed #220033;display:flex;align-items:center;justify-content:center;">
       <span style="font-family:'Courier New',monospace;font-size:6px;color:#330044;text-align:center;line-height:1.8;display:block">[ GIF ]<br>&#9654;</span>
@@ -388,14 +428,14 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   <div class="welcome-bar" style="text-align:center;">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
   <div class="welcome-body"><p>Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>Science</strong> et de la <strong>Po&eacute;sie</strong>. D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p></div>
 
-  <!-- GIF BANNER -->
+  <!-- GIF BANNER — MODIFICATION 5 : fond plus clair -->
   <div class="gif-banner">
     <div class="gif-banner-slot">
       <canvas id="gif-canvas-2a" width="60" height="60"></canvas>
     </div>
     <div class="gif-banner-text">
       <span class="glitch-text" data-text="&nbsp;** FRAGMENT III EN COURS **&nbsp;">&nbsp;** FRAGMENT III EN COURS **&nbsp;</span><br>
-      <span style="font-size:9px;color:#00FFFF;letter-spacing:1px">sociologie &middot; &eacute;sot&eacute;risme &middot; exp&eacute;rimentation</span>
+      <span style="font-size:9px;color:#CCFFFF;letter-spacing:1px">sociologie &middot; &eacute;sot&eacute;risme &middot; exp&eacute;rimentation</span>
     </div>
     <div class="gif-banner-slot">
       <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/funny%20face.gif?raw=true"
@@ -413,55 +453,55 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
       <div class="card-body">Enquetes, analyses et actions contre les organisations sectaires. Croisement des methodes sociologiques et des savoirs essoteriques pour decoder les mecanismes d'emprise.<br><a href="#">&#9658; Acceder aux projets</a></div>
     </td></tr>
 
-    <!-- PUBLICATIONS — pleine largeur -->
+    <!-- PUBLICATIONS — MODIFICATION 2 : 4 fonds pastels/crème distincts -->
     <tr><td class="card c-purple" id="oeuvres" colspan="2">
       <div class="card-header">&#x2736; PUBLICATIONS</div>
       <div class="card-body" style="padding:0">
         <table width="100%" cellpadding="0" cellspacing="0"><tr>
 
-          <!-- BOUTIQUE -->
-          <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF8FF;">
-            <div style="width:100%;height:90px;background:#0a0010;border-bottom:1px solid #330033;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <!-- BOUTIQUE — crème rosé -->
+          <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF5EE;">
+            <div style="width:100%;height:90px;background:#F2E0D8;border-bottom:1px solid #D4B8A8;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/ezgif-25b0768ca135783c.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="boutique">
             </div>
             <div style="padding:6px 8px;text-align:center;">
-              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br>
+              <strong style="font-family:'Arial Black';font-size:11px;color:#7A4040">BOUTIQUE</strong><br>
               <span style="font-size:11px">...........................</span><br>
               <a href="#" style="margin-top:4px">&#9658; Voir</a>
             </div>
           </td>
 
-          <!-- MAGAZINE -->
-          <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF5FF;">
-            <div style="width:100%;height:90px;background:#100010;border-bottom:1px solid #330033;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <!-- MAGAZINE — crème lavande -->
+          <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#F5F0FF;">
+            <div style="width:100%;height:90px;background:#E8DCF8;border-bottom:1px solid #C8B4E8;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/bite.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="magazine">
             </div>
             <div style="padding:6px 8px;text-align:center;">
-              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br>
+              <strong style="font-family:'Arial Black';font-size:11px;color:#5A3080">MAGAZINE PORNO</strong><br>
               <span style="font-size:11px">...........................</span><br>
               <a href="#" style="margin-top:4px">&#9658; Feuilleter</a>
             </div>
           </td>
 
-          <!-- TELEVISION -->
-          <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF;">
-            <div style="width:100%;height:90px;background:#001020;border-bottom:1px solid #003344;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <!-- TELEVISION — crème menthe -->
+          <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#F0FFF4;">
+            <div style="width:100%;height:90px;background:#D8F0E0;border-bottom:1px solid #A8D4B8;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/WS3PYONRZ7JP6AG2QBSA7RZMSTD4FEBI.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="television">
             </div>
             <div style="padding:6px 8px;text-align:center;">
-              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br>
+              <strong style="font-family:'Arial Black';font-size:11px;color:#2A6040">T&Eacute;L&Eacute;VISION</strong><br>
               <span style="font-size:11px">...........................</span><br>
               <a href="https://dashboard.twitch.tv/u/scienceetpoesie/stream-manager" target="_blank" style="margin-top:4px">&#9658; Parcourir</a>
             </div>
           </td>
 
-          <!-- GALERIE -->
-          <td style="width:25%;padding:0;vertical-align:top;background:#FFF5FF;">
-            <div style="width:100%;height:90px;background:#100800;border-bottom:1px solid #442200;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <!-- GALERIE — crème beurre -->
+          <td style="width:25%;padding:0;vertical-align:top;background:#FFFDE8;">
+            <div style="width:100%;height:90px;background:#F0E8C0;border-bottom:1px solid #D4C880;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/peinture" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="galerie">
             </div>
             <div style="padding:6px 8px;text-align:center;">
-              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br>
+              <strong style="font-family:'Arial Black';font-size:11px;color:#806020">GALERIE D'ART</strong><br>
               <span style="font-size:11px">...........................</span><br>
               <a href="#" style="margin-top:4px">&#9658; Galerie</a>
             </div>
@@ -473,6 +513,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
     <!-- HALL OF FAME (gauche) + PLACEHOLDER (droite, rowspan 2) -->
     <tr>
+      <!-- MODIFICATION 3 : pas de hover sur la card, hover vert fluo sur le bouton uniquement -->
       <td class="card c-gold" id="hallofame" style="width:50%">
         <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
         <div class="card-body">
@@ -485,7 +526,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
       </td>
     </tr>
 
-    <!-- SUCKERLIST (gauche) -->
+    <!-- SUCKERLIST (gauche) — MODIFICATION 4 : bouton marron clair au hover -->
     <tr>
       <td class="card c-black" id="suckerlist" style="width:50%">
         <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
@@ -674,28 +715,6 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   });
 })();
 
-/* GIF CANVAS 1 — sidebar gauche */
-(function(){
-  var cv=document.getElementById('gif-canvas-1');
-  if(!cv)return;
-  var c=cv.getContext('2d'), W=44, H=44, t=0;
-  function draw(){
-    t++;
-    c.fillStyle='#000'; c.fillRect(0,0,W,H);
-    var r=10+Math.sin(t*0.08)*4;
-    var grd=c.createRadialGradient(W/2,H/2,0,W/2,H/2,r*1.8);
-    grd.addColorStop(0,'#00FF00'); grd.addColorStop(1,'transparent');
-    c.fillStyle=grd; c.beginPath(); c.arc(W/2,H/2,r,0,Math.PI*2); c.fill();
-    for(var y=0;y<H;y+=2){ c.fillStyle='rgba(0,0,0,0.3)'; c.fillRect(0,y,W,1); }
-    if(Math.random()<0.15){
-      c.fillStyle='rgba(0,255,0,0.6)';
-      c.fillRect(Math.random()*W,Math.random()*H,Math.random()*8+2,1);
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
 /* GIF CANVAS 2a — bannière gauche */
 (function(){
   var cv=document.getElementById('gif-canvas-2a');
@@ -822,42 +841,7 @@ if(citEl){
   btn.addEventListener('mouseleave', release);
 })();
 
-/* SYNTH */
-var ctx=null,osc=null,osc2=null,gn=null,gn2=null,octave=4,vol=0.6,mouseDown=false,currentKeyEl=null;
-var waveType='sine',analyser=null,dataArr=null,oscRaf=null;
-var noteLabels={'C':'Do','D':'Ré','E':'Mi','F':'Fa','G':'Sol','A':'La','B':'Si','C#':'Do#','D#':'Ré#','F#':'Fa#','G#':'Sol#','A#':'La#'};
-var freqs={'C':[32.70,65.41,130.81,261.63,523.25,1046.50,2093.00],'C#':[34.65,69.30,138.59,277.18,554.37,1108.73],'D':[36.71,73.42,146.83,293.66,587.33,1174.66],'D#':[38.89,77.78,155.56,311.13,622.25,1244.51],'E':[41.20,82.41,164.81,329.63,659.25,1318.51],'F':[43.65,87.31,174.61,349.23,698.46,1396.91],'F#':[46.25,92.50,185.00,369.99,739.99,1479.98],'G':[49.00,98.00,196.00,392.00,783.99,1567.98],'G#':[51.91,103.83,207.65,415.30,830.61,1661.22],'A':[55.00,110.00,220.00,440.00,880.00,1760.00],'A#':[58.27,116.54,233.08,466.16,932.33,1864.66],'B':[61.74,123.47,246.94,493.88,987.77,1975.53]};
-var notes=['C','D','E','F','G','A','B','C'];
-var arpOn=false,arpNotes=[],arpIdx=0,arpDir=1,arpTimer=null,tempo=120;
-function bpmFromSlider(v){var t=v/100;return Math.round(60+t*t*(1200-60));}
-function setTempo(v){tempo=bpmFromSlider(parseInt(v));document.getElementById('bpm-lbl').textContent=tempo;if(arpOn&&arpTimer){stopArp();arpStep();}}
-function setWave(v){waveType=v=='0'?'sine':'triangle';if(osc)osc.type=waveType;if(osc2)osc2.type=waveType;}
-function changeOct(d){octave=Math.max(2,Math.min(6,octave+d));}
-function microDetune(){return(Math.random()-0.5)*0.018;}
-function initCtx(){if(!ctx){ctx=new(window.AudioContext||window.webkitAudioContext)();analyser=ctx.createAnalyser();analyser.fftSize=512;analyser.smoothingTimeConstant=0.6;dataArr=new Uint8Array(analyser.fftSize);analyser.connect(ctx.destination);}if(ctx.state==='suspended')ctx.resume();}
-function startSound(f){stopRawSound();var detune=microDetune();var f1=f*(1+detune);var f2=f*(1-detune*0.6+microDetune()*0.008);osc=ctx.createOscillator();gn=ctx.createGain();osc.type=waveType;osc.frequency.setValueAtTime(f1,ctx.currentTime);gn.gain.setValueAtTime(0,ctx.currentTime);gn.gain.linearRampToValueAtTime(vol*0.38,ctx.currentTime+0.012);osc.connect(gn);gn.connect(analyser);osc.start();osc2=ctx.createOscillator();gn2=ctx.createGain();osc2.type=waveType;osc2.frequency.setValueAtTime(f2,ctx.currentTime);gn2.gain.setValueAtTime(0,ctx.currentTime);gn2.gain.linearRampToValueAtTime(vol*0.18,ctx.currentTime+0.016);osc2.connect(gn2);gn2.connect(analyser);osc2.start();document.getElementById('led').classList.add('on');drawOsc();}
-function slideSound(f){if(!osc||!gn)return startSound(f);var detune=microDetune();osc.frequency.setTargetAtTime(f*(1+detune),ctx.currentTime,0.003);if(osc2)osc2.frequency.setTargetAtTime(f*(1-detune*0.6),ctx.currentTime,0.005);}
-function stopRawSound(){if(osc&&gn){try{gn.gain.setValueAtTime(gn.gain.value,ctx.currentTime);gn.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.08);var o=osc;setTimeout(function(){try{o.stop();}catch(e){}},100);}catch(e){}osc=null;gn=null;}if(osc2&&gn2){try{gn2.gain.setValueAtTime(gn2.gain.value,ctx.currentTime);gn2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.10);var o2=osc2;setTimeout(function(){try{o2.stop();}catch(e){}},120);}catch(e){}osc2=null;gn2=null;}}
-function pressKey(el){if(currentKeyEl&&currentKeyEl!==el)currentKeyEl.classList.remove('pressed');currentKeyEl=el;el.classList.add('pressed');}
-function releaseKey(){if(currentKeyEl){currentKeyEl.classList.remove('pressed');currentKeyEl=null;}}
-function getFreq(note,octShift){var oct=octave+(octShift||0);return freqs[note]?freqs[note][oct-2]:null;}
-function play(note,octShift,el){if(arpOn){addArpNote(note,octShift,el);return;}initCtx();var f=getFreq(note,octShift);if(!f)return;if(el)pressKey(el);document.getElementById('nval').textContent=noteLabels[note];document.getElementById('fval').textContent=Math.round(f)+'Hz';if(osc&&gn)slideSound(f);else startSound(f);}
-function stopSound(){releaseKey();stopRawSound();document.getElementById('nval').textContent='--';document.getElementById('fval').textContent='--Hz';document.getElementById('led').classList.remove('on');stopOsc();}
-function pingArpNote(n){initCtx();var f=getFreq(n.note,n.octShift);if(!f)return;document.getElementById('nval').textContent=noteLabels[n.note];document.getElementById('fval').textContent=Math.round(f)+'Hz';clearArpPing();if(n.el){n.el.classList.add('arp-ping');setTimeout(function(){if(n.el)n.el.classList.remove('arp-ping');},100);}if(osc&&gn)slideSound(f);else startSound(f);}
-function toggleArp(){arpOn=!arpOn;document.getElementById('arp-sw').classList.toggle('on',arpOn);if(!arpOn){stopArp();clearArpHeld();arpNotes=[];stopSound();}else if(arpNotes.length)startArp();}
-function startArp(){stopArp();arpIdx=0;arpDir=1;arpStep();}
-function stopArp(){if(arpTimer){clearTimeout(arpTimer);arpTimer=null;}}
-function arpStep(){if(!arpOn||!arpNotes.length){stopArp();return;}var len=arpNotes.length;if(len===1){arpIdx=0;}else{if(arpIdx>=len){arpIdx=len-2;arpDir=-1;}if(arpIdx<0){arpIdx=1;arpDir=1;}}var n=arpNotes[arpIdx];if(n)pingArpNote(n);if(len>1)arpIdx+=arpDir;arpTimer=setTimeout(arpStep,Math.round(60000/tempo));}
-function clearArpPing(){document.querySelectorAll('.arp-ping').forEach(function(e){e.classList.remove('arp-ping');});}
-function clearArpHeld(){document.querySelectorAll('.arp-held').forEach(function(e){e.classList.remove('arp-held');});}
-function addArpNote(note,octShift,el){for(var i=0;i<arpNotes.length;i++){if(arpNotes[i].note===note&&arpNotes[i].octShift===(octShift||0)){arpNotes.splice(i,1);if(el){el.classList.remove('arp-held');el.classList.remove('arp-ping');}if(arpIdx>=arpNotes.length)arpIdx=Math.max(0,arpNotes.length-1);if(!arpNotes.length){stopArp();stopSound();}return;}}arpNotes.push({note:note,octShift:octShift||0,el:el});if(el)el.classList.add('arp-held');if(arpNotes.length===1)startArp();}
-function findStart(d){for(var i=1;i<d.length-1;i++)if(d[i-1]<128&&d[i]>=128)return i;return 0;}
-function drawOsc(){if(oscRaf)cancelAnimationFrame(oscRaf);var cv=document.getElementById('osc'),c=cv.getContext('2d'),W=cv.width,H=cv.height;function frame(){if(!osc){stopOsc();return;}analyser.getByteTimeDomainData(dataArr);c.fillStyle='#1c1a0e';c.fillRect(0,0,W,H);c.strokeStyle='#332e18';c.lineWidth=0.5;c.beginPath();c.moveTo(0,H/2);c.lineTo(W,H/2);c.stroke();var start=findStart(dataArr);var len=Math.min(dataArr.length-start,Math.floor(dataArr.length*0.35));c.strokeStyle='#b89a3a';c.lineWidth=1.2;c.beginPath();for(var i=0;i<len;i++){var x=(i/len)*W;var y=H/2-((dataArr[start+i]-128)/128)*(H/2-1);if(i===0)c.moveTo(x,y);else c.lineTo(x,y);}c.stroke();oscRaf=requestAnimationFrame(frame);}frame();}
-function stopOsc(){if(oscRaf){cancelAnimationFrame(oscRaf);oscRaf=null;}var cv=document.getElementById('osc'),c=cv.getContext('2d');c.fillStyle='#1c1a0e';c.fillRect(0,0,cv.width,cv.height);c.strokeStyle='#332e18';c.lineWidth=0.5;c.beginPath();c.moveTo(0,cv.height/2);c.lineTo(cv.width,cv.height/2);c.stroke();}
-document.addEventListener('mouseup',function(){mouseDown=false;if(!arpOn)stopSound();});
-document.addEventListener('touchend',function(){mouseDown=false;if(!arpOn)stopSound();});
-(function build(){var wc=document.getElementById('wkeys'),bc=document.getElementById('bkeys');var wkW=8,gap=1;notes.forEach(function(n,i){var isHighC=(i===7);var k=document.createElement('div');k.className='wk';k.addEventListener('mousedown',function(e){e.preventDefault();mouseDown=true;play(n,isHighC?1:0,k);});k.addEventListener('mouseenter',function(){if(!arpOn&&mouseDown)play(n,isHighC?1:0,k);});k.addEventListener('mouseup',function(){if(!arpOn)stopSound();});k.addEventListener('touchstart',function(e){e.preventDefault();mouseDown=true;play(n,isHighC?1:0,k);},{passive:false});k.addEventListener('touchend',function(e){e.preventDefault();if(!arpOn)stopSound();},{passive:false});wc.appendChild(k);});var blacks=[{n:'C#',between:[0,1]},{n:'D#',between:[1,2]},{n:'F#',between:[3,4]},{n:'G#',between:[4,5]},{n:'A#',between:[5,6]}];blacks.forEach(function(b){var bk=document.createElement('div');bk.className='bk';var li=b.between[0],ri=b.between[1];var lc=li*(wkW+gap)+(wkW/2),rc=ri*(wkW+gap)+(wkW/2);bk.style.left=((lc+rc)/2-2.5)+'px';bk.addEventListener('mousedown',function(e){e.stopPropagation();e.preventDefault();mouseDown=true;play(b.n,0,bk);});bk.addEventListener('mouseenter',function(e){e.stopPropagation();if(!arpOn&&mouseDown)play(b.n,0,bk);});bk.addEventListener('mouseup',function(e){e.stopPropagation();if(!arpOn)stopSound();});bk.addEventListener('touchstart',function(e){e.stopPropagation();e.preventDefault();mouseDown=true;play(b.n,0,bk);},{passive:false});bk.addEventListener('touchend',function(e){e.stopPropagation();e.preventDefault();if(!arpOn)stopSound();},{passive:false});bc.appendChild(bk);});var totalW=8*(wkW+gap)-gap;wc.style.width=totalW+'px';bc.style.width=totalW+'px';document.getElementById('kw').style.width=(totalW+2)+'px';})();
-setTimeout(stopOsc,200);
+/* — SYNTH SCRIPT À REMETTRE ICI — */
 </script>
 </body>
 </html>
