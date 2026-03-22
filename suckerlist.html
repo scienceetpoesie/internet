@@ -20,22 +20,25 @@
     border-bottom: 1px solid #330000;
   }
 
-  /* Conteneur ancré : hauteur 0, les flammes débordent vers le HAUT */
+  /* Conteneur ancré : hauteur 0, les flammes débordent vers le HAUT, toujours devant */
   #flames-anchor {
     position: relative;
     height: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 200;
   }
-  #flames-anchor.devant { z-index: 200; }
 
   .flame-border {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%; display: flex; flex-wrap: nowrap;
+    right: 0;
+    display: flex; flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
     background: transparent; overflow: hidden;
     line-height: 0; font-size: 0;
+    gap: 0;
     transition: height 0.25s ease;
   }
   .flame-border img {
@@ -358,17 +361,14 @@
     <span>hauteur</span>
     <span class="fc-value" id="flameValDisplay">60px</span>
   </div>
-  <input type="range" id="flameSlider" min="20" max="300" value="60" step="5"
+  <input type="range" id="flameSlider" min="60" max="300" value="60" step="5"
          oninput="updateFlames(this.value)">
   <div class="fc-btn-row">
-    <button class="fc-btn" onclick="updateFlames(20)" title="minimum">▼</button>
+    <button class="fc-btn" onclick="updateFlames(60)" title="minimum">▼</button>
     <button class="fc-btn" onclick="updateFlames(60)" title="normal">◉</button>
     <button class="fc-btn" onclick="updateFlames(300)" title="inferno">▲</button>
   </div>
-  <button class="fc-btn" id="layerBtn" onclick="toggleLayer()"
-    style="width:100%;margin-top:6px;font-size:9px;letter-spacing:1px;padding:3px 0;">
-    DERRIÈRE LES PORTRAITS
-  </button>
+
   <div class="fc-inferno">variateur d'enfer</div>
 </div>
 
@@ -376,15 +376,16 @@
 
 var GIF_FLAMME = "https://raw.githubusercontent.com/scienceetpoesie/internet/refs/heads/main/assets/gif/flamme";
 var currentFlameHeight = 60;
-var flamesDevant = false;
-
 function buildFlames(id, height) {
   var el = document.getElementById(id);
   el.style.height = height + 'px';
-  var count = Math.ceil(window.innerWidth / 30) + 4;
+  // Le gif a un ratio ~0.5 (30px large / 60px haut à taille native)
+  // On recalcule la largeur proportionnelle pour couvrir tout l'écran
+  var imgW = Math.round(height * 0.5);
+  var count = Math.ceil(window.innerWidth / imgW) + 6;
   var html = '';
   for (var i = 0; i < count; i++) {
-    html += '<img src="' + GIF_FLAMME + '" height="' + height + '" style="height:' + height + 'px" alt="">';
+    html += '<img src="' + GIF_FLAMME + '" height="' + height + '" style="height:' + height + 'px;width:' + imgW + 'px;" alt="">';
   }
   el.innerHTML = html;
 }
@@ -395,21 +396,6 @@ function updateFlames(val) {
   document.getElementById('flameSlider').value = val;
   document.getElementById('flameValDisplay').textContent = val + 'px';
   buildFlames('flamesBot', val);
-}
-
-function toggleLayer() {
-  flamesDevant = !flamesDevant;
-  var anchor = document.getElementById('flames-anchor');
-  var btn = document.getElementById('layerBtn');
-  if (flamesDevant) {
-    anchor.classList.add('devant');
-    btn.textContent = 'DEVANT LES PORTRAITS';
-    btn.style.color = '#FFFF00';
-  } else {
-    anchor.classList.remove('devant');
-    btn.textContent = 'DERRIÈRE LES PORTRAITS';
-    btn.style.color = '#FF6600';
-  }
 }
 
 buildFlames('flamesBot', 60);
