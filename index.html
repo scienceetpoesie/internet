@@ -76,12 +76,10 @@ td.sidebar-left { background-color: #FFFF00; width: 75px; vertical-align: top; p
 .sidebar-section p { font-size: 9px; color: #000000; line-height: 1.5; font-family: "Courier New", monospace; }
 
 /* ===================== GIF ZONE — SIDEBAR GAUCHE ===================== */
-/* MODIFICATION 1 : le gif remplace le carré noir "ESPACE EXPÉRIMENTAL"
-   → on supprime la gif-zone séparée, le gif va dans le bloc dark bleu
-   On utilise la même zone .sidebar-section style dark mais avec l'img centrée */
+/* MODIFICATION 1 : gif agrandi — prend toute la largeur du bloc, pas de cadre bleu autour */
 .gif-zone-sidebar-exp {
   border-bottom: 3px solid #CCCC00;
-  padding: 6px 0;
+  padding: 0;
   background: #000080;
   text-align: center;
   overflow: hidden;
@@ -90,11 +88,11 @@ td.sidebar-left { background-color: #FFFF00; width: 75px; vertical-align: top; p
   justify-content: center;
 }
 .gif-zone-sidebar-exp img {
-  width: 50px;
+  width: 75px;   /* pleine largeur de la sidebar */
   height: auto;
   image-rendering: pixelated;
   display: block;
-  margin: 0 auto;
+  margin: 0;
 }
 
 /* ancienne gif-zone conservée pour rétro-compat si besoin */
@@ -134,9 +132,9 @@ td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; 
 .welcome-body { padding: 14px 16px; background-color: #FFFFFF; border-bottom: 3px solid #C0C0C0; }
 .welcome-body p { font-family: "Times New Roman", serif; font-size: 14px; color: #000000; line-height: 1.7; margin: 0; }
 
-/* ===================== GIF BANNER — MODIFICATION 5 : plus claire ===================== */
+/* ===================== GIF BANNER ===================== */
 .gif-banner {
-  background: #686868;  /* was #303030 — plus clair */
+  background: #686868;
   border-top: 3px solid #444444;
   border-bottom: 3px solid #444444;
   padding: 6px 10px;
@@ -149,7 +147,7 @@ td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; 
 .gif-banner-slot {
   flex-shrink: 0;
   width: 60px; height: 60px;
-  background: #888;   /* was #000 */
+  background: #888;
   border: 2px inset #999;
   overflow: hidden;
   position: relative;
@@ -163,7 +161,7 @@ td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; 
   flex: 1;
   font-family: "Courier New", monospace;
   font-size: 11px;
-  color: #FFFFD0;   /* was #FFFF00 — légèrement adouci */
+  color: #FFFFD0;
   line-height: 1.6;
   text-align: center;
 }
@@ -196,11 +194,8 @@ td.card { vertical-align: top; padding: 0; border: 3px outset #888888; width: 50
 .c-crimson .card-header { background-color: #990000; } .c-crimson .card-body { background-color: #FFF5F5; }
 .c-purple .card-header { background-color: #660066; } .c-purple .card-body { background-color: #FFF0FF; }
 
-/* MODIFICATION 3 : Hall of Fame — hover uniquement sur le bouton, pas la card entière */
 .c-gold .card-header { background-color: #886600; }
 .c-gold .card-body { background-color: #FFFBE8; }
-/* suppression du hover vert sur toute la card-body */
-/* le hover vert fluo est sur le lien uniquement */
 .c-gold .card-body a:hover {
   background-color: #22FF22 !important;
   border-color: #00CC00;
@@ -208,9 +203,7 @@ td.card { vertical-align: top; padding: 0; border: 3px outset #888888; width: 50
   color: #003300;
 }
 
-/* MODIFICATION 4 : Suckerlist — bouton marron clair au hover */
 .c-black .card-header { background-color: #111111; } .c-black .card-body { background-color: #1A1A1A; color: #CCCCCC; }
-/* suppression du hover marron sur toute la card */
 .c-black .card-body a { border-color: #888800; }
 .c-black .card-body a:hover {
   background-color: #5C2800 !important;
@@ -305,7 +298,7 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
   100%{ transform: translate(3px,1px); }
 }
 
-/* ===================== SYNTH (placeholder — script à remettre) ===================== */
+/* ===================== SYNTH ===================== */
 .sw{background:#d4c9a8;padding:3px 4px 0 4px;display:inline-block;border-top:2px solid #e8dfc0;border-left:2px solid #e8dfc0;border-right:2px solid #7a6a48;border-bottom:2px solid #7a6a48;box-sizing:border-box;}
 .screen{background:#1c1a0e;border-top:1px solid #3a3220;border-left:1px solid #3a3220;border-right:1px solid #c8b880;border-bottom:1px solid #c8b880;padding:2px 3px;margin-bottom:3px;display:flex;align-items:center;gap:3px;height:16px;}
 .osc-canvas{flex:1;height:12px;display:block;}
@@ -377,7 +370,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   <td class="header-right"><div class="header-right-text">La Science<br>pour croire,<br>la Po&eacute;sie<br>pour r&ecirc;ver.<br><br><strong style="font-style:normal;font-family:Arial;font-size:11px;color:#FFFF00">&#x2605; EST. 2024 &#x2605;</strong></div></td>
 </tr></table>
 
-<hr class="rainbow">
+<!-- MODIFICATION : rainbow du haut SUPPRIMÉ — on passe direct à la navbar -->
 
 <table class="navbar" cellpadding="0" cellspacing="0"><tr>
   <td class="nav-cell n1"><a href="#projets">PROJETS</a></td>
@@ -407,12 +400,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   </ul></div>
   <div class="sidebar-section"><h3>Statut</h3><p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;xxxxxx&nbsp;&raquo;<br>en cours&hellip;</p></div>
 
-  <!-- MODIFICATION 1 : GIF remplace le carré canvas + le bloc ESPACE EXPÉRIMENTAL
-       → un seul bloc avec fond #000080 qui contient le gif redimensionné à 50px de large -->
-  <div class="gif-zone-sidebar-exp">
-    <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/BMQ6224VRQT36SCUDQAM6CH7R6HNE2M7.gif?raw=true" alt="gif">
-  </div>
-
   <div class="sidebar-section"><h3>Liens</h3><ul>
     <li><a href="#">Archives</a></li>
     <li><a href="#">Ressources</a></li>
@@ -420,12 +407,12 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     <li><a href="#">Plan du site</a></li>
   </ul></div>
 
-  <div class="gif-zone-left" title="GIF ZONE — remplacer src par votre gif">
-    <div style="width:44px;height:44px;margin:0 auto;background:#060010;border:1px dashed #220033;display:flex;align-items:center;justify-content:center;">
-      <span style="font-family:'Courier New',monospace;font-size:6px;color:#330044;text-align:center;line-height:1.8;display:block">[ GIF ]<br>&#9654;</span>
-    </div>
-    <span class="gif-slot-label">[ GIF ]</span>
+  <!-- MODIFICATION : placeholder [ GIF ] supprimé, remplacé par le gif agrandi ici en bas -->
+  <!-- MODIFICATION : gif agrandi — largeur 75px, sans cadre, pleine colonne -->
+  <div class="gif-zone-sidebar-exp">
+    <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/BMQ6224VRQT36SCUDQAM6CH7R6HNE2M7.gif?raw=true" alt="gif">
   </div>
+
 </td>
 
 <!-- ===== CENTRE ===== -->
@@ -433,7 +420,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   <div class="welcome-bar" style="text-align:center;">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
   <div class="welcome-body"><p style="text-align:center;">Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>Science</strong> et de la <strong>Po&eacute;sie</strong>.<br>D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p></div>
 
-  <!-- GIF BANNER — MODIFICATION 5 : fond plus clair -->
+  <!-- GIF BANNER -->
   <div class="gif-banner">
     <div class="gif-banner-slot">
       <canvas id="gif-canvas-2a" width="60" height="60"></canvas>
@@ -458,13 +445,13 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
       <div class="card-body">Enquetes, analyses et actions contre les organisations sectaires.<br>Croisement des methodes sociologiques et des savoirs essoteriques pour decoder les mecanismes d'emprise.<br><a href="#">&#9658; Acceder aux projets</a></div>
     </td></tr>
 
-    <!-- PUBLICATIONS — MODIFICATION 2 : 4 fonds pastels/crème distincts -->
+    <!-- PUBLICATIONS -->
     <tr><td class="card c-purple" id="oeuvres" colspan="2">
       <div class="card-header">&#x2736; PUBLICATIONS</div>
       <div class="card-body" style="padding:0">
         <table width="100%" cellpadding="0" cellspacing="0"><tr>
 
-          <!-- BOUTIQUE — fond gif : rose grisé -->
+          <!-- BOUTIQUE -->
           <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#F0F0F0;">
             <div style="width:100%;height:90px;background:#D8C8C4;border-bottom:1px solid #BBAAAA;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/ezgif-25b0768ca135783c.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="boutique">
@@ -475,7 +462,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
             </div>
           </td>
 
-          <!-- MAGAZINE — fond gif : lavande grisée -->
+          <!-- MAGAZINE -->
           <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#F0F0F0;">
             <div style="width:100%;height:90px;background:#C8C0D8;border-bottom:1px solid #AAA0C0;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/bite.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="magazine">
@@ -486,7 +473,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
             </div>
           </td>
 
-          <!-- TELEVISION — fond gif : menthe grisée -->
+          <!-- TELEVISION -->
           <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#F0F0F0;">
             <div style="width:100%;height:90px;background:#B8CCC0;border-bottom:1px solid #9AB0A4;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/WS3PYONRZ7JP6AG2QBSA7RZMSTD4FEBI.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="television">
@@ -497,7 +484,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
             </div>
           </td>
 
-          <!-- GALERIE — fond gif : beurre grisé -->
+          <!-- GALERIE -->
           <td style="width:25%;padding:0;vertical-align:top;background:#F0F0F0;">
             <div style="width:100%;height:90px;background:#CCC8A8;border-bottom:1px solid #B0AA88;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/peinture" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="galerie">
@@ -514,7 +501,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
     <!-- HALL OF FAME (gauche) + PLACEHOLDER (droite, rowspan 2) -->
     <tr>
-      <!-- MODIFICATION 3 : pas de hover sur la card, hover vert fluo sur le bouton uniquement -->
       <td class="card c-gold" id="hallofame" style="width:50%">
         <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
         <div class="card-body">
@@ -527,7 +513,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
       </td>
     </tr>
 
-    <!-- SUCKERLIST (gauche) — MODIFICATION 4 : bouton marron clair au hover -->
+    <!-- SUCKERLIST (gauche) -->
     <tr>
       <td class="card c-black" id="suckerlist" style="width:50%">
         <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
@@ -878,10 +864,6 @@ document.addEventListener('mouseup',function(){mouseDown=false;if(!arpOn)stopSou
 document.addEventListener('touchend',function(){mouseDown=false;if(!arpOn)stopSound();});
 (function build(){var wc=document.getElementById('wkeys'),bc=document.getElementById('bkeys');var wkW=8,gap=1;notes.forEach(function(n,i){var isHighC=(i===7);var k=document.createElement('div');k.className='wk';k.addEventListener('mousedown',function(e){e.preventDefault();mouseDown=true;play(n,isHighC?1:0,k);});k.addEventListener('mouseenter',function(){if(!arpOn&&mouseDown)play(n,isHighC?1:0,k);});k.addEventListener('mouseup',function(){if(!arpOn)stopSound();});k.addEventListener('touchstart',function(e){e.preventDefault();mouseDown=true;play(n,isHighC?1:0,k);},{passive:false});k.addEventListener('touchend',function(e){e.preventDefault();if(!arpOn)stopSound();},{passive:false});wc.appendChild(k);});var blacks=[{n:'C#',between:[0,1]},{n:'D#',between:[1,2]},{n:'F#',between:[3,4]},{n:'G#',between:[4,5]},{n:'A#',between:[5,6]}];blacks.forEach(function(b){var bk=document.createElement('div');bk.className='bk';var li=b.between[0],ri=b.between[1];var lc=li*(wkW+gap)+(wkW/2),rc=ri*(wkW+gap)+(wkW/2);bk.style.left=((lc+rc)/2-2.5)+'px';bk.addEventListener('mousedown',function(e){e.stopPropagation();e.preventDefault();mouseDown=true;play(b.n,0,bk);});bk.addEventListener('mouseenter',function(e){e.stopPropagation();if(!arpOn&&mouseDown)play(b.n,0,bk);});bk.addEventListener('mouseup',function(e){e.stopPropagation();if(!arpOn)stopSound();});bk.addEventListener('touchstart',function(e){e.stopPropagation();e.preventDefault();mouseDown=true;play(b.n,0,bk);},{passive:false});bk.addEventListener('touchend',function(e){e.stopPropagation();e.preventDefault();if(!arpOn)stopSound();},{passive:false});bc.appendChild(bk);});var totalW=8*(wkW+gap)-gap;wc.style.width=totalW+'px';bc.style.width=totalW+'px';document.getElementById('kw').style.width=(totalW+2)+'px';})();
 setTimeout(stopOsc,200);
-</script>
-</body>
-</html>
-/* — SYNTH SCRIPT À REMETTRE ICI — */
 </script>
 </body>
 </html>
