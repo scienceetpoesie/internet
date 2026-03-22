@@ -6,33 +6,18 @@
 <title>HALL OF FAME :: Archives Célestes :: Bienvenue au Paradis</title>
 <style type="text/css">
 
-  /* =====================================================================
-     BACKGROUND
-     Remplace __BACKGROUND_IMAGE_URL__ par l'URL de ton image de ciel.
-     background-color sert de fallback si l'image ne charge pas.
-     ===================================================================== */
   body {
     margin: 0; padding: 0;
     font-family: "Times New Roman", Times, serif;
     color: #3a1a00;
     background-color: #7aaad0;
     background-image: url("https://github.com/scienceetpoesie/internet/blob/main/background/ciel%20bleu.jpg?raw=true");
-    /* ↑ REMPLACE __BACKGROUND_IMAGE_URL__ PAR TON URL D'IMAGE DE CIEL */
-    /* Exemple : url("https://monrepo.github.io/assets/ciel.jpg")       */
     background-size: cover;
     background-attachment: fixed;
     background-position: center top;
     background-repeat: no-repeat;
   }
 
-  /* ===== FRISE GIF — structure commune ===== */
-  /* =====================================================================
-     3 frises distinctes :
-       gifTop    → remplace GIF_FRISE_A dans le JS  (ex: colombes)
-       gifMiddle → remplace GIF_FRISE_B dans le JS  (ex: anges / fleurs)
-       gifBot    → remplace GIF_FRISE_C dans le JS  (ex: nuages / rayons)
-     Chaque frise a sa propre hauteur et fallback visuel différent.
-     ===================================================================== */
   .gif-border {
     width: 100%; display: flex; flex-wrap: nowrap;
     overflow: hidden; line-height: 0; font-size: 0;
@@ -41,12 +26,10 @@
   .gif-border img {
     display: block; flex-shrink: 0; width: auto;
   }
-  /* Hauteurs distinctes selon la frise */
   #gifTop    img { height: 60px; }
   #gifMiddle img { height: 50px; }
   #gifBot    img { height: 60px; }
 
-  /* ===== BANDEAU DÉFILANT — gauche vers droite ===== */
   .marquee-wrap {
     border-top: 3px double #FFD700;
     border-bottom: 3px double #cc8800;
@@ -68,7 +51,6 @@
     to   { transform: translateX(100vw); }
   }
 
-  /* ===== HEADER ===== */
   .header {
     background: linear-gradient(180deg,
       rgba(255,255,255,0.55) 0%,
@@ -133,12 +115,13 @@
     background: rgba(255,255,255,0.18);
   }
   .gallery {
-    padding: 16px 0; overflow: hidden;
+    padding: 32px 0 16px; overflow: hidden;
   }
   .scroll-inner {
     display: inline-flex; gap: 16px;
     white-space: nowrap;
     animation: scrollCardsReverse 70s linear infinite;
+    align-items: flex-end;
   }
   .scroll-inner:hover { animation-play-state: paused; }
   @keyframes scrollCardsReverse {
@@ -146,15 +129,48 @@
     to   { transform: translateX(0%); }
   }
 
+  /* ===== CARD WRAPPER (includes halo space above) ===== */
+  .card-outer {
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+    flex-shrink: 0;
+    padding-top: 42px;
+    align-items: stretch;
+  }
+
+  /* ===== AURÉOLE CANVAS ===== */
+  .aureole-canvas {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 52px;
+    pointer-events: none;
+    z-index: 10;
+    animation: haloPulse 3.5s ease-in-out infinite alternate;
+  }
+  @keyframes haloPulse {
+    from { opacity: 0.72; }
+    to   { opacity: 1; }
+  }
+  .card-outer:nth-child(2n)  .aureole-canvas { animation-delay: -0.8s; }
+  .card-outer:nth-child(3n)  .aureole-canvas { animation-delay: -1.7s; }
+  .card-outer:nth-child(4n)  .aureole-canvas { animation-delay: -2.5s; }
+  .card-outer:nth-child(5n)  .aureole-canvas { animation-delay: -0.4s; }
+
   /* ===== PORTRAIT CARD ===== */
   .portrait-card {
-    display: inline-block; width: 135px; vertical-align: top;
+    display: flex;
+    flex-direction: column;
+    width: 135px;
     background: linear-gradient(180deg, #fffef5 0%, #fff8d0 100%);
     border-left:   3px outset #FFD700;
     border-right:  3px outset #cc9900;
     border-bottom: 3px outset #aa7700;
     border-top: none;
-    cursor: pointer; white-space: normal; flex-shrink: 0;
+    cursor: pointer; white-space: normal;
     font-family: "Times New Roman", serif;
     box-shadow: 3px 3px 8px rgba(0,0,0,0.25), inset 0 0 6px #FFD70011;
   }
@@ -164,10 +180,6 @@
     border-left-style: inset; border-right-style: inset; border-bottom-style: inset;
   }
 
-  /* =====================================================================
-     PLACEHOLDER PORTRAIT
-     Remplis img:"URL" dans le tableau ELUS pour chaque personne.
-     ===================================================================== */
   .card-photo-area {
     background: linear-gradient(180deg, #e8f0ff 0%, #c8daf5 100%);
     width: 100%; height: 175px;
@@ -206,6 +218,9 @@
     padding: 5px 6px 7px;
     background: linear-gradient(180deg, #fffef5 0%, #fff8cc 100%);
     border-top: 1px solid #FFD70044;
+    height: 80px;
+    overflow: hidden;
+    flex-shrink: 0;
   }
   .card-nom {
     font-size: 10.5px; font-weight: bold; text-transform: uppercase;
@@ -347,13 +362,8 @@
 </head>
 <body>
 
-<!-- =====================================================================
-     FRISE GIF A — HAUT DE PAGE
-     Remplace GIF_FRISE_A dans le JS par ton URL (ex: colombes, anges…)
-     ===================================================================== -->
 <div class="gif-border" id="gifTop"></div>
 
-<!-- BANDEAU DÉFILANT -->
 <div class="marquee-wrap">
   <div class="marquee-strip">
     <span class="marquee-inner">
@@ -362,13 +372,8 @@
   </div>
 </div>
 
-<!-- =====================================================================
-     FRISE GIF B — ENTRE BANDEAU ET TITRE
-     Remplace GIF_FRISE_B dans le JS (ex: fleurs de lotus, rayons, roses…)
-     ===================================================================== -->
 <div class="gif-border" id="gifMiddle"></div>
 
-<!-- HEADER -->
 <div class="header">
   <hr class="gazette-double">
   <hr class="gazette-ornament">
@@ -380,7 +385,6 @@
   <hr class="gazette-double">
 </div>
 
-<!-- GALERIE PORTRAIT -->
 <div class="gallery-wrap">
   <div class="gallery-inner-border">
     <div class="gallery">
@@ -389,13 +393,8 @@
   </div>
 </div>
 
-<!-- =====================================================================
-     FRISE GIF C — BAS DE PAGE
-     Remplace GIF_FRISE_C dans le JS (ex: nuages, rayons solaires, lotus…)
-     ===================================================================== -->
 <div class="gif-border" id="gifBot"></div>
 
-<!-- FOOTER -->
 <div class="footer-wrap">
   <div class="footer">
     <hr class="gazette-double">
@@ -405,7 +404,6 @@
   </div>
 </div>
 
-<!-- POPUP -->
 <div class="popup-overlay" id="popup">
   <div class="popup-window">
     <div class="popup-titlebar">
@@ -427,28 +425,10 @@
 
 <script type="text/javascript">
 
-/* =========================================================================
-   FRISE A — HAUT DE PAGE
-   Remplace __GIF_FRISE_A__ par l'URL de ton GIF (colombes, anges…)
-   Hauteur affichée : 60px
-   ========================================================================= */
 var GIF_FRISE_A = "https://github.com/scienceetpoesie/internet/blob/main/assets/gif/turning%20star.gif?raw=true";
-
-/* =========================================================================
-   FRISE B — ENTRE BANDEAU ET TITRE
-   Remplace __GIF_FRISE_B__ par l'URL de ton GIF (fleurs, lotus, rayons…)
-   Hauteur affichée : 50px
-   ========================================================================= */
 var GIF_FRISE_B = "https://github.com/scienceetpoesie/internet/blob/main/assets/gif/greengem.gif?raw=true";
-
-/* =========================================================================
-   FRISE C — BAS DE PAGE
-   Remplace __GIF_FRISE_C__ par l'URL de ton GIF (nuages, soleil, lotus…)
-   Hauteur affichée : 60px
-   ========================================================================= */
 var GIF_FRISE_C = "https://github.com/scienceetpoesie/internet/blob/main/assets/gif/turning%20star.gif?raw=true";
 
-/* Fallbacks distincts par frise */
 var FALLBACKS = {
   gifTop:    { h:"60px", bg:"rgba(255,248,180,0.25)", msg:"[ GIF FRISE A — colombes / anges ]",    col:"#cc8800" },
   gifMiddle: { h:"50px", bg:"rgba(220,240,255,0.30)", msg:"[ GIF FRISE B — fleurs / rayons ]",     col:"#6688aa" },
@@ -482,27 +462,90 @@ buildGif('gifBot',    GIF_FRISE_C, 60);
 
 
 /* =========================================================================
-   PORTRAITS — renseigne img:"URL" pour chaque élu·e
+   AURÉOLE CANVAS — ellipse creuse avec flou gaussien
+   ========================================================================= */
+var _haloCounter = 0;
+function makeHaloCanvas() {
+  var id = 'halo-' + (_haloCounter++);
+  var canvas = document.createElement('canvas');
+  canvas.className = 'aureole-canvas';
+  canvas.width = 320;
+  canvas.height = 104;
+  canvas.style.width = '140px';
+  canvas.style.height = '52px';
+  canvas.id = id;
+
+  // Draw after layout
+  setTimeout(function() {
+    var ctx = canvas.getContext('2d');
+    var w = 320, h = 104;
+    var cx = w / 2, cy = h / 2;
+    var rx = 130, ry = 22;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Multiple passes for soft gaussian glow — wide outer layers first
+    var layers = [
+      { blur: 18, width: 22, color: 'rgba(160,210,255,0.18)' },
+      { blur: 12, width: 14, color: 'rgba(200,230,255,0.28)' },
+      { blur: 8,  width: 9,  color: 'rgba(220,240,255,0.45)' },
+      { blur: 5,  width: 5,  color: 'rgba(240,248,255,0.65)' },
+      { blur: 3,  width: 3,  color: 'rgba(255,255,255,0.80)' },
+      { blur: 1,  width: 1.5,color: 'rgba(255,255,255,0.95)' },
+    ];
+
+    for (var i = 0; i < layers.length; i++) {
+      var l = layers[i];
+      ctx.save();
+      ctx.shadowBlur = l.blur * 2;
+      ctx.shadowColor = l.color;
+      ctx.strokeStyle = l.color;
+      ctx.lineWidth = l.width;
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Thin golden thread on top
+    ctx.save();
+    ctx.shadowBlur = 6;
+    ctx.shadowColor = 'rgba(255,230,80,0.6)';
+    ctx.strokeStyle = 'rgba(255,228,100,0.55)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+
+  }, 0);
+
+  return canvas;
+}
+
+
+/* =========================================================================
+   PORTRAITS
    ========================================================================= */
 var ELUS = [
-  /* CEL-001 */ { nom:"Andre Williams",             date:"\u2746 1936",          merite:"funky proto-punk, voix de l'enfer au service du bien, indestructible",                                                    recompense:"DJ du Paradis, sono parfaite, \xe9ternit\xe9",                              id:"CEL-001", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/andre%20williams.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-020 */ { nom:"Bernadette Lafont",          date:"\u2746 1938 - 2013",   merite:"la vamp villageoise, surnommé la \&laquo; Bardot Nègre \&raquo; par Hervé Guibert", recompense:"",                                id:"CEL-019", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Bernadette-Lafont.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-003 */ { nom:"Lucien de Samosate",         date:"\u2746 ~125 ap. J.C.", merite:"inventeur de l'ironie, satiriste des dieux, proto-fumiste avant la lettre",                                               recompense:"Dialogue \xe9ternel avec les dieux qu'il a moqu\xe9s",                      id:"CEL-003", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Capture%20d'%C3%A9cran%202026-03-22%20071530.png?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-004 */ { nom:"Yorgos Batis",               date:"\u2746 1885",          merite:"reb\xe9tiko des bas-fonds, \xe2me du Pir\xe9e, musique des proscrits",                                                    recompense:"Bouzouki accord\xe9 \xe0 jamais, taverne c\xe9leste",                        id:"CEL-004", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/%CE%93%CE%B9%CF%8E%CF%81%CE%B3%CE%BF%CF%82%20%CE%9C%CF%80%CE%AC%CF%84%CE%B7%CF%82.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-006 */ { nom:"Athanasius Kircher",         date:"\u2746 1602",          merite:"encyclop\xe9diste baroque, d\xe9chiffreur de l'ind\xe9chiffrable, machine \xe0 merveilles",                               recompense:"Mus\xe9e des curiosit\xe9s universelles, acc\xe8s illimit\xe9",               id:"CEL-006", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Athanasius_Kircher_(cropped).jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-011 */ { nom:"Divine",                     date:"\u2746 1945",          merite:"drag pionnière, icône du cinéma trash sublimé, a mangé des excréments de chien pour l'art et n'a pas cillé",              recompense:"Robe cosmique taille unique, tapis c\xe9leste permanent",                    id:"CEL-011", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/2544.png?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-007 */ { nom:"Hans le Malin",              date:"\u2746 ~1480",         merite:"trickster m\xe9di\xe9val, farceur philosophique, premier situationniste de l'histoire",                                   recompense:"Cour des miracles c\xe9leste, licence perp\xe9tuelle",                       id:"CEL-007", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Hans%201910.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-008 */ { nom:"Tony Clifton",               date:"\u2746 1945",          merite:"lounge singer incr\xe9\xe9, alter ego plus r\xe9el que son cr\xe9ateur, insulte au principe de r\xe9alit\xe9",            recompense:"Sc\xe8ne permanente, public captif, \xe9ternit\xe9",                         id:"CEL-008", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/tonye%20clifton.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-010 */ { nom:"Valerie Solanas",            date:"\u2746 1936",          merite:"SCUM Manifesto, pamphlet-simulacre, ironie totale mal comprise par ses propres admirateurs",                               recompense:"Salle de r\xe9daction sans r\xe9daction, \xe9ternit\xe9",                    id:"CEL-010", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/valerie-solanas.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-002 */ { nom:"Jean-Pierre Petit",          date:"\u2746 1937",          merite:"astrophysicien h\xe9r\xe9tique, bandes dessin\xe9es cosmologiques pour les enfants et les sages",                          recompense:"T\xe9lescope infini, 1er rang",                                              id:"CEL-002", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/MV5BYTFlMjZmYzQtZjVmMS00OTI5LWE5ZDEtMDJiODdkMTQ0Y2E3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-012 */ { nom:"Claude Cahun",               date:"\u2746 1894",          merite:"auto-portrait comme arme, identit\xe9 liquide avant le concept, r\xe9sistance surr\xe9aliste",                            recompense:"Miroir infini, chambre noire \xe9ternelle",                                  id:"CEL-012", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/grandFormat_Cahun_Moore_visuel_1.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-013 */ { nom:"E. von Freytag-Loringhoven", date:"\u2746 1874",          merite:"dada\xefste avant Dada, urinoir pr\xe9c\xe9d\xe9 par elle, corps comme ready-made vivant",                               recompense:"Atelier cosmique, mat\xe9riaux illimit\xe9s",                                id:"CEL-013", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Barrone%20Elsa%20von%20Freytag-Loringhoven.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-009 */ { nom:"Norm MacDonald",             date:"\u2746 1959",          merite:"comique de l'absurde pur, anti-punchline \xe9rig\xe9e en syst\xe8me, seul \xe0 avoir vaincu le rire par le rire",         recompense:"Talk-show infini, invit\xe9s illimit\xe9s",                                 id:"CEL-009", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/rs-181627-141035522%20(1).png?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-005 */ { nom:"Francis Bebey",              date:"\u2746 1929",          merite:"polymathe camerounais, romancier, guitariste, ethnomusicologue, g\xe9nie discret",                                         recompense:"Orchestre cosmique, biblioth\xe8que infinie",                                id:"CEL-005", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/7996534a-c4e3-4439-af90-08f34239b94f_1006x782.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-016 */ { nom:"Herrade de Landsberg",       date:"\u2746 ~1130",         merite:"Hortus Deliciarum, encyclop\xe9die enluminee du monde, abbesse visionnaire du XIIe si\xe8cle",                             recompense:"Scriptorium \xe9ternel, encre qui ne s\xe8che jamais",                       id:"CEL-016", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Herrade%20de%20Landsberg.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-017 */ { nom:"Korla Pandit",               date:"\u2746 1921",          merite:"organiste hypnotique, identit\xe9 invent\xe9e et maintenue 40 ans, exotisme comme performance pure",                       recompense:"Orgue cosmique, audience perp\xe9tuellement envo\xfbt\xe9e",                id:"CEL-017", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/korla%20pandit.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-018 */ { nom:"Patrick Dewaere",            date:"\u2746 1947",          merite:"acteur br\xfbl\xe9 vif, incarnation totale, a jou\xe9 sa propre mort dans chaque r\xf4le",                                recompense:"R\xf4le unique et infini dans notre coeur, sans fin de tournage",            id:"CEL-018", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/646388070_25978197881791388_9126798458497327349_n.jpg?raw=true" /* \u2190 PORTRAIT */ },
-  /* CEL-019 */ { nom:"Marvin Heemeyer",            date:"\u2746 1951",          merite:"soudeur du Colorado, a blind\xe9 seul son bulldozer pendant 18 mois et d\xe9moli la ville qui l'avait \xe9cras\xe9",       recompense:"Garage infini, acier illimit\xe9, personne pour l'emmerder",                 id:"CEL-019", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/marvin-with_rounds.jpg?raw=true" /* \u2190 PORTRAIT */ }
+  /* CEL-001 */ { nom:"Andre Williams",             date:"\u2746 1936",          merite:"funky proto-punk, voix de l'enfer au service du bien, indestructible",                                                    recompense:"DJ du Paradis, sono parfaite, \xe9ternit\xe9",                              id:"CEL-001", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/andre%20williams.jpg?raw=true" },
+  /* CEL-020 */ { nom:"Bernadette Lafont",          date:"\u2746 1938 - 2013",   merite:"la vamp villageoise, surnommé la « Bardot Nègre » par Hervé Guibert",                                                    recompense:"",                                                                          id:"CEL-019", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Bernadette-Lafont.jpg?raw=true" },
+  /* CEL-003 */ { nom:"Lucien de Samosate",         date:"\u2746 ~125 ap. J.C.", merite:"inventeur de l'ironie, satiriste des dieux, proto-fumiste avant la lettre",                                               recompense:"Dialogue \xe9ternel avec les dieux qu'il a moqu\xe9s",                      id:"CEL-003", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Capture%20d'%C3%A9cran%202026-03-22%20071530.png?raw=true" },
+  /* CEL-004 */ { nom:"Yorgos Batis",               date:"\u2746 1885",          merite:"reb\xe9tiko des bas-fonds, \xe2me du Pir\xe9e, musique des proscrits",                                                    recompense:"Bouzouki accord\xe9 \xe0 jamais, taverne c\xe9leste",                        id:"CEL-004", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/%CE%93%CE%B9%CF%8E%CF%81%CE%B3%CE%BF%CF%82%20%CE%9C%CF%80%CE%AC%CF%84%CE%B7%CF%82.jpg?raw=true" },
+  /* CEL-006 */ { nom:"Athanasius Kircher",         date:"\u2746 1602",          merite:"encyclop\xe9diste baroque, d\xe9chiffreur de l'ind\xe9chiffrable, machine \xe0 merveilles",                               recompense:"Mus\xe9e des curiosit\xe9s universelles, acc\xe8s illimit\xe9",               id:"CEL-006", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Athanasius_Kircher_(cropped).jpg?raw=true" },
+  /* CEL-011 */ { nom:"Divine",                     date:"\u2746 1945",          merite:"drag pionnière, icône du cinéma trash sublimé, a mangé des excréments de chien pour l'art et n'a pas cillé",              recompense:"Robe cosmique taille unique, tapis c\xe9leste permanent",                    id:"CEL-011", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/2544.png?raw=true" },
+  /* CEL-007 */ { nom:"Hans le Malin",              date:"\u2746 ~1480",         merite:"trickster m\xe9di\xe9val, farceur philosophique, premier situationniste de l'histoire",                                   recompense:"Cour des miracles c\xe9leste, licence perp\xe9tuelle",                       id:"CEL-007", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Hans%201910.jpg?raw=true" },
+  /* CEL-008 */ { nom:"Tony Clifton",               date:"\u2746 1945",          merite:"lounge singer incr\xe9\xe9, alter ego plus r\xe9el que son cr\xe9ateur, insulte au principe de r\xe9alit\xe9",            recompense:"Sc\xe8ne permanente, public captif, \xe9ternit\xe9",                         id:"CEL-008", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/tonye%20clifton.jpg?raw=true" },
+  /* CEL-010 */ { nom:"Valerie Solanas",            date:"\u2746 1936",          merite:"SCUM Manifesto, pamphlet-simulacre, ironie totale mal comprise par ses propres admirateurs",                               recompense:"Salle de r\xe9daction sans r\xe9daction, \xe9ternit\xe9",                    id:"CEL-010", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/valerie-solanas.jpg?raw=true" },
+  /* CEL-002 */ { nom:"Jean-Pierre Petit",          date:"\u2746 1937",          merite:"astrophysicien h\xe9r\xe9tique, bandes dessin\xe9es cosmologiques pour les enfants et les sages",                          recompense:"T\xe9lescope infini, 1er rang",                                              id:"CEL-002", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/MV5BYTFlMjZmYzQtZjVmMS00OTI5LWE5ZDEtMDJiODdkMTQ0Y2E3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg?raw=true" },
+  /* CEL-012 */ { nom:"Claude Cahun",               date:"\u2746 1894",          merite:"auto-portrait comme arme, identit\xe9 liquide avant le concept, r\xe9sistance surr\xe9aliste",                            recompense:"Miroir infini, chambre noire \xe9ternelle",                                  id:"CEL-012", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/grandFormat_Cahun_Moore_visuel_1.jpg?raw=true" },
+  /* CEL-013 */ { nom:"E. von Freytag-Loringhoven", date:"\u2746 1874",          merite:"dada\xefste avant Dada, urinoir pr\xe9c\xe9d\xe9 par elle, corps comme ready-made vivant",                               recompense:"Atelier cosmique, mat\xe9riaux illimit\xe9s",                                id:"CEL-013", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Barrone%20Elsa%20von%20Freytag-Loringhoven.jpg?raw=true" },
+  /* CEL-009 */ { nom:"Norm MacDonald",             date:"\u2746 1959",          merite:"comique de l'absurde pur, anti-punchline \xe9rig\xe9e en syst\xe8me, seul \xe0 avoir vaincu le rire par le rire",         recompense:"Talk-show infini, invit\xe9s illimit\xe9s",                                 id:"CEL-009", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/rs-181627-141035522%20(1).png?raw=true" },
+  /* CEL-005 */ { nom:"Francis Bebey",              date:"\u2746 1929",          merite:"polymathe camerounais, romancier, guitariste, ethnomusicologue, g\xe9nie discret",                                         recompense:"Orchestre cosmique, biblioth\xe8que infinie",                                id:"CEL-005", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/7996534a-c4e3-4439-af90-08f34239b94f_1006x782.jpg?raw=true" },
+  /* CEL-016 */ { nom:"Herrade de Landsberg",       date:"\u2746 ~1130",         merite:"Hortus Deliciarum, encyclop\xe9die enluminee du monde, abbesse visionnaire du XIIe si\xe8cle",                             recompense:"Scriptorium \xe9ternel, encre qui ne s\xe8che jamais",                       id:"CEL-016", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Herrade%20de%20Landsberg.jpg?raw=true" },
+  /* CEL-017 */ { nom:"Korla Pandit",               date:"\u2746 1921",          merite:"organiste hypnotique, identit\xe9 invent\xe9e et maintenue 40 ans, exotisme comme performance pure",                       recompense:"Orgue cosmique, audience perp\xe9tuellement envo\xfbt\xe9e",                id:"CEL-017", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/korla%20pandit.jpg?raw=true" },
+  /* CEL-018 */ { nom:"Patrick Dewaere",            date:"\u2746 1947",          merite:"acteur br\xfbl\xe9 vif, incarnation totale, a jou\xe9 sa propre mort dans chaque r\xf4le",                                recompense:"R\xf4le unique et infini dans notre coeur, sans fin de tournage",            id:"CEL-018", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/646388070_25978197881791388_9126798458497327349_n.jpg?raw=true" },
+  /* CEL-019 */ { nom:"Marvin Heemeyer",            date:"\u2746 1951",          merite:"soudeur du Colorado, a blind\xe9 seul son bulldozer pendant 18 mois et d\xe9moli la ville qui l'avait \xe9cras\xe9",       recompense:"Garage infini, acier illimit\xe9, personne pour l'emmerder",                 id:"CEL-019", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/marvin-with_rounds.jpg?raw=true" }
 ];
 
 
@@ -517,6 +560,14 @@ function photoHTML(img) {
 }
 
 function makeCard(d) {
+  // Outer wrapper: holds the halo above and the card below
+  var outer = document.createElement('div');
+  outer.className = 'card-outer';
+
+  // Halo (canvas)
+  outer.appendChild(makeHaloCanvas());
+
+  // Card
   var div = document.createElement('div');
   div.className = 'portrait-card';
   div.innerHTML =
@@ -527,7 +578,9 @@ function makeCard(d) {
       '<div class="card-merite">' + d.merite + '</div>' +
     '</div>';
   div.onclick = function() { openPopup(d); };
-  return div;
+
+  outer.appendChild(div);
+  return outer;
 }
 
 var strip = document.getElementById('stripInner');
