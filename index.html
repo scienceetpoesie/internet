@@ -17,54 +17,34 @@
 body { background-color: #808080; margin: 0; padding: 0; font-family: "Times New Roman", Times, serif; scrollbar-color: #C0C0C0 #C0C0C0; scrollbar-width: auto; }
 #page-wrapper { width: 900px; margin: 0 auto; background-color: #C0C0C0; border-left: 2px solid #444; border-right: 2px solid #444; }
 
-/* ===================== MARQUEE ===================== */
 .marquee-band { background-color: #000080; color: #FFFF00; font-family: "Courier New", Courier, monospace; font-size: 13px; font-weight: bold; padding: 4px 0; overflow: hidden; white-space: nowrap; }
 .marquee-inner { display: inline-block; animation: marquee 22s linear infinite; }
 @keyframes marquee { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
 
-/* ===================== HEADER ===================== */
 table.header-table { width: 100%; border-collapse: collapse; }
 td.header-left { background-color: #FF0000; width: 145px; padding: 14px 10px; vertical-align: middle; border-right: 4px solid #800000; text-align: center; }
 td.header-center { background-color: #000080; text-align: center; padding: 18px 20px; vertical-align: middle; position: relative; overflow: hidden; }
 td.header-right { background-color: #008000; width: 60px; padding: 14px 6px; vertical-align: middle; border-left: 4px solid #004000; text-align: center; }
 
-/* ===================== TITRE ===================== */
-h1.site-title {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 58px; font-weight: bold; color: #FFFF00;
-  margin: 0; padding: 0; letter-spacing: 4px;
-  text-decoration: underline;
-  text-shadow: 3px 3px #000000;
-  position: relative;
-  animation: titlePulse 12s ease-in-out infinite;
-}
-@keyframes titlePulse {
-  0%   { text-shadow: 3px 3px #000000; }
-  10%  { text-shadow: 3px 3px #000000, 0 0 18px #FFFF00, 0 0 32px #FF8800; }
-  20%  { text-shadow: 3px 3px #000000; }
-  100% { text-shadow: 3px 3px #000000; }
-}
-
+h1.site-title { font-family: "Times New Roman", Times, serif; font-size: 58px; font-weight: bold; color: #FFFF00; margin: 0; padding: 0; letter-spacing: 4px; text-decoration: underline; text-shadow: 3px 3px #000000; position: relative; animation: titlePulse 12s ease-in-out infinite; }
+@keyframes titlePulse { 0%{text-shadow:3px 3px #000000;}10%{text-shadow:3px 3px #000000,0 0 18px #FFFF00,0 0 32px #FF8800;}20%{text-shadow:3px 3px #000000;}100%{text-shadow:3px 3px #000000;} }
 td.header-center::after { display: none; }
-
 .site-subtitle { font-family: "Courier New", Courier, monospace; font-size: 13px; color: #00FFFF; margin-top: 6px; letter-spacing: 2px; position: relative; z-index: 3; }
 .header-left-text { color: #FFFFFF; font-family: "Courier New", Courier, monospace; font-size: 12px; font-weight: bold; line-height: 1.8; }
 .visitor-box { background-color: #000000; color: #00FF00; font-family: "Courier New", Courier, monospace; font-size: 20px; font-weight: bold; border: 3px inset #888888; padding: 8px 10px 10px 10px; letter-spacing: 3px; display: inline-block; margin-top: 6px; margin-bottom: 8px; }
 .header-right-text { color: #FFFFFF; font-family: "Times New Roman", serif; font-size: 12px; font-style: italic; line-height: 1.7; }
 
-/* ===================== NAVBAR ===================== */
 table.navbar { width: 100%; border-collapse: collapse; border-top: 4px solid #800000; border-bottom: 4px solid #800000; }
 td.nav-cell { text-align: center; padding: 0; }
 td.nav-cell a { display: block; padding: 8px 4px; font-family: "Arial Black", Arial, sans-serif; font-size: 13px; font-weight: 900; text-decoration: none; letter-spacing: 0.5px; border-right: 3px outset #999999; }
 td.nav-cell:last-child a { border-right: none; }
-td.n1 { background-color: #FF0000; } td.n1 a { color: #FFFFFF; } td.n1 a:hover { background-color: #CC0000; }
-td.n2 { background-color: #FF8000; } td.n2 a { color: #000000; } td.n2 a:hover { background-color: #CC6600; }
-td.n3 { background-color: #FFFF00; } td.n3 a { color: #000000; } td.n3 a:hover { background-color: #CCCC00; }
-td.n4 { background-color: #008000; } td.n4 a { color: #FFFFFF; } td.n4 a:hover { background-color: #006600; }
-td.n5 { background-color: #000080; } td.n5 a { color: #FFFFFF; } td.n5 a:hover { background-color: #000055; }
-td.n6 { background-color: #800080; } td.n6 a { color: #FFFFFF; } td.n6 a:hover { background-color: #600060; }
+td.n1{background-color:#FF0000;}td.n1 a{color:#FFFFFF;}td.n1 a:hover{background-color:#CC0000;}
+td.n2{background-color:#FF8000;}td.n2 a{color:#000000;}td.n2 a:hover{background-color:#CC6600;}
+td.n3{background-color:#FFFF00;}td.n3 a{color:#000000;}td.n3 a:hover{background-color:#CCCC00;}
+td.n4{background-color:#008000;}td.n4 a{color:#FFFFFF;}td.n4 a:hover{background-color:#006600;}
+td.n5{background-color:#000080;}td.n5 a{color:#FFFFFF;}td.n5 a:hover{background-color:#000055;}
+td.n6{background-color:#800080;}td.n6 a{color:#FFFFFF;}td.n6 a:hover{background-color:#600060;}
 
-/* ===================== LAYOUT ===================== */
 table.main-layout { width: 100%; border-collapse: collapse; }
 td.sidebar-left { background-color: #FFFF00; width: 75px; vertical-align: top; padding: 0; border-right: 4px solid #CCCC00; }
 .sidebar-section { border-bottom: 3px solid #CCCC00; padding: 6px 5px; }
@@ -75,167 +55,43 @@ td.sidebar-left { background-color: #FFFF00; width: 75px; vertical-align: top; p
 .sidebar-section ul li a:hover { text-decoration: underline; color: #FF0000; }
 .sidebar-section p { font-size: 9px; color: #000000; line-height: 1.5; font-family: "Courier New", monospace; }
 
-/* ===================== GIF ZONE — SIDEBAR GAUCHE ===================== */
-/* MODIFICATION 1 : gif agrandi — prend toute la largeur du bloc, pas de cadre bleu autour */
-.gif-zone-sidebar-exp {
-  border-bottom: 3px solid #CCCC00;
-  padding: 0;
-  background: #000080;
-  text-align: center;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.gif-zone-sidebar-exp img {
-  width: 75px;   /* pleine largeur de la sidebar */
-  height: auto;
-  image-rendering: pixelated;
-  display: block;
-  margin: 0;
-}
-
-/* ancienne gif-zone conservée pour rétro-compat si besoin */
-.gif-zone-left {
-  border-bottom: 3px solid #CCCC00;
-  padding: 4px 3px;
-  background: #000000;
-  text-align: center;
-  overflow: hidden;
-}
-.gif-zone-left img {
-  width: 44px;
-  image-rendering: pixelated;
-  display: block;
-  margin: 0 auto 2px auto;
-}
-.gif-placeholder-canvas {
-  width: 44px; height: 44px;
-  display: block;
-}
-.gif-slot-label {
-  font-family: "Courier New", monospace;
-  font-size: 6px;
-  color: #00FF00;
-  display: block;
-  text-align: center;
-  letter-spacing: 1px;
-  margin-top: 1px;
-}
+.gif-zone-sidebar-exp { border-bottom: 3px solid #CCCC00; padding: 0; background: #000080; text-align: center; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.gif-zone-sidebar-exp img { width: 75px; height: auto; image-rendering: pixelated; display: block; margin: 0; }
 
 .blink { animation: blinker 0.9s step-start infinite; }
 @keyframes blinker { 50% { opacity: 0; } }
 
-/* ===================== CENTER CONTENT ===================== */
 td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; }
 .welcome-bar { background-color: #FF0000; color: #FFFFFF; font-family: "Arial Black", Arial, sans-serif; font-size: 16px; font-weight: 900; padding: 8px 16px; letter-spacing: 2px; border-bottom: 4px outset #CC0000; }
 .welcome-body { padding: 14px 16px; background-color: #FFFFFF; border-bottom: 3px solid #C0C0C0; }
 .welcome-body p { font-family: "Times New Roman", serif; font-size: 14px; color: #000000; line-height: 1.7; margin: 0; }
 
-/* ===================== GIF BANNER ===================== */
-.gif-banner {
-  background: #686868;
-  border-top: 3px solid #444444;
-  border-bottom: 3px solid #444444;
-  padding: 6px 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  overflow: hidden;
-  position: relative;
-}
-.gif-banner-slot {
-  flex-shrink: 0;
-  width: 60px; height: 60px;
-  background: #888;
-  border: 2px inset #999;
-  overflow: hidden;
-  position: relative;
-  display: flex; align-items: center; justify-content: center;
-}
-.gif-banner-slot img {
-  width: 60px;
-  image-rendering: pixelated;
-}
-.gif-banner-text {
-  flex: 1;
-  font-family: "Courier New", monospace;
-  font-size: 11px;
-  color: #FFFFD0;
-  line-height: 1.6;
-  text-align: center;
-}
-.glitch-text {
-  position: relative;
-  display: inline-block;
-}
-.glitch-text::before {
-  content: attr(data-text);
-  position: absolute; left: 0; top: 0;
-  color: #FF4444;
-  animation: textGlitch 4s steps(1) infinite;
-  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-}
-@keyframes textGlitch {
-  0%,90%  { opacity:0; transform:none; }
-  91%     { opacity:1; transform:translate(-2px,1px); }
-  92%     { opacity:0; }
-  94%     { opacity:1; transform:translate(2px,0); }
-  95%     { opacity:0; }
-}
+.gif-banner { background: #686868; border-top: 3px solid #444444; border-bottom: 3px solid #444444; padding: 6px 10px; display: flex; align-items: center; gap: 8px; overflow: hidden; position: relative; }
+.gif-banner-slot { flex-shrink: 0; width: 60px; height: 60px; background: #888; border: 2px inset #999; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; }
+.gif-banner-slot img { width: 60px; image-rendering: pixelated; }
+.gif-banner-text { flex: 1; font-family: "Courier New", monospace; font-size: 11px; color: #FFFFD0; line-height: 1.6; text-align: center; }
+.glitch-text { position: relative; display: inline-block; }
+.glitch-text::before { content: attr(data-text); position: absolute; left: 0; top: 0; color: #FF4444; animation: textGlitch 4s steps(1) infinite; clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%); }
+@keyframes textGlitch { 0%,90%{opacity:0;transform:none;}91%{opacity:1;transform:translate(-2px,1px);}92%{opacity:0;}94%{opacity:1;transform:translate(2px,0);}95%{opacity:0;} }
 
-/* ===================== CARDS ===================== */
 table.cards-table { width: 100%; border-collapse: collapse; }
 td.card { vertical-align: top; padding: 0; border: 3px outset #888888; width: 50%; }
 .card-header { padding: 7px 10px; font-family: "Arial Black", Arial, sans-serif; font-size: 14px; font-weight: 900; letter-spacing: 1px; color: #FFFFFF; border-bottom: 3px inset #555555; }
 .card-body { padding: 10px 12px; background-color: #F0F0F0; font-family: "Times New Roman", serif; font-size: 13px; color: #000000; line-height: 1.6; min-height: 80px; }
 .card-body a { display: inline-block; margin-top: 8px; background-color: #000080; color: #FFFFFF; font-family: "Arial", sans-serif; font-size: 11px; font-weight: bold; text-decoration: none; padding: 3px 10px; border: 2px outset #8888FF; transition: background-color 0.1s; }
 .card-body a:hover { background-color: #0000CC; border-style: inset; }
-.c-crimson .card-header { background-color: #990000; } .c-crimson .card-body { background-color: #FFF5F5; }
-.c-purple .card-header { background-color: #660066; } .c-purple .card-body { background-color: #FFF0FF; }
+.c-crimson .card-header{background-color:#990000;}.c-crimson .card-body{background-color:#FFF5F5;}
+.c-purple .card-header{background-color:#660066;}.c-purple .card-body{background-color:#FFF0FF;}
+.c-gold .card-header{background-color:#886600;}.c-gold .card-body{background-color:#FFFBE8;}
+.c-gold .card-body a:hover{background-color:#22FF22!important;border-color:#00CC00;border-style:inset;color:#003300;}
+.c-black .card-header{background-color:#111111;}.c-black .card-body{background-color:#1A1A1A;color:#CCCCCC;}
+.c-black .card-body a{border-color:#888800;}
+.c-black .card-body a:hover{background-color:#5C2800!important;border-color:#8B4000;border-style:inset;color:#FFBB66;}
+.c-sociogonie .card-header{background-color:#2B0050;}.c-sociogonie .card-body{background-color:#F5EEFF;}
+.sociogonie-with-gif{display:flex;align-items:flex-start;gap:10px;}
+.sociogonie-gif-slot{flex-shrink:0;width:52px;height:52px;background:#000;border:2px inset #5500AA;overflow:hidden;}
+.sociogonie-gif-slot canvas{width:52px;height:52px;display:block;}
 
-.c-gold .card-header { background-color: #886600; }
-.c-gold .card-body { background-color: #FFFBE8; }
-.c-gold .card-body a:hover {
-  background-color: #22FF22 !important;
-  border-color: #00CC00;
-  border-style: inset;
-  color: #003300;
-}
-
-.c-black .card-header { background-color: #111111; } .c-black .card-body { background-color: #1A1A1A; color: #CCCCCC; }
-.c-black .card-body a { border-color: #888800; }
-.c-black .card-body a:hover {
-  background-color: #5C2800 !important;
-  border-color: #8B4000;
-  border-style: inset;
-  color: #FFBB66;
-}
-
-.c-sociogonie .card-header { background-color: #2B0050; } .c-sociogonie .card-body { background-color: #F5EEFF; }
-
-.sociogonie-with-gif {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-.sociogonie-gif-slot {
-  flex-shrink: 0;
-  width: 52px; height: 52px;
-  background: #000;
-  border: 2px inset #5500AA;
-  overflow: hidden;
-}
-.sociogonie-gif-slot img {
-  width: 52px;
-  image-rendering: pixelated;
-}
-.sociogonie-gif-slot canvas {
-  width: 52px; height: 52px;
-  display: block;
-}
-
-/* ===================== SIDEBAR DROITE ===================== */
 td.sidebar-right { background-color: #FF8000; width: 90px; vertical-align: top; padding: 0; border-left: 4px solid #CC6600; }
 .rsidebar-section { border-bottom: 3px solid #CC6600; padding: 6px 6px; }
 .rsidebar-section h3 { font-family: "Arial Black", Arial, sans-serif; font-size: 10px; font-weight: 900; color: #000000; margin: 0 0 4px 0; text-transform: uppercase; border-bottom: 2px solid #000000; padding-bottom: 2px; }
@@ -244,61 +100,87 @@ td.sidebar-right { background-color: #FF8000; width: 90px; vertical-align: top; 
 .webring-box a { color: #000080; text-decoration: none; display: block; line-height: 2; }
 .webring-box a:hover { text-decoration: underline; }
 hr.rainbow { border: none; height: 6px; background: linear-gradient(to right, #6B0000, #7A3800, #5C5C00, #005500, #00004A, #380038, #6B0000); margin: 0; opacity: 0.65; }
-.footer-band { background-color: #000080; color: #FFFFFF; text-align: center; padding: 10px; font-family: "Courier New", Courier, monospace; font-size: 12px; border-top: 4px solid #000000; }
+.footer-band { background-color: #000080; color: #FFFFFF; text-align: center; padding: 10px; font-family: "Courier New", Courier, monospace; font-size: 12px; border-top: 4px solid #000000; position: relative; overflow: hidden; }
 .footer-band a { color: #FFFF00; }
 .footer-bottom { background-color: #000000; color: #C0C0C0; text-align: center; padding: 5px; font-family: "Courier New", monospace; font-size: 10px; }
+.footer-band::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"); opacity: 0.15; pointer-events: none; animation: noiseShift 0.5s steps(1) infinite; }
+@keyframes noiseShift{0%{transform:translate(0,0);}25%{transform:translate(-3px,2px);}50%{transform:translate(2px,-3px);}75%{transform:translate(-2px,-2px);}100%{transform:translate(3px,1px);}}
+
+/* ===================== NOTRE ENTENTE — HALO DIVIN ===================== */
+/*
+  Le wrapper a overflow:visible pour que le box-shadow de l'<a> déborde
+  hors des limites de la sidebar sans être clippé.
+  La sidebar elle-même a overflow visible sur ce point grâce au z-index.
+*/
+.ne-pub-wrapper {
+  padding: 8px;
+  background: #FF8000;
+  border-bottom: 3px solid #CC6600;
+  overflow: visible;
+  position: relative;
+  z-index: 10;
+}
+
+a.ne-pub-link {
+  display: block;
+  text-decoration: none;
+  background: #FFFFFF;
+  border: 4px solid #0000AA;
+  outline: 4px solid #FFFFFF;
+  text-align: center;
+  padding: 10px 6px 12px 6px;
+  position: relative;
+  /* transition douce à l'entrée */
+  transition: box-shadow 0.4s ease, outline-color 0.4s ease;
+  box-shadow: none;
+}
+
+/* halo au hover : rayonnement extérieur bleu-doré, pulsant */
+a.ne-pub-link:hover {
+  outline-color: #AAAAFF;
+  animation: haloBreath 2.6s ease-in-out infinite;
+}
+
+@keyframes haloBreath {
+  0% {
+    box-shadow:
+      0 0  5px  2px rgba(160, 140, 255, 0.50),
+      0 0 12px  6px rgba( 80,  80, 255, 0.40),
+      0 0 24px 12px rgba(255, 255, 160, 0.28),
+      0 0 44px 20px rgba(190, 170, 255, 0.16),
+      0 0 72px 32px rgba(255, 255, 210, 0.09);
+  }
+  50% {
+    box-shadow:
+      0 0  9px  4px rgba(200, 180, 255, 0.72),
+      0 0 20px 10px rgba(110, 110, 255, 0.55),
+      0 0 38px 18px rgba(255, 255, 190, 0.40),
+      0 0 64px 28px rgba(220, 200, 255, 0.25),
+      0 0 100px 46px rgba(255, 255, 230, 0.13);
+  }
+  100% {
+    box-shadow:
+      0 0  5px  2px rgba(160, 140, 255, 0.50),
+      0 0 12px  6px rgba( 80,  80, 255, 0.40),
+      0 0 24px 12px rgba(255, 255, 160, 0.28),
+      0 0 44px 20px rgba(190, 170, 255, 0.16),
+      0 0 72px 32px rgba(255, 255, 210, 0.09);
+  }
+}
+
 a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
 
 /* ===================== SPARKLES ===================== */
 .sparkle { position: fixed; pointer-events: none; z-index: 99997; animation: sparkleBurst 0.45s linear forwards; transform-origin: center; user-select: none; font-family: "Courier New", monospace; font-weight: bold; }
-@keyframes sparkleBurst { 0% { opacity: 1; transform: translate(-50%,-50%); } 100% { opacity: 0; transform: translate(var(--tx), var(--ty)); } }
+@keyframes sparkleBurst { 0%{opacity:1;transform:translate(-50%,-50%);}100%{opacity:0;transform:translate(var(--tx),var(--ty));} }
 
-/* ===================== EASTER EGG — KONAMI / GLITCH SCREEN ===================== */
-#glitch-overlay {
-  display: none;
-  position: fixed; inset: 0;
-  z-index: 999998;
-  background: #000;
-  overflow: hidden;
-  pointer-events: none;
-}
-#glitch-overlay.active { display: block; pointer-events: all; }
-#glitch-overlay canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-#glitch-msg {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: "Courier New", monospace;
-  font-size: 28px;
-  font-weight: bold;
-  color: #00FF00;
-  text-align: center;
-  text-shadow: 0 0 20px #00FF00, 0 0 40px #00FF00;
-  letter-spacing: 4px;
-  z-index: 2;
-  animation: msgFlicker 0.3s steps(1) infinite;
-}
-@keyframes msgFlicker { 50% { opacity: 0.7; color: #FFFF00; text-shadow: 0 0 20px #FFFF00; } }
+#glitch-overlay{display:none;position:fixed;inset:0;z-index:999998;background:#000;overflow:hidden;pointer-events:none;}
+#glitch-overlay.active{display:block;pointer-events:all;}
+#glitch-overlay canvas{position:absolute;inset:0;width:100%;height:100%;}
+#glitch-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:"Courier New",monospace;font-size:28px;font-weight:bold;color:#00FF00;text-align:center;text-shadow:0 0 20px #00FF00,0 0 40px #00FF00;letter-spacing:4px;z-index:2;animation:msgFlicker 0.3s steps(1) infinite;}
+@keyframes msgFlicker{50%{opacity:0.7;color:#FFFF00;text-shadow:0 0 20px #FFFF00;}}
 
-/* ===================== STATIC NOISE FOOTER ===================== */
-.footer-band { position: relative; overflow: hidden; }
-.footer-band::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-  opacity: 0.15;
-  pointer-events: none;
-  animation: noiseShift 0.5s steps(1) infinite;
-}
-@keyframes noiseShift {
-  0%  { transform: translate(0,0); }
-  25% { transform: translate(-3px,2px); }
-  50% { transform: translate(2px,-3px); }
-  75% { transform: translate(-2px,-2px); }
-  100%{ transform: translate(3px,1px); }
-}
-
-/* ===================== SYNTH ===================== */
+/* SYNTH */
 .sw{background:#d4c9a8;padding:3px 4px 0 4px;display:inline-block;border-top:2px solid #e8dfc0;border-left:2px solid #e8dfc0;border-right:2px solid #7a6a48;border-bottom:2px solid #7a6a48;box-sizing:border-box;}
 .screen{background:#1c1a0e;border-top:1px solid #3a3220;border-left:1px solid #3a3220;border-right:1px solid #c8b880;border-bottom:1px solid #c8b880;padding:2px 3px;margin-bottom:3px;display:flex;align-items:center;gap:3px;height:16px;}
 .osc-canvas{flex:1;height:12px;display:block;}
@@ -321,14 +203,10 @@ input[type=range].wslider::-webkit-slider-thumb{-webkit-appearance:none;width:5p
 .keys-wrap{background:#1a1408;border-top:2px solid #0a0804;border-left:2px solid #0a0804;border-right:2px solid #7a6a40;border-bottom:0;padding:1px 1px 0 1px;box-sizing:border-box;position:relative;display:inline-block;flex-shrink:0;}
 .wkeys{display:flex;gap:1px;align-items:flex-start;}
 .wk{width:8px;flex-shrink:0;height:36px;background:#f0ebe0;border-top:1px solid #d8d0bc;border-left:1px solid #e8e0cc;border-right:1px solid #a09080;border-bottom:2px solid #706050;border-radius:0 0 2px 2px;cursor:pointer;box-sizing:border-box;}
-.wk.pressed{background:#e8701a;}
-.wk.arp-held{background:#e8701a;}
-.wk.arp-ping{background:#e8c030;}
+.wk.pressed{background:#e8701a;}.wk.arp-held{background:#e8701a;}.wk.arp-ping{background:#e8c030;}
 .bkeys{position:absolute;top:1px;left:1px;height:22px;pointer-events:none;}
 .bk{position:absolute;height:22px;width:5px;background:#1e180e;border-top:1px solid #3a3020;border-left:1px solid #3a3020;border-right:1px solid #080604;border-bottom:2px solid #080604;border-radius:0 0 1px 1px;cursor:pointer;pointer-events:all;box-sizing:border-box;}
-.bk.pressed{background:#b05010;}
-.bk.arp-held{background:#b05010;}
-.bk.arp-ping{background:#c09020;border-bottom-color:#301404;border-bottom-width:1px;}
+.bk.pressed{background:#b05010;}.bk.arp-held{background:#b05010;}.bk.arp-ping{background:#c09020;border-bottom-color:#301404;border-bottom-width:1px;}
 .arp-corner{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;flex:1;}
 .arp-top{display:flex;flex-direction:column;align-items:center;gap:1px;margin-bottom:4px;}
 .arp-lbl{font-family:'Courier New',monospace;font-size:3px;color:#7a6a48;letter-spacing:1px;}
@@ -346,7 +224,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
 <div id="voice-pool" style="position:absolute;width:0;height:0;overflow:hidden;"></div>
 
-<!-- EASTER EGG KONAMI OVERLAY -->
 <div id="glitch-overlay">
   <canvas id="glitch-canvas"></canvas>
   <div id="glitch-msg">Ϫꙮ TRANSMISSION REÇUE ꙮϪ<br><span style="font-size:14px;letter-spacing:2px">↑↑↓↓←→←→BA</span></div>
@@ -370,8 +247,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   <td class="header-right"><div class="header-right-text">Lier L'utile<br>à l'agréable.<br><br><strong style="font-style:normal;font-family:Arial;font-size:11px;color:#FFFF00">&#x2605; EST. 2024 &#x2605;</strong></div></td>
 </tr></table>
 
-<!-- MODIFICATION : rainbow du haut SUPPRIMÉ — on passe direct à la navbar -->
-
 <table class="navbar" cellpadding="0" cellspacing="0"><tr>
   <td class="nav-cell n1"><a href="#projets">REVUE</a></td>
   <td class="nav-cell n6"><a href="#oeuvres">GALERIE</a></td>
@@ -383,7 +258,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
 <table class="main-layout" cellpadding="0" cellspacing="0"><tr>
 
-<!-- ===== SIDEBAR GAUCHE ===== -->
 <td class="sidebar-left">
   <div class="sidebar-section"><h3>Navigation</h3><ul>
     <li><a href="#projets">&#9658; Projets</a></li>
@@ -399,153 +273,110 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     <li><a href="#encyclopédie">&#9658; Encyclop&eacute;die</a></li>
   </ul></div>
   <div class="sidebar-section"><h3>Statut</h3><p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;xxxxxx&nbsp;&raquo;<br>en cours&hellip;</p></div>
-
   <div class="sidebar-section"><h3>Liens</h3><ul>
     <li><a href="#">Archives</a></li>
     <li><a href="#">Ressources</a></li>
     <li><a href="#">R&eacute;f&eacute;rences</a></li>
     <li><a href="#">Plan du site</a></li>
   </ul></div>
-
-  <!-- MODIFICATION : placeholder [ GIF ] supprimé, remplacé par le gif agrandi ici en bas -->
-  <!-- MODIFICATION : gif agrandi — largeur 75px, sans cadre, pleine colonne -->
   <div class="gif-zone-sidebar-exp">
     <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/BMQ6224VRQT36SCUDQAM6CH7R6HNE2M7.gif?raw=true" alt="gif">
   </div>
-
 </td>
 
-<!-- ===== CENTRE ===== -->
 <td class="center-content">
   <div class="welcome-bar" style="text-align:center;">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
   <div class="welcome-body"><p style="text-align:center;">Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>Science</strong> et de la <strong>Po&eacute;sie</strong>.<br>D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p></div>
 
-  <!-- GIF BANNER -->
   <div class="gif-banner">
-    <div class="gif-banner-slot">
-      <canvas id="gif-canvas-2a" width="60" height="60"></canvas>
-    </div>
+    <div class="gif-banner-slot"><canvas id="gif-canvas-2a" width="60" height="60"></canvas></div>
     <div class="gif-banner-text">
       <span class="glitch-text" data-text="&nbsp;** xxxxxx EN COURS **&nbsp;">&nbsp;** xxxxxx EN COURS **&nbsp;</span><br>
       <span style="font-size:9px;color:#CCFFFF;letter-spacing:1px">sociologie &middot; &eacute;sot&eacute;risme &middot; exp&eacute;rimentation</span>
     </div>
     <div class="gif-banner-slot">
-      <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/funny%20face.gif?raw=true"
-           style="width:100%; height:100%; object-fit:contain; image-rendering:pixelated;">
+      <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/funny%20face.gif?raw=true" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;">
     </div>
   </div>
 
   <hr class="rainbow">
 
   <table class="cards-table" cellpadding="0" cellspacing="0">
-
-    <!-- PROJET EN COURS — pleine largeur -->
     <tr><td class="card c-crimson" id="projets" colspan="2">
       <div class="card-header">&#x25BA; PROJET EN COURS</div>
       <div class="card-body">Enquetes, analyses et actions contre les organisations sectaires.<br>Croisement des méthodes sociologiques et des savoirs essotériques pour decoder les mécanismes d'emprise.<br><a href="#">&#9658; Accéder aux projets</a></div>
     </td></tr>
 
-    <!-- PUBLICATIONS -->
     <tr><td class="card c-purple" id="oeuvres" colspan="2">
       <div class="card-header">&#x2736; PUBLICATIONS</div>
       <div class="card-body" style="padding:0">
         <table width="100%" cellpadding="0" cellspacing="0"><tr>
-
-          <!-- GALERIE -->
           <td style="width:25%;padding:0;vertical-align:top;background:#F0F0F0;">
             <div style="width:100%;height:90px;background:#CCC8A8;border-bottom:1px solid #B0AA88;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/peinture" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="galerie">
             </div>
-            <div style="padding:6px 8px;text-align:center;background:#F0F0F0;">
-              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br>
-              <a href="#" style="margin-top:4px">&#9658; Parcourir</a>
-            </div>
+            <div style="padding:6px 8px;text-align:center;background:#F0F0F0;"><strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br><a href="#" style="margin-top:4px">&#9658; Parcourir</a></div>
           </td>
-
-          <!-- TELEVISION -->
           <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#F0F0F0;">
             <div style="width:100%;height:90px;background:#B8CCC0;border-bottom:1px solid #9AB0A4;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/WS3PYONRZ7JP6AG2QBSA7RZMSTD4FEBI.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="television">
             </div>
-            <div style="padding:6px 8px;text-align:center;background:#F0F0F0;">
-              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br>
-              <a href="https://dashboard.twitch.tv/u/scienceetpoesie/stream-manager" target="_blank" style="margin-top:4px">&#9658; Regarder</a>
-            </div>
+            <div style="padding:6px 8px;text-align:center;background:#F0F0F0;"><strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br><a href="https://dashboard.twitch.tv/u/scienceetpoesie/stream-manager" target="_blank" style="margin-top:4px">&#9658; Regarder</a></div>
           </td>
-
-             <!-- MAGAZINE -->
           <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#F0F0F0;">
             <div style="width:100%;height:90px;background:#C8C0D8;border-bottom:1px solid #AAA0C0;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/bite.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="magazine">
             </div>
-            <div style="padding:6px 8px;text-align:center;background:#F0F0F0;">
-              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br>
-              <a href="#" style="margin-top:4px">&#9658; Feuilleter</a>
-            </div>
+            <div style="padding:6px 8px;text-align:center;background:#F0F0F0;"><strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br><a href="#" style="margin-top:4px">&#9658; Feuilleter</a></div>
           </td>
-          
-    <!-- BOUTIQUE -->
           <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#F0F0F0;">
             <div style="width:100%;height:90px;background:#D8C8C4;border-bottom:1px solid #BBAAAA;display:flex;align-items:center;justify-content:center;overflow:hidden;">
               <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/ezgif-25b0768ca135783c.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="boutique">
             </div>
-            <div style="padding:6px 8px;text-align:center;background:#F0F0F0;">
-              <strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br>
-              <a href="#" style="margin-top:4px">&#9658; Voir</a>
-            </div>
+            <div style="padding:6px 8px;text-align:center;background:#F0F0F0;"><strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br><a href="#" style="margin-top:4px">&#9658; Voir</a></div>
           </td>
-          
-
         </tr></table>
       </div>
     </td></tr>
 
-    <!-- HALL OF FAME (gauche) + PLACEHOLDER (droite, rowspan 2) -->
     <tr>
       <td class="card c-gold" id="hallofame" style="width:50%">
         <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
-        <div class="card-body">
-          Figures, contributions exceptionnelles, honor&eacute;s par S&amp;P.<br><a href="hallofame.html">&#9658; D&eacute;couvrir le palmar&egrave;s</a>
-        </div>
+        <div class="card-body">Figures, contributions exceptionnelles, honor&eacute;s par S&amp;P.<br><a href="hallofame.html">&#9658; D&eacute;couvrir le palmar&egrave;s</a></div>
       </td>
       <td class="card" rowspan="2" style="width:50%;vertical-align:top;background:#C0C0C0">
         <div class="card-header" style="background:#808080;color:#AAAAAA;letter-spacing:2px">&#x25A1; PLACEHOLDER</div>
         <div class="card-body" style="background:#C0C0C0;color:#888888;font-style:italic;text-align:center;padding-top:40px">[ à venir ]</div>
       </td>
     </tr>
-
-    <!-- SUCKERLIST (gauche) -->
     <tr>
       <td class="card c-black" id="suckerlist" style="width:50%">
         <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
-        <div class="card-body" style="background:#1A1A1A;color:#CCCCCC;">
-          Figures, contributions r&eacute;pugnantes, honnis par S&amp;P<br>
-          <a href="suckerlist.html" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a>
-        </div>
+        <div class="card-body" style="background:#1A1A1A;color:#CCCCCC;">Figures, contributions r&eacute;pugnantes, honnis par S&amp;P<br><a href="suckerlist.html" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a></div>
       </td>
     </tr>
 
-    <!-- SOCIOGONIE — pleine largeur -->
     <tr><td class="card c-sociogonie" id="sociogonie" colspan="2">
       <div class="card-header" style="color:#E0CCFF;letter-spacing:3px">&#x2609; SOCIOGONIE</div>
       <div class="card-body" style="background:#F5EEFF">
         <div class="sociogonie-with-gif">
-          <div class="sociogonie-gif-slot">
-            <canvas id="gif-canvas-3" width="52" height="52"></canvas>
-          </div>
+          <div class="sociogonie-gif-slot"><canvas id="gif-canvas-3" width="52" height="52"></canvas></div>
           <div>Théorie des origines sociales. &mdash; Une approche fondatrice des structures invisibles du collectif.<br><a href="#" style="background:#2B0050;border-color:#9955FF">&#9658; Explorer les sociogonies</a></div>
         </div>
       </div>
     </td></tr>
-
   </table>
   <hr class="rainbow">
 </td>
 
 <!-- ===== SIDEBAR DROITE ===== -->
 <td class="sidebar-right">
-  <div class="rsidebar-section" style="background:#FF8000;border-bottom:3px solid #CC6600;padding:8px">
-    <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" target="_blank" style="display:block;text-decoration:none;background:#FFFFFF;border:4px solid #0000AA;outline:4px solid #FFFFFF;text-align:center;padding:10px 6px 12px 6px">
+
+  <!-- NOTRE ENTENTE — halo divin + son au hover -->
+  <!-- Pour le halo : overflow:visible sur .ne-pub-wrapper + z-index elevé -->
+  <!-- Pour le son  : remplacer PLACEHOLDER_NOTRE_ENTENTE.mp3 par l'URL du fichier -->
+  <div class="ne-pub-wrapper">
+    <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" id="ne-pub-link" target="_blank">
       <div style="font-family:'Arial Black',Arial,sans-serif;font-size:10px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
       <div style="height:4px;background:#0000AA;margin:0 0 8px 0"></div>
       <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/blue%20book.jpg?raw=true" width="60" height="74" style="display:block;margin:0 auto 8px auto;position:relative;left:-2px;image-rendering:pixelated;" alt="Notre Entente">
@@ -553,6 +384,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
       <span class="ne-cta" style="font-family:'Times New Roman',serif;font-size:15px;font-weight:bold;color:#0000AA;text-decoration:underline">Acc&eacute;der au site</span>
     </a>
   </div>
+
   <div class="rsidebar-section"><h3>Citation</h3><p id="citation-text" style="font-style:italic;font-size:11px" title="cliquer pour suivant">&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;</p></div>
   <div class="rsidebar-section"><h3>Web Ring</h3><div class="webring-box"><a href="#">&#9664; Pr&eacute;c.</a><a href="#" style="color:#FF0000;font-size:13px">&#9679;</a><a href="#">Suiv. &#9654;</a></div></div>
   <div class="rsidebar-section" style="text-align:center"><p style="font-family:'Courier New';font-size:10px;font-weight:bold;color:#000">Optimis&eacute; pour<br><span style="font-size:13px">Netscape 3.0</span><br>800&times;600</p></div>
@@ -565,10 +397,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 <div class="sw">
   <div class="screen">
     <canvas class="osc-canvas" id="osc" width="68" height="12"></canvas>
-    <div class="freq-block">
-      <div class="note-val" id="nval">--</div>
-      <div class="freq-val" id="fval">--Hz</div>
-    </div>
+    <div class="freq-block"><div class="note-val" id="nval">--</div><div class="freq-val" id="fval">--Hz</div></div>
   </div>
   <div class="ctrls">
     <button class="round-btn" onclick="changeOct(-1)">-</button>
@@ -581,15 +410,9 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     <div class="led-wrap"><div class="led-inner" id="led"><div class="led-reflet"></div></div></div>
   </div>
   <div class="bottom-row">
-    <div class="keys-wrap" id="kw">
-      <div class="wkeys" id="wkeys"></div>
-      <div class="bkeys" id="bkeys"></div>
-    </div>
+    <div class="keys-wrap" id="kw"><div class="wkeys" id="wkeys"></div><div class="bkeys" id="bkeys"></div></div>
     <div class="arp-corner">
-      <div class="arp-top">
-        <div class="arp-lbl">ARP</div>
-        <div class="arp-sw" id="arp-sw" onclick="toggleArp()"><div class="arp-thumb"></div></div>
-      </div>
+      <div class="arp-top"><div class="arp-lbl">ARP</div><div class="arp-sw" id="arp-sw" onclick="toggleArp()"><div class="arp-thumb"></div></div></div>
       <div class="arp-bot">
         <input type="range" class="tslider" id="tslider" min="0" max="100" step="1" value="30" oninput="setTempo(this.value)">
         <div class="bpm-lbl" id="bpm-lbl">120</div>
@@ -614,19 +437,10 @@ document.getElementById('fyear').innerHTML = new Date().getFullYear();
 var baseCount = 1847;
 var disp = document.getElementById('vcounter');
 var sessionAdd = Math.floor(Math.random()*4) + 1;
-var cur = baseCount;
-var tgt = baseCount + sessionAdd;
+var cur = baseCount, tgt = baseCount + sessionAdd;
 function tickCounter(){
-  if(cur >= tgt){
-    setTimeout(function(){
-      if(Math.random() < 0.3){ cur++; disp.innerHTML=String(cur).padStart(6,'0'); }
-      tickCounter();
-    }, 4000 + Math.random()*8000);
-    return;
-  }
-  cur++;
-  disp.innerHTML = String(cur).padStart(6,'0');
-  setTimeout(tickCounter, 200 + Math.random()*600);
+  if(cur >= tgt){ setTimeout(function(){ if(Math.random()<0.3){cur++;disp.innerHTML=String(cur).padStart(6,'0');} tickCounter(); }, 4000+Math.random()*8000); return; }
+  cur++; disp.innerHTML=String(cur).padStart(6,'0'); setTimeout(tickCounter, 200+Math.random()*600);
 }
 tickCounter();
 
@@ -646,6 +460,28 @@ document.addEventListener('click',function(e){
   })(i);}
 });
 
+/* ===================== NOTRE ENTENTE — SON AU HOVER ===================== */
+/*
+  PLACEHOLDER : remplacer l'URL ci-dessous par le chemin vers votre fichier mp3.
+  Exemple : 'https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/notre-entente.mp3'
+  Même comportement que max headroom : démarre au mouseenter, s'arrête au mouseleave.
+*/
+(function(){
+  var neLink = document.getElementById('ne-pub-link');
+  if(!neLink) return;
+  var mp3src = 'PLACEHOLDER_NOTRE_ENTENTE.mp3'; /* ← REMPLACER PAR L'URL DU MP3 */
+  var audio = null;
+  neLink.addEventListener('mouseenter', function(){
+    if(!audio){ audio = new Audio(mp3src); audio.loop = false; audio.volume = 0.85; }
+    audio.currentTime = 0;
+    audio.play().catch(function(){});
+  });
+  neLink.addEventListener('mouseleave', function(){
+    if(audio){ audio.pause(); audio.currentTime = 0; }
+  });
+})();
+
+/* ===================== NAVBAR SPEECH ===================== */
 var navData = [
   { text:'Projets', pitch:1.0 }, { text:'Galerie', pitch:0.85 },
   { text:'Encyclopédie', pitch:1.15 }, { text:null, pitch:0 },
@@ -678,16 +514,12 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   link.addEventListener('mouseenter',function(){
     if(i===3) return;
     if(!frames[i]||!frames[i].contentWindow)return;
-    var d=navData[i];
-    if(!d.text)return;
-    frames[i].contentWindow.postMessage({
-      t:'s', w:d.text,
-      p:d.pitch+(Math.random()*0.2-0.1),
-      r:0.85+Math.random()*0.2
-    },'*');
+    var d=navData[i]; if(!d.text)return;
+    frames[i].contentWindow.postMessage({ t:'s', w:d.text, p:d.pitch+(Math.random()*0.2-0.1), r:0.85+Math.random()*0.2 },'*');
   });
 });
 
+/* MAX HEADROOM */
 (function(){
   var mp3NavLink = document.getElementById('mp3-nav');
   if(!mp3NavLink) return;
@@ -695,56 +527,39 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   var audio = null;
   mp3NavLink.addEventListener('mouseenter', function(){
     if(!audio){ audio = new Audio(mp3src); audio.loop = false; audio.volume = 0.85; }
-    audio.currentTime = 0;
-    audio.play().catch(function(){});
+    audio.currentTime = 0; audio.play().catch(function(){});
   });
   mp3NavLink.addEventListener('mouseleave', function(){
     if(audio){ audio.pause(); audio.currentTime = 0; }
   });
 })();
 
-/* GIF CANVAS 2a — bannière gauche */
+/* GIF CANVAS 2a */
 (function(){
-  var cv=document.getElementById('gif-canvas-2a');
-  if(!cv)return;
+  var cv=document.getElementById('gif-canvas-2a'); if(!cv)return;
   var c=cv.getContext('2d'), W=60, H=60, t=0;
   function draw(){
-    t+=0.04;
-    var img=c.createImageData(W,H);
-    for(var y=0;y<H;y++){
-      for(var x=0;x<W;x++){
-        var v=Math.sin(x/4+t)+Math.sin(y/4+t)+Math.sin((x+y)/8+t)+Math.sin(Math.sqrt(x*x+y*y)/6+t);
-        v=(v+4)/8;
-        var r=Math.floor(v*50); var g=Math.floor(v*180+50); var b=Math.floor(v*200+55);
-        var idx=(y*W+x)*4;
-        img.data[idx]=r; img.data[idx+1]=g; img.data[idx+2]=b; img.data[idx+3]=255;
-      }
+    t+=0.04; var img=c.createImageData(W,H);
+    for(var y=0;y<H;y++) for(var x=0;x<W;x++){
+      var v=Math.sin(x/4+t)+Math.sin(y/4+t)+Math.sin((x+y)/8+t)+Math.sin(Math.sqrt(x*x+y*y)/6+t);
+      v=(v+4)/8; var idx=(y*W+x)*4;
+      img.data[idx]=Math.floor(v*50); img.data[idx+1]=Math.floor(v*180+50); img.data[idx+2]=Math.floor(v*200+55); img.data[idx+3]=255;
     }
-    c.putImageData(img,0,0);
-    requestAnimationFrame(draw);
+    c.putImageData(img,0,0); requestAnimationFrame(draw);
   }
   draw();
 })();
 
-/* GIF CANVAS 3 — sociogonie spirale */
+/* GIF CANVAS 3 — spirale sociogonie */
 (function(){
-  var cv=document.getElementById('gif-canvas-3');
-  if(!cv)return;
+  var cv=document.getElementById('gif-canvas-3'); if(!cv)return;
   var c=cv.getContext('2d'), W=52, H=52, t=0;
   function draw(){
-    t+=0.03;
-    c.fillStyle='rgba(10,0,30,0.18)'; c.fillRect(0,0,W,H);
-    c.strokeStyle='#9955FF'; c.lineWidth=1;
-    c.beginPath();
-    for(var i=0;i<200;i++){
-      var a=0.15*i+t;
-      var r=0.12*i;
-      var x=W/2+Math.cos(a)*r, y=H/2+Math.sin(a)*r;
-      if(i===0)c.moveTo(x,y); else c.lineTo(x,y);
-    }
+    t+=0.03; c.fillStyle='rgba(10,0,30,0.18)'; c.fillRect(0,0,W,H);
+    c.strokeStyle='#9955FF'; c.lineWidth=1; c.beginPath();
+    for(var i=0;i<200;i++){ var a=0.15*i+t, r=0.12*i, x=W/2+Math.cos(a)*r, y=H/2+Math.sin(a)*r; if(i===0)c.moveTo(x,y); else c.lineTo(x,y); }
     c.stroke();
-    var grd=c.createRadialGradient(W/2,H/2,0,W/2,H/2,6);
-    grd.addColorStop(0,'#FFFFFF'); grd.addColorStop(1,'transparent');
+    var grd=c.createRadialGradient(W/2,H/2,0,W/2,H/2,6); grd.addColorStop(0,'#FFFFFF'); grd.addColorStop(1,'transparent');
     c.fillStyle=grd; c.beginPath(); c.arc(W/2,H/2,6,0,Math.PI*2); c.fill();
     requestAnimationFrame(draw);
   }
@@ -752,35 +567,20 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
 })();
 
 /* KONAMI */
-var konamiSeq=[38,38,40,40,37,39,37,39,66,65];
-var konamiIdx=0;
+var konamiSeq=[38,38,40,40,37,39,37,39,66,65], konamiIdx=0;
 document.addEventListener('keydown',function(e){
-  if(e.keyCode===konamiSeq[konamiIdx]){ konamiIdx++; } else { konamiIdx=0; }
+  if(e.keyCode===konamiSeq[konamiIdx]) konamiIdx++; else konamiIdx=0;
   if(konamiIdx===konamiSeq.length){ konamiIdx=0; triggerKonamiEgg(); }
 });
 function triggerKonamiEgg(){
-  var ov=document.getElementById('glitch-overlay');
-  ov.classList.add('active');
-  var cv=document.getElementById('glitch-canvas');
-  cv.width=window.innerWidth; cv.height=window.innerHeight;
-  var c=cv.getContext('2d');
-  var frames=0, maxFrames=90;
+  var ov=document.getElementById('glitch-overlay'); ov.classList.add('active');
+  var cv=document.getElementById('glitch-canvas'); cv.width=window.innerWidth; cv.height=window.innerHeight;
+  var c=cv.getContext('2d'), frames=0, maxFrames=90;
   function glitchFrame(){
-    frames++;
-    var img=c.createImageData(cv.width,cv.height);
-    for(var i=0;i<img.data.length;i+=4){
-      var v=Math.random()*255;
-      img.data[i]=v>240?0:0; img.data[i+1]=v>240?255:0; img.data[i+2]=0; img.data[i+3]=v>240?255:0;
-    }
+    frames++; var img=c.createImageData(cv.width,cv.height);
+    for(var i=0;i<img.data.length;i+=4){ var v=Math.random()*255; img.data[i]=0; img.data[i+1]=v>240?255:0; img.data[i+2]=0; img.data[i+3]=v>240?255:0; }
     c.putImageData(img,0,0);
-    for(var j=0;j<8;j++){
-      if(Math.random()<0.5){
-        var y=Math.random()*cv.height;
-        var h=Math.random()*8+1;
-        var col=Math.random()<0.5?'rgba(0,255,0,0.6)':'rgba(255,255,0,0.4)';
-        c.fillStyle=col; c.fillRect(0,y,cv.width,h);
-      }
-    }
+    for(var j=0;j<8;j++){ if(Math.random()<0.5){ var y=Math.random()*cv.height, h=Math.random()*8+1, col=Math.random()<0.5?'rgba(0,255,0,0.6)':'rgba(255,255,0,0.4)'; c.fillStyle=col; c.fillRect(0,y,cv.width,h); } }
     if(frames<maxFrames) requestAnimationFrame(glitchFrame);
     else { ov.classList.remove('active'); c.clearRect(0,0,cv.width,cv.height); }
   }
@@ -788,45 +588,16 @@ function triggerKonamiEgg(){
 }
 
 /* Citations */
-var citations=[
-  '&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;',
-  '&laquo;&nbsp;Le collectif précède l\'individu.&nbsp;&raquo;',
-  '&laquo;&nbsp;Tout signe est une serrure.&nbsp;&raquo;',
-  '&laquo;&nbsp;L\'ésotérisme est une sociologie inversée.&nbsp;&raquo;',
-  '&laquo;&nbsp;La structure invisible gouverne.&nbsp;&raquo;',
-  '&laquo;&nbsp;Fragment III : en attente de réception.&nbsp;&raquo;',
-  '&laquo;&nbsp;ϪꙮʘɮҨȢɮꙚ&nbsp;&raquo;',
-  '&laquo;&nbsp;Croire sans comprendre est une technique.&nbsp;&raquo;'
-];
-var citIdx=0;
-var citEl=document.getElementById('citation-text');
-if(citEl){
-  citEl.style.cursor='pointer';
-  citEl.addEventListener('click',function(e){
-    e.preventDefault();
-    citIdx=(citIdx+1)%citations.length;
-    citEl.style.opacity='0';
-    setTimeout(function(){ citEl.innerHTML=citations[citIdx]; citEl.style.opacity='1'; },150);
-    citEl.style.transition='opacity 0.15s';
-  });
-}
+var citations=['&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;','&laquo;&nbsp;Le collectif précède l\'individu.&nbsp;&raquo;','&laquo;&nbsp;Tout signe est une serrure.&nbsp;&raquo;','&laquo;&nbsp;L\'ésotérisme est une sociologie inversée.&nbsp;&raquo;','&laquo;&nbsp;La structure invisible gouverne.&nbsp;&raquo;','&laquo;&nbsp;Fragment III : en attente de réception.&nbsp;&raquo;','&laquo;&nbsp;ϪꙮʘɮҨȢɮꙚ&nbsp;&raquo;','&laquo;&nbsp;Croire sans comprendre est une technique.&nbsp;&raquo;'];
+var citIdx=0, citEl=document.getElementById('citation-text');
+if(citEl){ citEl.style.cursor='pointer'; citEl.addEventListener('click',function(e){ e.preventDefault(); citIdx=(citIdx+1)%citations.length; citEl.style.opacity='0'; setTimeout(function(){ citEl.innerHTML=citations[citIdx]; citEl.style.opacity='1'; },150); citEl.style.transition='opacity 0.15s'; }); }
 
 /* Bouton Gratuité */
 (function(){
-  var btn = document.getElementById('btn-gratuite');
-  if(!btn) return;
-  btn.addEventListener('mousedown', function(){
-    btn.style.borderTopColor='#880000'; btn.style.borderLeftColor='#880000';
-    btn.style.borderRightColor='#FF6666'; btn.style.borderBottomColor='#FF6666';
-    btn.style.transform='translateY(1px)';
-  });
-  function release(){
-    btn.style.borderTopColor='#FF6666'; btn.style.borderLeftColor='#FF6666';
-    btn.style.borderRightColor='#880000'; btn.style.borderBottomColor='#880000';
-    btn.style.transform='';
-  }
-  btn.addEventListener('mouseup', release);
-  btn.addEventListener('mouseleave', release);
+  var btn=document.getElementById('btn-gratuite'); if(!btn)return;
+  btn.addEventListener('mousedown',function(){ btn.style.borderTopColor='#880000'; btn.style.borderLeftColor='#880000'; btn.style.borderRightColor='#FF6666'; btn.style.borderBottomColor='#FF6666'; btn.style.transform='translateY(1px)'; });
+  function release(){ btn.style.borderTopColor='#FF6666'; btn.style.borderLeftColor='#FF6666'; btn.style.borderRightColor='#880000'; btn.style.borderBottomColor='#880000'; btn.style.transform=''; }
+  btn.addEventListener('mouseup',release); btn.addEventListener('mouseleave',release);
 })();
 
 /* SYNTH */
