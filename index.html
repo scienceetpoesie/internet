@@ -45,7 +45,6 @@ h1.site-title {
   100% { text-shadow: 3px 3px #000000; }
 }
 
-/* Scanlines overlay sur le header-center */
 td.header-center::after {
   content: '';
   position: absolute; inset: 0;
@@ -73,14 +72,14 @@ td.header-center::after {
 /* ===================== NAVBAR ===================== */
 table.navbar { width: 100%; border-collapse: collapse; border-top: 4px solid #800000; border-bottom: 4px solid #800000; }
 td.nav-cell { text-align: center; padding: 0; }
-td.nav-cell a { display: block; padding: 8px 4px; font-family: "Arial Black", Arial, sans-serif; font-size: 13px; font-weight: 900; text-decoration: none; letter-spacing: 0.5px; border-right: 3px outset #999999; transition: letter-spacing 0.15s; }
+td.nav-cell a { display: block; padding: 8px 4px; font-family: "Arial Black", Arial, sans-serif; font-size: 13px; font-weight: 900; text-decoration: none; letter-spacing: 0.5px; border-right: 3px outset #999999; }
 td.nav-cell:last-child a { border-right: none; }
-td.n1 { background-color: #FF0000; } td.n1 a { color: #FFFFFF; } td.n1 a:hover { background-color: #CC0000; letter-spacing: 2px; }
-td.n2 { background-color: #FF8000; } td.n2 a { color: #000000; } td.n2 a:hover { background-color: #CC6600; letter-spacing: 2px; }
-td.n3 { background-color: #FFFF00; } td.n3 a { color: #000000; } td.n3 a:hover { background-color: #CCCC00; letter-spacing: 2px; }
-td.n4 { background-color: #008000; } td.n4 a { color: #FFFFFF; } td.n4 a:hover { background-color: #006600; letter-spacing: 2px; }
-td.n5 { background-color: #000080; } td.n5 a { color: #FFFFFF; } td.n5 a:hover { background-color: #000055; letter-spacing: 2px; }
-td.n6 { background-color: #800080; } td.n6 a { color: #FFFFFF; } td.n6 a:hover { background-color: #600060; letter-spacing: 2px; }
+td.n1 { background-color: #FF0000; } td.n1 a { color: #FFFFFF; } td.n1 a:hover { background-color: #CC0000; }
+td.n2 { background-color: #FF8000; } td.n2 a { color: #000000; } td.n2 a:hover { background-color: #CC6600; }
+td.n3 { background-color: #FFFF00; } td.n3 a { color: #000000; } td.n3 a:hover { background-color: #CCCC00; }
+td.n4 { background-color: #008000; } td.n4 a { color: #FFFFFF; } td.n4 a:hover { background-color: #006600; }
+td.n5 { background-color: #000080; } td.n5 a { color: #FFFFFF; } td.n5 a:hover { background-color: #000055; }
+td.n6 { background-color: #800080; } td.n6 a { color: #FFFFFF; } td.n6 a:hover { background-color: #600060; }
 
 /* ===================== LAYOUT ===================== */
 table.main-layout { width: 100%; border-collapse: collapse; }
@@ -107,7 +106,6 @@ td.sidebar-left { background-color: #FFFF00; width: 50px; vertical-align: top; p
   display: block;
   margin: 0 auto 2px auto;
 }
-/* Placeholder animé quand pas de GIF */
 .gif-placeholder {
   width: 44px; height: 44px;
   background: #000;
@@ -140,9 +138,8 @@ td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; 
 .welcome-body { padding: 14px 16px; background-color: #FFFFFF; border-bottom: 3px solid #C0C0C0; }
 .welcome-body p { font-family: "Times New Roman", serif; font-size: 14px; color: #000000; line-height: 1.7; margin: 0; }
 
-/* ===================== GIF BANNER — ENTRE WELCOME ET CARDS ===================== */
+/* ===================== GIF BANNER ===================== */
 .gif-banner {
-  /* PLACEHOLDER FOND : remplacer background par : background-image: url("votre-image.jpg"); background-size: cover; background-position: center; */
   background: #303030;
   border-top: 3px solid #000000;
   border-bottom: 3px solid #000000;
@@ -174,7 +171,6 @@ td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; 
   line-height: 1.6;
   text-align: center;
 }
-/* Glitch sur le texte bannière */
 .glitch-text {
   position: relative;
   display: inline-block;
@@ -204,11 +200,12 @@ td.card { vertical-align: top; padding: 0; border: 3px outset #888888; width: 50
 .c-crimson .card-header { background-color: #990000; } .c-crimson .card-body { background-color: #FFF5F5; }
 .c-purple .card-header { background-color: #660066; } .c-purple .card-body { background-color: #FFF0FF; }
 .c-gold .card-header { background-color: #886600; } .c-gold .card-body { background-color: #FFFBE8; }
+.c-gold:hover .card-body { background-color: #d4f0c8; }
 .c-black .card-header { background-color: #111111; } .c-black .card-body { background-color: #1A1A1A; color: #CCCCCC; }
+.c-black:hover .card-body { background-color: #3a1a08; color: #DDCCBB; }
 .c-black .card-body a { border-color: #888800; }
 .c-sociogonie .card-header { background-color: #2B0050; } .c-sociogonie .card-body { background-color: #F5EEFF; }
 
-/* GIF dans la card sociogonie */
 .sociogonie-with-gif {
   display: flex;
   align-items: flex-start;
@@ -275,34 +272,7 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
 }
 @keyframes msgFlicker { 50% { opacity: 0.7; color: #FFFF00; text-shadow: 0 0 20px #FFFF00; } }
 
-/* ===================== EASTER EGG — TOOLTIP MYSTÉRIEUX ===================== */
-.mystery-tooltip {
-  position: absolute;
-  background: #000080;
-  color: #FFFF00;
-  font-family: "Courier New", monospace;
-  font-size: 10px;
-  padding: 4px 8px;
-  border: 2px outset #8888FF;
-  pointer-events: none;
-  z-index: 9999;
-  display: none;
-  white-space: nowrap;
-  max-width: 200px;
-}
 
-/* ===================== GLITCH SUR HOVER DES CARDS ===================== */
-.card-header:hover {
-  animation: headerGlitch 0.4s steps(1) 1;
-}
-@keyframes headerGlitch {
-  0%   { filter: none; }
-  20%  { filter: hue-rotate(90deg) saturate(3); transform: translateX(2px); }
-  40%  { filter: hue-rotate(-90deg); transform: translateX(-2px); }
-  60%  { filter: invert(0.3); transform: translateX(1px); }
-  80%  { filter: none; transform: translateX(-1px); }
-  100% { filter: none; transform: none; }
-}
 
 /* ===================== STATIC NOISE FOOTER ===================== */
 .footer-band { position: relative; overflow: hidden; }
@@ -322,7 +292,7 @@ a.ne-pub-link:hover .ne-cta { color: #CC0000 !important; }
   100%{ transform: translate(3px,1px); }
 }
 
-/* ===================== SYNTH (inchangé) ===================== */
+/* ===================== SYNTH ===================== */
 .sw{background:#d4c9a8;padding:3px 4px 0 4px;display:inline-block;border-top:2px solid #e8dfc0;border-left:2px solid #e8dfc0;border-right:2px solid #7a6a48;border-bottom:2px solid #7a6a48;box-sizing:border-box;}
 .screen{background:#1c1a0e;border-top:1px solid #3a3220;border-left:1px solid #3a3220;border-right:1px solid #c8b880;border-bottom:1px solid #c8b880;padding:2px 3px;margin-bottom:3px;display:flex;align-items:center;gap:3px;height:16px;}
 .osc-canvas{flex:1;height:12px;display:block;}
@@ -364,12 +334,30 @@ input[type=range].tslider{-webkit-appearance:none;appearance:none;width:24px;hei
 input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4px;height:5px;background:#c4b990;cursor:pointer;border-radius:1px;}
 .bpm-lbl{font-family:'Courier New',monospace;font-size:3px;color:#7a6a48;}
 .synth-scale-wrapper{transform:scale(1.43);transform-origin:top left;margin-left:-120px;margin-top:40px;}
+
+/* ===================== GIF PLACEHOLDER FRAME ===================== */
+.gif-frame-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: #0a0a0a;
+  border: 1px dashed #333;
+  box-sizing: border-box;
+}
+.gif-frame-placeholder span {
+  font-family: "Courier New", monospace;
+  font-size: 7px;
+  color: #444;
+  letter-spacing: 1px;
+  display: block;
+  text-align: center;
+  line-height: 1.8;
+}
 </style>
 </head>
 <body>
 
 <div id="voice-pool" style="position:absolute;width:0;height:0;overflow:hidden;"></div>
-<div id="mystery-tooltip" class="mystery-tooltip"></div>
 
 <!-- EASTER EGG KONAMI OVERLAY -->
 <div id="glitch-overlay">
@@ -420,8 +408,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   </ul></div>
   <div class="sidebar-section"><h3>Statut</h3><p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;Fragment III&nbsp;&raquo;<br>en cours&hellip;</p></div>
 
-  <!-- GIF ZONE 1 — sidebar gauche -->
-  <!-- Pour remplacer par un vrai GIF : <img src="TON-GIF.gif" alt=""> -->
   <div class="gif-zone-left" title="GIF ZONE — remplacer src par votre gif">
     <canvas class="gif-placeholder-canvas" id="gif-canvas-1" width="44" height="44"></canvas>
     <span class="gif-slot-label">[ GIF ]</span>
@@ -436,6 +422,12 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   <div class="sidebar-section" style="text-align:center;background-color:#000080;border:3px inset #888">
     <p style="color:#FFFF00;font-family:'Courier New';font-size:10px;font-weight:bold;margin:0">&#x2234; &#x2235; &#x2234;<br>ESPACE<br>EXP&Eacute;RIMENTAL<br>&#x2234; &#x2235; &#x2234;</p>
   </div>
+  <div class="gif-zone-left" title="GIF ZONE — remplacer src par votre gif">
+    <div style="width:44px;height:44px;margin:0 auto;background:#060010;border:1px dashed #220033;display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:'Courier New',monospace;font-size:6px;color:#330044;text-align:center;line-height:1.8;display:block">[ GIF ]<br>&#9654;</span>
+    </div>
+    <span class="gif-slot-label">[ GIF ]</span>
+  </div>
 </td>
 
 <!-- ===== CENTRE ===== -->
@@ -443,8 +435,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   <div class="welcome-bar" style="text-align:center;">&#x2605; BIENVENUE SUR SCIENCE &amp; PO&Eacute;SIE &#x2605;</div>
   <div class="welcome-body"><p>Ce site est un espace de recherche &agrave; la crois&eacute;e de la <strong>Science</strong> et de la <strong>Po&eacute;sie</strong>. D&eacute;marche exp&eacute;rimentale, textes, images, &eacute;v&eacute;nements &mdash; explorez librement.</p></div>
 
-  <!-- GIF BANNER ZONE 2 — bande entre welcome et cards -->
-  <!-- Remplacer les <canvas> par des <img src="GIF.gif"> selon vos contenus -->
+  <!-- GIF BANNER — gauche=texture bleue (conservée), droite=placeholder GIF -->
   <div class="gif-banner">
     <div class="gif-banner-slot" title="GIF ZONE 2a — remplacer par img src">
       <canvas id="gif-canvas-2a" width="60" height="60"></canvas>
@@ -453,8 +444,11 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
       <span class="glitch-text" data-text="&nbsp;** FRAGMENT III EN COURS **&nbsp;">&nbsp;** FRAGMENT III EN COURS **&nbsp;</span><br>
       <span style="font-size:9px;color:#00FFFF;letter-spacing:1px">sociologie &middot; &eacute;sot&eacute;risme &middot; exp&eacute;rimentation</span>
     </div>
-    <div class="gif-banner-slot" title="GIF ZONE 2b — remplacer par img src">
-      <canvas id="gif-canvas-2b" width="60" height="60"></canvas>
+    <!-- GIF ZONE 2b -->
+    <div class="gif-banner-slot">
+      <div class="gif-frame-placeholder">
+        <span>[ GIF ]<br>&#9654; ici</span>
+      </div>
     </div>
   </div>
 
@@ -470,8 +464,9 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
       <div class="card-header">&#x2736; PUBLICATIONS</div>
       <div class="card-body" style="padding:0"><table width="100%" cellpadding="0" cellspacing="0"><tr>
         <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF;position:relative;">
-          <!-- GIF CELLULE 1 : remplacer canvas par <img src="gif.gif" style="width:100%;display:block"> -->
-          <canvas id="gif-cell-1" width="120" height="90" style="display:block;width:100%;"></canvas>
+          <div style="width:100%;height:90px;display:flex;align-items:center;justify-content:center;background:#0a0010;border-bottom:1px solid #330033;">
+            <div style="text-align:center;font-family:'Courier New',monospace;font-size:7px;color:#440044;line-height:2">[ GIF ]<br>&#9654;</div>
+          </div>
           <div style="padding:6px 8px;">
             <strong style="font-family:'Arial Black';font-size:11px;color:#660066">BOUTIQUE</strong><br>
             <span style="font-size:11px">Publications, tirages, objets.</span><br>
@@ -479,8 +474,9 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
           </div>
         </td>
         <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF5FF;">
-          <!-- GIF CELLULE 2 : remplacer canvas par <img src="gif.gif" style="width:100%;display:block"> -->
-          <canvas id="gif-cell-2" width="120" height="90" style="display:block;width:100%;"></canvas>
+          <div style="width:100%;height:90px;display:flex;align-items:center;justify-content:center;background:#100010;border-bottom:1px solid #330033;">
+            <div style="text-align:center;font-family:'Courier New',monospace;font-size:7px;color:#440044;line-height:2">[ GIF ]<br>&#9654;</div>
+          </div>
           <div style="padding:6px 8px;">
             <strong style="font-family:'Arial Black';font-size:11px;color:#660066">MAGAZINE PORNO</strong><br>
             <span style="font-size:11px">Revue experimentale.</span><br>
@@ -488,8 +484,9 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
           </div>
         </td>
         <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#FFF0FF;">
-          <!-- GIF CELLULE 3 : remplacer canvas par <img src="gif.gif" style="width:100%;display:block"> -->
-          <canvas id="gif-cell-3" width="120" height="90" style="display:block;width:100%;"></canvas>
+          <div style="width:100%;height:90px;display:flex;align-items:center;justify-content:center;background:#001020;border-bottom:1px solid #003344;">
+            <div style="text-align:center;font-family:'Courier New',monospace;font-size:7px;color:#004455;line-height:2">[ GIF ]<br>&#9654;</div>
+          </div>
           <div style="padding:6px 8px;">
             <strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br>
             <span style="font-size:11px">Videos, captations, creations.</span><br>
@@ -497,8 +494,9 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
           </div>
         </td>
         <td style="width:25%;padding:0;vertical-align:top;background:#FFF5FF;">
-          <!-- GIF CELLULE 4 : remplacer canvas par <img src="gif.gif" style="width:100%;display:block"> -->
-          <canvas id="gif-cell-4" width="120" height="90" style="display:block;width:100%;"></canvas>
+          <div style="width:100%;height:90px;display:flex;align-items:center;justify-content:center;background:#100800;border-bottom:1px solid #442200;">
+            <div style="text-align:center;font-family:'Courier New',monospace;font-size:7px;color:#443300;line-height:2">[ GIF ]<br>&#9654;</div>
+          </div>
           <div style="padding:6px 8px;">
             <strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br>
             <span style="font-size:11px">Images, oeuvres visuelles.</span><br>
@@ -511,8 +509,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     <tr>
       <td class="card c-gold" id="halloffame" style="width:50%">
         <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
-        <!-- PLACEHOLDER FOND HALL OF FAME : ajouter style="background-image:url('img.jpg');background-size:cover;" sur le div ci-dessous -->
-        <div class="card-body" style="background-image:none;/* remplacer none par url('votre-image.jpg') */;background-size:cover;background-position:center;">
+        <div class="card-body" style="background-image:none;background-size:cover;background-position:center;">
           Figures, contributions exceptionnelles, honor&eacute;s par S&amp;P.<br><a href="hallofame.html">&#9658; Découvrir le palmares</a>
         </div>
       </td>
@@ -524,21 +521,18 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     <tr>
       <td class="card c-black" id="suckerlist" style="width:50%">
         <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
-        <!-- PLACEHOLDER FOND SUCKERLIST : ajouter url('votre-image.jpg') dans background-image ci-dessous -->
-        <div class="card-body" style="background:#1A1A1A;color:#CCCCCC;background-image:none;/* remplacer none par url('votre-image.jpg') */;background-size:cover;background-position:center;">
+        <div class="card-body" style="background:#1A1A1A;color:#CCCCCC;background-image:none;background-size:cover;background-position:center;">
           Figures, contributions répugnantes, honnis par S&P<br>
           <a href="suckerlist.html" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a>
         </div>
       </td>
     </tr>
 
-    <!-- SOCIOGONIE avec GIF ZONE 3 -->
+    <!-- SOCIOGONIE avec spirale (conservée) -->
     <tr><td class="card c-sociogonie" id="sociogonie" colspan="2">
       <div class="card-header" style="color:#E0CCFF;letter-spacing:3px">&#x2609; SOCIOGONIE</div>
       <div class="card-body" style="background:#F5EEFF">
         <div class="sociogonie-with-gif">
-          <!-- GIF ZONE 3 — dans la card Sociogonie -->
-          <!-- Remplacer <canvas> par <img src="GIF.gif" width="52" height="52"> -->
           <div class="sociogonie-gif-slot" title="GIF ZONE 3 — remplacer par img src">
             <canvas id="gif-canvas-3" width="52" height="52"></canvas>
           </div>
@@ -567,7 +561,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;">
     <span style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#CC0000;line-height:1.5;display:block;margin-bottom:2px">Gratuit&eacute;</span>
     <span style="display:block;color:#CC0000;font-size:13px;line-height:1;">&#x2193;</span>
-    <a href="#" style="display:inline-block;width:22px;height:22px;background:#CC0000;border:2px outset #FF6666;border-right-color:#880000;border-bottom-color:#880000;border-radius:50%;text-decoration:none;margin-top:2px;">&nbsp;</a>
+    <span id="btn-gratuite" style="display:inline-block;width:22px;height:22px;background:#CC0000;border-top:2px solid #FF6666;border-left:2px solid #FF6666;border-right:2px solid #880000;border-bottom:2px solid #880000;border-radius:50%;margin-top:2px;"></span>
 
 <div class="synth-scale-wrapper">
 <div class="sw">
@@ -617,13 +611,29 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 </div>
 
 <!-- ===================== SCRIPTS ===================== -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
 /* === INIT === */
 document.getElementById('fyear').innerHTML = new Date().getFullYear();
-var count=4731, disp=document.getElementById('vcounter');
-var tgt=count+Math.floor(Math.random()*3), cur=count;
-var iv=setInterval(function(){ if(cur>=tgt){clearInterval(iv);return;} disp.innerHTML=String(++cur).padStart(6,'0'); },120);
+/* compteur visiteurs : base basse, variation réaliste lente */
+var baseCount = 1847;
+var disp = document.getElementById('vcounter');
+var sessionAdd = Math.floor(Math.random()*4) + 1;
+var cur = baseCount;
+var tgt = baseCount + sessionAdd;
+function tickCounter(){
+  if(cur >= tgt){ 
+    /* après l'arrivée, petites variations aléatoires sporadiques */
+    setTimeout(function(){
+      if(Math.random() < 0.3){ cur++; disp.innerHTML=String(cur).padStart(6,'0'); }
+      tickCounter();
+    }, 4000 + Math.random()*8000);
+    return;
+  }
+  cur++;
+  disp.innerHTML = String(cur).padStart(6,'0');
+  setTimeout(tickCounter, 200 + Math.random()*600);
+}
+tickCounter();
 
 /* === CURSOR === */
 var cursor=document.getElementById('star-cursor');
@@ -643,7 +653,7 @@ document.addEventListener('click',function(e){
   })(i);}
 });
 
-/* === SPEECH NAV === */
+/* === SPEECH NAV (maintenu sans tooltip, sans touch mp3-nav) === */
 var navData = [
   { text:'Projets', pitch:1.0 }, { text:'Galerie', pitch:0.85 },
   { text:'Encyclopédie', pitch:1.15 }, { text:null, pitch:0 },
@@ -674,13 +684,7 @@ for(var n=0;n<6;n++){
 }
 document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   link.addEventListener('mouseenter',function(){
-    if(i===3){
-      /* SLOT MP3 — remplacer le src par votre fichier audio */
-      var mp3src='https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/maxheadroom.mp3'; /* <-- REMPLACER ICI */
-      if(mp3src==='https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/maxheadroom.mp3') return; /* pas encore branché */
-      var a=new Audio(mp3src); a.volume=0.8; a.play().catch(function(){});
-      return;
-    }
+    if(i===3) return; // slot mp3 — géré séparément ci-dessous
     if(!frames[i]||!frames[i].contentWindow)return;
     var d=navData[i];
     if(!d.text)return;
@@ -693,11 +697,39 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
 });
 
 /* ========================================================
+   SECTION MYSTÈRE — son joué au hover, coupé au déhover
+   Remplacer mp3src par votre fichier audio
+   ======================================================== */
+(function(){
+  var mp3NavLink = document.getElementById('mp3-nav');
+  if(!mp3NavLink) return;
+
+  var mp3src = 'https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/maxheadroom.mp3';
+  var audio = null;
+
+  mp3NavLink.addEventListener('mouseenter', function(){
+    if(!audio){
+      audio = new Audio(mp3src);
+      audio.loop = false;
+      audio.volume = 0.85;
+    }
+    audio.currentTime = 0;
+    audio.play().catch(function(){});
+  });
+
+  mp3NavLink.addEventListener('mouseleave', function(){
+    if(audio){
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  });
+})();
+
+/* ========================================================
    GIF PLACEHOLDERS — ANIMATIONS CANVAS
-   Remplacez chaque canvas par <img src="votre.gif">
    ======================================================== */
 
-/* Placeholder 1 — sidebar gauche : scanlines vertes */
+/* Placeholder 1 — sidebar gauche : texture bleue défilante (conservée) */
 (function(){
   var cv=document.getElementById('gif-canvas-1');
   if(!cv)return;
@@ -705,14 +737,11 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   function draw(){
     t++;
     c.fillStyle='#000'; c.fillRect(0,0,W,H);
-    // Forme qui pulse
     var r=10+Math.sin(t*0.08)*4;
     var grd=c.createRadialGradient(W/2,H/2,0,W/2,H/2,r*1.8);
     grd.addColorStop(0,'#00FF00'); grd.addColorStop(1,'transparent');
     c.fillStyle=grd; c.beginPath(); c.arc(W/2,H/2,r,0,Math.PI*2); c.fill();
-    // Scanlines
     for(var y=0;y<H;y+=2){ c.fillStyle='rgba(0,0,0,0.3)'; c.fillRect(0,y,W,1); }
-    // Noise aléatoire
     if(Math.random()<0.15){
       c.fillStyle='rgba(0,255,0,0.6)';
       c.fillRect(Math.random()*W,Math.random()*H,Math.random()*8+2,1);
@@ -722,7 +751,7 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   draw();
 })();
 
-/* Placeholder 2a — bannière gauche : plasma cyan */
+/* Placeholder 2a — bannière gauche : texture bleue carrés (conservée) */
 (function(){
   var cv=document.getElementById('gif-canvas-2a');
   if(!cv)return;
@@ -745,33 +774,7 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   draw();
 })();
 
-/* Placeholder 2b — bannière droite : étoile tournante */
-(function(){
-  var cv=document.getElementById('gif-canvas-2b');
-  if(!cv)return;
-  var c=cv.getContext('2d'), W=60, H=60, t=0;
-  function drawStar(cx,cy,r1,r2,pts,angle,color){
-    c.beginPath(); c.fillStyle=color;
-    for(var i=0;i<pts*2;i++){
-      var a=angle+i*Math.PI/pts;
-      var r=i%2===0?r1:r2;
-      var x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r;
-      if(i===0)c.moveTo(x,y); else c.lineTo(x,y);
-    }
-    c.closePath(); c.fill();
-  }
-  function draw(){
-    t+=0.04;
-    c.fillStyle='#110020'; c.fillRect(0,0,W,H);
-    drawStar(W/2,H/2,22,9,5,t,'#FF00FF');
-    drawStar(W/2,H/2,16,6,5,t+0.5,'#FFFF00');
-    drawStar(W/2,H/2,8,3,5,t*1.5,'#FFFFFF');
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-/* Placeholder 3 — sociogonie : spirale cosmique */
+/* Placeholder 3 — sociogonie : spirale cosmique (conservée) */
 (function(){
   var cv=document.getElementById('gif-canvas-3');
   if(!cv)return;
@@ -779,7 +782,6 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
   function draw(){
     t+=0.03;
     c.fillStyle='rgba(10,0,30,0.18)'; c.fillRect(0,0,W,H);
-    // Spirale
     c.strokeStyle='#9955FF'; c.lineWidth=1;
     c.beginPath();
     for(var i=0;i<200;i++){
@@ -789,7 +791,6 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
       if(i===0)c.moveTo(x,y); else c.lineTo(x,y);
     }
     c.stroke();
-    // Point central
     var grd=c.createRadialGradient(W/2,H/2,0,W/2,H/2,6);
     grd.addColorStop(0,'#FFFFFF'); grd.addColorStop(1,'transparent');
     c.fillStyle=grd; c.beginPath(); c.arc(W/2,H/2,6,0,Math.PI*2); c.fill();
@@ -799,8 +800,7 @@ document.querySelectorAll('td.nav-cell a').forEach(function(link,i){
 })();
 
 /* ========================================================
-   EASTER EGG 1 — KONAMI CODE → écran glitch
-   ↑ ↑ ↓ ↓ ← → ← → B A
+   EASTER EGG 1 — KONAMI CODE
    ======================================================== */
 var konamiSeq=[38,38,40,40,37,39,37,39,66,65];
 var konamiIdx=0;
@@ -817,7 +817,6 @@ function triggerKonamiEgg(){
   var frames=0, maxFrames=90;
   function glitchFrame(){
     frames++;
-    // Noise
     var img=c.createImageData(cv.width,cv.height);
     for(var i=0;i<img.data.length;i+=4){
       var v=Math.random()*255;
@@ -827,7 +826,6 @@ function triggerKonamiEgg(){
       img.data[i+3]=v>240?255:0;
     }
     c.putImageData(img,0,0);
-    // Barres de glitch
     for(var j=0;j<8;j++){
       if(Math.random()<0.5){
         var y=Math.random()*cv.height;
@@ -843,75 +841,7 @@ function triggerKonamiEgg(){
 }
 
 /* ========================================================
-   GIF CELLULES PUBLICATIONS — canvas placeholder
-   Pour chaque cellule : remplacer le <canvas id="gif-cell-N">
-   par <img src="votre.gif" style="width:100%;display:block">
-   ======================================================== */
-(function(){
-  var cells=[
-    {id:'gif-cell-1',color:'#AA55CC',bg:'#1a0033'},
-    {id:'gif-cell-2',color:'#FF3366',bg:'#1a0010'},
-    {id:'gif-cell-3',color:'#00CCFF',bg:'#001a2a'},
-    {id:'gif-cell-4',color:'#FFAA00',bg:'#1a1000'}
-  ];
-  cells.forEach(function(cfg,ci){
-    var cv=document.getElementById(cfg.id); if(!cv)return;
-    var c=cv.getContext('2d'), W=cv.width, H=cv.height, t=0;
-    (function draw(){
-      t+=0.06;
-      c.fillStyle=cfg.bg; c.fillRect(0,0,W,H);
-      for(var j=0;j<3;j++){
-        if(Math.random()<0.3){
-          var y2=Math.floor(Math.random()*H);
-          c.fillStyle='rgba(255,255,255,0.06)';
-          c.fillRect(0,y2,W,Math.random()*3+1);
-        }
-      }
-      var r=H*0.22+Math.sin(t+ci)*H*0.07;
-      var grd=c.createRadialGradient(W/2,H/2,0,W/2,H/2,r*2);
-      grd.addColorStop(0,cfg.color); grd.addColorStop(1,'transparent');
-      c.fillStyle=grd; c.beginPath(); c.arc(W/2,H/2,r,0,Math.PI*2); c.fill();
-      c.fillStyle='rgba(0,0,0,0.22)';
-      for(var y=0;y<H;y+=2) c.fillRect(0,y,W,1);
-      c.fillStyle='rgba(0,0,0,0.5)'; c.fillRect(0,H-14,W,14);
-      c.fillStyle=cfg.color;
-      c.font='bold 8px Courier New'; c.textAlign='center';
-      c.fillText('[ GIF ]',W/2,H-4);
-      requestAnimationFrame(draw);
-    })();
-  });
-})();
-
-/* ========================================================
-   EASTER EGG 2 — slot MP3 nav : tooltip au hover
-   ======================================================== */
-var mp3NavLink=document.getElementById('mp3-nav');
-var tooltip=document.getElementById('mystery-tooltip');
-if(mp3NavLink && tooltip){
-  var mp3Messages=[
-    '[ son à venir ]',
-    'fichier audio non chargé',
-    'hover → lecture MP3',
-    'remplacer votre-son.mp3',
-    '♪ silence temporaire ♪'
-  ];
-  mp3NavLink.addEventListener('mouseenter',function(e){
-    tooltip.textContent=mp3Messages[Math.floor(Math.random()*mp3Messages.length)];
-    tooltip.style.display='block';
-    tooltip.style.left=(e.clientX+12)+'px';
-    tooltip.style.top=(e.clientY-8)+'px';
-  });
-  mp3NavLink.addEventListener('mousemove',function(e){
-    tooltip.style.left=(e.clientX+12)+'px';
-    tooltip.style.top=(e.clientY-8)+'px';
-  });
-  mp3NavLink.addEventListener('mouseleave',function(){
-    tooltip.style.display='none';
-  });
-}
-
-/* ========================================================
-   EASTER EGG 3 — Citation rotative (click)
+   EASTER EGG 2 — Citation rotative (click)
    ======================================================== */
 var citations=[
   '&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;',
@@ -939,35 +869,29 @@ if(citEl){
   });
 }
 
-/* ========================================================
-   EASTER EGG 4 — Triple-click sur le titre → glitch intense
-   ======================================================== */
-var titleEl=document.querySelector('h1.site-title');
-if(titleEl){
-  var titleClicks=0, titleTimer=null;
-  titleEl.addEventListener('click',function(){
-    titleClicks++;
-    clearTimeout(titleTimer);
-    titleTimer=setTimeout(function(){ titleClicks=0; },600);
-    if(titleClicks>=3){
-      titleClicks=0;
-      titleEl.style.animation='none';
-      titleEl.style.filter='hue-rotate(180deg) invert(0.2)';
-      titleEl.style.transform='skewX(-5deg)';
-      titleEl.style.letterSpacing='8px';
-      setTimeout(function(){
-        titleEl.style.filter='hue-rotate(0deg)';
-        titleEl.style.transform='skewX(3deg)';
-        setTimeout(function(){
-          titleEl.style.filter='';
-          titleEl.style.transform='';
-          titleEl.style.letterSpacing='4px';
-          titleEl.style.animation='titlePulse 12s ease-in-out infinite';
-        },120);
-      },80);
-    }
+/* === BOUTON GRATUITE : s'appuie au clic === */
+(function(){
+  var btn = document.getElementById('btn-gratuite');
+  if(!btn) return;
+  btn.addEventListener('mousedown', function(){
+    btn.style.borderTopColor   = '#880000';
+    btn.style.borderLeftColor  = '#880000';
+    btn.style.borderRightColor = '#FF6666';
+    btn.style.borderBottomColor= '#FF6666';
+    btn.style.transform = 'translateY(1px)';
   });
-}
+  function release(){ 
+    btn.style.borderTopColor   = '#FF6666';
+    btn.style.borderLeftColor  = '#FF6666';
+    btn.style.borderRightColor = '#880000';
+    btn.style.borderBottomColor= '#880000';
+    btn.style.transform = ''; 
+  }
+  btn.addEventListener('mouseup', release);
+  btn.addEventListener('mouseleave', release);
+})();
+
+/* titre : lueur uniquement, pas d'easter egg clic */
 
 /* ========================================================
    SYNTH (inchangé)
