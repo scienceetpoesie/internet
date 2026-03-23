@@ -296,7 +296,8 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   </div>
 
   <hr class="rainbow">
-    
+
+  <table class="cards-table" cellpadding="0" cellspacing="0">
     <tr><td class="card c-purple" id="oeuvres" colspan="2">
       <div class="card-header">&#x2736; PUBLICATIONS</div>
       <div class="card-body" style="padding:0">
@@ -329,32 +330,21 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
       </div>
     </td></tr>
 
-
-  <table class="cards-table" cellpadding="0" cellspacing="0">
-    <tr><td class="card c-crimson" id="projets" colspan="2">
-      <div class="card-header">&#x25BA; PROJET EN COURS</div>
-      <div class="card-body">Enquetes, analyses et actions contre les organisations sectaires.<br>Croisement des méthodes sociologiques et des savoirs essotériques pour decoder les mécanismes d'emprise.<br><a href="#">&#9658; Accéder aux projets</a></div>
-    </td></tr>
-
-
-
-    
     <tr>
       <td class="card c-gold" id="hallofame" style="width:50%">
         <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
         <div class="card-body">Figures, contributions exceptionnelles, honor&eacute;s par S&amp;P.<br><a href="hallofame.html">&#9658; D&eacute;couvrir le palmar&egrave;s</a></div>
       </td>
-      <td class="card" rowspan="2" style="width:50%;vertical-align:top;background:#C0C0C0">
-        <div class="card-header" style="background:#808080;color:#AAAAAA;letter-spacing:2px">&#x25A1; PLACEHOLDER</div>
-        <div class="card-body" style="background:#C0C0C0;color:#888888;font-style:italic;text-align:center;padding-top:40px">[ à venir ]</div>
-      </td>
-    </tr>
-    <tr>
       <td class="card c-black" id="suckerlist" style="width:50%">
         <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
         <div class="card-body" style="background:#1A1A1A;color:#CCCCCC;">Figures, contributions r&eacute;pugnantes, honnis par S&amp;P<br><a href="suckerlist.html" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a></div>
       </td>
     </tr>
+
+    <tr><td class="card c-crimson" id="projets" colspan="2">
+      <div class="card-header">&#x25BA; PROJET EN COURS</div>
+      <div class="card-body">Enquetes, analyses et actions contre les organisations sectaires.<br>Croisement des méthodes sociologiques et des savoirs essotériques pour decoder les mécanismes d'emprise.<br><a href="#">&#9658; Accéder aux projets</a></div>
+    </td></tr>
 
     <tr><td class="card c-sociogonie" id="sociogonie" colspan="2">
       <div class="card-header" style="color:#E0CCFF;letter-spacing:3px">&#x2609; SOCIOGONIE</div>
@@ -397,15 +387,12 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   </div>
 
   <!-- 5. MODULORAVIER intégré -->
-  <div style="background:#CC6600;border-bottom:3px solid #994400;padding:3px 5px;">
-    <div style="font-family:'Arial Black',Arial,sans-serif;font-size:9px;font-weight:900;color:#FFDD88;text-transform:uppercase;letter-spacing:1px;text-align:center">&#x25CB; ModuRavier</div>
-  </div>
-  <div style="background:#1a1408;padding:4px;border-bottom:3px solid #994400;line-height:0;">
-    <div id="mr-wrap">
+  <div style="background:#FF8000;border-bottom:0;padding:6px 4px 0 4px;display:flex;justify-content:center;">
+    <div id="mr-wrap" style="border:2px solid #6b4a28;box-shadow:1px 1px 4px rgba(0,0,0,0.3);">
       <canvas id="mr-c" width="156" height="206"></canvas>
     </div>
   </div>
-  <div style="background:#CC6600;border-bottom:3px solid #994400;padding:6px 4px 7px 4px;">
+  <div style="background:#FF8000;border-bottom:3px solid #CC6600;padding:5px 4px 7px 4px;display:flex;justify-content:center;">
     <div style="width:82px;display:flex;flex-direction:row;gap:6px;align-items:center;">
       <div style="flex:1;display:flex;flex-direction:column;gap:7px;">
         <input type="range" id="mr-rep"   min="1"   max="60"   step="0.5"   value="9.5">
