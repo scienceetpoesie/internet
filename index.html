@@ -375,6 +375,8 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   <!-- NOTRE ENTENTE — halo divin + son au hover -->
   <!-- Pour le halo : overflow:visible sur .ne-pub-wrapper + z-index elevé -->
   <!-- Pour le son  : remplacer PLACEHOLDER_NOTRE_ENTENTE.mp3 par l'URL du fichier -->
+
+  <!-- 1. NOTRE ENTENTE -->
   <div class="ne-pub-wrapper">
     <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" id="ne-pub-link" target="_blank">
       <div style="font-family:'Arial Black',Arial,sans-serif;font-size:10px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
@@ -385,44 +387,60 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     </a>
   </div>
 
+  <!-- 2. CITATION -->
   <div class="rsidebar-section"><h3>Citation</h3><p id="citation-text" style="font-style:italic;font-size:11px" title="cliquer pour suivant">&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;</p></div>
+
+  <!-- 3. WEB RING -->
   <div class="rsidebar-section"><h3>Web Ring</h3><div class="webring-box"><a href="#">&#9664; Pr&eacute;c.</a><a href="#" style="color:#FF0000;font-size:13px">&#9679;</a><a href="#">Suiv. &#9654;</a></div></div>
-  <div class="rsidebar-section" style="text-align:center"><p style="font-family:'Courier New';font-size:10px;font-weight:bold;color:#000">Optimis&eacute; pour<br><span style="font-size:13px">Netscape 3.0</span><br>800&times;600</p></div>
-  <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;">
+
+  <!-- 4. BOUTON GRATUITE -->
+  <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;border-bottom:3px solid #CC6600;">
     <span style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#CC0000;line-height:1.5;display:block;margin-bottom:2px">Gratuit&eacute;</span>
     <span style="display:block;color:#CC0000;font-size:13px;line-height:1;">&#x2193;</span>
     <span id="btn-gratuite" style="display:inline-block;width:22px;height:22px;background:#CC0000;border-top:2px solid #FF6666;border-left:2px solid #FF6666;border-right:2px solid #880000;border-bottom:2px solid #880000;border-radius:50%;margin-top:2px;"></span>
+  </div>
 
-<div class="synth-scale-wrapper">
-<div class="sw">
-  <div class="screen">
-    <canvas class="osc-canvas" id="osc" width="68" height="12"></canvas>
-    <div class="freq-block"><div class="note-val" id="nval">--</div><div class="freq-val" id="fval">--Hz</div></div>
+  <!-- 5. MODULORAVIER — placeholder -->
+  <div style="background:#CC6600;border-bottom:3px solid #994400;padding:4px 5px;">
+    <div style="font-family:'Arial Black',Arial,sans-serif;font-size:9px;font-weight:900;color:#FFDD88;text-transform:uppercase;letter-spacing:1px;text-align:center">&#x25A1; ModuRavier</div>
   </div>
-  <div class="ctrls">
-    <button class="round-btn" onclick="changeOct(-1)">-</button>
-    <button class="round-btn" onclick="changeOct(1)">+</button>
-    <div class="wave-slider-wrap">
-      <span class="wave-label">S</span>
-      <input type="range" class="wslider" min="0" max="1" step="1" value="0" oninput="setWave(this.value)">
-      <span class="wave-label">T</span>
-    </div>
-    <div class="led-wrap"><div class="led-inner" id="led"><div class="led-reflet"></div></div></div>
+  <div style="background:#1a1408;min-height:80px;display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Courier New',monospace;font-size:9px;color:#5a4a30;text-align:center;letter-spacing:1px">[ à venir ]</span>
   </div>
-  <div class="bottom-row">
-    <div class="keys-wrap" id="kw"><div class="wkeys" id="wkeys"></div><div class="bkeys" id="bkeys"></div></div>
-    <div class="arp-corner">
-      <div class="arp-top"><div class="arp-lbl">ARP</div><div class="arp-sw" id="arp-sw" onclick="toggleArp()"><div class="arp-thumb"></div></div></div>
-      <div class="arp-bot">
-        <input type="range" class="tslider" id="tslider" min="0" max="100" step="1" value="30" oninput="setTempo(this.value)">
-        <div class="bpm-lbl" id="bpm-lbl">120</div>
+
+  <!-- 6. SYNTHÉ -->
+  <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;">
+    <div class="synth-scale-wrapper">
+      <!-- le synthé existant, inchangé -->
+      <div class="sw">
+        <div class="screen">
+          <canvas class="osc-canvas" id="osc" width="68" height="12"></canvas>
+          <div class="freq-block"><div class="note-val" id="nval">--</div><div class="freq-val" id="fval">--Hz</div></div>
+        </div>
+        <div class="ctrls">
+          <button class="round-btn" onclick="changeOct(-1)">-</button>
+          <button class="round-btn" onclick="changeOct(1)">+</button>
+          <div class="wave-slider-wrap">
+            <span class="wave-label">S</span>
+            <input type="range" class="wslider" min="0" max="1" step="1" value="0" oninput="setWave(this.value)">
+            <span class="wave-label">T</span>
+          </div>
+          <div class="led-wrap"><div class="led-inner" id="led"><div class="led-reflet"></div></div></div>
+        </div>
+        <div class="bottom-row">
+          <div class="keys-wrap" id="kw"><div class="wkeys" id="wkeys"></div><div class="bkeys" id="bkeys"></div></div>
+          <div class="arp-corner">
+            <div class="arp-top"><div class="arp-lbl">ARP</div><div class="arp-sw" id="arp-sw" onclick="toggleArp()"><div class="arp-thumb"></div></div></div>
+            <div class="arp-bot">
+              <input type="range" class="tslider" id="tslider" min="0" max="100" step="1" value="30" oninput="setTempo(this.value)">
+              <div class="bpm-lbl" id="bpm-lbl">120</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 
-  </div>
 </td>
 </tr></table>
 
