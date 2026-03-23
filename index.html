@@ -451,17 +451,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
    ait fini de charger, donc contentWindow.postMessage était ignoré.
    Solution : on bufferise les messages et on les envoie une fois l'iframe prête.
 */
-var ravierReady = false;
-var ravierQueue = [];
-
-function ravierSend(param, value) {
-  var msg = { type: 'ravier', param: param, value: parseFloat(value) };
-  if (!ravierReady) { ravierQueue.push(msg); return; }
-  var iframe = document.getElementById('ravier-iframe');
-  if (!iframe || !iframe.contentWindow) return;
-  try { iframe.contentWindow.postMessage(msg, '*'); } catch(e) {}
-}
-
 (function() {
   var iframe = document.getElementById('ravier-iframe');
   if (!iframe) return;
