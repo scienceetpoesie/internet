@@ -91,11 +91,11 @@ td.card { vertical-align: top; padding: 0; border: 3px outset #888888; width: 50
 .card-body a:hover { background-color: #0000CC; border-style: inset; }
 .c-crimson .card-header{background-color:#990000;}.c-crimson .card-body{background-color:#FFF5F5;}
 .c-purple .card-header{background-color:#660066;}.c-purple .card-body{background-color:#FFF0FF;}
-.c-gold .card-header{background-color:#886600;}.c-gold .card-body{background-color:#FFFBE8;}
+.c-gold .card-header{background-color:#886600;}.c-gold .card-body{background-color:#886600;}
 .c-gold .card-body a:hover{background-color:#22FF22!important;border-color:#00CC00;border-style:inset;color:#003300;}
 .c-black .card-header{background-color:#111111;}.c-black .card-body{background-color:#1A1A1A;color:#CCCCCC;}
 .c-black .card-body a{border-color:#888800;}
-.c-black .card-body a:hover{background-color:#5C2800!important;border-color:#8B4000;border-style:inset;color:#FFBB66;}
+.c-black .card-body a:hover{background-color:#471f01!important;border-color:#8B4000;border-style:inset;color:#FFBB66;}
 .c-sociogonie .card-header{background-color:#2B0050;}.c-sociogonie .card-body{background-color:#F5EEFF;}
 .sociogonie-with-gif{display:flex;align-items:flex-start;gap:10px;}
 .sociogonie-gif-slot{flex-shrink:0;width:52px;height:52px;background:#000;border:2px inset #5500AA;overflow:hidden;}
@@ -364,7 +364,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     <tr>
       <td class="card c-gold" id="hallofame" style="width:50%;vertical-align:top;">
         <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/couronne%202.ico" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
-        <div class="card-body">Figures, contributions exceptionnelles, honor&eacute;s par S&amp;P.<a href="hallofame.html">&#9658; D&eacute;couvrir le palmar&egrave;s</a></div>
+        <div class="card-body" style="background:#1A1A1A;color:#CCCCCC;">Figures, contributions exceptionnelles, honor&eacute;s par S&amp;P.<a href="hallofame.html">&#9658; D&eacute;couvrir le palmar&egrave;s</a></div>
       </td>
       <td class="card c-black" id="suckerlist" style="width:50%;vertical-align:top;">
         <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane%20simple.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
@@ -771,7 +771,7 @@ document.addEventListener('touchend',function(){mouseDown=false;if(!arpOn)stopSo
   var h1=document.getElementById('site-title-h1');
   var container=document.getElementById('title-stars');
   if(!h1||!container)return;
-  var OFFSET_X = -12;
+  var OFFSET_X = -8;
   var OFFSET_Y = -4;
   function placeStars(){
     var h1rect=h1.getBoundingClientRect();
