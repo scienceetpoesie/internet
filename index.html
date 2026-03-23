@@ -107,11 +107,6 @@ hr.rainbow { border: none; height: 6px; background: linear-gradient(to right, #6
 @keyframes noiseShift{0%{transform:translate(0,0);}25%{transform:translate(-3px,2px);}50%{transform:translate(2px,-3px);}75%{transform:translate(-2px,-2px);}100%{transform:translate(3px,1px);}}
 
 /* ===================== NOTRE ENTENTE — HALO DIVIN ===================== */
-/*
-  Le wrapper a overflow:visible pour que le box-shadow de l'<a> déborde
-  hors des limites de la sidebar sans être clippé.
-  La sidebar elle-même a overflow visible sur ce point grâce au z-index.
-*/
 .ne-pub-wrapper {
   padding: 8px;
   background: #FF8000;
@@ -130,12 +125,10 @@ a.ne-pub-link {
   text-align: center;
   padding: 10px 6px 12px 6px;
   position: relative;
-  /* transition douce à l'entrée */
   transition: box-shadow 0.4s ease, outline-color 0.4s ease;
   box-shadow: none;
 }
 
-/* halo au hover : rayonnement extérieur bleu-doré, pulsant */
 a.ne-pub-link:hover {
   outline-color: #AAAAFF;
   animation: haloBreath 2.6s ease-in-out infinite;
@@ -372,10 +365,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 <!-- ===== SIDEBAR DROITE ===== -->
 <td class="sidebar-right">
 
-  <!-- NOTRE ENTENTE — halo divin + son au hover -->
-  <!-- Pour le halo : overflow:visible sur .ne-pub-wrapper + z-index elevé -->
-  <!-- Pour le son  : remplacer PLACEHOLDER_NOTRE_ENTENTE.mp3 par l'URL du fichier -->
-
   <!-- 1. NOTRE ENTENTE -->
   <div class="ne-pub-wrapper">
     <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" id="ne-pub-link" target="_blank">
@@ -400,37 +389,42 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     <span id="btn-gratuite" style="display:inline-block;width:22px;height:22px;background:#CC0000;border-top:2px solid #FF6666;border-left:2px solid #FF6666;border-right:2px solid #880000;border-bottom:2px solid #880000;border-radius:50%;margin-top:2px;"></span>
   </div>
 
-<!-- 5. MODULORAVIER — iframe -->
-<div style="background:#CC6600;border-bottom:3px solid #994400;padding:4px 5px;">
-  <div style="font-family:'Arial Black',Arial,sans-serif;font-size:9px;font-weight:900;color:#FFDD88;text-transform:uppercase;letter-spacing:1px;text-align:center">&#x25CB; ModuRavier</div>
-</div>
-<div style="background:#1a1408;overflow:hidden;line-height:0;border-bottom:3px solid #994400;height:60px;width:90px;">
-  <iframe
-    id="ravier-iframe"
-    src="raviermod.html"
-    width="720"
-    height="480"
-    scrolling="no"
-    frameborder="0"
-    style="display:block;border:none;transform:scale(0.125);transform-origin:top left;pointer-events:none;"
-  ></iframe>
-</div>
-<div style="background:#CC6600;border-bottom:3px solid #994400;padding:4px 5px 6px 5px;">
-  <div style="font-family:'Courier New',monospace;font-size:7px;color:#FFDD88;margin-bottom:3px;letter-spacing:1px">RÉP</div>
-  <input type="range" min="1" max="60" step="0.5" value="9.5" oninput="ravierSend('rep',this.value)"
-    style="-webkit-appearance:none;appearance:none;width:78px;height:3px;background:#994400;outline:none;display:block;margin-bottom:4px;">
-  <div style="font-family:'Courier New',monospace;font-size:7px;color:#FFDD88;margin-bottom:3px;letter-spacing:1px">VIT</div>
-  <input type="range" min="0" max="50" step="0.1" value="6.6" oninput="ravierSend('spd',this.value)"
-    style="-webkit-appearance:none;appearance:none;width:78px;height:3px;background:#994400;outline:none;display:block;margin-bottom:4px;">
-  <div style="font-family:'Courier New',monospace;font-size:7px;color:#FFDD88;margin-bottom:3px;letter-spacing:1px">AMP</div>
-  <input type="range" min="0" max="0.35" step="0.005" value="0.07" oninput="ravierSend('amp',this.value)"
-    style="-webkit-appearance:none;appearance:none;width:78px;height:3px;background:#994400;outline:none;display:block;">
-</div>
+  <!-- 5. MODULORAVIER — iframe agrandie, paramètres fonctionnels -->
+  <div style="background:#CC6600;border-bottom:3px solid #994400;padding:4px 5px;">
+    <div style="font-family:'Arial Black',Arial,sans-serif;font-size:9px;font-weight:900;color:#FFDD88;text-transform:uppercase;letter-spacing:1px;text-align:center">&#x25CB; ModuRavier</div>
+  </div>
+  <!--
+    La colonne fait 90px. L'iframe (720×480) est scalée à 0.175 → 126×84px.
+    On centre le débordement horizontal avec margin-left négatif :
+      débordement = (126 - 90) / 2 = 18px → margin-left: -18px
+    overflow:hidden coupe ce qui dépasse.
+  -->
+  <div style="background:#1a1408;overflow:hidden;line-height:0;border-bottom:3px solid #994400;height:84px;width:90px;">
+    <iframe
+      id="ravier-iframe"
+      src="raviermod.html"
+      width="720"
+      height="480"
+      scrolling="no"
+      frameborder="0"
+      style="display:block;border:none;transform:scale(0.175);transform-origin:top left;pointer-events:none;margin-left:-18px;"
+    ></iframe>
+  </div>
+  <div style="background:#CC6600;border-bottom:3px solid #994400;padding:5px 6px 8px 6px;">
+    <div style="font-family:'Courier New',monospace;font-size:7px;color:#FFDD88;margin-bottom:2px;letter-spacing:1px">RÉP</div>
+    <input type="range" id="ravier-rep" min="1" max="60" step="0.5" value="9.5"
+      style="-webkit-appearance:none;appearance:none;width:78px;height:3px;background:#994400;outline:none;display:block;margin-bottom:5px;cursor:pointer;">
+    <div style="font-family:'Courier New',monospace;font-size:7px;color:#FFDD88;margin-bottom:2px;letter-spacing:1px">VIT</div>
+    <input type="range" id="ravier-spd" min="0" max="50" step="0.1" value="6.6"
+      style="-webkit-appearance:none;appearance:none;width:78px;height:3px;background:#994400;outline:none;display:block;margin-bottom:5px;cursor:pointer;">
+    <div style="font-family:'Courier New',monospace;font-size:7px;color:#FFDD88;margin-bottom:2px;letter-spacing:1px">AMP</div>
+    <input type="range" id="ravier-amp" min="0" max="0.35" step="0.005" value="0.07"
+      style="-webkit-appearance:none;appearance:none;width:78px;height:3px;background:#994400;outline:none;display:block;cursor:pointer;">
+  </div>
 
   <!-- 6. SYNTHÉ -->
   <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;">
     <div class="synth-scale-wrapper">
-      <!-- le synthé existant, inchangé -->
       <div class="sw">
         <div class="screen">
           <canvas class="osc-canvas" id="osc" width="68" height="12"></canvas>
@@ -470,11 +464,47 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
 <!-- ===================== SCRIPTS ===================== -->
 <script>
-  function ravierSend(param, value) {
+/* ══ ModuRavier — postMessage avec file d'attente jusqu'au load de l'iframe ══
+   Problème original : ravierSend() était appelé via oninput avant que l'iframe
+   ait fini de charger, donc contentWindow.postMessage était ignoré.
+   Solution : on bufferise les messages et on les envoie une fois l'iframe prête.
+*/
+var ravierReady = false;
+var ravierQueue = [];
+
+function ravierSend(param, value) {
+  var msg = { type: 'ravier', param: param, value: parseFloat(value) };
+  if (!ravierReady) { ravierQueue.push(msg); return; }
   var iframe = document.getElementById('ravier-iframe');
   if (!iframe || !iframe.contentWindow) return;
-  iframe.contentWindow.postMessage({ type: 'ravier', param: param, value: parseFloat(value) }, '*');
+  try { iframe.contentWindow.postMessage(msg, '*'); } catch(e) {}
 }
+
+(function() {
+  var iframe = document.getElementById('ravier-iframe');
+  if (!iframe) return;
+
+  /* Dès que l'iframe est chargée : vider la file et brancher les sliders */
+  iframe.addEventListener('load', function() {
+    ravierReady = true;
+    var iw = iframe.contentWindow;
+    ravierQueue.forEach(function(m) { try { iw.postMessage(m, '*'); } catch(e){} });
+    ravierQueue = [];
+  });
+
+  /* Listeners sur les sliders identifiés par id */
+  var sliders = [
+    { id: 'ravier-rep', param: 'rep' },
+    { id: 'ravier-spd', param: 'spd' },
+    { id: 'ravier-amp', param: 'amp' }
+  ];
+  sliders.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (!el) return;
+    el.addEventListener('input', function() { ravierSend(s.param, this.value); });
+  });
+})();
+
 document.getElementById('fyear').innerHTML = new Date().getFullYear();
 var baseCount = 1847;
 var disp = document.getElementById('vcounter');
@@ -505,20 +535,15 @@ document.addEventListener('click',function(e){
 (function(){
   var neLink = document.getElementById('ne-pub-link');
   if(!neLink) return;
-  var mp3src = 'https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/Chromatic%20Bach%20McLeod.mp3'; /* ← REMPLACER PAR L'URL DU MP3 */
+  var mp3src = 'https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/son/Chromatic%20Bach%20McLeod.mp3';
   var audio = null;
-  /* état du synthé sauvegardé au mouseenter pour restauration au mouseleave */
   var synthWasSounding = false;
 
   neLink.addEventListener('mouseenter', function(){
-    /* --- 1. couper la synthèse vocale (catégories navbar) --- */
     if(window.speechSynthesis) window.speechSynthesis.cancel();
-
-    /* --- 2. mettre le synthé en silence sans le détruire --- */
     synthWasSounding = false;
     if(window.gn && window.ctx) {
       try {
-        /* vérifie qu'une note est active (osc existe) */
         if(window.osc) {
           synthWasSounding = true;
           window.gn.gain.setTargetAtTime(0, window.ctx.currentTime, 0.02);
@@ -526,24 +551,17 @@ document.addEventListener('click',function(e){
         }
       } catch(e){}
     }
-
-    /* --- 3. lancer / reprendre le mp3 --- */
     if(!audio){
       audio = new Audio(mp3src);
       audio.loop = false;
       audio.volume = 0.85;
-      /* si le fichier se termine naturellement, remettre à 0 pour la prochaine fois */
       audio.addEventListener('ended', function(){ audio.currentTime = 0; });
     }
-    /* NE PAS toucher à currentTime ici → reprend là où on en était */
     audio.play().catch(function(){});
   });
 
   neLink.addEventListener('mouseleave', function(){
-    /* --- 1. pause du mp3 (position conservée) --- */
     if(audio) audio.pause();
-
-    /* --- 2. rendre le volume au synthé s'il était actif --- */
     if(synthWasSounding && window.gn && window.ctx) {
       try {
         window.gn.gain.setTargetAtTime(window.vol * 0.38, window.ctx.currentTime, 0.03);
