@@ -470,6 +470,11 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
 <!-- ===================== SCRIPTS ===================== -->
 <script>
+  function ravierSend(param, value) {
+  var iframe = document.getElementById('ravier-iframe');
+  if (!iframe || !iframe.contentWindow) return;
+  iframe.contentWindow.postMessage({ type: 'ravier', param: param, value: parseFloat(value) }, '*');
+}
 document.getElementById('fyear').innerHTML = new Date().getFullYear();
 var baseCount = 1847;
 var disp = document.getElementById('vcounter');
