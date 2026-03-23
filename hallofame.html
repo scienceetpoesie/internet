@@ -19,12 +19,13 @@
   }
 
   .gif-border {
-    width: 100%; display: flex; flex-wrap: nowrap;
+    width: 100%;
     overflow: hidden; line-height: 0; font-size: 0;
     background: transparent;
+    white-space: nowrap;
   }
   .gif-border img {
-    display: block; flex-shrink: 0; width: auto;
+    display: inline-block; flex-shrink: 0; width: auto;
   }
   #gifTop    img { height: 60px; }
   #gifMiddle img { height: 50px; }
@@ -84,14 +85,12 @@
     color: #FFD700;
     text-shadow:
       3px  3px 0 #7a3a00,
-      -1px -1px 0 #fff8a0,
-      0 0 20px #FFD700aa,
-      0 0 50px #FFAA0055;
+      -1px -1px 0 #fff8a0;
   }
   .title-of {
     font-size: 40px; letter-spacing: 10px; display: block;
     color: #cc8800;
-    text-shadow: 2px 2px 0 #5a2a00, 0 0 12px #FFD70077;
+    text-shadow: 2px 2px 0 #5a2a00;
     margin: -8px 0 -4px;
   }
   .title-fame {
@@ -99,8 +98,7 @@
     color: #cc8800;
     text-shadow:
       3px  3px 0 #5a2a00,
-      -1px -1px 0 #fff5a0,
-      0 0 20px #FFD700aa;
+      -1px -1px 0 #fff5a0;
   }
 
   /* ===== GALLERY ===== */
@@ -434,9 +432,8 @@ var FALLBACKS = {
   gifBot:    { h:"60px", bg:"rgba(255,248,180,0.25)", msg:"[ GIF FRISE C ]", col:"#cc8800" }
 };
 
-/* Frise GIF : on tile suffisamment d'images pour couvrir la largeur,
-   puis on en rajoute autant pour permettre une animation de défilement
-   sans blanc visible en bout de boucle. */
+/* Frise GIF : 80 images fixes — largement assez pour couvrir n'importe
+   quel écran même en 4K avec de petits GIFs. overflow:hidden coupe proprement. */
 function buildGif(id, url, height) {
   var el = document.getElementById(id);
   var fb = FALLBACKS[id];
@@ -450,28 +447,11 @@ function buildGif(id, url, height) {
     el.innerHTML = fb.msg;
     return;
   }
-  /* On crée une image temporaire pour mesurer la largeur naturelle du GIF,
-     puis on tile. Si l'image ne charge pas, on repasse sur un fallback. */
-  var probe = new Image();
-  probe.onload = function() {
-    var gifW = probe.naturalWidth || 60;
-    /* Nombre d'images pour deux largeurs d'écran (garantit la boucle) */
-    var count = Math.ceil(window.innerWidth * 2 / gifW) + 4;
-    var html = '';
-    for (var i = 0; i < count; i++) {
-      html += '<img src="' + url + '" height="' + height + '" alt="" style="display:block;flex-shrink:0;">';
-    }
-    el.innerHTML = html;
-  };
-  probe.onerror = function() {
-    el.style.cssText =
-      "display:block;width:100%;text-align:center;padding:10px 0;" +
-      "background:" + fb.bg + ";" +
-      "font-size:11px;font-family:'Courier New',monospace;letter-spacing:3px;" +
-      "color:" + fb.col + ";";
-    el.innerHTML = fb.msg;
-  };
-  probe.src = url;
+  var html = '';
+  for (var i = 0; i < 80; i++) {
+    html += '<img src="' + url + '" height="' + height + '" alt="">';
+  }
+  el.innerHTML = html;
 }
 
 buildGif('gifTop',    GIF_FRISE_A, 60);
