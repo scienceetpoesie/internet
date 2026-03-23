@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Vintage Page</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #0b3d2e; /* vert forêt foncé */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Georgia", serif;
+    }
+
+    .cadre {
+      background-color: #f5f0e6; /* crème */
+      padding: 20px;
+      border: 3px solid #d6c7a1;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      max-width: 80%;
+      max-height: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cadre img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cadre">
+    <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/enconstruction.gif?raw=true" alt="Image vintage">
+  </div>
+
+</body>
+</html>
