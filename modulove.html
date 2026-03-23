@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="icon" href="https://github.com/scienceetpoesie/notre-entente/raw/refs/heads/main/assets/coeur" type="image/x-icon">
+<meta charset="utf-8">
+<title>MODULOVE</title>
+<style>
+:root {
+  --bg:        #c8b89a;
+  --bg2:       #b8a888;
+  --bg3:       #d4c5aa;
+  --shadow:    #7a6a52;
+  --gold:      #9a7c3a;
+  --gold-hi:   #c4a455;
+  --gold-dk:   #6b5220;
+  --text:      #2e2214;
+  --text-dim:  #6b5a3e;
+  --text-info: #7a6030;
+  --bord:      #7a1a2a;
+  --bord-hi:   #b03048;
+  --bord-dk:   #3e0a12;
+  --sep:       #a09070;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+  min-height: 100vh;
+  padding: 40px 20px;
+  gap: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.10'/%3E%3C/svg%3E"),
+    linear-gradient(160deg, var(--bg3) 0%, var(--bg) 40%, var(--bg2) 100%);
+}
+
+#appTitle {
+  font-size: 18px;
+  letter-spacing: .36em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  text-shadow: 0 1px 0 var(--gold-hi);
+  user-select: none;
+  font-weight: 700;
+}
+
+.scene { display:flex; align-items:center; justify-content:center; gap:20px; }
+
+.canvas-frame {
+  padding: 6px;
+  background: var(--bg2);
+  border-top:  3px solid var(--bg3);
+  border-left: 3px solid var(--bg3);
+  border-bottom: 3px solid var(--shadow);
+  border-right:  3px solid var(--shadow);
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.35);
+}
+
+canvas { display:block; width:720px; height:480px; flex-shrink:0; }
+
+#imgBtn {
+  width:60px; height:60px; flex-shrink:0;
+  background: #cc0000;
+  border-top:  3px solid #ff6666; border-left:  3px solid #ff4444;
+  border-bottom:3px solid #660000; border-right: 3px solid #880000;
+  cursor:pointer;
+}
+#imgBtn:active {
+  border-top:  3px solid #660000; border-left:  3px solid #880000;
+  border-bottom:3px solid #ff6666; border-right: 3px solid #ff4444;
+  background: #aa0000;
+}
+
+#soundBtn {
+  width:60px; height:60px; flex-shrink:0;
+  background: var(--bg3);
+  border-top:   3px solid #ede0cc; border-left:  3px solid #ede0cc;
+  border-bottom:3px solid var(--shadow); border-right: 3px solid var(--shadow);
+  cursor:pointer; font-size:28px;
+  color: var(--text-dim);
+  display:flex; align-items:center; justify-content:center;
+  user-select:none; line-height:1;
+}
+#soundBtn.on {
+  background: #2244aa;
+  border-top:   3px solid #4466cc; border-left:  3px solid #4466cc;
+  border-bottom:3px solid #112266; border-right: 3px solid #112266;
+  color: #ccdeff;
+  text-shadow: 0 0 6px rgba(100,160,255,0.7);
+}
+#soundBtn:active {
+  border-top:   3px solid var(--shadow); border-left:  3px solid var(--shadow);
+  border-bottom:3px solid #ede0cc;      border-right: 3px solid #ede0cc;
+  background: var(--bg2);
+}
+
+.controls {
+  width: 90vw; max-width: 800px;
+  display: flex; flex-direction: column; gap: 12px;
+  background: var(--bg2);
+  border-top:   2px solid var(--shadow);
+  border-left:  2px solid var(--shadow);
+  border-bottom:2px solid var(--bg3);
+  border-right: 2px solid var(--bg3);
+  padding: 18px 22px;
+  box-shadow: inset 1px 1px 4px rgba(0,0,0,0.18);
+}
+
+.slider-row { display:flex; align-items:center; gap:16px; }
+.slider-row label {
+  font-size: 11px; letter-spacing:.10em; text-transform:uppercase;
+  color: var(--text); width:130px; flex-shrink:0;
+  font-weight: bold;
+}
+.slider-row input[type=range] {
+  flex:1; cursor:pointer;
+  -webkit-appearance:none; appearance:none;
+  height:5px;
+  border-radius:3px;
+  outline:none;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4);
+  background: linear-gradient(to right, var(--shadow) 0%, var(--shadow) 0%, var(--gold) 0%, var(--gold) 100%);
+}
+.slider-row input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance:none; appearance:none;
+  width:13px; height:13px;
+  border-radius:50%;
+  background: var(--bord);
+  border: 2px solid var(--bord-hi);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12);
+  cursor:pointer;
+}
+.slider-row input[type=range]::-moz-range-thumb {
+  width:13px; height:13px; border-radius:50%;
+  background: var(--bord);
+  border: 2px solid var(--bord-hi);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.55);
+  cursor:pointer;
+}
+.slider-row span {
+  font-size:12px; color: var(--text);
+  width:44px; text-align:right;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing:.04em;
+}
+
+.btn-row { display:flex; align-items:center; gap:16px; }
+.btn-row label {
+  font-size:11px; letter-spacing:.10em; text-transform:uppercase;
+  color: var(--text); width:130px; flex-shrink:0;
+  font-weight: bold;
+}
+
+#dirBtn {
+  width:48px; height:48px; font-size:13px;
+  font-family:'Times New Roman',serif;
+  background: var(--bg); color: var(--text);
+  border-top:2px solid var(--bg3); border-left:2px solid var(--bg3);
+  border-bottom:2px solid var(--shadow); border-right:2px solid var(--shadow);
+  cursor:pointer; font-weight:bold;
+}
+#dirBtn:active {
+  border-top:2px solid var(--shadow); border-left:2px solid var(--shadow);
+  border-bottom:2px solid var(--bg3); border-right:2px solid var(--bg3);
+  background: var(--bg2);
+}
+
+.separator {
+  border:none;
+  border-top: 1px solid var(--sep);
+  margin: 4px 0;
+}
+
+.section-label {
+  font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--gold);
+  font-weight: bold;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--gold-dk);
+  display: inline-block;
+}
+
+#infoLine {
+  font-family: Helvetica, Arial, sans-serif;
+  width:720px; max-width:90vw;
+  padding: 0 0 0 272px;
+  height: 32px;
+  display:flex; align-items:center; gap:20px;
+  flex-shrink:0;
+}
+#imgLabel {
+  font-size:13px; color: var(--text-dim);
+  letter-spacing:.04em; font-style:italic;
+  white-space:nowrap;
+}
+#synthInfo {
+  font-size:10px; color: var(--text-info);
+  letter-spacing:.10em; text-transform:uppercase;
+  font-family: 'Courier New', monospace;
+  white-space:nowrap;
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <button id="soundBtn">&#9834;</button>
+  <div class="canvas-frame">
+    <canvas id="c" width="720" height="480"></canvas>
+  </div>
+  <button id="imgBtn"></button>
+</div>
+
+<div id="infoLine">
+  <span id="imgLabel">—</span>
+  <span id="synthInfo"></span>
+</div>
+
+<div class="controls">
+  <div class="section-label">Taille :</div>
+  <div class="slider-row"><label>Hauteur :</label><input type="range" id="scaleY" min="0.3" max="3" step="0.01" value="1.00"><span id="scaleYVal">1.00</span></div>
+  <div class="slider-row"><label>Largeur :</label><input type="range" id="scaleX" min="0.3" max="3" step="0.01" value="1.45"><span id="scaleXVal">1.45</span></div>
+  <hr class="separator">
+  <div class="section-label">Ondulation :</div>
+  <div class="slider-row"><label>Répétition :</label><input type="range" id="rep" min="1" max="60" step="0.5" value="7"><span id="repVal">7.0</span></div>
+  <div class="slider-row"><label>Vitesse :</label><input type="range" id="spd" min="0" max="50" step="0.1" value="3"><span id="spdVal">3.0</span></div>
+  <div class="slider-row"><label>Amplitude :</label><input type="range" id="amp" min="0" max="0.35" step="0.005" value="0.04"><span id="ampVal">0.04</span></div>
+  <div class="btn-row"><label>Axe :</label><button id="dirBtn">Y</button></div>
+  <div class="section-label">Chaos :</div>
+  <div class="slider-row"><input type="range" id="randomSlider" min="0" max="1.8" step="0.01" value="0"><span id="randomVal">0.00</span></div>
+</div>
+
+<script>
+var DEF = { scaleY:1.00, scaleX:1.45, rep:7, spd:3, amp:0.04, dir:1, chaos:0 };
+
+var BASE = 'https://raw.githubusercontent.com/scienceetpoesie/notre-entente/main/modulove%20portaits/';
+
+var images = [
+  { url:BASE+'steiniger_johannes_gross.jpg',
+    name:'Johannes Steiniger', synth:'steiniger',
+    defaults:{} },
+  { url:BASE+'VAl.jpg',
+    name:'Philippe Val', synth:'val',
+    defaults:{} },
+  { url:BASE+'Christoph_Blocher_(Bundesrat,_2004).jpg',
+    name:'Christoph Blocher', synth:'blocher',
+    defaults:{scaleY:1.34,scaleX:1.11,rep:10,spd:0.6,amp:0.12,dir:0,chaos:0} },
+  { url:BASE+'Gilles-Lellouche.jpg',
+    name:'Gilles Lellouche', synth:'lellouche',
+    defaults:{} },
+  { url:BASE+'Beigbeder.jpg',
+    name:'Frédéric Beigbeder', synth:'beigbeder',
+    defaults:{scaleY:0.78,scaleX:0.77,rep:5,spd:10.2,amp:0.26,dir:0,chaos:0.11} },
+  { url: 'https://raw.githubusercontent.com/scienceetpoesie/notre-entente/main/modulove%20portaits/Charles%20Gave.png',
+    name:'Charles Gave', synth:'gave',
+    defaults:{scaleY:1.00,scaleX:1.00,rep:8,spd:4,amp:0.08,dir:1,chaos:0} },
+  { url: 'https://raw.githubusercontent.com/scienceetpoesie/notre-entente/main/modulove%20portaits/G%C3%A9rard%20Larcher.jpg',
+    name:'Gérard Larcher', synth:'larcher',
+    defaults:{scaleY:1.00,scaleX:1.00,rep:6,spd:2,amp:0.06,dir:1,chaos:0} },
+];
+
+var imgIndex = Math.floor(Math.random() * images.length);
+
+var gRep=DEF.rep, gSpd=DEF.spd, gAmp=DEF.amp, gDir=DEF.dir, gChaos=DEF.chaos;
+var gScaleX=DEF.scaleX, gScaleY=DEF.scaleY;
+var actx=null, synthOn=false, masterGain=null, patchNodes=[], updateFn=null;
+
+var gSpdTarget = DEF.spd;
+var gSpdSmooth = DEF.spd;
+var SPD_SLEW   = 0.05;
+
+/* ══════════════════════════════════════════════
+   WebGL
+══════════════════════════════════════════════ */
+var canvas = document.getElementById('c');
+var gl = canvas.getContext('webgl');
+gl.viewport(0,0,720,480);
+
+var VERT = `
+attribute vec2 a_pos;
+varying vec2 v_uv;
+uniform float u_scaleX, u_scaleY;
+void main(){
+  vec2 uv = (a_pos + 1.0) * 0.5;
+  uv.y = 1.0 - uv.y;
+  uv.x = (uv.x - 0.5) / u_scaleX + 0.5;
+  uv.y = (uv.y - 0.5) / u_scaleY + 0.5;
+  v_uv = uv;
+  gl_Position = vec4(a_pos, 0.0, 1.0);
+}`;
+
+var FRAG = `
+precision mediump float;
+varying vec2 v_uv;
+uniform float u_time, u_rep, u_spd, u_amp, u_dir, u_chaos;
+uniform sampler2D u_tex;
+
+float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+float vnoise(vec2 p){
+  vec2 i=floor(p), f=fract(p);
+  f=f*f*(3.0-2.0*f);
+  float a=hash(i), b=hash(i+vec2(1,0)), c=hash(i+vec2(0,1)), d=hash(i+vec2(1,1));
+  return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);
+}
+
+void main(){
+  vec2 uv = v_uv;
+
+  if(u_dir < 0.5){
+    uv.y += sin(uv.x * u_rep + u_time * u_spd) * u_amp;
+  } else {
+    uv.x += sin(uv.y * u_rep + u_time * u_spd) * u_amp;
+  }
+
+  if(u_chaos > 0.0){
+    float m = 0.12;
+    float vx = smoothstep(0.0, m, uv.x) * smoothstep(0.0, m, 1.0 - uv.x);
+    float vy = smoothstep(0.0, m, uv.y) * smoothstep(0.0, m, 1.0 - uv.y);
+    float vign = vx * vy;
+    float amount = u_chaos * u_chaos * 0.55 * vign;
+    float nx1 = vnoise(uv * 1.2 + vec2(u_time * 0.08, 0.0)) - 0.5;
+    float ny1 = vnoise(uv * 1.2 + vec2(0.0, u_time * 0.10) + vec2(3.7,8.2)) - 0.5;
+    float nx2 = vnoise(uv * 2.8 + vec2(-u_time*0.15, u_time*0.12) + vec2(1.3,4.1)) - 0.5;
+    float ny2 = vnoise(uv * 2.8 + vec2(u_time*0.13,-u_time*0.10) + vec2(6.6,2.9)) - 0.5;
+    vec2 d = vec2(nx1,ny1)*0.72 + vec2(nx2,ny2)*0.32;
+    uv += d * amount;
+  }
+
+  vec4 col = texture2D(u_tex, clamp(uv, 0.0, 1.0));
+  gl_FragColor = col;
+}`;
+
+function mkSh(t,s){ var sh=gl.createShader(t); gl.shaderSource(sh,s); gl.compileShader(sh); return sh; }
+var prog = gl.createProgram();
+gl.attachShader(prog, mkSh(gl.VERTEX_SHADER, VERT));
+gl.attachShader(prog, mkSh(gl.FRAGMENT_SHADER, FRAG));
+gl.linkProgram(prog); gl.useProgram(prog);
+
+var vbuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, vbuf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+var aloc = gl.getAttribLocation(prog,'a_pos');
+gl.enableVertexAttribArray(aloc);
+gl.vertexAttribPointer(aloc,2,gl.FLOAT,false,0,0);
+
+var U = {
+  time:   gl.getUniformLocation(prog,'u_time'),
+  rep:    gl.getUniformLocation(prog,'u_rep'),
+  spd:    gl.getUniformLocation(prog,'u_spd'),
+  amp:    gl.getUniformLocation(prog,'u_amp'),
+  dir:    gl.getUniformLocation(prog,'u_dir'),
+  chaos:  gl.getUniformLocation(prog,'u_chaos'),
+  scaleX: gl.getUniformLocation(prog,'u_scaleX'),
+  scaleY: gl.getUniformLocation(prog,'u_scaleY'),
+};
+
+var tex = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D, tex);
+gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([180,180,180,255]));
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+
+function loadImage(index, applyDef){
+  var e = images[index];
+  document.getElementById('imgLabel').textContent = e.name;
+  if(applyDef){
+    var p={}; for(var k in DEF) p[k]=DEF[k]; for(var k in e.defaults) p[k]=e.defaults[k];
+    applyParams(p);
+  }
+  var img = new Image(); img.crossOrigin='anonymous';
+  img.onload = function(){
+    gl.bindTexture(gl.TEXTURE_2D,tex);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+  };
+  img.src = e.url;
+  if(synthOn && actx) rebuildPatch(e.synth||'steiniger');
+}
+
+/* ══════════════════════════════════════════════
+   UI
+══════════════════════════════════════════════ */
+function applyParams(p){
+  gScaleY=p.scaleY; gScaleX=p.scaleX; gRep=p.rep; gSpd=p.spd; gSpdTarget=p.spd; gSpdSmooth=p.spd; gAmp=p.amp; gDir=p.dir; gChaos=p.chaos;
+  document.getElementById('scaleY').value=gScaleY;       document.getElementById('scaleYVal').textContent=gScaleY.toFixed(2);
+  document.getElementById('scaleX').value=gScaleX;       document.getElementById('scaleXVal').textContent=gScaleX.toFixed(2);
+  document.getElementById('rep').value=gRep;             document.getElementById('repVal').textContent=(+gRep).toFixed(1);
+  document.getElementById('spd').value=gSpd;             document.getElementById('spdVal').textContent=(+gSpd).toFixed(1);
+  document.getElementById('amp').value=gAmp;             document.getElementById('ampVal').textContent=(+gAmp).toFixed(2);
+  document.getElementById('dirBtn').textContent=gDir<0.5?'X':'Y';
+  document.getElementById('randomSlider').value=gChaos;  document.getElementById('randomVal').textContent=(+gChaos).toFixed(2);
+  initAllSliders();
+}
+
+function updateSliderFill(el){
+  var min=+el.min, max=+el.max, val=+el.value;
+  var pct = ((val - min) / (max - min) * 100).toFixed(1);
+  el.style.background = 'linear-gradient(to right, #7a6a52 0%, #7a6a52 '+pct+'%, #9a7c3a '+pct+'%, #9a7c3a 100%)';
+}
+function initAllSliders(){
+  document.querySelectorAll('input[type=range]').forEach(function(s){ updateSliderFill(s); });
+}
+
+document.getElementById('rep').oninput = function(e){ gRep=+e.target.value; document.getElementById('repVal').textContent=(+gRep).toFixed(1); updateSliderFill(e.target); };
+document.getElementById('spd').oninput = function(e){ gSpd=+e.target.value; gSpdTarget=gSpd; document.getElementById('spdVal').textContent=(+gSpd).toFixed(1); updateSliderFill(e.target); };
+document.getElementById('amp').oninput = function(e){ gAmp=+e.target.value; document.getElementById('ampVal').textContent=(+gAmp).toFixed(2); updateSliderFill(e.target); };
+document.getElementById('scaleX').oninput = function(e){ gScaleX=+e.target.value; document.getElementById('scaleXVal').textContent=(+gScaleX).toFixed(2); updateSliderFill(e.target); };
+document.getElementById('scaleY').oninput = function(e){ gScaleY=+e.target.value; document.getElementById('scaleYVal').textContent=(+gScaleY).toFixed(2); updateSliderFill(e.target); };
+document.getElementById('randomSlider').oninput = function(e){ gChaos=+e.target.value; document.getElementById('randomVal').textContent=(+gChaos).toFixed(2); updateSliderFill(e.target); };
+document.getElementById('imgBtn').onclick = function(){ imgIndex=(imgIndex+1)%images.length; loadImage(imgIndex,false); };
+
+document.getElementById('dirBtn').onclick = function(){
+  gDir = gDir<0.5 ? 1 : 0;
+  document.getElementById('dirBtn').textContent = gDir<0.5?'X':'Y';
+  applyWaveformSwitch(images[imgIndex].synth||'steiniger');
+  updatePatchLabel(images[imgIndex].synth||'steiniger');
+};
+
+/* ══════════════════════════════════════════════
+   Changement de forme d'onde à chaud
+══════════════════════════════════════════════ */
+function applyWaveformSwitch(name){
+  if(!actx||!synthOn||patchNodes.length===0) return;
+  var inv=(gDir<0.5);
+  try{
+    if(name==='steiniger'){
+      patchNodes[0].type = inv?'triangle':'square';
+      patchNodes[1].type = inv?'sine':'square';
+    } else if(name==='val'){
+      patchNodes[0].type = inv?'sine':'sawtooth';
+      patchNodes[1].type = inv?'sine':'triangle';
+    } else if(name==='blocher'){
+      patchNodes[0].type = inv?'triangle':'sine';
+    } else if(name==='lellouche'){
+      patchNodes[0].type = inv?'sine':'sawtooth';
+      patchNodes[1].type = inv?'sine':'triangle';
+    } else if(name==='beigbeder'){
+      patchNodes[0].type = inv?'triangle':'sine';
+      patchNodes[1].type = inv?'triangle':'sine';
+      patchNodes[9].type = inv?'highpass':'lowpass';
+    } else if(name==='gave'){
+      patchNodes[0].type = inv?'sine':'sawtooth';
+      patchNodes[1].type = inv?'sine':'triangle';
+      patchNodes[2].type = inv?'triangle':'square';
+    } else if(name==='larcher'){
+      patchNodes[0].type = inv?'sine':'sawtooth';
+      patchNodes[1].type = inv?'sine':'triangle';
+    }
+  }catch(e){}
+}
+
+var PATCH_LABELS = {
+  steiniger: ['patch : ring mod · rond · presque voix',      'patch : ring mod · métallique · parlementaire'],
+  val:       ['patch : cross mod · sinusoïdal · instable',   'patch : cross mod · inharmonique · rhétorique'],
+  blocher:   ['patch : sub triangle · battements · montagnard','patch : sub sine · tellurique · massif'],
+  lellouche: ['patch : fm 3-op sine · pur→chaos · charnel',  'patch : fm 3-op · cinématique · ascendant'],
+  beigbeder: ['patch : drone triangle · flottant · mélancolie sèche','patch : drone sine · noyé · mélancolie alcoolisée'],
+  gave:      ['patch : fm dual · aigre · clavecin brisé',    'patch : fm dual · sawtooth · harangue libérale'],
+  larcher:   ['patch : comb sine · solennel · chambre vide', 'patch : comb saw · pompeux · discours fleuve'],
+};
+function updatePatchLabel(name){
+  var inv=(gDir<0.5);
+  var pair=PATCH_LABELS[name]||['',''];
+  document.getElementById('synthInfo').textContent=inv?pair[0]:pair[1];
+}
+
+/* ══════════════════════════════════════════════
+   Audio — utilitaires
+══════════════════════════════════════════════ */
+function tanhCurve(amount){
+  var c=new Float32Array(512);
+  for(var i=0;i<512;i++){ var x=i/256-1; c[i]=Math.tanh(x*amount)*0.88; }
+  return c;
+}
+function makeSH(rate, outGain){
+  if(!actx||!actx.createConstantSource) return null;
+  var src=actx.createConstantSource();
+  var gain=actx.createGain(); gain.gain.value=outGain;
+  src.connect(gain); src.start();
+  var cur=0, tgt=0;
+  var iv=setInterval(function(){
+    if(!actx) return;
+    tgt=Math.random()*2-1; cur+=(tgt-cur)*0.42;
+    try{ src.offset.setTargetAtTime(cur,actx.currentTime,0.07); }catch(e){}
+  }, Math.round(1000/Math.max(0.05,rate)));
+  return { node:gain, src:src, stop:function(){ clearInterval(iv); try{src.stop();}catch(e){} } };
+}
+function disposeNodes(){
+  patchNodes.forEach(function(n){
+    try{ if(n.stop) n.stop(0); n.disconnect(); }catch(e){}
+  });
+  patchNodes=[]; updateFn=null;
+}
+
+/* ══════════════════════════════════════════════
+   PATCHES
+══════════════════════════════════════════════ */
+function rebuildPatch(name){
+  if(!actx||!synthOn) return;
+  disposeNodes();
+  var dst=masterGain, now=actx.currentTime;
+  var inv=(gDir<0.5);
+
+  /* ── STEINIGER — Ring mod
+     [0]=oA [1]=oB [2]=lfo [3]=ringG [4]=mix [5]=lfoG [6]=filt */
+  if(name==='steiniger'){
+    var oA=actx.createOscillator(); oA.type=inv?'triangle':'square';
+    var oB=actx.createOscillator(); oB.type=inv?'sine':'square';
+    var ringG=actx.createGain(); ringG.gain.value=0;
+    oA.connect(ringG); oB.connect(ringG.gain);
+    var mix =actx.createGain(); mix.gain.value=0.36;
+    var filt=actx.createBiquadFilter(); filt.type='bandpass'; filt.Q.value=inv?1.5:2.2;
+    var lfo =actx.createOscillator(); lfo.type='sine'; lfo.frequency.value=0.25;
+    var lfoG=actx.createGain(); lfoG.gain.value=0;
+    var sh  =makeSH(1.5+gChaos*5,0);
+    ringG.connect(mix); mix.connect(filt);
+    lfo.connect(lfoG); lfoG.connect(filt.frequency);
+    if(sh) sh.node.connect(filt.frequency);
+    filt.connect(dst);
+    oA.start(now); oB.start(now); lfo.start(now);
+    patchNodes=[oA,oB,lfo,ringG,mix,lfoG,filt];
+    if(sh) patchNodes.push(sh);
+    updateFn=function(){
+      var t=actx.currentTime, fc=55*Math.pow(2,gRep/12);
+      var drift = 1 + (0.5+gSpd*0.35)*0.04 + gChaos*0.18;
+      oA.frequency.setTargetAtTime(fc,t,.10);
+      oB.frequency.setTargetAtTime(fc*drift,t,.10);
+      oA.detune.setTargetAtTime((gScaleX-1)*70,t,.10);
+      oB.detune.setTargetAtTime(-(gScaleX-1)*70,t,.10);
+      filt.frequency.setTargetAtTime(inv?(600+gScaleY*2800):(150+gScaleY*1500),t,.10);
+      lfo.frequency.setTargetAtTime(0.04+gSpd*0.09+gChaos*3.5,t,.10);
+      lfoG.gain.setTargetAtTime(gAmp*420+gChaos*800,t,.07);
+      filt.Q.setTargetAtTime(inv?(1.2+gChaos*9):(1.8+gChaos*12),t,.10);
+    };
+
+  /* ── VAL — Cross mod
+     [0]=oA [1]=oB [2]=lfo [3]=gAB [4]=gBA [5]=outA [6]=outB [7]=lfoG [8]=filt */
+  } else if(name==='val'){
+    var oA =actx.createOscillator(); oA.type=inv?'sine':'sawtooth';
+    var oB =actx.createOscillator(); oB.type=inv?'sine':'triangle';
+    var gAB=actx.createGain(); gAB.gain.value=0;
+    var gBA=actx.createGain(); gBA.gain.value=0;
+    var outA=actx.createGain(); outA.gain.value=0.22;
+    var outB=actx.createGain(); outB.gain.value=0.22;
+    var filt=actx.createBiquadFilter(); filt.type='lowpass'; filt.Q.value=2.5;
+    var lfo =actx.createOscillator(); lfo.type='sine';
+    var lfoG=actx.createGain(); lfoG.gain.value=0;
+    var sh  =makeSH(1+gChaos*5,0);
+    oA.connect(gAB); gAB.connect(oB.frequency);
+    oB.connect(gBA); gBA.connect(oA.frequency);
+    oA.connect(outA); oB.connect(outB);
+    outA.connect(filt); outB.connect(filt);
+    lfo.connect(lfoG); lfoG.connect(filt.frequency);
+    if(sh) sh.node.connect(oA.frequency);
+    filt.connect(dst);
+    oA.start(now); oB.start(now); lfo.start(now);
+    patchNodes=[oA,oB,lfo,gAB,gBA,outA,outB,lfoG,filt];
+    if(sh) patchNodes.push(sh);
+    updateFn=function(){
+      var t=actx.currentTime, fc=55*Math.pow(2,gRep/12);
+      oA.frequency.setTargetAtTime(fc,t,.10);
+      oB.frequency.setTargetAtTime(fc*(1.618+gChaos*0.9),t,.10);
+      var idx=fc*(0.15+gSpd*0.18+gChaos*3.2);
+      gAB.gain.setTargetAtTime(idx,t,.08);
+      gBA.gain.setTargetAtTime(idx*(0.7+gChaos*0.5),t,.08);
+      lfo.frequency.setTargetAtTime(0.15+gSpd*0.25+gChaos*2,t,.10);
+      lfoG.gain.setTargetAtTime(gAmp*750,t,.06);
+      filt.frequency.setTargetAtTime(300+gScaleY*3200,t,.10);
+      filt.Q.setTargetAtTime(1.5+gChaos*14,t,.10);
+    };
+
+  /* ── BLOCHER — Sub + ring mod tellurique
+     [0]=sub [1]=ringOsc [2]=lfo [3]=subG [4]=ringG [5]=ringOut [6]=comb [7]=lfoG */
+  } else if(name==='blocher'){
+    var sub    =actx.createOscillator(); sub.type=inv?'triangle':'sine';
+    var subG   =actx.createGain(); subG.gain.value=0.48;
+    var ringOsc=actx.createOscillator(); ringOsc.type='sine';
+    var ringG  =actx.createGain(); ringG.gain.value=0;
+    sub.connect(ringG); ringOsc.connect(ringG.gain);
+    var ringOut=actx.createGain(); ringOut.gain.value=0.28;
+    ringG.connect(ringOut);
+    var comb=actx.createBiquadFilter();
+    comb.type=inv?'bandpass':'lowpass';
+    comb.frequency.value=inv?180:260; comb.Q.value=inv?1.2:2.0;
+    var lfo =actx.createOscillator(); lfo.type='sine'; lfo.frequency.value=0.04;
+    var lfoG=actx.createGain(); lfoG.gain.value=0;
+    var sh  =makeSH(0.4+gChaos*2.5,0);
+    sub.connect(subG); subG.connect(comb);
+    ringOut.connect(comb);
+    lfo.connect(lfoG); lfoG.connect(comb.frequency);
+    if(sh) sh.node.connect(sub.frequency);
+    comb.connect(dst);
+    sub.start(now); ringOsc.start(now); lfo.start(now);
+    patchNodes=[sub,ringOsc,lfo,subG,ringG,ringOut,comb,lfoG];
+    if(sh) patchNodes.push(sh);
+    updateFn=function(){
+      var t=actx.currentTime;
+      var fc=55*Math.pow(2,gRep/12);
+      sub.frequency.setTargetAtTime(fc,t,.25);
+      var beatFreq=inv?(1.2+gSpd*0.8+gChaos*18):(0.4+gSpd*0.35+gChaos*12);
+      ringOsc.frequency.setTargetAtTime(fc+beatFreq,t,.20);
+      ringOut.gain.setTargetAtTime(0.15+gAmp*0.6,t,.12);
+      comb.frequency.setTargetAtTime(
+        inv?(200+gScaleY*2200+gChaos*1800):(80+gScaleY*1800+gChaos*1200),t,.18);
+      comb.Q.setTargetAtTime(inv?(0.8+gScaleX*3+gChaos*6):(0.6+gScaleX*4+gChaos*8),t,.12);
+      lfo.frequency.setTargetAtTime(0.02+gSpd*0.06+gChaos*0.4,t,.20);
+      lfoG.gain.setTargetAtTime(gAmp*320,t,.10);
+    };
+
+  /* ── LELLOUCHE — FM 3-op feedback
+     [0]=op1 [1]=op2 [2]=op3 [3]=car [4]=lfo [5]=g1 [6]=g2 [7]=g3 [8]=gCar [9]=fbG [10]=lfoM [11]=filt */
+  } else if(name==='lellouche'){
+    var op1=actx.createOscillator(); op1.type=inv?'sine':'sawtooth';
+    var op2=actx.createOscillator(); op2.type=inv?'sine':'triangle';
+    var op3=actx.createOscillator(); op3.type='sine';
+    var car=actx.createOscillator(); car.type='sine';
+    var g1 =actx.createGain(); g1.gain.value=0;
+    var g2 =actx.createGain(); g2.gain.value=0;
+    var g3 =actx.createGain(); g3.gain.value=0;
+    var gCar=actx.createGain(); gCar.gain.value=0.44;
+    var fbG =actx.createGain(); fbG.gain.value=0;
+    var lfo =actx.createOscillator(); lfo.type='sine'; lfo.frequency.value=0.6;
+    var lfoM=actx.createGain(); lfoM.gain.value=0;
+    var filt=actx.createBiquadFilter(); filt.type='lowpass'; filt.Q.value=3.5;
+    var sh  =makeSH(1.5+gChaos*6,0);
+    op1.connect(g1); g1.connect(op2.frequency);
+    op2.connect(g2); g2.connect(op3.frequency);
+    op3.connect(g3); g3.connect(car.frequency);
+    car.connect(gCar);
+    op1.connect(fbG); fbG.connect(op1.frequency);
+    lfo.connect(lfoM); lfoM.connect(g1.gain); lfoM.connect(g2.gain); lfoM.connect(g3.gain);
+    if(sh){ sh.node.connect(g1.gain); sh.node.connect(g2.gain); }
+    gCar.connect(filt); filt.connect(dst);
+    [op1,op2,op3,car,lfo].forEach(function(o){o.start(now);});
+    patchNodes=[op1,op2,op3,car,lfo,g1,g2,g3,gCar,fbG,lfoM,filt];
+    if(sh) patchNodes.push(sh);
+    updateFn=function(){
+      var t=actx.currentTime, fc=55*Math.pow(2,gRep/12);
+      var fmR=0.5+gSpd*0.32+gChaos*0.8;
+      car.frequency.setTargetAtTime(fc,t,.08);
+      op3.frequency.setTargetAtTime(fc*fmR,t,.08);
+      op2.frequency.setTargetAtTime(fc*fmR*(1.4+gChaos*0.6),t,.08);
+      op1.frequency.setTargetAtTime(fc*fmR*(1.9+gChaos*1.2),t,.08);
+      var idx=fc*(0.28+gChaos*4.0);
+      g1.gain.setTargetAtTime(idx,t,.08);
+      g2.gain.setTargetAtTime(idx*.58,t,.08);
+      g3.gain.setTargetAtTime(idx*.28,t,.08);
+      lfo.frequency.setTargetAtTime(0.2+gSpd*0.17,t,.10);
+      lfoM.gain.setTargetAtTime(gAmp*idx*1.4,t,.05);
+      fbG.gain.setTargetAtTime(inv?(gChaos*0.72):(gChaos*0.58),t,.08);
+      filt.frequency.setTargetAtTime(280+gScaleY*2700,t,.10);
+      filt.Q.setTargetAtTime(1.4+gChaos*10,t,.10);
+    };
+
+  /* ── BEIGBEDER — Drone mélancolique
+     [0]=oA [1]=oB [2]=oC [3]=lfo [4]=gA [5]=gB [6]=gC [7]=lfoA [8]=lfoB [9]=filt [10]=ap1 [11]=ap2 [12]=shape [13]=outG */
+  } else if(name==='beigbeder'){
+    var oA=actx.createOscillator(); oA.type=inv?'triangle':'sine';
+    var oB=actx.createOscillator(); oB.type=inv?'triangle':'sine';
+    var gA=actx.createGain(); gA.gain.value=0.28;
+    var gB=actx.createGain(); gB.gain.value=0.20;
+    var oC=actx.createOscillator(); oC.type='sine';
+    var gC=actx.createGain(); gC.gain.value=0.08;
+    var lfo =actx.createOscillator(); lfo.type='sine'; lfo.frequency.value=0.05;
+    var lfoA=actx.createGain(); lfoA.gain.value=0;
+    var lfoB=actx.createGain(); lfoB.gain.value=0;
+    var filt=actx.createBiquadFilter();
+    filt.type=inv?'highpass':'lowpass'; filt.Q.value=inv?0.9:1.2;
+    var ap1=actx.createBiquadFilter(); ap1.type='allpass'; ap1.frequency.value=800;  ap1.Q.value=4;
+    var ap2=actx.createBiquadFilter(); ap2.type='allpass'; ap2.frequency.value=1600; ap2.Q.value=3;
+    var shape=actx.createWaveShaper(); shape.curve=tanhCurve(inv?0.5:0.35);
+    var outG=actx.createGain(); outG.gain.value=0.42;
+    var sh=makeSH(0.3+gChaos*1.5,0);
+    oA.connect(gA); oB.connect(gB); oC.connect(gC);
+    gA.connect(filt); gB.connect(filt); gC.connect(filt);
+    lfo.connect(lfoA); lfoA.connect(filt.frequency);
+    lfo.connect(lfoB); lfoB.connect(outG.gain);
+    if(sh) sh.node.connect(oA.detune);
+    filt.connect(ap1); ap1.connect(ap2); ap2.connect(shape); shape.connect(outG); outG.connect(dst);
+    oA.start(now); oB.start(now); oC.start(now); lfo.start(now);
+    patchNodes=[oA,oB,oC,lfo,gA,gB,gC,lfoA,lfoB,filt,ap1,ap2,shape,outG];
+    if(sh) patchNodes.push(sh);
+    updateFn=function(){
+      var t=actx.currentTime;
+      var fc=55*Math.pow(2,gRep/20);
+      oA.frequency.setTargetAtTime(fc,t,.60);
+      var ratio=1.5 - gChaos*0.18;
+      var beat=0.4+gSpd*0.18+gChaos*4;
+      oB.frequency.setTargetAtTime(fc*ratio+beat,t,.45);
+      oC.frequency.setTargetAtTime(fc*(5+gChaos*3.5),t,.40);
+      filt.frequency.setTargetAtTime(
+        inv?(280+gScaleY*900+gAmp*2400):(140+gScaleY*900+gAmp*2000),t,.40);
+      filt.Q.setTargetAtTime(inv?(0.8+gChaos*5):(1.0+gChaos*6),t,.25);
+      lfo.frequency.setTargetAtTime(0.02+gSpd*0.012+gChaos*0.08,t,.80);
+      lfoA.gain.setTargetAtTime(gAmp*500+gChaos*600,t,.25);
+      lfoB.gain.setTargetAtTime(gAmp*0.10,t,.30);
+      ap1.frequency.setTargetAtTime(500+gScaleX*500+gChaos*1200,t,.20);
+      ap2.frequency.setTargetAtTime(1000+gScaleX*700+gChaos*2000,t,.20);
+    };
+
+  /* ── GAVE — FM dual modulateurs inharmoniques
+     [0]=carrier [1]=mod1 [2]=mod2 [3]=mg1 [4]=mg2 [5]=carG
+     [6]=lfo [7]=lfoG [8]=filt [9]=peak [10]=wave */
+  } else if(name==='gave'){
+    var carrier=actx.createOscillator(); carrier.type=inv?'sine':'sawtooth';
+    var mod1   =actx.createOscillator(); mod1.type=inv?'sine':'triangle';
+    var mod2   =actx.createOscillator(); mod2.type=inv?'triangle':'square';
+    var mg1    =actx.createGain(); mg1.gain.value=0;
+    var mg2    =actx.createGain(); mg2.gain.value=0;
+    var carG   =actx.createGain(); carG.gain.value=0.38;
+    var lfo    =actx.createOscillator(); lfo.type='sine'; lfo.frequency.value=0.8;
+    var lfoG   =actx.createGain(); lfoG.gain.value=0;
+    var filt   =actx.createBiquadFilter(); filt.type='lowpass'; filt.Q.value=1.2;
+    var peak   =actx.createBiquadFilter(); peak.type='peaking';
+    peak.frequency.value=1200; peak.Q.value=2.2; peak.gain.value=7;
+    var wave   =actx.createWaveShaper(); wave.curve=tanhCurve(inv?0.8:1.4);
+    mod1.connect(mg1); mg1.connect(carrier.frequency);
+    mod2.connect(mg2); mg2.connect(carrier.frequency);
+    lfo.connect(lfoG); lfoG.connect(mg1.gain);
+    carrier.connect(carG); carG.connect(filt);
+    filt.connect(peak); peak.connect(wave); wave.connect(dst);
+    carrier.start(now); mod1.start(now); mod2.start(now); lfo.start(now);
+    patchNodes=[carrier,mod1,mod2,mg1,mg2,carG,lfo,lfoG,filt,peak,wave];
+    updateFn=function(){
+      var t=actx.currentTime, fc=110*Math.pow(2,gRep/14);
+      carrier.frequency.setTargetAtTime(fc,t,.08);
+      mod1.frequency.setTargetAtTime(fc*(2.0+gSpd*0.08),t,.08);
+      mod2.frequency.setTargetAtTime(fc*(3.1+gSpd*0.12),t,.08);
+      var idx1=fc*(0.12+gScaleY*0.55+gChaos*2.8);
+      var idx2=fc*(0.06+gScaleX*0.30+gChaos*1.6);
+      mg1.gain.setTargetAtTime(idx1,t,.06);
+      mg2.gain.setTargetAtTime(idx2,t,.06);
+      lfo.frequency.setTargetAtTime(0.4+gSpd*0.12,t,.10);
+      lfoG.gain.setTargetAtTime(gAmp*idx1*0.6,t,.06);
+      filt.frequency.setTargetAtTime(800+gScaleY*3500,t,.10);
+      peak.gain.value=5+gChaos*10;
+      wave.curve=tanhCurve(inv?(0.8+gChaos*4):(1.4+gChaos*6));
+    };
+
+  /* ── LARCHER — Comb + dual osc solennel
+     [0]=osc1 [1]=osc2 [2]=lfo [3]=g1 [4]=g2
+     [5]=comb1 [6]=comb2 [7]=lfoG [8]=filt [9]=wave */
+  } else if(name==='larcher'){
+    var osc1 =actx.createOscillator(); osc1.type=inv?'sine':'sawtooth';
+    var osc2 =actx.createOscillator(); osc2.type=inv?'sine':'triangle';
+    var g1   =actx.createGain(); g1.gain.value=0.32;
+    var g2   =actx.createGain(); g2.gain.value=0.20;
+    var comb1=actx.createBiquadFilter(); comb1.type='bandpass'; comb1.Q.value=8;
+    var comb2=actx.createBiquadFilter(); comb2.type='bandpass'; comb2.Q.value=6;
+    var lfo  =actx.createOscillator(); lfo.type='sine'; lfo.frequency.value=0.15;
+    var lfoG =actx.createGain(); lfoG.gain.value=0;
+    var filt =actx.createBiquadFilter(); filt.type='lowpass'; filt.Q.value=0.8;
+    var wave =actx.createWaveShaper(); wave.curve=tanhCurve(inv?0.6:1.0);
+    var outG =actx.createGain(); outG.gain.value=0.44;
+    osc1.connect(g1); osc2.connect(g2);
+    g1.connect(comb1); g2.connect(comb2);
+    lfo.connect(lfoG); lfoG.connect(comb1.frequency); lfoG.connect(comb2.frequency);
+    comb1.connect(filt); comb2.connect(filt);
+    filt.connect(wave); wave.connect(outG); outG.connect(dst);
+    osc1.start(now); osc2.start(now); lfo.start(now);
+    patchNodes=[osc1,osc2,lfo,g1,g2,comb1,comb2,lfoG,filt,wave,outG];
+    updateFn=function(){
+      var t=actx.currentTime, fc=82*Math.pow(2,gRep/14);
+      osc1.frequency.setTargetAtTime(fc,t,.20);
+      osc2.frequency.setTargetAtTime(fc*(1+gSpd*0.004),t,.20);
+      comb1.frequency.setTargetAtTime(fc*(2+gScaleY*3),t,.15);
+      comb2.frequency.setTargetAtTime(fc*(3+gScaleX*2.5),t,.15);
+      comb1.Q.value=6+gChaos*18;
+      comb2.Q.value=4+gChaos*14;
+      lfo.frequency.setTargetAtTime(0.08+gSpd*0.04,t,.30);
+      lfoG.gain.setTargetAtTime(fc*(0.04+gAmp*0.8+gChaos*1.2),t,.15);
+      filt.frequency.setTargetAtTime(600+gScaleY*2800,t,.15);
+      osc2.frequency.setTargetAtTime(fc*(1+gSpd*0.004+gChaos*0.35),t,.12);
+      wave.curve=tanhCurve(inv?(0.6+gChaos*5):(1.0+gChaos*7));
+    };
+  }
+
+  updatePatchLabel(name);
+}
+
+/* ══════════════════════════════════════════════
+   Init audio
+══════════════════════════════════════════════ */
+function initAudio(){
+  if(actx) return;
+  actx=new(window.AudioContext||window.webkitAudioContext)();
+  masterGain=actx.createGain(); masterGain.gain.value=0.48;
+  masterGain.connect(actx.destination);
+}
+document.getElementById('soundBtn').onclick=function(){
+  initAudio();
+  if(actx.state==='suspended') actx.resume();
+  synthOn=!synthOn;
+  document.getElementById('soundBtn').classList.toggle('on',synthOn);
+  if(synthOn){ rebuildPatch(images[imgIndex].synth||'steiniger'); }
+  else{ disposeNodes(); document.getElementById('synthInfo').textContent=''; }
+};
+
+/* ══════════════════════════════════════════════
+   Boucle principale
+══════════════════════════════════════════════ */
+var startT=performance.now();
+function loop(){
+  var t=(performance.now()-startT)/1000;
+
+  gSpdSmooth += (gSpdTarget - gSpdSmooth) * SPD_SLEW;
+
+  if(masterGain && actx){
+    var targetVol = gAmp > 0 ? 0.48 : 0;
+    masterGain.gain.setTargetAtTime(targetVol, actx.currentTime, 0.08);
+  }
+
+  gl.uniform1f(U.time,  t);
+  gl.uniform1f(U.rep,   Math.max(0.1,gRep));
+  gl.uniform1f(U.spd,   gSpdSmooth);
+  gl.uniform1f(U.amp,   Math.max(0,gAmp));
+  gl.uniform1f(U.dir,   gDir);
+  gl.uniform1f(U.chaos, gChaos);
+  gl.uniform1f(U.scaleX,Math.max(0.01,gScaleX));
+  gl.uniform1f(U.scaleY,Math.max(0.01,gScaleY));
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  if(synthOn&&actx&&updateFn) updateFn();
+  requestAnimationFrame(loop);
+}
+
+loadImage(imgIndex,true);
+initAllSliders();
+loop();
+</script>
+</body>
+</html>
