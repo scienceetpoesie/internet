@@ -204,6 +204,12 @@ canvas { display:block; width:720px; height:480px; flex-shrink:0; }
 </div>
 
 <script>
+  window.addEventListener('message', function(e) {
+  if (!e.data || e.data.type !== 'ravier') return;
+  if (e.data.param === 'rep') gRep = e.data.value;
+  if (e.data.param === 'spd') { gSpd = e.data.value; gSpdTarget = e.data.value; }
+  if (e.data.param === 'amp') gAmp = e.data.value;
+});
 /* Paramètres Ravier */
 var gRep=9.5, gSpd=6.6, gAmp=0.07, gDir=1, gChaos=0;
 var gScaleX=0.67, gScaleY=0.99;
