@@ -42,11 +42,17 @@ td.n1{background-color:#FF0000;}td.n1 a{color:#FFFFFF;}td.n1 a:hover{background-
 td.n2{background-color:#FF8000;}td.n2 a{color:#000000;}td.n2 a:hover{background-color:#CC6600;}
 td.n3{background-color:#FFFF00;}td.n3 a{color:#000000;}td.n3 a:hover{background-color:#CCCC00;}
 td.n4{background-color:#008000;}td.n4 a{color:#FFFFFF;}td.n4 a:hover{background-color:#006600;}
-td.n5{background-color:#000080;}td.n5 a{color:#FFFFFF;}td.n5 a:hover{background-color:#000055;}
+td.n5{background-color:#1a4ab8;}td.n5 a{color:#FFFFFF;}td.n5 a:hover{background-color:#1438a0;}
+/* étoiles statiques au-dessus des i du titre */
+#title-stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+.title-star-i { position: absolute; color: #FFFF00; font-size: 18px; line-height: 1; filter: drop-shadow(1px 1px 0 #000000); }
 td.n6{background-color:#800080;}td.n6 a{color:#FFFFFF;}td.n6 a:hover{background-color:#600060;}
 
 table.main-layout { width: 100%; border-collapse: collapse; }
+/* CORRECTION 4 : sidebar gauche en flex pour coller le gif en bas */
 td.sidebar-left { background-color: #FFFF00; width: 75px; vertical-align: top; padding: 0; border-right: 4px solid #CCCC00; }
+.sidebar-left-inner { display: flex; flex-direction: column; height: 100%; min-height: 100%; }
+.sidebar-spacer { flex: 1; background: #FFFF00; }
 .sidebar-section { border-bottom: 3px solid #CCCC00; padding: 6px 5px; }
 .sidebar-section h3 { font-family: "Arial Black", Arial, sans-serif; font-size: 9px; font-weight: 900; color: #000080; margin: 0 0 4px 0; text-transform: uppercase; border-bottom: 2px solid #000080; padding-bottom: 2px; }
 .sidebar-section ul { margin: 0; padding: 0 0 0 2px; list-style-type: none; }
@@ -56,6 +62,8 @@ td.sidebar-left { background-color: #FFFF00; width: 75px; vertical-align: top; p
 .sidebar-section p { font-size: 9px; color: #000000; line-height: 1.5; font-family: "Courier New", monospace; }
 .gif-zone-sidebar-exp { border-bottom: 3px solid #CCCC00; padding: 0; background: #000080; text-align: center; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 .gif-zone-sidebar-exp img { width: 75px; height: auto; image-rendering: pixelated; display: block; margin: 0; }
+.gif-zone-sidebar-bottom { padding: 0; background: #000080; text-align: center; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.gif-zone-sidebar-bottom img { width: 75px; height: auto; image-rendering: pixelated; display: block; margin: 0; }
 .blink { animation: blinker 0.9s step-start infinite; }
 @keyframes blinker { 50% { opacity: 0; } }
 
@@ -74,7 +82,8 @@ td.center-content { background-color: #FFFFFF; vertical-align: top; padding: 0; 
 table.cards-table { width: 100%; border-collapse: collapse; }
 td.card { vertical-align: top; padding: 0; border: 3px outset #888888; width: 50%; }
 .card-header { padding: 7px 10px; font-family: "Arial Black", Arial, sans-serif; font-size: 14px; font-weight: 900; letter-spacing: 1px; color: #FFFFFF; border-bottom: 3px inset #555555; }
-.card-body { padding: 10px 12px; background-color: #F0F0F0; font-family: "Times New Roman", serif; font-size: 13px; color: #000000; line-height: 1.6; min-height: 80px; }
+/* CORRECTION 1 : min-height à 0 sur card-body pour supprimer le blanc sous les boutons */
+.card-body { padding: 10px 12px; background-color: #F0F0F0; font-family: "Times New Roman", serif; font-size: 13px; color: #000000; line-height: 1.6; min-height: 0; }
 .card-body a { display: inline-block; margin-top: 8px; background-color: #000080; color: #FFFFFF; font-family: "Arial", sans-serif; font-size: 11px; font-weight: bold; text-decoration: none; padding: 3px 10px; border: 2px outset #8888FF; transition: background-color 0.1s; }
 .card-body a:hover { background-color: #0000CC; border-style: inset; }
 .c-crimson .card-header{background-color:#990000;}.c-crimson .card-body{background-color:#FFF5F5;}
@@ -165,54 +174,37 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
 /* ===================== MODURAVIER intégré ===================== */
 #mr-wrap {
-  width: 82px;
-  padding: 2px;
-  background: #e8e8e8;
-  border: 1px solid #ccc;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.25);
-  cursor: pointer;
-  position: relative;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  width: 82px; padding: 0; background: transparent; border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.25); cursor: pointer; position: relative;
+  user-select: none; -webkit-tap-highlight-color: transparent;
   transition: box-shadow 0.25s, transform 0.08s;
 }
 #mr-wrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
+  content: ''; position: absolute; inset: 0;
   background: radial-gradient(circle at var(--mrx,50%) var(--mry,50%), rgba(180,140,255,0.55) 0%, rgba(180,140,255,0.12) 40%, transparent 70%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.05s;
+  opacity: 0; pointer-events: none; transition: opacity 0.05s;
 }
 #mr-wrap.mr-flash::after { opacity: 1; }
 #mr-wrap.mr-pressed { box-shadow: 0 0 2px rgba(0,0,0,0.1); transform: translate(1px,1px); }
 #mr-wrap.mr-on { box-shadow: 2px 2px 6px rgba(0,0,0,0.25), 0 0 10px 3px rgba(140,80,255,0.35); }
-#mr-c { display: block; width: 78px; height: 103px; pointer-events: none; }
-
-/* sliders moduravier — thumbs violets, rails marron */
+#mr-c { display: block; width: 82px; height: 108px; pointer-events: none; }
 #mr-rep, #mr-spd, #mr-amp {
   -webkit-appearance: none; appearance: none;
-  width: 100%; height: 2px; border-radius: 1px;
-  outline: none; cursor: pointer; display: block;
+  width: 100%; height: 2px; border-radius: 1px; outline: none; cursor: pointer; display: block;
 }
 #mr-chaos {
   -webkit-appearance: none; appearance: none;
   writing-mode: vertical-lr; direction: rtl;
-  width: 2px; height: 52px; border-radius: 1px;
-  outline: none; cursor: pointer;
+  width: 2px; height: 52px; border-radius: 1px; outline: none; cursor: pointer;
 }
 #mr-rep::-webkit-slider-thumb, #mr-spd::-webkit-slider-thumb,
 #mr-amp::-webkit-slider-thumb, #mr-chaos::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 9px; height: 9px; border-radius: 50%;
-  background: #7c3aed; border: none;
-  box-shadow: 0 1px 3px rgba(124,58,237,0.4); cursor: pointer;
+  -webkit-appearance: none; width: 9px; height: 9px; border-radius: 50%;
+  background: #7c3aed; border: none; box-shadow: 0 1px 3px rgba(124,58,237,0.4); cursor: pointer;
 }
 #mr-rep::-moz-range-thumb, #mr-spd::-moz-range-thumb,
 #mr-amp::-moz-range-thumb, #mr-chaos::-moz-range-thumb {
-  width: 9px; height: 9px; border-radius: 50%;
-  background: #7c3aed; border: none; cursor: pointer;
+  width: 9px; height: 9px; border-radius: 50%; background: #7c3aed; border: none; cursor: pointer;
 }
 </style>
 </head>
@@ -237,10 +229,16 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 <table class="header-table" cellpadding="0" cellspacing="0"><tr>
   <td class="header-left"><div class="header-left-text"><span class="blink">&#9632;</span> Visiteurs en ligne&nbsp;:<br><div class="visitor-box" id="vcounter">064731</div><br></div></td>
   <td class="header-center">
-    <h1 class="site-title">SCIENCE &amp; PO&Eacute;SIE</h1>
+    <div id="title-stars"></div>
+    <h1 class="site-title" id="site-title-h1">SCIENCE &amp; PO&Eacute;SIE</h1>
     <div class="site-subtitle">&#x2234; recherche &middot; exp&eacute;rimentation &#x2235;</div>
   </td>
-  <td class="header-right"><div class="header-right-text">Lier L'utile<br>à l'agréable.<br><br><strong style="font-style:normal;font-family:Arial;font-size:11px;color:#FFFF00">&#x2605; EST. 2024 &#x2605;</strong></div></td>
+  <td class="header-right" style="padding:0;overflow:hidden;">
+    <!-- PLACER ICI UN GIF ANIMÉ aux dimensions de la boîte (environ 68×110px) -->
+    <div style="width:100%;height:100%;min-height:110px;display:flex;align-items:center;justify-content:center;background:#006000;border:2px dashed #00FF00;box-sizing:border-box;">
+      <span style="font-family:'Courier New',monospace;font-size:8px;color:#00FF00;text-align:center;line-height:1.6;padding:4px;">[ GIF<br>ANIMÉ<br>~68×110px ]</span>
+    </div>
+  </td>
 </tr></table>
 
 <table class="navbar" cellpadding="0" cellspacing="0"><tr>
@@ -254,29 +252,39 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
 <table class="main-layout" cellpadding="0" cellspacing="0"><tr>
 
+<!-- ===== SIDEBAR GAUCHE — CORRECTION 4 : flex pour gif collé en bas ===== -->
 <td class="sidebar-left">
-  <div class="sidebar-section"><h3>Navigation</h3><ul>
-    <li><a href="#projets">&#9658; Projets</a></li>
-    <li><a href="#oeuvres">&#9658; Publications</a></li>
-    <li><a href="#oeuvres">&#9658; Boutique</a></li>
-    <li><a href="#oeuvres">&#9658; Magazine</a></li>
-    <li><a href="#oeuvres">&#9658; T&eacute;l&eacute;vision</a></li>
-    <li><a href="#oeuvres">&#9658; Galerie d'art</a></li>
-    <li><a href="#hallofame">&#9658; Hall of Fame</a></li>
-    <li><a href="#suckerlist">&#9658; Suckerlist</a></li>
-    <li><a href="#notreentente">&#9658; N. Entente</a></li>
-    <li><a href="#sociogonie">&#9658; Sociogonie</a></li>
-    <li><a href="#encyclopédie">&#9658; Encyclop&eacute;die</a></li>
-  </ul></div>
-  <div class="sidebar-section"><h3>Statut</h3><p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;xxxxxx&nbsp;&raquo;<br>en cours&hellip;</p></div>
-  <div class="sidebar-section"><h3>Liens</h3><ul>
-    <li><a href="#">Archives</a></li>
-    <li><a href="#">Ressources</a></li>
-    <li><a href="#">R&eacute;f&eacute;rences</a></li>
-    <li><a href="#">Plan du site</a></li>
-  </ul></div>
-  <div class="gif-zone-sidebar-exp">
-    <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/BMQ6224VRQT36SCUDQAM6CH7R6HNE2M7.gif?raw=true" alt="gif">
+  <div class="sidebar-left-inner">
+    <div class="sidebar-section"><h3>Navigation</h3><ul>
+      <li><a href="#projets">&#9658; Projets</a></li>
+      <li><a href="#oeuvres">&#9658; Publications</a></li>
+      <li><a href="#oeuvres">&#9658; Boutique</a></li>
+      <li><a href="#oeuvres">&#9658; Magazine</a></li>
+      <li><a href="#oeuvres">&#9658; T&eacute;l&eacute;vision</a></li>
+      <li><a href="#oeuvres">&#9658; Galerie d'art</a></li>
+      <li><a href="#hallofame">&#9658; Hall of Fame</a></li>
+      <li><a href="#suckerlist">&#9658; Suckerlist</a></li>
+      <li><a href="#notreentente">&#9658; N. Entente</a></li>
+      <li><a href="#sociogonie">&#9658; Sociogonie</a></li>
+      <li><a href="#encyclopédie">&#9658; Encyclop&eacute;die</a></li>
+    </ul></div>
+    <div class="sidebar-section"><h3>Statut</h3><p><span class="blink">&#9632;</span> PROJET ACTIF<br><br>&laquo;&nbsp;xxxxxx&nbsp;&raquo;<br>en cours&hellip;</p></div>
+    <div class="sidebar-section"><h3>Liens</h3><ul>
+      <li><a href="#">Archives</a></li>
+      <li><a href="#">Ressources</a></li>
+      <li><a href="#">R&eacute;f&eacute;rences</a></li>
+      <li><a href="#">Plan du site</a></li>
+    </ul></div>
+    <!-- gif original -->
+    <div class="gif-zone-sidebar-exp">
+      <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/BMQ6224VRQT36SCUDQAM6CH7R6HNE2M7.gif?raw=true" alt="gif">
+    </div>
+    <!-- espace libre pour futurs objets -->
+    <div class="sidebar-spacer"></div>
+    <!-- gif copié tout en bas -->
+    <div class="gif-zone-sidebar-bottom">
+      <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/BMQ6224VRQT36SCUDQAM6CH7R6HNE2M7.gif?raw=true" alt="gif">
+    </div>
   </div>
 </td>
 
@@ -299,7 +307,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
   <table class="cards-table" cellpadding="0" cellspacing="0">
     <tr><td class="card c-purple" id="oeuvres" colspan="2">
-      <div class="card-header">&#x2736; PUBLICATIONS</div>
       <div class="card-body" style="padding:0">
         <table width="100%" cellpadding="0" cellspacing="0"><tr>
           <td style="width:25%;padding:0;vertical-align:top;background:#F0F0F0;">
@@ -309,8 +316,8 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
             <div style="padding:6px 8px;text-align:center;background:#F0F0F0;"><strong style="font-family:'Arial Black';font-size:11px;color:#660066">GALERIE D'ART</strong><br><a href="#" style="margin-top:4px">&#9658; Parcourir</a></div>
           </td>
           <td style="width:25%;padding:0;border-right:2px solid #CCCCCC;vertical-align:top;background:#F0F0F0;">
-            <div style="width:100%;height:90px;background:#B8CCC0;border-bottom:1px solid #9AB0A4;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-              <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/WS3PYONRZ7JP6AG2QBSA7RZMSTD4FEBI.gif?raw=true" style="max-width:100%;max-height:90px;image-rendering:pixelated;" alt="television">
+            <div style="width:100%;height:90px;background:#B8CCC0;border-bottom:1px solid #9AB0A4;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;">
+              <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/WS3PYONRZ7JP6AG2QBSA7RZMSTD4FEBI.gif?raw=true" style="max-width:100%;height:110px;object-fit:contain;image-rendering:pixelated;display:block;" alt="television">
             </div>
             <div style="padding:6px 8px;text-align:center;background:#F0F0F0;"><strong style="font-family:'Arial Black';font-size:11px;color:#660066">T&Eacute;L&Eacute;VISION</strong><br><a href="https://dashboard.twitch.tv/u/scienceetpoesie/stream-manager" target="_blank" style="margin-top:4px">&#9658; Regarder</a></div>
           </td>
@@ -330,12 +337,13 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
       </div>
     </td></tr>
 
+    <!-- CORRECTION 1 : vertical-align:top sur les deux td pour supprimer le blanc -->
     <tr>
-      <td class="card c-gold" id="hallofame" style="width:50%">
+      <td class="card c-gold" id="hallofame" style="width:50%;vertical-align:top;">
         <div class="card-header" style="overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/couronne.png?raw=true" width="26" height="26" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="couronne"> HALL OF FAME</div>
         <div class="card-body">Figures, contributions exceptionnelles, honor&eacute;s par S&amp;P.<br><a href="hallofame.html">&#9658; D&eacute;couvrir le palmar&egrave;s</a></div>
       </td>
-      <td class="card c-black" id="suckerlist" style="width:50%">
+      <td class="card c-black" id="suckerlist" style="width:50%;vertical-align:top;">
         <div class="card-header" style="background:#111111;color:#FF3333;overflow:hidden;white-space:nowrap"><img src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/crane.png?raw=true" width="24" height="24" style="vertical-align:middle;margin-right:4px;image-rendering:pixelated;position:relative;top:-1px" alt="crane"> SUCKERLIST</div>
         <div class="card-body" style="background:#1A1A1A;color:#CCCCCC;">Figures, contributions r&eacute;pugnantes, honnis par S&amp;P<br><a href="suckerlist.html" style="background:#660000;border-color:#FF3333">&#9658; Entrer en enfer</a></div>
       </td>
@@ -362,7 +370,6 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 <!-- ===== SIDEBAR DROITE ===== -->
 <td class="sidebar-right">
 
-  <!-- 1. NOTRE ENTENTE -->
   <div class="ne-pub-wrapper">
     <a href="https://scienceetpoesie.github.io/notre-entente/" class="ne-pub-link" id="ne-pub-link" target="_blank">
       <div style="font-family:'Arial Black',Arial,sans-serif;font-size:10px;font-weight:900;color:#0000AA;letter-spacing:1px;margin-bottom:6px;white-space:nowrap">&#9830;&nbsp;NOTRE ENTENTE&nbsp;&#9830;</div>
@@ -373,23 +380,18 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     </a>
   </div>
 
-  <!-- 2. CITATION -->
   <div class="rsidebar-section"><h3>Citation</h3><p id="citation-text" style="font-style:italic;font-size:11px" title="cliquer pour suivant">&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;</p></div>
-
-  <!-- 3. WEB RING -->
   <div class="rsidebar-section"><h3>Web Ring</h3><div class="webring-box"><a href="#">&#9664; Pr&eacute;c.</a><a href="#" style="color:#FF0000;font-size:13px">&#9679;</a><a href="modulove.html">Suiv. &#9654;</a></div></div>
 
-  <!-- 4. BOUTON GRATUITE -->
   <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;border-bottom:3px solid #CC6600;">
     <span style="font-family:'Times New Roman',serif;font-size:10px;font-style:italic;color:#CC0000;line-height:1.5;display:block;margin-bottom:2px">Gratuit&eacute;</span>
     <span style="display:block;color:#CC0000;font-size:13px;line-height:1;">&#x2193;</span>
     <span id="btn-gratuite" style="display:inline-block;width:22px;height:22px;background:#CC0000;border-top:2px solid #FF6666;border-left:2px solid #FF6666;border-right:2px solid #880000;border-bottom:2px solid #880000;border-radius:50%;margin-top:2px;"></span>
   </div>
 
-  <!-- 5. MODULORAVIER intégré -->
   <div style="background:#FF8000;border-bottom:0;padding:6px 4px 0 4px;display:flex;justify-content:center;">
     <div id="mr-wrap" style="border:2px solid #6b4a28;box-shadow:1px 1px 4px rgba(0,0,0,0.3);">
-      <canvas id="mr-c" width="156" height="206"></canvas>
+      <canvas id="mr-c" width="164" height="216"></canvas>
     </div>
   </div>
   <div style="background:#FF8000;border-bottom:3px solid #CC6600;padding:5px 4px 7px 4px;display:flex;justify-content:center;">
@@ -405,7 +407,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     </div>
   </div>
 
-  <!-- 6. SYNTHÉ -->
+  <!-- CORRECTION 3 : tslider value="65" -->
   <div style="padding:10px 6px 14px 6px;text-align:center;background:#FF8000;">
     <div class="synth-scale-wrapper">
       <div class="sw">
@@ -428,7 +430,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
           <div class="arp-corner">
             <div class="arp-top"><div class="arp-lbl">ARP</div><div class="arp-sw" id="arp-sw" onclick="toggleArp()"><div class="arp-thumb"></div></div></div>
             <div class="arp-bot">
-              <input type="range" class="tslider" id="tslider" min="0" max="100" step="1" value="30" oninput="setTempo(this.value)">
+              <input type="range" class="tslider" id="tslider" min="0" max="100" step="1" value="65" oninput="setTempo(this.value)">
               <div class="bpm-lbl" id="bpm-lbl">120</div>
             </div>
           </div>
@@ -457,13 +459,14 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 
   var cv=document.getElementById('mr-c');
   var gl=cv.getContext('webgl');
-  gl.viewport(0,0,156,206);
+  gl.viewport(0,0,164,216);
 
   var VERT='attribute vec2 a;varying vec2 v;void main(){vec2 u=(a+1.0)*0.5;u.y=1.0-u.y;v=u;gl_Position=vec4(a,0,1);}';
+  /* CORRECTION 2 : ondulation sur axe Y — u.x décalé en fonction de u.y (était u.y décalé par u.x) */
   var FRAG='precision mediump float;varying vec2 v;uniform float t,rep,spd,amp,chaos;uniform sampler2D tex;'+
     'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}'+
     'float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);float a=h(i),b=h(i+vec2(1,0)),c=h(i+vec2(0,1)),d=h(i+vec2(1,1));return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);}'+
-    'void main(){vec2 u=v;u.y+=sin(u.x*rep+t*spd)*amp;'+
+    'void main(){vec2 u=v;u.x+=sin(u.y*rep+t*spd)*amp;'+
     'if(chaos>0.0){float m=0.12;float vg=smoothstep(0.0,m,u.x)*smoothstep(0.0,m,1.0-u.x)*smoothstep(0.0,m,u.y)*smoothstep(0.0,m,1.0-u.y);'+
     'float amt=chaos*chaos*0.55*vg;'+
     'float nx=vn(u*1.2+vec2(t*0.08,0))-0.5;float ny=vn(u*1.2+vec2(0,t*0.10)+vec2(3.7,8.2))-0.5;'+
@@ -674,14 +677,15 @@ if(citEl){citEl.style.cursor='pointer';citEl.addEventListener('click',function(e
   btn.addEventListener('mouseup',release);btn.addEventListener('mouseleave',release);
 })();
 
-/* ══ SYNTH ══ */
+/* ══ SYNTH — CORRECTION 3 : tempo initialisé à 65% ══ */
 var ctx=null,osc=null,osc2=null,gn=null,gn2=null,octave=4,vol=0.6,mouseDown=false,currentKeyEl=null;
 var waveType='sine',analyser=null,dataArr=null,oscRaf=null;
 var noteLabels={'C':'Do','D':'Ré','E':'Mi','F':'Fa','G':'Sol','A':'La','B':'Si','C#':'Do#','D#':'Ré#','F#':'Fa#','G#':'Sol#','A#':'La#'};
 var freqs={'C':[32.70,65.41,130.81,261.63,523.25,1046.50,2093.00],'C#':[34.65,69.30,138.59,277.18,554.37,1108.73],'D':[36.71,73.42,146.83,293.66,587.33,1174.66],'D#':[38.89,77.78,155.56,311.13,622.25,1244.51],'E':[41.20,82.41,164.81,329.63,659.25,1318.51],'F':[43.65,87.31,174.61,349.23,698.46,1396.91],'F#':[46.25,92.50,185.00,369.99,739.99,1479.98],'G':[49.00,98.00,196.00,392.00,783.99,1567.98],'G#':[51.91,103.83,207.65,415.30,830.61,1661.22],'A':[55.00,110.00,220.00,440.00,880.00,1760.00],'A#':[58.27,116.54,233.08,466.16,932.33,1864.66],'B':[61.74,123.47,246.94,493.88,987.77,1975.53]};
 var notes=['C','D','E','F','G','A','B','C'];
-var arpOn=false,arpNotes=[],arpIdx=0,arpDir=1,arpTimer=null,tempo=120;
+var arpOn=false,arpNotes=[],arpIdx=0,arpDir=1,arpTimer=null;
 function bpmFromSlider(v){var t=v/100;return Math.round(60+t*t*(1200-60));}
+var tempo=bpmFromSlider(65);
 function setTempo(v){tempo=bpmFromSlider(parseInt(v));document.getElementById('bpm-lbl').textContent=tempo;if(arpOn&&arpTimer){stopArp();arpStep();}}
 function setWave(v){waveType=v=='0'?'sine':'triangle';if(osc)osc.type=waveType;if(osc2)osc2.type=waveType;}
 function changeOct(d){octave=Math.max(2,Math.min(6,octave+d));}
@@ -709,6 +713,57 @@ function stopOsc(){if(oscRaf){cancelAnimationFrame(oscRaf);oscRaf=null;}var cv=d
 document.addEventListener('mouseup',function(){mouseDown=false;if(!arpOn)stopSound();});
 document.addEventListener('touchend',function(){mouseDown=false;if(!arpOn)stopSound();});
 (function build(){var wc=document.getElementById('wkeys'),bc=document.getElementById('bkeys');var wkW=8,gap=1;notes.forEach(function(n,i){var isHighC=(i===7);var k=document.createElement('div');k.className='wk';k.addEventListener('mousedown',function(e){e.preventDefault();mouseDown=true;play(n,isHighC?1:0,k);});k.addEventListener('mouseenter',function(){if(!arpOn&&mouseDown)play(n,isHighC?1:0,k);});k.addEventListener('mouseup',function(){if(!arpOn)stopSound();});k.addEventListener('touchstart',function(e){e.preventDefault();mouseDown=true;play(n,isHighC?1:0,k);},{passive:false});k.addEventListener('touchend',function(e){e.preventDefault();if(!arpOn)stopSound();},{passive:false});wc.appendChild(k);});var blacks=[{n:'C#',between:[0,1]},{n:'D#',between:[1,2]},{n:'F#',between:[3,4]},{n:'G#',between:[4,5]},{n:'A#',between:[5,6]}];blacks.forEach(function(b){var bk=document.createElement('div');bk.className='bk';var li=b.between[0],ri=b.between[1];var lc=li*(wkW+gap)+(wkW/2),rc=ri*(wkW+gap)+(wkW/2);bk.style.left=((lc+rc)/2-2.5)+'px';bk.addEventListener('mousedown',function(e){e.stopPropagation();e.preventDefault();mouseDown=true;play(b.n,0,bk);});bk.addEventListener('mouseenter',function(e){e.stopPropagation();if(!arpOn&&mouseDown)play(b.n,0,bk);});bk.addEventListener('mouseup',function(e){e.stopPropagation();if(!arpOn)stopSound();});bk.addEventListener('touchstart',function(e){e.stopPropagation();e.preventDefault();mouseDown=true;play(b.n,0,bk);},{passive:false});bk.addEventListener('touchend',function(e){e.stopPropagation();e.preventDefault();if(!arpOn)stopSound();},{passive:false});bc.appendChild(bk);});var totalW=8*(wkW+gap)-gap;wc.style.width=totalW+'px';bc.style.width=totalW+'px';document.getElementById('kw').style.width=(totalW+2)+'px';})();
+/* ══ Étoiles au-dessus des i du titre ══ */
+(function(){
+  var h1=document.getElementById('site-title-h1');
+  var container=document.getElementById('title-stars');
+  if(!h1||!container)return;
+
+  /* ── RÉGLAGES ──────────────────────────────────────────────
+     Ajuste ces deux valeurs pour déplacer les étoiles :
+     OFFSET_X : décalage horizontal en px (+ = droite, - = gauche)
+     OFFSET_Y : décalage vertical en px   (- = monte, + = descend)
+  ─────────────────────────────────────────────────────────── */
+  var OFFSET_X = 0;
+  var OFFSET_Y = -22;
+  /* ─────────────────────────────────────────────────────────── */
+
+  function placeStars(){
+    var h1rect=h1.getBoundingClientRect();
+    var cellrect=container.parentElement.getBoundingClientRect();
+    var test=document.createElement('span');
+    test.style.cssText='position:absolute;visibility:hidden;font-family:"Times New Roman",Times,serif;font-size:58px;font-weight:bold;letter-spacing:4px;white-space:nowrap;pointer-events:none;left:0;top:0;';
+    document.body.appendChild(test);
+    var rendered='SCIENCE & POÉSIE';
+    var iPositions=[];
+    for(var i=0;i<rendered.length;i++){if(rendered[i]==='I')iPositions.push(i);}
+    container.innerHTML='';
+    test.textContent=rendered;
+    var fullW=test.offsetWidth;
+    iPositions.forEach(function(idx,si){
+      test.textContent=rendered.substring(0,idx);
+      var xBefore=test.offsetWidth;
+      test.textContent=rendered.substring(0,idx+1);
+      var xAfter=test.offsetWidth;
+      var xMid=(xBefore+xAfter)/2;
+      var starX=h1rect.left-cellrect.left+(h1rect.width-fullW)/2+xMid+OFFSET_X;
+      var starY=h1rect.top-cellrect.top+OFFSET_Y;
+      var el=document.createElement('div');
+      el.className='title-star-i';
+      el.innerHTML='&#9733;';
+      el.style.left=Math.round(starX)+'px';
+      el.style.top=Math.round(starY)+'px';
+      container.appendChild(el);
+    });
+    document.body.removeChild(test);
+  }
+  if(document.fonts&&document.fonts.ready){
+    document.fonts.ready.then(placeStars);
+  } else {
+    setTimeout(placeStars,400);
+  }
+  window.addEventListener('resize',placeStars);
+})();
 setTimeout(stopOsc,200);
 </script>
 </body>
