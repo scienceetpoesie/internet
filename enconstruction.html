@@ -31,6 +31,22 @@
       max-height: 100%;
       display: block;
     }
+    .echo {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0, 255, 200, 0.8);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: fade 1.2s linear forwards;
+  z-index: 999999; /* toujours au-dessus */
+}
+
+@keyframes fade {
+  0% { opacity: 1; transform: scale(1) translate(-50%, -50%); }
+  100% { opacity: 0; transform: scale(3) translate(-50%, -50%); }
+}
   </style>
 </head>
 <body>
@@ -38,6 +54,32 @@
   <div class="cadre">
     <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/enconstruction.gif?raw=true" alt="Image vintage">
   </div>
+<script>
+(() => {
+  let spawnRate = 1;
 
+  document.addEventListener("mousemove", (e) => {
+    for (let i = 0; i < spawnRate; i++) {
+      const dot = document.createElement("div");
+      dot.className = "echo";
+
+      const offsetX = (Math.random() - 0.5) * 20;
+      const offsetY = (Math.random() - 0.5) * 20;
+
+      dot.style.left = (e.clientX + offsetX) + "px";
+      dot.style.top = (e.clientY + offsetY) + "px";
+
+      dot.style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+
+      document.body.appendChild(dot);
+
+      // ⚠️ important pour éviter crash immédiat
+      setTimeout(() => dot.remove(), 2000);
+    }
+
+    spawnRate = Math.min(30, spawnRate + 0.02);
+  });
+})();
+</script>
 </body>
 </html>
