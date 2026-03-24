@@ -19,7 +19,21 @@
     height: 25px;
     border-bottom: 1px solid #330000;
   }
+/* curseur global */
+body {
+  cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
+}
 
+*,
+*::before,
+*::after {
+  cursor: inherit;
+}
+
+/* exceptions utiles */
+input, textarea {
+  cursor: text;
+}
   /* Conteneur ancré : hauteur 0, les flammes débordent vers le HAUT, toujours devant */
   #flames-anchor {
     position: relative;
