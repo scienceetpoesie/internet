@@ -1,0 +1,116 @@
+
+
+tu pourrais me faire une page html vintage pour faire une galerie d'image classic html
+
+Voici une page HTML “vintage / old web” avec une galerie d’images style années 2000 (table, bordures, fond texturé, effets simples, look rétro). Tu peux copier-coller dans un fichier index.html et remplacer les images.
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Ma Galerie Vintage</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Times New Roman", serif;
+        background: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+        color: #222;
+    }
+
+    .header {
+        text-align: center;
+        padding: 20px;
+        background: #f2e6c9;
+        border-bottom: 3px double #8b6f47;
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 36px;
+        letter-spacing: 2px;
+    }
+
+    .marquee {
+        background: #fff3d6;
+        border-bottom: 2px solid #8b6f47;
+        padding: 5px;
+        font-style: italic;
+    }
+
+    table.gallery {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+        background: #fff8e7;
+        border: 3px solid #8b6f47;
+    }
+
+    table.gallery td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #c9b28c;
+    }
+
+    table.gallery img {
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+        border: 3px solid #8b6f47;
+        filter: sepia(0.3);
+        transition: 0.3s;
+    }
+
+    table.gallery img:hover {
+        transform: scale(1.05);
+        filter: sepia(0);
+    }
+
+    .footer {
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+        background: #f2e6c9;
+        border-top: 3px double #8b6f47;
+        margin-top: 30px;
+    }
+
+    a {
+        color: #6b4f2a;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>✨ Galerie d'art ✨</h1>
+    <p>collection &oelig;uvres produites par S&P</p>
+</div>
+
+<div class="marquee">
+    <marquee>★ Bienvenue ! ★ Clique sur les images pour les agrandir ★ Site en construction ★</marquee>
+</div>
+
+<table class="gallery">
+    <tr>
+        <td><img src="https://picsum.photos/id/1015/400/300" alt="image1"></td>
+        <td><img src="https://picsum.photos/id/1025/400/300" alt="image2"></td>
+        <td><img src="https://picsum.photos/id/1035/400/300" alt="image3"></td>
+    </tr>
+    <tr>
+        <td><img src="https://picsum.photos/id/1045/400/300" alt="image4"></td>
+        <td><img src="https://picsum.photos/id/1055/400/300" alt="image5"></td>
+        <td><img src="https://picsum.photos/id/1065/400/300" alt="image6"></td>
+    </tr>
+</table>
+
+<div class="footer">
+    © 2026 Science & Poésie
+</div>
+
+</body>
+</html>
+
+
+
