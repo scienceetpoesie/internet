@@ -24,15 +24,9 @@ body {
   cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
 }
 
-*,
-*::before,
-*::after {
-  cursor: inherit;
-}
-
 /* exceptions utiles */
 input, textarea {
-  cursor: text;
+cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
 }
   /* Conteneur ancré : hauteur 0, les flammes débordent vers le HAUT, toujours devant */
   #flames-anchor {
@@ -40,6 +34,7 @@ input, textarea {
     height: 0;
     width: 100%;
     z-index: 200;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
   }
 
   .flame-border {
@@ -54,6 +49,7 @@ input, textarea {
     line-height: 0; font-size: 0;
     gap: 0;
     transition: height 0.25s ease;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
   }
   .flame-border img {
     display: block; flex-shrink: 0;
@@ -109,10 +105,12 @@ input, textarea {
     padding: 14px 0; overflow: hidden;
     position: relative;
     z-index: 2;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
   }
   .scroll-inner {
     display: inline-flex; gap: 12px;
     animation: scrollCards 55s linear infinite; white-space: nowrap;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
   }
   .scroll-inner:hover { animation-play-state: paused; }
   @keyframes scrollCards {
@@ -124,7 +122,7 @@ input, textarea {
   .portrait-card {
     display: inline-block; width: 130px; vertical-align: top;
     background: #1a0000; border: 3px outset #884444;
-    cursor: pointer; white-space: normal; flex-shrink: 0;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
     font-family: "Times New Roman", serif;
     position: relative; /* needed for ribbon */
     overflow: hidden;   /* clip the ribbon corners */
@@ -262,7 +260,7 @@ input, textarea {
     background: #330000;
     border: 1px inset #660000;
     outline: none;
-    cursor: pointer;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
     margin: 4px 0 8px;
   }
   #flameSlider::-webkit-slider-thumb {
@@ -272,7 +270,7 @@ input, textarea {
     height: 16px;
     background: #CC0000;
     border: 2px outset #FF4400;
-    cursor: pointer;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
   }
   #flameSlider::-moz-range-thumb {
     width: 14px;
