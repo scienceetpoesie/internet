@@ -176,30 +176,53 @@ var images = [
 "https://raw.githubusercontent.com/scienceetpoesie/internet/main/galerie/why%20our%20modern%20homes%20looks%20so%20dul%20shhortl.jpg"
 ];
 
-var index = Math.floor(Math.random() * images.length);
+var images = [
+    "https://raw.githubusercontent.com/scienceetpoesie/internet/main/galerie/20230917_221003.jpg",
+    "https://raw.githubusercontent.com/scienceetpoesie/internet/main/galerie/564fpz.jpg",
+    // ajoute d’autres images ici
+];
+
+var shuffledIndices = [];
+var currentIndex = 0;
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function initShuffle() {
+    shuffledIndices = [];
+    for (let i = 0; i < images.length; i++) shuffledIndices.push(i);
+    shuffledIndices = shuffle(shuffledIndices);
+    currentIndex = 0;
+}
 
 function showImage() {
-    document.getElementById("gallery").src = images[index];
+    document.getElementById("gallery").src = images[shuffledIndices[currentIndex]];
 }
 
 function nextImage() {
-    let newIndex;
-    do {
-        newIndex = Math.floor(Math.random() * images.length);
-    } while (newIndex === index && images.length > 1); // évite la même image
-    index = newIndex;
+    currentIndex++;
+    if (currentIndex >= shuffledIndices.length) initShuffle(); // tout vu → reshuffle
     showImage();
 }
 
 function prevImage() {
-    let newIndex;
-    do {
-        newIndex = Math.floor(Math.random() * images.length);
-    } while (newIndex === index && images.length > 1);
-    index = newIndex;
+    currentIndex--;
+    if (currentIndex < 0) currentIndex = 0; // limite au début
     showImage();
 }
-    showImage();
+
+// initialisation
+initShuffle();
+showImage();
+
+
+
+    
 </script>
 
 </body>
