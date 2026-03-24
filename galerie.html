@@ -182,6 +182,12 @@ var images = [
     // ajoute d’autres images ici
 ];
 
+var images = [
+    "https://raw.githubusercontent.com/scienceetpoesie/internet/main/galerie/20230917_221003.jpg",
+    "https://raw.githubusercontent.com/scienceetpoesie/internet/main/galerie/564fpz.jpg",
+    // autres images
+];
+
 var shuffledIndices = [];
 var currentIndex = 0;
 
@@ -193,6 +199,7 @@ function shuffle(array) {
     return array;
 }
 
+// Initialise le shuffle
 function initShuffle() {
     shuffledIndices = [];
     for (let i = 0; i < images.length; i++) shuffledIndices.push(i);
@@ -200,23 +207,27 @@ function initShuffle() {
     currentIndex = 0;
 }
 
+// Affiche l'image courante
 function showImage() {
     document.getElementById("gallery").src = images[shuffledIndices[currentIndex]];
 }
 
+// Image suivante (shuffle)
 function nextImage() {
     currentIndex++;
-    if (currentIndex >= shuffledIndices.length) initShuffle(); // tout vu → reshuffle
+    if (currentIndex >= shuffledIndices.length) initShuffle(); // reshuffle après avoir tout vu
     showImage();
 }
 
+// Image précédente (séquentiel, dans l'ordre déjà affiché)
 function prevImage() {
-    currentIndex--;
-    if (currentIndex < 0) currentIndex = 0; // limite au début
-    showImage();
+    if (currentIndex > 0) {
+        currentIndex--;
+        showImage();
+    }
 }
 
-// initialisation
+// Initialisation
 initShuffle();
 showImage();
 
