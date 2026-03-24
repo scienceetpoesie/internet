@@ -56,12 +56,29 @@ button:active {
     color: yellow;
     font-weight: bold;
 }
+    .star {
+    position: fixed;
+    top: 5px;
+    font-size: 24px;
+    color: yellow;
+    font-family: "Courier New";
+    z-index: 1000;
+}
+
+.left {
+    left: 10px;
+}
+
+.right {
+    right: 10px;
+}
 </style>
 </head>
 <body>
-
-<marquee class="marquee">★                                                 ★</marquee>
-
+    
+<div class="star left">★</div>
+<div class="star right">★</div>
+    
 <div class="container">
     <h1>"Art"</h1>
     <img id="gallery" src="image1.jpg">
