@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Butik</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --jungle: #1a3a1f;
+    --leaf: #2d5a27;
+    --skin: #e8c89a;
+    --vein: #c4614a;
+    --fairground: #f0d060;
+    --candy: #e8485a;
+    --cream: #f7f0e3;
+    --dark: #0f1e10;
+    --text: #1a1208;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--dark);
+    color: var(--cream);
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.5;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Organic background shapes */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-bg svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: normal;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-style: italic;
+    letter-spacing: -0.02em;
+    color: var(--fairground);
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .logo span {
+    display: block;
+    font-size: 0.38em;
+    font-style: normal;
+    letter-spacing: 0.22em;
+    color: var(--skin);
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    margin-top: 0.2em;
+  }
+
+  nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  nav a {
+    color: var(--skin);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    opacity: 0.75;
+  }
+
+  nav a:hover { color: var(--fairground); opacity: 1; }
+
+  .nav-shop {
+    background: var(--candy);
+    color: var(--cream) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2px;
+    opacity: 1 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-shop:hover { background: var(--fairground) !important; color: var(--text) !important; }
+
+  /* ── HERO CENTER ── */
+  .hero-center {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--vein);
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 700;
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    color: var(--cream);
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--fairground);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--skin);
+    max-width: 360px;
+    line-height: 1.8;
+    opacity: 0.8;
+    margin-bottom: 3rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--fairground);
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    border-radius: 2px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--candy);
+    transform: translateX(-101%);
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  .hero-cta:hover::before { transform: translateX(0); }
+  .hero-cta:hover { color: var(--cream); }
+
+  .hero-cta span { position: relative; z-index: 1; }
+
+  .hero-cta .arrow {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.25s;
+  }
+
+  .hero-cta:hover .arrow { transform: translateX(4px); }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    position: relative;
+    z-index: 10;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(240, 208, 96, 0.06);
+    overflow: hidden;
+    padding: 0.75rem 0;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 18s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--skin);
+    padding: 0 2.5rem;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  .marquee-item.accent { color: var(--fairground); opacity: 1; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── COLLECTION SECTION ── */
+  .collection {
+    padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-style: italic;
+    line-height: 1;
+    color: var(--cream);
+  }
+
+  .section-title strong {
+    font-style: normal;
+    color: var(--fairground);
+    display: block;
+  }
+
+  .section-link {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--vein);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vein);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+
+  .section-link:hover { color: var(--fairground); border-color: var(--fairground); }
+
+  /* ── PRODUCT GRID ── */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    position: relative;
+    background: #141f15;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .product-card:hover {
+    border-color: rgba(240, 208, 96, 0.35);
+    transform: translateY(-3px);
+  }
+
+  .product-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: #1e2e1f;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Placeholder pattern for images */
+  .product-img-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .product-img svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.25;
+  }
+
+  .product-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: var(--candy);
+    color: var(--cream);
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border-radius: 1px;
+  }
+
+  .product-info {
+    padding: 1.2rem 1.4rem 1.6rem;
+  }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .product-desc {
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--skin);
+    opacity: 0.65;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .product-price {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--fairground);
+  }
+
+  .product-btn {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.45rem 0.9rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .product-btn:hover {
+    background: var(--fairground);
+    color: var(--text);
+    border-color: var(--fairground);
+  }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    background: #0d1a0e;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 700px) {
+    .about-strip { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text h2 em { color: var(--fairground); font-style: normal; }
+
+  .about-text p {
+    font-size: 0.75rem;
+    line-height: 2;
+    color: var(--skin);
+    opacity: 0.75;
+    max-width: 420px;
+  }
+
+  .about-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .detail-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding: 1.2rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 3px;
+    transition: border-color 0.2s;
+  }
+
+  .detail-item:hover { border-color: rgba(240, 208, 96, 0.25); }
+
+  .detail-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    color: var(--vein);
+  }
+
+  .detail-text strong {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .detail-text span {
+    font-size: 0.65rem;
+    color: var(--skin);
+    opacity: 0.6;
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--skin);
+    opacity: 0.4;
+    text-transform: uppercase;
+  }
+
+  footer a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  footer a:hover { opacity: 0.8; }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  /* ── DECORATIVE ORGANIC LINES ── */
+  .deco-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── ANIMATE IN ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.9s ease 0.2s both; }
+  .hero-title   { animation: fadeUp 0.9s ease 0.4s both; }
+  .hero-sub     { animation: fadeUp 0.9s ease 0.6s both; }
+  .hero-cta     { animation: fadeUp 0.9s ease 0.8s both; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    header { padding: 1.5rem; }
+    nav a:not(.nav-shop) { display: none; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+
+  /* Toboggan stripe accent (diagonal) */
+  .toboggan-accent {
+    position: absolute;
+    top: 0; right: 0;
+    width: 180px; height: 100%;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 18px,
+      rgba(240, 208, 96, 0.025) 18px,
+      rgba(240, 208, 96, 0.025) 36px
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- Background organic jungle SVG -->
+  <div class="hero-bg">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Deep jungle bg -->
+      <rect width="1440" height="900" fill="#0f1e10"/>
+
+      <!-- Large leaf shapes - left cluster -->
+      <path d="M-60 700 Q80 400 200 600 Q120 750 -60 700Z" fill="#1a3a1f" opacity="0.9"/>
+      <path d="M-40 800 Q150 500 280 650 Q180 820 -40 800Z" fill="#152e18" opacity="0.7"/>
+      <path d="M40 600 Q180 300 260 480 Q170 620 40 600Z" fill="#1f4524" opacity="0.6"/>
+      <!-- vein on leaf -->
+      <path d="M40 600 Q160 430 260 480" fill="none" stroke="#2d5a27" stroke-width="1.2" opacity="0.5"/>
+
+      <!-- Large leaf shapes - right cluster -->
+      <path d="M1500 200 Q1300 500 1180 300 Q1280 150 1500 200Z" fill="#1a3a1f" opacity="0.9"/>
+      <path d="M1480 100 Q1260 450 1120 250 Q1260 80 1480 100Z" fill="#152e18" opacity="0.6"/>
+      <path d="M1440 350 Q1280 550 1200 430 Q1290 320 1440 350Z" fill="#1f4524" opacity="0.5"/>
+
+      <!-- Anatomy / toboggan curve - red sinuous line through center -->
+      <path d="M0 450 C200 200 400 700 600 450 S900 200 1100 450 S1300 700 1440 500"
+            fill="none" stroke="#c4614a" stroke-width="1.5" opacity="0.18"/>
+      <path d="M0 470 C200 220 400 720 600 470 S900 220 1100 470 S1300 720 1440 520"
+            fill="none" stroke="#c4614a" stroke-width="0.7" opacity="0.1"/>
+
+      <!-- Fairground dots / bulbs - scattered -->
+      <circle cx="300" cy="150" r="2.5" fill="#f0d060" opacity="0.7"/>
+      <circle cx="320" cy="170" r="1.5" fill="#f0d060" opacity="0.4"/>
+      <circle cx="680" cy="80"  r="3"   fill="#f0d060" opacity="0.6"/>
+      <circle cx="700" cy="100" r="1.8" fill="#f0d060" opacity="0.3"/>
+      <circle cx="1050" cy="130" r="2.5" fill="#f0d060" opacity="0.65"/>
+      <circle cx="1080" cy="155" r="1.5" fill="#f0d060" opacity="0.35"/>
+      <circle cx="200" cy="380"  r="2"   fill="#e8c89a" opacity="0.3"/>
+      <circle cx="900" cy="280"  r="2.5" fill="#e8c89a" opacity="0.25"/>
+      <circle cx="1200" cy="500" r="2"   fill="#e8c89a" opacity="0.28"/>
+
+      <!-- Anatomical cross-section circle (suggestive, abstract) -->
+      <circle cx="720" cy="450" r="280" fill="none" stroke="#1a3a1f" stroke-width="40" opacity="0.5"/>
+      <circle cx="720" cy="450" r="260" fill="none" stroke="#c4614a" stroke-width="0.5" opacity="0.12"/>
+      <circle cx="720" cy="450" r="200" fill="none" stroke="#e8c89a" stroke-width="0.4" opacity="0.07"/>
+
+      <!-- Toboggan lane (diagonal stripe) -->
+      <path d="M900 -50 L1500 900" stroke="#f0d060" stroke-width="60" stroke-linecap="butt" opacity="0.025"/>
+      <path d="M960 -50 L1560 900" stroke="#e8485a" stroke-width="18" stroke-linecap="butt" opacity="0.03"/>
+
+      <!-- Bottom foliage -->
+      <path d="M0 900 Q100 700 250 850 Q150 920 0 900Z"  fill="#1a3a1f" opacity="0.85"/>
+      <path d="M1200 900 Q1320 680 1440 820 L1440 900Z"  fill="#1a3a1f" opacity="0.85"/>
+      <path d="M550 900 Q620 750 750 880 Q680 930 550 900Z" fill="#152e18" opacity="0.5"/>
+
+      <!-- Faint grid (anatomical diagram reference) -->
+      <line x1="0" y1="450" x2="1440" y2="450" stroke="#e8c89a" stroke-width="0.4" opacity="0.05"/>
+      <line x1="720" y1="0" x2="720" y2="900" stroke="#e8c89a" stroke-width="0.4" opacity="0.05"/>
+    </svg>
+  </div>
+
+  <!-- Toboggan diagonal stripes - right edge -->
+  <div class="toboggan-accent"></div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#" class="logo">
+      La Butik
+      <span>pièces faites main</span>
+    </a>
+    <nav>
+      <a href="#collection">Collection</a>
+      <a href="#about">À propos</a>
+      <a href="https://labbutik.bigcartel.com" target="_blank" class="nav-shop">Boutique →</a>
+    </nav>
+  </header>
+
+  <!-- HERO CONTENT -->
+  <div class="hero-center">
+    <p class="hero-eyebrow">✦ Créations uniques · fait à la main · France ✦</p>
+    <h1 class="hero-title">
+      La<br>
+      <em>Butik</em>
+    </h1>
+    <p class="hero-sub">
+      Des vêtements faits à la main — chaque pièce est unique,
+      pensée et cousue avec soin.
+    </p>
+    <a href="https://labbutik.bigcartel.com" target="_blank" class="hero-cta">
+      <span>Voir la collection</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <!-- Duplicate items for seamless loop -->
+      <span class="marquee-item">Fait à la main</span>
+      <span class="marquee-item accent">✦</span>
+      <span class="marquee-item">Pièces uniques</span>
+      <span class="marquee-item accent">✦</span>
+      <span class="marquee-item">Slow fashion</span>
+      <span class="marquee-item accent">✦</span>
+      <span class="marquee-item">Créations originales</span>
+      <span class="marquee-item accent">✦</span>
+      <span class="marquee-item">Livraison France</span>
+      <span class="marquee-item accent">✦</span>
+      <span class="marquee-item">La Butik</span>
+      <span class="marquee-item accent">✦</span>
+      <!-- Duplicate -->
+      <span class="marquee-item">Fait à la main</span>
+      <span class="marquee-item accent">✦</span>
+      <span class="marquee-item">Pièces uniques</span>
+      <span class="marquee-item accent">✦</span>
+      <span class="marquee-item">Slow fashion</span>
+      <span class="marquee-item accent">✦</span>
+      <span class="marquee-item">Créations originales</span>
+      <span class="marquee-item accent">✦</span>
+      <span class="marquee-item">Livraison France</span>
+      <span class="marquee-item accent">✦</span>
+      <span class="marquee-item">La Butik</span>
+      <span class="marquee-item accent">✦</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- COLLECTION -->
+<section class="collection" id="collection">
+  <div class="section-header">
+    <h2 class="section-title">
+      En ce moment
+      <strong>dans la boutique</strong>
+    </h2>
+    <a href="https://labbutik.bigcartel.com" target="_blank" class="section-link">Tout voir →</a>
+  </div>
+
+  <div class="product-grid">
+
+    <!-- Placeholder cards - à remplacer par des vraies photos -->
+    <a href="https://labbutik.bigcartel.com" target="_blank" class="product-card">
+      <div class="product-img">
+        <div class="product-img-inner">
+          <!-- Organic decorative SVG placeholder -->
+          <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="400" fill="#1e2e1f"/>
+            <path d="M50 350 Q150 100 250 350" fill="none" stroke="#2d5a27" stroke-width="30" stroke-linecap="round"/>
+            <circle cx="150" cy="200" r="60" fill="none" stroke="#c4614a" stroke-width="1"/>
+            <circle cx="150" cy="200" r="40" fill="none" stroke="#e8c89a" stroke-width="0.5"/>
+            <path d="M100 200 Q150 140 200 200 Q150 260 100 200Z" fill="#1a3a1f" opacity="0.8"/>
+          </svg>
+        </div>
+        <span class="product-tag">Nouveau</span>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Veste brodée</p>
+        <p class="product-desc">Coton • taille unique · broderies à l'aiguille</p>
+        <div class="product-footer">
+          <span class="product-price">€ — voir prix</span>
+          <button class="product-btn">Voir →</button>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://labbutik.bigcartel.com" target="_blank" class="product-card">
+      <div class="product-img">
+        <div class="product-img-inner">
+          <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="400" fill="#1e2e1f"/>
+            <path d="M0 200 Q150 50 300 200 L300 400 L0 400Z" fill="#152e18" opacity="0.7"/>
+            <line x1="150" y1="0" x2="150" y2="400" stroke="#c4614a" stroke-width="0.7" opacity="0.4"/>
+            <circle cx="150" cy="140" r="55" fill="none" stroke="#f0d060" stroke-width="0.8" stroke-dasharray="4 6"/>
+          </svg>
+        </div>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Top appliqué</p>
+        <p class="product-desc">Tissu recyclé · découpes à la main</p>
+        <div class="product-footer">
+          <span class="product-price">€ — voir prix</span>
+          <button class="product-btn">Voir →</button>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://labbutik.bigcartel.com" target="_blank" class="product-card">
+      <div class="product-img">
+        <div class="product-img-inner">
+          <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="400" fill="#1e2e1f"/>
+            <path d="M150 50 Q250 200 150 350 Q50 200 150 50Z" fill="#1f4524" opacity="0.5"/>
+            <path d="M100 200 Q150 100 200 200 Q150 300 100 200Z" fill="none" stroke="#e8c89a" stroke-width="0.8" opacity="0.5"/>
+            <circle cx="150" cy="200" r="80" fill="none" stroke="#c4614a" stroke-width="1.2" opacity="0.4" stroke-dasharray="3 5"/>
+          </svg>
+        </div>
+        <span class="product-tag">Unique</span>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Pantalon patchwork</p>
+        <p class="product-desc">Assemblage de chutes · coutures apparentes</p>
+        <div class="product-footer">
+          <span class="product-price">€ — voir prix</span>
+          <button class="product-btn">Voir →</button>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- CTA toward bigcartel -->
+  <div style="text-align: center; margin-top: 3.5rem;">
+    <a href="https://labbutik.bigcartel.com" target="_blank" class="hero-cta" style="display: inline-flex;">
+      <span>Voir toutes les pièces sur la boutique</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div id="about">
+  <div class="about-strip">
+    <div class="about-text">
+      <h2>
+        Chaque pièce est<br>
+        <em>une seule fois</em>
+      </h2>
+      <p>
+        La Butik c'est des vêtements faits entièrement à la main,
+        avec des matières choisies une par une. Pas de production en série,
+        pas de tailles standardisées — chaque création est pensée pour exister
+        une fois, et une seule.
+      </p>
+    </div>
+    <div class="about-details">
+      <div class="detail-item">
+        <svg class="detail-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 24 Q16 6 24 24" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="1"/>
+        </svg>
+        <div class="detail-text">
+          <strong>Fait à la main</strong>
+          <span>Chaque pièce cousue, brodée et assemblée manuellement</span>
+        </div>
+      </div>
+      <div class="detail-item">
+        <svg class="detail-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1"/>
+          <path d="M11 16 L15 20 L21 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="detail-text">
+          <strong>Pièces uniques</strong>
+          <span>Jamais reproduites à l'identique, toujours originales</span>
+        </div>
+      </div>
+      <div class="detail-item">
+        <svg class="detail-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 4 C8 4 4 10 4 16 C4 22 8 28 16 28 C24 28 28 22 28 16" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+          <path d="M20 4 L28 4 L28 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M28 4 L18 14" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+        <div class="detail-text">
+          <strong>Commande en ligne</strong>
+          <span>Checkout sécurisé via BigCartel · livraison France</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 La Butik — tous droits réservés</p>
+  <div class="footer-links">
+    <p><a href="https://labbutik.bigcartel.com" target="_blank">Boutique</a></p>
+    <p><a href="mailto:contact@labutik.fr">Contact</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
