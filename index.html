@@ -541,7 +541,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 /* ══ ModuRavier intégré ══ */
 (function(){
   var mrRep=9.5, mrSpd=6.6, mrAmp=0.07, mrChaos=0;
-  var mrSpdT=mrSpd, mrSpdS=mrSpd, SLEW=0.05;
+  var mrSpdS=6.6;  // valeur lissée courante (plus de mrSpdT / SLEW)
   var mrActx=null, mrOn=false, mrMaster=null, mrNodes=[], mrUpd=null;
   var BT='#5a3e28', BK='#8B6343';
 
@@ -549,11 +549,15 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   var gl=cv.getContext('webgl');
   gl.viewport(0,0,164,216);
 
+  // ── FIX 1 : on passe une "phase" accumulée au lieu de t*spd ──
+  // Le shader reçoit `phase` (= intégrale de spd dt) au lieu de t*spd.
+  // Ainsi changer la vitesse change uniquement le rythme futur, jamais la position actuelle.
   var VERT='attribute vec2 a;varying vec2 v;void main(){vec2 u=(a+1.0)*0.5;u.y=1.0-u.y;v=u;gl_Position=vec4(a,0,1);}';
-  var FRAG='precision mediump float;varying vec2 v;uniform float t,rep,spd,amp,chaos;uniform sampler2D tex;'+
+  var FRAG='precision mediump float;varying vec2 v;'+
+    'uniform float phase,t,rep,amp,chaos;uniform sampler2D tex;'+
     'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}'+
     'float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);float a=h(i),b=h(i+vec2(1,0)),c=h(i+vec2(0,1)),d=h(i+vec2(1,1));return mix(mix(a,b,f.x),mix(c,d,f.x),f.y);}'+
-    'void main(){vec2 u=v;u.x+=sin(u.y*rep+t*spd)*amp;'+
+    'void main(){vec2 u=v;u.x+=sin(u.y*rep+phase)*amp;'+   // ← phase au lieu de t*spd
     'if(chaos>0.0){float m=0.12;float vg=smoothstep(0.0,m,u.x)*smoothstep(0.0,m,1.0-u.x)*smoothstep(0.0,m,u.y)*smoothstep(0.0,m,1.0-u.y);'+
     'float amt=chaos*chaos*0.55*vg;'+
     'float nx=vn(u*1.2+vec2(t*0.08,0))-0.5;float ny=vn(u*1.2+vec2(0,t*0.10)+vec2(3.7,8.2))-0.5;'+
@@ -570,7 +574,13 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
   var al=gl.getAttribLocation(pg,'a'); gl.enableVertexAttribArray(al);
   gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
-  var U={t:gl.getUniformLocation(pg,'t'),rep:gl.getUniformLocation(pg,'rep'),spd:gl.getUniformLocation(pg,'spd'),amp:gl.getUniformLocation(pg,'amp'),chaos:gl.getUniformLocation(pg,'chaos')};
+  var U={
+    phase: gl.getUniformLocation(pg,'phase'),  // ← nouveau uniform
+    t:     gl.getUniformLocation(pg,'t'),
+    rep:   gl.getUniformLocation(pg,'rep'),
+    amp:   gl.getUniformLocation(pg,'amp'),
+    chaos: gl.getUniformLocation(pg,'chaos')
+  };
 
   var tx=gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,tx);
   gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([200,200,200,255]));
@@ -588,7 +598,8 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
   fV(document.getElementById('mr-chaos'));
 
   document.getElementById('mr-rep').oninput  =function(e){mrRep  =+e.target.value;fH(e.target);};
-  document.getElementById('mr-spd').oninput  =function(e){mrSpd  =+e.target.value;mrSpdT=mrSpd;fH(e.target);};
+  // ── FIX 1 (suite) : on ne fait plus de slew, mrSpdS se lisse dans la boucle ──
+  document.getElementById('mr-spd').oninput  =function(e){mrSpd  =+e.target.value;fH(e.target);};
   document.getElementById('mr-amp').oninput  =function(e){mrAmp  =+e.target.value;fH(e.target);};
   document.getElementById('mr-chaos').oninput=function(e){mrChaos=+e.target.value;fV(e.target);};
 
@@ -611,13 +622,17 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     mrNodes=[car,mod,lfo,mg,cg,lg,fi,wv];
     mrUpd=function(){
       var tt=mrActx.currentTime, fc=55*Math.pow(2,mrRep/18);
+
+      // ── FIX 2 : le gain de modulation de fréquence (mg) ne doit pas dépendre de mrChaos
+      // pour éviter l'augmentation de volume perçu.
+      // mrChaos agit uniquement sur la forme (Q du filtre, waveshaper, LFO rate).
       car.frequency.setTargetAtTime(fc,tt,.10);
       mod.frequency.setTargetAtTime(fc*(0.5+mrSpd*0.22),tt,.10);
-      mg.gain.setTargetAtTime(fc*(Math.min(0.35+mrSpd*0.13,2.8)+mrChaos*4.5),tt,.08);
+      mg.gain.setTargetAtTime(fc*(Math.min(0.35+mrSpd*0.13,2.8)),tt,.08);  // ← mrChaos*4.5 retiré
       lfo.frequency.setTargetAtTime(0.3+mrSpd*0.22+mrChaos*8,tt,.10);
       lg.gain.setTargetAtTime(mrAmp*160,tt,.06);
       fi.frequency.setTargetAtTime(1880,tt,.10);
-      fi.Q.setTargetAtTime(1.4+mrChaos*14,tt,.08);
+      fi.Q.setTargetAtTime(1.4+mrChaos*14,tt,.08);                        // chaos = timbre, pas volume
       wv.curve=tC(1.6+mrChaos*8);
     };
   }
@@ -640,14 +655,30 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
     if(mrOn) rebuild(); else dispose();
   });
 
+  // ── FIX 1 : variables pour la phase accumulée et le lissage de vitesse ──
   var st=performance.now();
+  var mrPhase=0;        // phase accumulée en radians (intégrale de spd)
+  var prevT=0;          // temps précédent en secondes
+  var SLEW=0.04;        // coefficient de lissage pour mrSpdS
+
   function mrLoop(){
-    var t=(performance.now()-st)/1000;
-    mrSpdS+=(mrSpdT-mrSpdS)*SLEW;
-    gl.uniform1f(U.t,t); gl.uniform1f(U.rep,Math.max(0.1,mrRep));
-    gl.uniform1f(U.spd,mrSpdS); gl.uniform1f(U.amp,Math.max(0,mrAmp));
-    gl.uniform1f(U.chaos,mrChaos);
+    var now=(performance.now()-st)/1000;
+    var dt=now-prevT; prevT=now;
+
+    // Lissage exponentiel de la vitesse affichée → vitesse réelle
+    mrSpdS+=(mrSpd-mrSpdS)*SLEW;
+
+    // Accumulation de phase : Δphase = spdLissée × dt
+    // → pas de saut de phase quand la vitesse change
+    mrPhase+=mrSpdS*dt;
+
+    gl.uniform1f(U.phase, mrPhase);
+    gl.uniform1f(U.t,     now);
+    gl.uniform1f(U.rep,   Math.max(0.1,mrRep));
+    gl.uniform1f(U.amp,   Math.max(0,mrAmp));
+    gl.uniform1f(U.chaos, mrChaos);
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+
     if(mrOn&&mrActx&&mrUpd) mrUpd();
     requestAnimationFrame(mrLoop);
   }
