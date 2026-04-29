@@ -13,7 +13,21 @@
       align-items: center;
       font-family: "Georgia", serif;
     }
+.retour-menu {
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  font-family: "Times New Roman", serif;
+  font-size: 18px;
+  color: #d8d3c4; /* crème grisâtre semi-clair */
+  text-decoration: underline;
+  transition: color 0.3s ease;
+  z-index: 1000000;
+}
 
+.retour-menu:hover {
+  color: #f2efe6; /* plus clair au hover */
+}
     .cadre {
       background-color: #f5f0e6; /* crème */
       padding: 20px;
@@ -50,7 +64,7 @@
   </style>
 </head>
 <body>
-
+<a href="index.html" class="retour-menu">Revenir au menu principal</a>
   <div class="cadre">
     <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/enconstruction.gif?raw=true" alt="Image vintage">
   </div>
