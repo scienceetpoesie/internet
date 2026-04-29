@@ -274,6 +274,10 @@ var gSpdTarget = DEF.spd;
 var gSpdSmooth = DEF.spd;
 var SPD_SLEW   = 0.05;
 
+// Phase accumulée — évite les sauts quand on change la vitesse
+var gPhase   = 0;
+var lastTime = performance.now();
+
 /* ══════════════════════════════════════════════
    WebGL
 ══════════════════════════════════════════════ */
@@ -294,10 +298,12 @@ void main(){
   gl_Position = vec4(a_pos, 0.0, 1.0);
 }`;
 
+// u_phase remplace u_time * u_spd — la phase est accumulée côté JS
+// u_time reste disponible uniquement pour le bruit de chaos
 var FRAG = `
 precision mediump float;
 varying vec2 v_uv;
-uniform float u_time, u_rep, u_spd, u_amp, u_dir, u_chaos;
+uniform float u_time, u_phase, u_rep, u_amp, u_dir, u_chaos;
 uniform sampler2D u_tex;
 
 float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
@@ -312,9 +318,9 @@ void main(){
   vec2 uv = v_uv;
 
   if(u_dir < 0.5){
-    uv.y += sin(uv.x * u_rep + u_time * u_spd) * u_amp;
+    uv.y += sin(uv.x * u_rep + u_phase) * u_amp;
   } else {
-    uv.x += sin(uv.y * u_rep + u_time * u_spd) * u_amp;
+    uv.x += sin(uv.y * u_rep + u_phase) * u_amp;
   }
 
   if(u_chaos > 0.0){
@@ -350,8 +356,8 @@ gl.vertexAttribPointer(aloc,2,gl.FLOAT,false,0,0);
 
 var U = {
   time:   gl.getUniformLocation(prog,'u_time'),
+  phase:  gl.getUniformLocation(prog,'u_phase'),
   rep:    gl.getUniformLocation(prog,'u_rep'),
-  spd:    gl.getUniformLocation(prog,'u_spd'),
   amp:    gl.getUniformLocation(prog,'u_amp'),
   dir:    gl.getUniformLocation(prog,'u_dir'),
   chaos:  gl.getUniformLocation(prog,'u_chaos'),
@@ -507,8 +513,6 @@ function rebuildPatch(name){
   var dst=masterGain, now=actx.currentTime;
   var inv=(gDir<0.5);
 
-  /* ── STEINIGER — Ring mod
-     [0]=oA [1]=oB [2]=lfo [3]=ringG [4]=mix [5]=lfoG [6]=filt */
   if(name==='steiniger'){
     var oA=actx.createOscillator(); oA.type=inv?'triangle':'square';
     var oB=actx.createOscillator(); oB.type=inv?'sine':'square';
@@ -539,8 +543,6 @@ function rebuildPatch(name){
       filt.Q.setTargetAtTime(inv?(1.2+gChaos*9):(1.8+gChaos*12),t,.10);
     };
 
-  /* ── VAL — Cross mod
-     [0]=oA [1]=oB [2]=lfo [3]=gAB [4]=gBA [5]=outA [6]=outB [7]=lfoG [8]=filt */
   } else if(name==='val'){
     var oA =actx.createOscillator(); oA.type=inv?'sine':'sawtooth';
     var oB =actx.createOscillator(); oB.type=inv?'sine':'triangle';
@@ -575,8 +577,6 @@ function rebuildPatch(name){
       filt.Q.setTargetAtTime(1.5+gChaos*14,t,.10);
     };
 
-  /* ── BLOCHER — Sub + ring mod tellurique
-     [0]=sub [1]=ringOsc [2]=lfo [3]=subG [4]=ringG [5]=ringOut [6]=comb [7]=lfoG */
   } else if(name==='blocher'){
     var sub    =actx.createOscillator(); sub.type=inv?'triangle':'sine';
     var subG   =actx.createGain(); subG.gain.value=0.48;
@@ -613,8 +613,6 @@ function rebuildPatch(name){
       lfoG.gain.setTargetAtTime(gAmp*320,t,.10);
     };
 
-  /* ── LELLOUCHE — FM 3-op feedback
-     [0]=op1 [1]=op2 [2]=op3 [3]=car [4]=lfo [5]=g1 [6]=g2 [7]=g3 [8]=gCar [9]=fbG [10]=lfoM [11]=filt */
   } else if(name==='lellouche'){
     var op1=actx.createOscillator(); op1.type=inv?'sine':'sawtooth';
     var op2=actx.createOscillator(); op2.type=inv?'sine':'triangle';
@@ -658,8 +656,6 @@ function rebuildPatch(name){
       filt.Q.setTargetAtTime(1.4+gChaos*10,t,.10);
     };
 
-  /* ── BEIGBEDER — Drone mélancolique
-     [0]=oA [1]=oB [2]=oC [3]=lfo [4]=gA [5]=gB [6]=gC [7]=lfoA [8]=lfoB [9]=filt [10]=ap1 [11]=ap2 [12]=shape [13]=outG */
   } else if(name==='beigbeder'){
     var oA=actx.createOscillator(); oA.type=inv?'triangle':'sine';
     var oB=actx.createOscillator(); oB.type=inv?'triangle':'sine';
@@ -704,9 +700,6 @@ function rebuildPatch(name){
       ap2.frequency.setTargetAtTime(1000+gScaleX*700+gChaos*2000,t,.20);
     };
 
-  /* ── GAVE — FM dual modulateurs inharmoniques
-     [0]=carrier [1]=mod1 [2]=mod2 [3]=mg1 [4]=mg2 [5]=carG
-     [6]=lfo [7]=lfoG [8]=filt [9]=peak [10]=wave */
   } else if(name==='gave'){
     var carrier=actx.createOscillator(); carrier.type=inv?'sine':'sawtooth';
     var mod1   =actx.createOscillator(); mod1.type=inv?'sine':'triangle';
@@ -743,9 +736,6 @@ function rebuildPatch(name){
       wave.curve=tanhCurve(inv?(0.8+gChaos*4):(1.4+gChaos*6));
     };
 
-  /* ── LARCHER — Comb + dual osc solennel
-     [0]=osc1 [1]=osc2 [2]=lfo [3]=g1 [4]=g2
-     [5]=comb1 [6]=comb2 [7]=lfoG [8]=filt [9]=wave */
   } else if(name==='larcher'){
     var osc1 =actx.createOscillator(); osc1.type=inv?'sine':'sawtooth';
     var osc2 =actx.createOscillator(); osc2.type=inv?'sine':'triangle';
@@ -805,20 +795,28 @@ document.getElementById('soundBtn').onclick=function(){
 /* ══════════════════════════════════════════════
    Boucle principale
 ══════════════════════════════════════════════ */
-var startT=performance.now();
 function loop(){
-  var t=(performance.now()-startT)/1000;
+  var now = performance.now();
+  var dt  = Math.min((now - lastTime) / 1000, 0.1); // cap à 100ms pour éviter les sauts après onglet inactif
+  lastTime = now;
 
+  // Lissage de la vitesse
   gSpdSmooth += (gSpdTarget - gSpdSmooth) * SPD_SLEW;
+
+  // Accumulation de la phase : pas de saut quand gSpdSmooth change
+  gPhase += gSpdSmooth * dt;
 
   if(masterGain && actx){
     var targetVol = gAmp > 0 ? 0.48 : 0;
     masterGain.gain.setTargetAtTime(targetVol, actx.currentTime, 0.08);
   }
 
+  // u_time reste disponible pour le bruit de chaos (lent, pas de saut visible)
+  var t = now / 1000;
+
   gl.uniform1f(U.time,  t);
+  gl.uniform1f(U.phase, gPhase);
   gl.uniform1f(U.rep,   Math.max(0.1,gRep));
-  gl.uniform1f(U.spd,   gSpdSmooth);
   gl.uniform1f(U.amp,   Math.max(0,gAmp));
   gl.uniform1f(U.dir,   gDir);
   gl.uniform1f(U.chaos, gChaos);
