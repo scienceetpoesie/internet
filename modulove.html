@@ -24,6 +24,12 @@
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
+html, body {
+  /* Empêche tout débordement horizontal */
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif;
   min-height: 100vh;
@@ -49,7 +55,27 @@ body {
   font-weight: 700;
 }
 
-.scene { display:flex; align-items:center; justify-content:center; gap:20px; }
+/* ── Titre principal ── */
+#mainTitle {
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  text-shadow: 0 1px 0 var(--gold-hi);
+  user-select: none;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.scene {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  /* Empêche la scène de déborder */
+  max-width: 100%;
+}
 
 .canvas-frame {
   padding: 6px;
@@ -59,9 +85,20 @@ body {
   border-bottom: 3px solid var(--shadow);
   border-right:  3px solid var(--shadow);
   box-shadow: 2px 2px 8px rgba(0,0,0,0.35);
+  /* Le cadre ne dépasse pas la largeur disponible */
+  max-width: calc(100vw - 120px); /* 120px = place pour les deux boutons + gaps */
+  flex-shrink: 1;
 }
 
-canvas { display:block; width:720px; height:480px; flex-shrink:0; }
+canvas {
+  display: block;
+  /* Largeur fluide : 720px max, mais réduit si nécessaire */
+  width: min(720px, calc(100vw - 132px));
+  /* Hauteur proportionnelle au ratio 720×480 = 3:2 */
+  aspect-ratio: 3 / 2;
+  height: auto;
+  flex-shrink: 1;
+}
 
 #imgBtn {
   width:60px; height:60px; flex-shrink:0;
@@ -188,12 +225,24 @@ canvas { display:block; width:720px; height:480px; flex-shrink:0; }
 
 #infoLine {
   font-family: Helvetica, Arial, sans-serif;
-  width:720px; max-width:90vw;
-  padding: 0 0 0 272px;
+  width: min(720px, calc(100vw - 132px));
+  max-width: 90vw;
+  /* Supprimé le padding-left fixe de 272px — on utilise flexbox avec gap */
+  padding: 0;
   height: 32px;
-  display:flex; align-items:center; gap:20px;
-  flex-shrink:0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
 }
+
+#mainTitle {
+  /* Aligné à gauche, séparé du reste par une barre fine */
+  border-right: 1px solid var(--sep);
+  padding-right: 16px;
+  flex-shrink: 0;
+}
+
 #imgLabel {
   font-size:13px; color: var(--text-dim);
   letter-spacing:.04em; font-style:italic;
@@ -204,6 +253,9 @@ canvas { display:block; width:720px; height:480px; flex-shrink:0; }
   letter-spacing:.10em; text-transform:uppercase;
   font-family: 'Courier New', monospace;
   white-space:nowrap;
+  /* Overflow caché si synthInfo est trop long */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
 </head>
@@ -217,6 +269,7 @@ canvas { display:block; width:720px; height:480px; flex-shrink:0; }
 </div>
 
 <div id="infoLine">
+  <span id="mainTitle">Modulateur d'homme blanc de 50+</span>
   <span id="imgLabel">—</span>
   <span id="synthInfo"></span>
 </div>
@@ -274,7 +327,6 @@ var gSpdTarget = DEF.spd;
 var gSpdSmooth = DEF.spd;
 var SPD_SLEW   = 0.05;
 
-// Phase accumulée — évite les sauts quand on change la vitesse
 var gPhase   = 0;
 var lastTime = performance.now();
 
@@ -298,8 +350,6 @@ void main(){
   gl_Position = vec4(a_pos, 0.0, 1.0);
 }`;
 
-// u_phase remplace u_time * u_spd — la phase est accumulée côté JS
-// u_time reste disponible uniquement pour le bruit de chaos
 var FRAG = `
 precision mediump float;
 varying vec2 v_uv;
@@ -797,13 +847,10 @@ document.getElementById('soundBtn').onclick=function(){
 ══════════════════════════════════════════════ */
 function loop(){
   var now = performance.now();
-  var dt  = Math.min((now - lastTime) / 1000, 0.1); // cap à 100ms pour éviter les sauts après onglet inactif
+  var dt  = Math.min((now - lastTime) / 1000, 0.1);
   lastTime = now;
 
-  // Lissage de la vitesse
   gSpdSmooth += (gSpdTarget - gSpdSmooth) * SPD_SLEW;
-
-  // Accumulation de la phase : pas de saut quand gSpdSmooth change
   gPhase += gSpdSmooth * dt;
 
   if(masterGain && actx){
@@ -811,7 +858,6 @@ function loop(){
     masterGain.gain.setTargetAtTime(targetVol, actx.currentTime, 0.08);
   }
 
-  // u_time reste disponible pour le bruit de chaos (lent, pas de saut visible)
   var t = now / 1000;
 
   gl.uniform1f(U.time,  t);
