@@ -572,9 +572,6 @@ function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
   document.getElementById('lightbox-img').src = '';
 }
-document.getElementById('lightbox').addEventListener('click', function(e){
-  if(e.target === this) closeLightbox();
-});
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLightbox(); });
 
 /* ══ Sparkles ══ */
@@ -599,6 +596,18 @@ var dragStartX, dragStartY, dragging = false;
 
 function applyTransform() {
   lbImg.style.transform = 'translate(' + posX + 'px, ' + posY + 'px) scale(' + scale + ')';
+}
+
+function resetLightbox() {
+  scale = 1; posX = 0; posY = 0;
+  lbImg.style.transform = '';
+  lbImg.classList.remove('dragging');
+}
+
+function closeLightbox() {
+  resetLightbox();
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightbox-img').src = '';
 }
 
 lbImg.addEventListener('wheel', function(e){
@@ -633,13 +642,10 @@ document.getElementById('lightbox').addEventListener('wheel', function(e){
   e.preventDefault();
 }, { passive: false });
 
-var origClose = closeLightbox;
-closeLightbox = function(){
-  scale = 1; posX = 0; posY = 0;
-  lbImg.style.transform = '';
-  lbImg.classList.remove('dragging');
-  origClose();
-};
+/* clic en dehors de l'image = fermer */
+document.getElementById('lightbox').addEventListener('click', function(e){
+  if(e.target === this) closeLightbox();
+});
 // reset zoom à la fermeture
 var origClose = closeLightbox;
 closeLightbox = function(){
