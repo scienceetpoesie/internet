@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Barkerbaggies-Pool-Ball-Ball-8.ico" type="image/x-icon">
+
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>GP-80 — ARNOLD ENGINE</title>
@@ -242,69 +243,64 @@ const lfoOn={advance:false,grainSize:false,repeat:false,dispersion:false};
 let grainDir='F', playing=false, reverse=false, bypass=false;
 
 // ═══════════════════════════════════════════════════════════════════
-// RING BUFFER — conception stable
+// BUFFER VIDÉO
 //
-// Le buffer est un tableau circulaire de taille fixe BUF_FRAMES.
-// absFrame monte TOUJOURS à l'infini, sans jamais être réinitialisé.
-// La boucle IN/OUT ne reset JAMAIS absFrame — elle ne fait que
-// repositionner vid.currentTime. Le buffer continue de se remplir.
+// PRINCIPE FONDAMENTAL :
+//   La vidéo tourne librement comme une source de capture.
+//   On ne l'affiche JAMAIS directement.
+//   Le moteur granulaire lit UNIQUEMENT depuis le buffer.
 //
-// needle = valeur FLOTTANTE en "secondes dans le buffer"
-// (indépendant de absFrame). Elle correspond à un décalage
-// depuis la tête d'écriture, compté en frames :
-//   needleOff ∈ [0 .. BUF_FRAMES-1]
-//   needleOff = 0  → frame la plus récente
-//   needleOff = BUF_FRAMES-1 → frame la plus ancienne
+//   buf[] = tableau de {img:ImageData, sec:number}
+//   Indexé par secondes. Taille fixe = BUF_FRAMES frames.
+//   Quand le buffer est plein, on écrase la plus vieille frame
+//   SAUF si la needle ou le grain courant en a besoin.
 //
-// Avantage : la needle n'a AUCUN lien avec absFrame.
-// La boucle vidéo ne la perturbe pas.
-//
-// bufGet(off) retourne buf[(writePtr - 1 - off + BUF_FRAMES) % BUF_FRAMES]
-// avec off clampé à [0 .. bufCount-1].
+//   needle = index entier dans buf[] (pas en secondes !)
+//   Stable par définition : c'est un index dans un tableau
+//   dont la taille ne change pas une fois rempli.
 // ═══════════════════════════════════════════════════════════════════
-const BUF_FRAMES = 512;
-const buf = new Array(BUF_FRAMES);
-let writePtr = 0;      // prochain slot à écrire (toujours mod BUF_FRAMES)
-let bufCount = 0;      // frames valides : 0 → BUF_FRAMES
+const BUF_FRAMES = 512;            // buffer fixe : ~17s à 30fps ou ~20s à 25fps
+const buf = new Array(BUF_FRAMES); // pré-alloué, jamais redimensionné
+let bufWrite = 0;                  // position physique dans le tableau (0..511)
+let absFrame = 0;                  // numéro de frame absolu (jamais réinitialisé entre cycles)
+let bufCount = 0;                  // frames valides (0..BUF_FRAMES)
 
-// needleOff : décalage entier depuis la tête (0 = plus récent)
-// Incrémenté de eAdv à chaque nouveau grain.
-// Wrap dans [0 .. bufCount-1] sans jamais sauter.
-let needleOff = 0;
+// needle = index ABSOLU dans buf[] (basé sur absFrame)
+// Représente la "tête de lecture" courante.
+let needle = 0;
 
-function bufPut(img, sec){
-  buf[writePtr] = {img, sec};
-  writePtr = (writePtr + 1) % BUF_FRAMES;
-  if(bufCount < BUF_FRAMES) bufCount++;
-  // needleOff suit la tête : si on écrase la frame où elle pointe,
-  // on la recule d'un cran (clamp soft)
-  if(bufCount >= BUF_FRAMES && needleOff < BUF_FRAMES - 1){
-    // la frame la plus ancienne vient d'être écrasée
-    // si needleOff était au max, il reste au max
-  }
-}
-
-// Accès par offset (0 = plus récent, bufCount-1 = plus ancien)
-function bufGet(off){
+// ── Accès au buffer ──
+// Retourne la frame à l'index absolu absIdx (clampé aux frames disponibles)
+function bufGet(absIdx){
   if(bufCount === 0) return null;
-  const clampedOff = Math.max(0, Math.min(bufCount - 1, Math.round(off)));
-  // writePtr-1 est la dernière frame écrite
-  const idx = ((writePtr - 1 - clampedOff) % BUF_FRAMES + BUF_FRAMES) % BUF_FRAMES;
-  return buf[idx] || null;
+  // Oldest et newest en termes absolus
+  const oldest = absFrame - bufCount;
+  const newest = absFrame - 1;
+  
+  // Clamp absIdx aux frames valides
+  if(absIdx < oldest || absIdx > newest){
+    absIdx = Math.max(oldest, Math.min(newest, absIdx));
+  }
+  
+  // Convertir index absolu en position physique dans le tableau
+  const physicalIdx = absIdx % BUF_FRAMES;
+  return buf[physicalIdx];
 }
 
-// Avance la needle (en "frames offset") dans la direction voulue.
-// Wrap propre dans la fenêtre disponible.
-function advanceNeedle(step){
-  if(bufCount === 0) return;
-  const maxOff = bufCount - 1;
-  if(reverse){
-    needleOff -= step;
-    if(needleOff < 0) needleOff = maxOff;
-  } else {
-    needleOff += step;
-    if(needleOff > maxOff) needleOff = 0;
-  }
+// Écrire une frame
+function bufPut(img, sec){
+  buf[bufWrite] = {img, sec};
+  bufWrite = (bufWrite + 1) % BUF_FRAMES;  // ← RESTE DANS 0..511
+  absFrame++;                               // ← COMPTE TOUTES LES FRAMES
+  if(bufCount < BUF_FRAMES) bufCount++;
+}
+
+// Oldest et newest index absolus valides
+function bufOldest(){ 
+  return Math.max(0, absFrame - bufCount); 
+}
+function bufNewest(){ 
+  return absFrame - 1; 
 }
 
 let estFPS = 25;
@@ -313,8 +309,23 @@ let loaded = false;
 
 // ═══════════════════════════════════════════════════════════════════
 // ÉTAT GRAIN
+//
+// Tout est en TEMPS RÉEL (performance.now, secondes).
+// needle est un index absolu dans buf[].
+//
+// grainAnchor  : index absolu buf[] du premier frame du grain courant
+// grainStart   : performance.now() au démarrage du grain
+// grainNomSec  : durée nominale du grain = eGS/estFPS
+// grainPlaySec : durée réelle de lecture = grainNomSec/eRate
+// grainRep     : répétition courante (0-based)
+//
+// FREEZE (eAdv=0) :
+//   La needle NE BOUGE PAS.
+//   On recalcule grainAnchor à chaque nouveau grain (avec dispersion).
+//   Mais needle reste fixée → les grains restent dans la même zone.
+//   La vidéo continue de remplir le buffer, mais needle ne suit pas.
 // ═══════════════════════════════════════════════════════════════════
-let grainAnchorOff = 0;   // offset dans buf[] de l'ancre du grain courant
+let grainAnchor  = 0;
 let grainStart   = 0;
 let grainNomSec  = 0;
 let grainPlaySec = 0;
@@ -322,24 +333,22 @@ let grainRep     = 0;
 let needNewGrain = true;
 
 function resetEngine(){
-  // On ne touche PAS à writePtr/absFrame !
-  // On vide juste le compteur de frames valides
-  // et on repositionne la needle au centre du buffer.
-  bufCount = 0;
-  writePtr = 0;
-  lastVT = -1;
-  needleOff = 0;
-  grainAnchorOff = 0;
-  grainStart = 0;
-  grainNomSec = 0;
-  grainPlaySec = 0;
-  grainRep = 0;
-  needNewGrain = true;
+  bufWrite=0;
+  absFrame=0;        // ← RESET absFrame aussi
+  bufCount=0;
+  lastVT=-1;
+  needle=0;
+  grainAnchor=0;
+  grainStart=0;
+  grainNomSec=0;
+  grainPlaySec=0;
+  grainRep=0;
+  needNewGrain=true;
   killAudio();
 }
 
 // ═══════════════════════════════════════════════════════════════════
-// AUDIO
+// AUDIO — time-stretch granulaire + reverse + ping-pong
 // ═══════════════════════════════════════════════════════════════════
 let actx=null, audioBuf=null, masterGain=null, analyser=null;
 let audioNodes=[];
@@ -363,6 +372,8 @@ function killAudio(){
   audioNodes=[];
 }
 
+// Extrait un AudioBuffer depuis audioBuf[startSec .. startSec+durSec],
+// éventuellement inversé sample par sample.
 function extractAudio(startSec, durSec, reversed){
   if(!audioBuf) return null;
   const sr=audioBuf.sampleRate;
@@ -385,31 +396,50 @@ function extractAudio(startSec, durSec, reversed){
   return ab;
 }
 
+// Planifie un nœud AudioBufferSource à audioTime avec time-stretch.
 function scheduleAudio(ab, audioTime, replayRate, ePitch){
   if(!ab||!actx||bypass) return;
   const nd=actx.createBufferSource();
   nd.buffer=ab;
-  nd.playbackRate.value=Math.max(0.1, replayRate);
-  nd.detune.value=ePitch*100;
+  nd.playbackRate.value=Math.max(0.1, replayRate);  // ← TIME-STRETCH ici !
+  nd.detune.value=ePitch*100;    // transposition indépendante
   nd.connect(masterGain);
   nd.start(audioTime);
   nd.onended=()=>{ const i=audioNodes.indexOf(nd);if(i>=0)audioNodes.splice(i,1); };
   audioNodes.push(nd);
 }
 
+// Lance le(s) nœud(s) audio pour un grain.
+// anchorSec  = position dans le fichier audio source
+// playSec    = durée RÉELLE de lecture du grain (après time-stretch)
+// eRate      = facteur de vitesse (1=normal, 0.5=ralenti 2x, 2=double vitesse)
+// ePitch     = demi-tons
+// dir        = 'F' | 'R' | 'P'
 function playGrain(anchorSec, playSec, eRate, ePitch, dir){
   if(!audioBuf||!actx||bypass) return;
   killAudio();
+
+  // Lire srcDur d'audio, joué à playbackRate = eRate
+  // → durée réelle = srcDur / eRate = playSec ✓
   const srcDur = playSec / Math.max(0.1, eRate);
   const t0 = actx.currentTime;
+
   if(dir==='F'){
-    scheduleAudio(extractAudio(anchorSec, srcDur, false), t0, eRate, ePitch);
+    const ab=extractAudio(anchorSec, srcDur, false);
+    scheduleAudio(ab, t0, eRate, ePitch);
+
   }else if(dir==='R'){
-    scheduleAudio(extractAudio(anchorSec, srcDur, true), t0, eRate, ePitch);
+    const ab=extractAudio(anchorSec, srcDur, true);
+    scheduleAudio(ab, t0, eRate, ePitch);
+
   }else{
-    const halfSrc=srcDur/2, halfPlay=playSec/2;
-    scheduleAudio(extractAudio(anchorSec, halfSrc, false), t0,          eRate, ePitch);
-    scheduleAudio(extractAudio(anchorSec, halfSrc, true),  t0+halfPlay, eRate, ePitch);
+    // PING-PONG : moitié aller puis moitié retour
+    const halfSrc = srcDur / 2;
+    const halfPlay = playSec / 2;
+    const abFwd=extractAudio(anchorSec, halfSrc, false);
+    const abRev=extractAudio(anchorSec, halfSrc, true);
+    scheduleAudio(abFwd, t0,             eRate, ePitch);
+    scheduleAudio(abRev, t0 + halfPlay,  eRate, ePitch);
   }
 }
 
@@ -497,9 +527,12 @@ document.addEventListener('mouseup',()=>{ tlDrag=null; });
 
 function doSeek(p){
   if(!loaded||!vid.duration) return;
+  // Seek la vidéo source
   const t=vid.duration*(inPt+p*(outPt-inPt));
   vid.currentTime=t;
+  // Vide le buffer et repositionne needle
   resetEngine();
+  // La vidéo va re-remplir le buffer depuis la nouvelle position
 }
 
 function updHandles(){
@@ -729,6 +762,23 @@ function drawGact(v){
 
 // ═══════════════════════════════════════════════════════════════════
 // BOUCLE PRINCIPALE
+//
+// Séparation claire des responsabilités :
+//
+//   1. CAPTURE : vid → buf[] à chaque nouvelle frame vidéo.
+//                Toujours actif tant que la vidéo joue.
+//                La vidéo est une "source infinie", pas un affichage.
+//
+//   2. MOTEUR GRANULAIRE : lit buf[] via needle + grainAnchor.
+//                needle = index absolu dans buf[].
+//                Avance de eAdv à chaque nouveau grain.
+//                Si eAdv=0 → needle fixe → FREEZE stable.
+//
+//   3. AFFICHAGE : putImageData de la frame calculée.
+//                  Jamais la vidéo directement.
+//
+// La vidéo joue toujours en forward pour alimenter buf[].
+// IN/OUT = bornes de la région active, appliquées à vid.currentTime.
 // ═══════════════════════════════════════════════════════════════════
 let lastRafT=0;
 let fpsCnt=0, fpsT0=0;
@@ -748,8 +798,9 @@ function loop(now){
   const eRate=Math.max(0.1, P.rate);
   const ePitch=P.pitch;
 
-  const nomSec =eGS/Math.max(1,estFPS);
-  const playSec=nomSec/Math.max(0.01,eRate);
+  // Durées
+  const nomSec =eGS/Math.max(1,estFPS);          // durée nominale du grain
+  const playSec=nomSec/Math.max(0.01,eRate);      // durée réelle (time-stretch)
 
   // ── 1. CAPTURE ──
   if(loaded && vid.readyState>=2 && !tlBuilding){
@@ -769,16 +820,17 @@ function loop(now){
         }
       }
 
-      // ── Boucle IN/OUT : repositionner la vidéo source uniquement ──
-      // On ne reset PAS le buffer ni la needle.
-      // La needle continue sa course dans le ring buffer existant.
-      // Le buffer va naturellement être réécrit avec les nouvelles frames.
-      if(vid.duration>0 && vt/vid.duration>=outPt){
-        vid.currentTime=inPt*vid.duration;
-        lastVT=-1;
-        // Pas de resetEngine() ici !
-        // La needle reste en place → continuité garantie.
-      }
+           // Boucle IN/OUT sur la source vidéo - reboucle SMOOTH sans reset complet
+       if(vid.duration>0 && vt/vid.duration>=outPt){
+         vid.currentTime=inPt*vid.duration;
+         // Reset buffer mais GARDE needle à sa position
+         bufWrite=0;
+         bufCount=0;
+         absFrame=needle;  // ← KEY: absFrame = où est needle maintenant
+         lastVT=-1;
+         // NE PAS reset needle, grainAnchor, grainStart, etc.
+         // Le grain continue naturellement
+       }
     }
   }
 
@@ -786,13 +838,14 @@ function loop(now){
   if(loaded && !tlBuilt && !tlBuilding && bufCount>10) buildTimeline();
   drawTL();
 
+  // Attendre d'avoir assez de frames avant de démarrer le moteur
   if(!loaded || bufCount<2){
     drawIdle(now); drawScope(ls); drawGact(0); updVU(); return;
   }
 
   // ── BYPASS ──
   if(bypass){
-    const f=bufGet(0);  // frame la plus récente
+    const f=bufGet(bufNewest());
     if(f){ outCtx.putImageData(f.img,0,0); }
     document.getElementById('mbadge').textContent='BYPASS';
     const ts=fmtS(f?.sec??0);
@@ -804,15 +857,16 @@ function loop(now){
   // ══════════════════════════════════════════════════════════════
   // 2. MOTEUR GRANULAIRE
   //
-  // Toute la logique de position est en "offset depuis la tête"
-  // (0 = plus récent, bufCount-1 = plus ancien).
-  // La needle NE DÉPEND PAS de absFrame ni de writePtr.
+  // needle est un index absolu dans buf[].
+  // Il ne dépend que de eAdv et de reverse — jamais de la taille du buf.
+  // bufGet() clamp needle aux frames disponibles automatiquement.
   //
-  // FREEZE (eAdv=0) : needleOff ne bouge pas.
-  //   grainAnchorOff = needleOff ± dispersion (recalculé à chaque grain).
-  //
-  // LECTURE : advanceNeedle(eAdv) déplace needleOff de façon monotone
-  //   avec wrap propre dans [0 .. bufCount-1].
+  // FREEZE (eAdv=0) :
+  //   needle ne bouge pas.
+  //   grainAnchor = needle + dispersion (recalculé à chaque nouveau grain).
+  //   Le grain lit les eGS frames à partir de grainAnchor.
+  //   Même si buf[] continue de grossir, grainAnchor reste fixe
+  //   → on lit toujours les mêmes frames → vrai freeze stable.
   // ══════════════════════════════════════════════════════════════
   if(needNewGrain && playing){
     needNewGrain=false;
@@ -822,20 +876,26 @@ function loop(now){
     grainPlaySec=playSec;
 
     if(eAdv===0){
-      // FREEZE : needle fixe, ancre ± dispersion
+      // FREEZE : needle fixe, juste recalculer l'ancre avec dispersion
       const disp=eDisp>0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
-      grainAnchorOff = Math.max(0, Math.min(bufCount-1, needleOff + disp));
-    } else {
-      // LECTURE NORMALE : avancer la needle
-      advanceNeedle(eAdv);
+      grainAnchor=needle+disp;  // index absolu, bufGet() clampe si hors bornes
+    }else{
+      // LECTURE NORMALE : avancer needle
+      const dir=reverse?-1:1;
+      needle+=dir*eAdv;
+      // Wraparound dans la fenêtre du buffer
+      const oldest=bufOldest(), newest=bufNewest();
+      if(needle > newest) needle = oldest;
+      if(needle < oldest) needle = newest;
+      // Ancre avec dispersion
       const disp=eDisp>0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
-      grainAnchorOff = Math.max(0, Math.min(bufCount-1, needleOff + disp));
+      grainAnchor=needle+disp;
     }
 
-    const anchorFrame=bufGet(grainAnchorOff);
+    // Frame d'ancrage pour l'audio
+    const anchorFrame=bufGet(grainAnchor);
     if(anchorFrame && playing){
-      playGrain(anchorFrame.sec, grainPlaySec, eRate, ePitch, grainDir);
-    }
+playGrain(anchorFrame.sec, grainPlaySec, eRate, ePitch, grainDir);    }
   }
 
   // ── Temps écoulé dans le grain courant ──
@@ -848,31 +908,32 @@ function loop(now){
       needNewGrain=true;
       elapsed=curPlay*0.999;
     }else{
+      // Répétition : même grain, même ancre
       grainStart=now; elapsed=0;
-      const anchorFrame=bufGet(grainAnchorOff);
+      const anchorFrame=bufGet(grainAnchor);
       if(anchorFrame && playing){
-        playGrain(anchorFrame.sec, grainPlaySec, eRate, ePitch, grainDir);
-      }
+playGrain(anchorFrame.sec, grainPlaySec, eRate, ePitch, grainDir);      }
     }
   }
 
   // ── 3. CALCUL DE LA FRAME À AFFICHER ──
   const frac=Math.max(0,Math.min(0.9999, elapsed/curPlay));
 
+  // Position dans le grain [0..eGS-1] selon direction
   let posI;
   if(grainDir==='F'){
     posI=Math.floor(frac*eGS);
   }else if(grainDir==='R'){
     posI=Math.floor((1-frac)*eGS);
   }else{
+    // PING-PONG : 0→eGS→0
     const ph=frac<0.5 ? frac*2 : (1-frac)*2;
     posI=Math.floor(ph*eGS);
   }
   posI=Math.max(0,Math.min(eGS-1,posI));
 
-  // grainAnchorOff + posI : on avance dans le buffer (vers les frames + récentes)
-  const displayOff = Math.max(0, grainAnchorOff - posI);
-  const outFrame=bufGet(displayOff);
+  const frameIdx=grainAnchor+posI;  // index absolu dans buf[]
+  const outFrame=bufGet(frameIdx);
 
   if(outFrame) outCtx.putImageData(outFrame.img,0,0);
 
@@ -880,9 +941,9 @@ function loop(now){
   document.getElementById('mtc').textContent=fmtS(outTS);
   document.getElementById('htc').textContent=fmtS(outTS);
 
-  // Needle sur TL (position de la needle dans la durée vidéo)
+  // Needle sur TL
   if(vid.duration>0){
-    const nf=bufGet(needleOff);
+    const nf=bufGet(needle);
     if(nf){
       tlnd.style.left=((nf.sec/vid.duration)*100).toFixed(1)+'%';
       tlnd.style.display='block';
