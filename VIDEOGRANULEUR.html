@@ -820,10 +820,11 @@ function loop(now){
         }
       }
 
-      // Boucle IN/OUT sur la source vidéo
-      if(vid.duration>0 && vt/vid.duration>=outPt){
-        vid.currentTime=inPt*vid.duration;
-      }
+         // Boucle IN/OUT sur la source vidéo
+       if(vid.duration>0 && vt/vid.duration>=outPt){
+         vid.currentTime=inPt*vid.duration;
+         resetEngine();  // ← Resync needle avec la reboucle vidéo
+       }
     }
   }
 
