@@ -884,7 +884,7 @@ if(vid.duration>0 && vt/vid.duration>=outPt){
       const oldest=bufOldest(), newest=bufNewest();
 // Wrap modulaire propre, sans saut brutal
 if(needle > newest) needle = oldest;
-if(needle < oldest) needle = oldest;
+if(needle < oldest) needle = Math.floor((oldest + newest) / 2);
       // Ancre avec dispersion
       const disp=eDisp>0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
       grainAnchor=needle+disp;
