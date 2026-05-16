@@ -820,10 +820,16 @@ function loop(now){
         }
       }
 
-         // Boucle IN/OUT sur la source vidéo
+           // Boucle IN/OUT sur la source vidéo - reboucle SMOOTH sans reset complet
        if(vid.duration>0 && vt/vid.duration>=outPt){
          vid.currentTime=inPt*vid.duration;
-         resetEngine();  // ← Resync needle avec la reboucle vidéo
+         // Reset buffer mais GARDE needle à sa position
+         bufWrite=0;
+         bufCount=0;
+         absFrame=needle;  // ← KEY: absFrame = où est needle maintenant
+         lastVT=-1;
+         // NE PAS reset needle, grainAnchor, grainStart, etc.
+         // Le grain continue naturellement
        }
     }
   }
