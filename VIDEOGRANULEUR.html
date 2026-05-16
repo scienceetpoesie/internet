@@ -263,7 +263,7 @@ header{background:var(--ink);color:var(--paper);
   <!-- ⑥ Cibles LFO -->
   <div class="pcell">
     <div class="plabel">Cibles LFO</div>
-    <div class="lforow"><span class="lfon">AVANCE</span><div class="rok on" data-lt="advance"></div></div>
+    <div class="lforow"><span class="lfon">AVANCE</span><div class="rok" data-lt="advance"></div></div>
     <div class="lforow"><span class="lfon">VITESSE</span><div class="rok" data-lt="rate"></div></div>
     <div class="lforow"><span class="lfon">TAILLE</span><div class="rok" data-lt="grainSize"></div></div>
     <div class="lforow"><span class="lfon">REPEAT</span><div class="rok" data-lt="repeat"></div></div>
@@ -300,35 +300,49 @@ const PRESETS = [
 const P = {
   advance:1, rate:1, grainSize:8, repeat:2, dispersion:0, lfoRate:0.25, lfoAmt:0.3
 };
-const lfoOn = { advance:true, rate:false, grainSize:false, repeat:false, dispersion:false };
+const lfoOn = { advance:false, rate:false, grainSize:false, repeat:false, dispersion:false };
 let grainDir = 'F';     // 'F' | 'R' | 'P'
 let playing  = false;
 let reverse  = false;   // reverse de l'avance needle
 let bypass   = false;
 
 // ══════════════════════════════════════════════════════════════
-// BUFFER DE FRAMES — ring buffer fixe, INDÉPENDANT de la vidéo
-// On capture toujours ; les indices sont stables.
+// BUFFER DE FRAMES — tableau fixe, index absolus stables
+//
+// Architecture :
+//   frameBuf[0..BUFMAX-1]  tableau circulaire de snapshots
+//   bufHead  = prochain slot d'écriture
+//   bufFill  = nombre de slots valides (0..BUFMAX)
+//
+// FREEZE : on prend un snapshot des frames du grain au moment
+// où advance passe à 0, et on boucle UNIQUEMENT sur ces frames.
+// La vidéo continue de tourner mais on ignore les nouvelles captures.
 // ══════════════════════════════════════════════════════════════
-const BUFMAX = 256;        // ring buffer
-const frameBuf  = new Array(BUFMAX); // {img:ImageData, sec:number}
-let   bufHead   = 0;       // prochain slot d'écriture (FIFO circulaire)
-let   bufFill   = 0;       // frames valides dans le buffer (0..BUFMAX)
+const BUFMAX   = 256;
+const frameBuf = new Array(BUFMAX);
+let   bufHead  = 0;
+let   bufFill  = 0;
 
-// needle = index ABSOLU dans le ring (0..BUFMAX-1)
-// toujours dans la fenêtre valide [bufHead-bufFill .. bufHead-1] mod BUFMAX
-let   needle    = 0;
+// ── Snapshot de freeze ──
+// Quand advance=0, on copie les eGS frames autour de needle
+// dans freezeSnap[] et on boucle dessus indéfiniment.
+let freezeSnap  = [];   // [{img, sec}]  frames copiées au moment du freeze
+let freezeActive = false; // true = on lit freezeSnap, pas frameBuf
 
-// État grain courant
-let   gAnchor   = 0;   // index ring du début du grain
-let   gPos      = 0;   // position dans le grain [0..eGS-1]
-let   gRep      = 0;   // répétition courante
-let   pingDir   = 1;   // +1 ou -1 pour ping-pong
-let   grainDone = true; // faut-il démarrer un nouveau grain ?
+// needle = index logique dans frameBuf [0..bufFill-1]
+// 0=oldest, bufFill-1=newest
+let needle    = 0;
 
-let   estFPS    = 25;   // estimé lors du chargement, stable ensuite
-let   lastVT    = -1;
-let   loaded    = false;
+// État grain
+let gAnchor   = 0;   // index logique (frameBuf) ou index dans freezeSnap
+let gPos      = 0;
+let gRep      = 0;
+let pingDir   = 1;
+let grainDone = true;
+
+let estFPS  = 25;
+let lastVT  = -1;
+let loaded  = false;
 
 // IN/OUT points (fraction 0..1 de la durée)
 let inPt = 0, outPt = 1;
@@ -373,6 +387,8 @@ function playGrainAudio(anchorSec, grainDurSec, eRate) {
   const nd = actx.createBufferSource();
   nd.buffer = audioBuf;
   nd.playbackRate.value = rate;
+  // preservesPitch=false : vitesse change sans changer le pitch (granulaire pur)
+  nd.preservesPitch = false;
   nd.connect(masterGain);
   nd.start(actx.currentTime, s, d);
   nd.onended = () => { if (activeNode === nd) activeNode = null; };
@@ -451,18 +467,14 @@ async function estimateFPS() {
 }
 
 function resetEngine() {
-  // Vide le ring buffer
   bufHead = 0; bufFill = 0; lastVT = -1;
-  // Remet la needle au début du buffer
   needle = 0;
   gAnchor = 0; gPos = 0; gRep = 0; pingDir = 1; grainDone = true;
+  freezeSnap = []; freezeActive = false;
   killAudio();
 }
 
-// ══════════════════════════════════════════════════════════════
-// CAPTURE — appelée dans la boucle principale depuis les frames vidéo
-// Remplit le ring buffer. Ne remet PAS la needle à zéro.
-// ══════════════════════════════════════════════════════════════
+// Capture une frame dans le ring buffer circulaire
 function captureFrame(vt) {
   capCtx.drawImage(vid, 0, 0, capCv.width, capCv.height);
   const img = capCtx.getImageData(0, 0, capCv.width, capCv.height);
@@ -471,17 +483,36 @@ function captureFrame(vt) {
   if (bufFill < BUFMAX) bufFill++;
 }
 
-// Convertit un index logique (0 = le plus ancien, bufFill-1 = le plus récent)
-// en index ring réel.
+// Index ring réel depuis un index logique (0=oldest)
 function ringIdx(logical) {
-  // oldest = (bufHead - bufFill + BUFMAX) % BUFMAX
-  return ((bufHead - bufFill + logical) % BUFMAX + BUFMAX) % BUFMAX;
+  const oldest = (bufHead - bufFill + BUFMAX) % BUFMAX;
+  return (oldest + logical) % BUFMAX;
 }
 
-// Accède à une frame par index logique (clampé)
+// Accède à une frame par index logique dans frameBuf, clampé
 function getFrame(logical) {
+  if (bufFill === 0) return null;
   const l = Math.max(0, Math.min(bufFill - 1, logical));
   return frameBuf[ringIdx(l)];
+}
+
+// Accède à une frame dans le snapshot de freeze (ou frameBuf si pas de freeze)
+function getGrainFrame(pos) {
+  if (freezeActive && freezeSnap.length > 0) {
+    const i = Math.max(0, Math.min(freezeSnap.length - 1, pos));
+    return freezeSnap[i];
+  }
+  return getFrame(pos);
+}
+
+// Crée le snapshot de freeze : copie les eGS frames autour de needle
+function makeFreeze(anchorLogical, size) {
+  freezeSnap = [];
+  for (let i = 0; i < size; i++) {
+    const f = getFrame(Math.max(0, Math.min(bufFill-1, anchorLogical + i)));
+    if (f) freezeSnap.push({ img: f.img, sec: f.sec });
+  }
+  freezeActive = freezeSnap.length > 0;
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -825,38 +856,32 @@ function loop(now) {
   const eDisp = Math.max(0,   Math.round(P.dispersion   + (lfoOn.dispersion ? ls*la*P.dispersion   : 0)));
 
   // ── Capture frame vidéo ──
+  // En freeze (freezeActive=true) : on ignore les nouvelles frames,
+  // le snapshot est auto-suffisant et ne sera jamais écrasé.
   if (loaded && vid.readyState >= 2 && !tlBuilding) {
     const vt = vid.currentTime;
     if (vt !== lastVT) {
       lastVT = vt;
-      captureFrame(vt);
-
-      // Calibration FPS (uniquement pendant lecture, pas pendant seek/build)
-      if (playing && !vid.paused) {
-        fpsCnt++;
-        if (now - fpsT0 > 1500 && fpsCnt > 5) {
-          const measured = fpsCnt / ((now-fpsT0)/1000);
-          estFPS = Math.max(1, Math.min(120, Math.round(measured)));
-          fpsCnt=0; fpsT0=now;
+      if (!freezeActive) {
+        captureFrame(vt);
+        if (playing && !vid.paused) {
+          fpsCnt++;
+          if (now - fpsT0 > 1500 && fpsCnt > 5) {
+            estFPS = Math.max(1, Math.min(120, Math.round(fpsCnt/((now-fpsT0)/1000))));
+            fpsCnt=0; fpsT0=now;
+          }
         }
       }
-
-      // Boucle IN/OUT : remet la tête de lecture vidéo, mais NE reset PAS le buffer.
-      // La needle continue dans le buffer, ce qui est correct.
-      if (vid.duration > 0) {
-        const pct = vt / vid.duration;
-        if (pct >= outPt) {
-          vid.currentTime = inPt * vid.duration;
-        }
+      // Boucle IN/OUT (toujours active pour garder la vidéo dans la région)
+      if (vid.duration > 0 && vid.currentTime/vid.duration >= outPt) {
+        vid.currentTime = inPt * vid.duration;
       }
     }
   }
 
-  // Lance la construction de la timeline une seule fois quand on a assez de frames
   if (loaded && !tlBuilt && !tlBuilding && bufFill > 10) buildTimeline();
   drawTL();
 
-  // ── Pas de rendu granulaire si rien n'est chargé ──
   if (!loaded || bufFill === 0) {
     drawIdle(now); drawScope(ls); drawGact(0); updVU(); return;
   }
@@ -864,77 +889,88 @@ function loop(now) {
   // ── BYPASS ──
   if (bypass) {
     const f = getFrame(bufFill-1);
-    outCtx.putImageData(f.img, 0, 0);
+    if (f) outCtx.putImageData(f.img, 0, 0);
     document.getElementById('mbadge').textContent = 'BYPASS';
-    document.getElementById('mtc').textContent = fmtS(f.sec);
-    document.getElementById('htc').textContent = fmtS(f.sec);
+    const bts = fmtS(f?.sec ?? 0);
+    document.getElementById('mtc').textContent = bts;
+    document.getElementById('htc').textContent = bts;
     drawScope(ls); drawGact(0); updVU(); return;
   }
 
-  // ── MOTEUR GRANULAIRE ──
-  // Logique :
-  //   needle  = index LOGIQUE dans le ring (0=oldest, bufFill-1=newest)
-  //   gAnchor = index logique du début du grain courant
-  //   gPos    = position dans le grain [0..eGS-1]
-  //   gRep    = répétition en cours
+  // ══════════════════════════════════════════════════════════════
+  // MOTEUR GRANULAIRE
   //
-  // FREEZE (eAdv=0) : needle ne bouge pas, le grain se répète indéfiniment
-  // sur les mêmes frames du buffer. Le buffer continue de recevoir de nouvelles
-  // frames mais needle n'avance pas → on lit toujours les mêmes positions.
+  // FREEZE (eAdv=0) :
+  //   Au premier grain après passage en freeze, on prend un snapshot
+  //   (makeFreeze) des eGS frames autour de needle → freezeSnap[].
+  //   Les grains suivants bouclent sur freezeSnap SANS jamais toucher
+  //   frameBuf. freezeActive reste true tant que eAdv=0.
+  //
+  // LECTURE (eAdv>0) :
+  //   Si on sort du freeze, freezeActive=false, freezeSnap=[].
+  //   needle avance de eAdv dans frameBuf à chaque grain.
+  // ══════════════════════════════════════════════════════════════
 
   if (grainDone && playing) {
-    // Avancer needle
+
     if (eAdv === 0) {
-      // FREEZE : needle reste fixe → gAnchor reste sur la même zone
-      // On recentre simplement gAnchor sur la needle actuelle
-      // (avec dispersion optionnelle) sans bouger needle.
+      // FREEZE
+      if (!freezeActive) {
+        // Premier grain en freeze : créer le snapshot maintenant
+        const disp   = eDisp > 0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
+        const anchor = Math.max(0, Math.min(bufFill-1, needle + disp));
+        makeFreeze(anchor, Math.max(2, eGS));
+      }
+      // Grains suivants : freezeActive=true, on réutilise freezeSnap tel quel.
+      // gAnchor n'est pas utilisé pour les freeze (lecture via freezeSnap direct).
     } else {
-      const dir  = reverse ? -1 : 1;
-      // Avance dans l'espace logique [0..bufFill-1]
-      needle = needle + dir * eAdv;
-      // Bornage : on reste dans le buffer valide
-      needle = Math.max(0, Math.min(bufFill-1, needle));
-      // Si on atteint un bord, on reboucle doucement
-      if (needle <= 0 && dir < 0)        needle = bufFill-1;
-      if (needle >= bufFill-1 && dir > 0) needle = 0;
+      // LECTURE NORMALE — sortir du freeze si on y était
+      if (freezeActive) { freezeActive = false; freezeSnap = []; }
+
+      const dir = reverse ? -1 : 1;
+      needle += dir * eAdv;
+      if (needle >= bufFill) needle = 0;
+      if (needle < 0)        needle = bufFill - 1;
+
+      const disp = eDisp > 0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
+      gAnchor    = Math.max(0, Math.min(bufFill-1, needle + disp));
     }
 
-    // Ancrage avec dispersion
-    const disp   = eDisp > 0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
-    gAnchor      = Math.max(0, Math.min(bufFill-1, needle + disp));
-    gPos         = 0;
-    gRep         = 0;
-    pingDir      = 1;
-    grainDone    = false;
+    gPos = 0; gRep = 0; pingDir = 1; grainDone = false;
 
-    // Audio du grain
+    // Audio du grain (vitesse sans pitch : preservesPitch=false)
     if (playing) {
-      const f = getFrame(gAnchor);
-      playGrainAudio(f.sec, eGS/Math.max(1,estFPS), eRate);
+      const f = freezeActive ? (freezeSnap[0] ?? null) : getFrame(gAnchor);
+      if (f) playGrainAudio(f.sec, eGS / Math.max(1, estFPS), eRate);
     }
   }
 
-  // ── Calcul index de frame à afficher ──
-  let readPos; // index logique dans le buffer
+  // ── Frame à afficher ──
+  const snapLen  = freezeActive ? freezeSnap.length : 0;
+  const grainLen = freezeActive ? snapLen : eGS;
 
-  if (grainDir === 'F') {
-    readPos = gAnchor + gPos;
-  } else if (grainDir === 'R') {
-    readPos = gAnchor + (eGS-1) - gPos;
+  let readPos;
+  if (grainDir === 'R') {
+    readPos = (grainLen-1) - gPos;
   } else {
-    // PING-PONG : gPos avance/recule selon pingDir
-    readPos = gAnchor + gPos;
+    readPos = gPos; // FWD et PNG utilisent gPos directement
   }
-  readPos = Math.max(0, Math.min(bufFill-1, readPos));
+  readPos = Math.max(0, Math.min(grainLen-1, readPos));
 
-  const outFrame = getFrame(readPos);
-  outCtx.putImageData(outFrame.img, 0, 0);
+  let outFrame;
+  if (freezeActive) {
+    outFrame = freezeSnap[readPos] ?? null;
+  } else {
+    outFrame = getFrame(gAnchor + readPos);
+  }
 
-  const outTS = outFrame.sec;
+  if (outFrame) outCtx.putImageData(outFrame.img, 0, 0);
+
+  const outTS = outFrame?.sec ?? 0;
   document.getElementById('mtc').textContent = fmtS(outTS);
   document.getElementById('htc').textContent = fmtS(outTS);
 
-  // Needle sur TL (position de la needle dans la timeline globale)
+  // Needle sur TL
   if (vid.duration > 0) {
     const nf = getFrame(Math.max(0, Math.min(bufFill-1, needle)));
     if (nf) {
@@ -945,38 +981,36 @@ function loop(now) {
 
   // ── Avancer gPos ──
   if (playing) {
+    const maxP = Math.max(0, grainLen - 1);
     if (grainDir === 'P') {
-      // Ping-pong : bascule aux extrémités
-      if (gPos >= eGS-1) { pingDir = -1; }
-      if (gPos <= 0)     { pingDir =  1; }
+      if (gPos >= maxP) pingDir = -1;
+      if (gPos <= 0)    pingDir =  1;
       gPos += pingDir;
     } else {
       gPos++;
     }
 
-    // Fin de grain ?
-    if (gPos >= eGS) {
+    if (gPos > maxP) {
       gRep++;
       if (gRep >= eRep) {
-        // Grain terminé : prochain tick lancera le suivant
         grainDone = true;
+        // En freeze : grainDone=true + eAdv=0 + freezeActive=true
+        // → le prochain bloc ne recrée PAS le snapshot → boucle parfaite
       } else {
-        // Répétition : rejoue le même grain
-        gPos = 0; pingDir = 1;
-        const f = getFrame(gAnchor);
-        playGrainAudio(f.sec, eGS/Math.max(1,estFPS), eRate);
+        gPos = (grainDir === 'R') ? maxP : 0;
+        pingDir = 1;
+        const f = freezeActive ? (freezeSnap[0] ?? null) : getFrame(gAnchor);
+        if (f) playGrainAudio(f.sec, eGS / Math.max(1, estFPS), eRate);
       }
     }
   }
 
-  // Badge
-  const dnLabel = {F:'FWD',R:'REV',P:'PNG'}[grainDir];
+  const dnLabel  = {F:'FWD',R:'REV',P:'PNG'}[grainDir];
   const advLabel = eAdv===0 ? 'FREEZE' : (reverse?'-':'+') + eAdv;
   document.getElementById('mbadge').textContent = `GRAIN·${dnLabel}·${advLabel}`;
   document.getElementById('lgr').className = 'led on';
   document.getElementById('lpk').className = 'led'+(Math.random()<0.04?' on':'');
 
-  // Activité grain (pour le bargraphe)
   const actV = Math.min(1, 0.15 + (eGS/96)*0.4 + (eRep/16)*0.3 + (eDisp/64)*0.15);
   drawScope(ls); drawGact(actV); updVU();
 }
