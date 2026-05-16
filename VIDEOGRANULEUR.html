@@ -883,8 +883,8 @@ if(vid.duration>0 && vt/vid.duration>=outPt){
       // Wraparound dans la fenêtre du buffer
       const oldest=bufOldest(), newest=bufNewest();
 // Wrap modulaire propre, sans saut brutal
-if(needle > newest) needle = oldest + ((needle - newest - 1) % Math.max(1, bufCount));
-if(needle < oldest) needle = newest - ((oldest - needle - 1) % Math.max(1, bufCount));
+if(needle > newest) needle = oldest;
+if(needle < oldest) needle = oldest;
       // Ancre avec dispersion
       const disp=eDisp>0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
       grainAnchor=needle+disp;
