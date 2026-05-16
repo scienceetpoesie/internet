@@ -259,36 +259,47 @@ let grainDir='F', playing=false, reverse=false, bypass=false;
 // ═══════════════════════════════════════════════════════════════════
 const BUF_FRAMES = 512;            // buffer fixe : ~17s à 30fps ou ~20s à 25fps
 const buf = new Array(BUF_FRAMES); // pré-alloué, jamais redimensionné
-let bufWrite = 0;                  // prochain index d'écriture
+let bufWrite = 0;                  // position physique dans le tableau (0..511)
+let absFrame = 0;                  // numéro de frame absolu (jamais réinitialisé entre cycles)
 let bufCount = 0;                  // frames valides (0..BUF_FRAMES)
 
-// needle = index ABSOLU dans buf[] (wraparound modulo BUF_FRAMES)
+// needle = index ABSOLU dans buf[] (basé sur absFrame)
 // Représente la "tête de lecture" courante.
 let needle = 0;
 
 // ── Accès au buffer ──
-// readIdx(i) : index absolu → index tableau (toujours valide)
-function readIdx(absIdx){
-  return ((absIdx % BUF_FRAMES) + BUF_FRAMES) % BUF_FRAMES;
-}
 // Retourne la frame à l'index absolu absIdx (clampé aux frames disponibles)
 function bufGet(absIdx){
-  if(bufCount===0) return null;
-  // Oldest = bufWrite - bufCount (modulo)
-  const oldest = bufWrite - bufCount;
-  const newest = bufWrite - 1;
-  const clamped = Math.max(oldest, Math.min(newest, absIdx));
-  return buf[readIdx(clamped)];
+  if(bufCount === 0) return null;
+  // Oldest et newest en termes absolus
+  const oldest = absFrame - bufCount;
+  const newest = absFrame - 1;
+  
+  // Clamp absIdx aux frames valides
+  if(absIdx < oldest || absIdx > newest){
+    absIdx = Math.max(oldest, Math.min(newest, absIdx));
+  }
+  
+  // Convertir index absolu en position physique dans le tableau
+  const physicalIdx = absIdx % BUF_FRAMES;
+  return buf[physicalIdx];
 }
+
 // Écrire une frame
 function bufPut(img, sec){
-  buf[bufWrite % BUF_FRAMES] = {img, sec};
-  bufWrite++;
+  buf[bufWrite] = {img, sec};
+  bufWrite = (bufWrite + 1) % BUF_FRAMES;  // ← RESTE DANS 0..511
+  absFrame++;                               // ← COMPTE TOUTES LES FRAMES
   if(bufCount < BUF_FRAMES) bufCount++;
 }
+
 // Oldest et newest index absolus valides
-function bufOldest(){ return bufWrite - bufCount; }
-function bufNewest(){ return bufWrite - 1; }
+function bufOldest(){ 
+  return Math.max(0, absFrame - bufCount); 
+}
+function bufNewest(){ 
+  return absFrame - 1; 
+}
 
 let estFPS = 25;
 let lastVT = -1;
@@ -320,10 +331,17 @@ let grainRep     = 0;
 let needNewGrain = true;
 
 function resetEngine(){
-  bufWrite=0; bufCount=0; lastVT=-1;
-  needle=0; grainAnchor=0;
-  grainStart=0; grainNomSec=0; grainPlaySec=0;
-  grainRep=0; needNewGrain=true;
+  bufWrite=0;
+  absFrame=0;        // ← RESET absFrame aussi
+  bufCount=0;
+  lastVT=-1;
+  needle=0;
+  grainAnchor=0;
+  grainStart=0;
+  grainNomSec=0;
+  grainPlaySec=0;
+  grainRep=0;
+  needNewGrain=true;
   killAudio();
 }
 
@@ -859,8 +877,8 @@ function loop(now){
       needle+=dir*eAdv;
       // Wraparound dans la fenêtre du buffer
       const oldest=bufOldest(), newest=bufNewest();
-      if(needle>newest) needle=oldest;
-      if(needle<oldest) needle=newest;
+      if(needle > newest) needle = oldest;
+      if(needle < oldest) needle = newest;
       // Ancre avec dispersion
       const disp=eDisp>0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
       grainAnchor=needle+disp;
