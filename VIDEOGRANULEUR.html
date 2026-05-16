@@ -23,7 +23,7 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
 #outCv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
 .mbadge{position:absolute;top:8px;left:8px;font-size:7px;font-weight:700;letter-spacing:.14em;background:var(--ox);color:var(--paper);padding:2px 6px;pointer-events:none;}
 .mtc{position:absolute;bottom:7px;right:8px;font-size:7px;color:rgba(240,237,230,.32);letter-spacing:.05em;pointer-events:none;}
-.nosrc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(240,237,230,.18);font-size:7px;letter-spacing:.15em;text-transform:upp[...]
+.nosrc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(240,237,230,.18);font-size:7px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;}
 .nosrc.h,.lveil.h{display:none;}
 .lveil{position:absolute;inset:0;background:rgba(5,5,3,.96);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--paper);}
 .lvt{font-size:8px;font-weight:700;letter-spacing:.18em;}
@@ -40,14 +40,14 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
 .pcell{border-right:1px solid rgba(15,14,12,.07);padding:6px 9px;display:flex;flex-direction:column;gap:3px;}
 .pcell:last-child{border-right:none;}
 .trow{display:flex;gap:3px;margin-top:2px;}
-.tb{flex:1;height:19px;border:1px solid rgba(15,14,12,.18);background:transparent;color:var(--ink);font-family:var(--ff);font-size:6px;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:al[...]
+.tb{flex:1;height:19px;border:1px solid rgba(15,14,12,.18);background:transparent;color:var(--ink);font-family:var(--ff);font-size:6px;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:all .07s;white-space:nowrap;}
 .tb:hover,.tb.on{background:var(--ink);color:var(--paper);border-color:var(--ink);}
 .tb.prim{background:var(--ox);color:var(--paper);border-color:var(--ox);}
 .tb.prim:hover{background:var(--rust);border-color:var(--rust);}
 .ldbtn{height:18px;border:1px dashed rgba(15,14,12,.16);background:transparent;color:var(--dim);font-family:var(--ff);font-size:6px;letter-spacing:.06em;cursor:pointer;transition:all .07s;width:100%;}
 .ldbtn:hover{border-color:var(--ink);color:var(--ink);}
 .pre-row{display:flex;gap:2px;margin-top:2px;}
-.pre{flex:1;height:15px;border:1px solid rgba(15,14,12,.14);background:transparent;color:var(--dim);font-family:var(--ff);font-size:5px;letter-spacing:.04em;cursor:pointer;transition:all .07s;white-sp[...]
+.pre{flex:1;height:15px;border:1px solid rgba(15,14,12,.14);background:transparent;color:var(--dim);font-family:var(--ff);font-size:5px;letter-spacing:.04em;cursor:pointer;transition:all .07s;white-space:nowrap;overflow:hidden;}
 .pre:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
 .pre.act{background:var(--ox);color:var(--paper);border-color:var(--ox);}
 .plabel{font-size:5.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:3px;}
@@ -224,9 +224,9 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
 <script>
 'use strict';
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // PRESETS
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 const PRESETS=[
   {name:'NORMAL',  advance:1, rate:1.0,  grainSize:8,  repeat:1, dispersion:0,  dir:'F', rev:false, lfoAmt:0,   lfoRate:0.25, pitch:0},
   {name:'STUTTER', advance:0, rate:1.0,  grainSize:10, repeat:6, dispersion:4,  dir:'F', rev:false, lfoAmt:0,   lfoRate:0.25, pitch:0},
@@ -235,14 +235,14 @@ const PRESETS=[
   {name:'ARNOLD',  advance:3, rate:0.5,  grainSize:20, repeat:6, dispersion:16, dir:'P', rev:false, lfoAmt:0.7, lfoRate:0.5,  pitch:0},
 ];
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // PARAMÈTRES
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 const P={advance:1,rate:1,grainSize:8,repeat:1,dispersion:0,lfoRate:0.25,lfoAmt:0,pitch:0};
 const lfoOn={advance:false,grainSize:false,repeat:false,dispersion:false};
 let grainDir='F', playing=false, reverse=false, bypass=false;
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // BUFFER VIDÉO
 //
 // PRINCIPE FONDAMENTAL :
@@ -258,7 +258,7 @@ let grainDir='F', playing=false, reverse=false, bypass=false;
 //   needle = index entier dans buf[] (pas en secondes !)
 //   Stable par définition : c'est un index dans un tableau
 //   dont la taille ne change pas une fois rempli.
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 const BUF_FRAMES = 512;            // buffer fixe : ~17s à 30fps ou ~20s à 25fps
 const buf = new Array(BUF_FRAMES); // pré-alloué, jamais redimensionné
 let bufWrite = 0;                  // position physique dans le tableau (0..511)
@@ -307,7 +307,7 @@ let estFPS = 25;
 let lastVT = -1;
 let loaded = false;
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // ÉTAT GRAIN
 //
 // Tout est en TEMPS RÉEL (performance.now, secondes).
@@ -324,7 +324,7 @@ let loaded = false;
 //   On recalcule grainAnchor à chaque nouveau grain (avec dispersion).
 //   Mais needle reste fixée → les grains restent dans la même zone.
 //   La vidéo continue de remplir le buffer, mais needle ne suit pas.
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 let grainAnchor  = 0;
 let grainStart   = 0;
 let grainNomSec  = 0;
@@ -347,9 +347,9 @@ function resetEngine(){
   killAudio();
 }
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // AUDIO — time-stretch granulaire + reverse + ping-pong
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 let actx=null, audioBuf=null, masterGain=null, analyser=null;
 let audioNodes=[];
 
@@ -443,9 +443,9 @@ function playGrain(anchorSec, playSec, eRate, ePitch, dir){
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // VIDÉO & CHARGEMENT
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 const vid=document.createElement('video');
 vid.muted=true; vid.loop=false; vid.playsInline=true; vid.preload='auto';
 const outCv=document.getElementById('outCv');
@@ -493,9 +493,9 @@ async function loadFile(file){
 
 let inPt=0, outPt=1;
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // TIMELINE
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 const tlEl=document.getElementById('tl');
 const tlCv=document.getElementById('tlCv');
 const tlCtx=tlCv.getContext('2d');
@@ -586,9 +586,9 @@ async function buildTimeline(){
   tlBuilding=false; tlBuilt=true; drawTL();
 }
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // TRANSPORT
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 document.getElementById('btnPl').addEventListener('click',()=>{
   if(!loaded) return; initAudio(); actx.resume();
   playing=!playing;
@@ -630,9 +630,9 @@ function updTUI(){
   document.getElementById('lpl').className='led'+(playing?' on':'');
 }
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // SLIDERS
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 function fmtV(v,f){
   if(f==='fr')   return Math.round(v)+' fr';
   if(f==='rate') return v.toFixed(2)+'×';
@@ -681,9 +681,9 @@ document.querySelectorAll('[data-lt]').forEach(r=>{
   r.addEventListener('click',()=>{ r.classList.toggle('on'); lfoOn[t]=r.classList.contains('on'); });
 });
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // PRESETS
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 function applyPreset(idx){
   const pr=PRESETS[idx];
   Object.assign(P,{advance:pr.advance,rate:pr.rate,grainSize:pr.grainSize,
@@ -700,9 +700,9 @@ function applyPreset(idx){
 }
 document.querySelectorAll('.pre').forEach((b,i)=>b.addEventListener('click',()=>applyPreset(i)));
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // VU-MÈTRE
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 const VU_SEG=10, vuw=document.getElementById('vuw');
 ['L','R'].forEach(ch=>{
   const c=document.createElement('div'); c.className='vcol'; c.id='vc-'+ch;
@@ -724,9 +724,9 @@ function updVU(){
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // SCOPE + GRAIN ACTIVITY
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 const scCv=document.getElementById('scCv'), sctx=scCv.getContext('2d');
 let lfoPhase=0;
 function drawScope(sv){
@@ -760,7 +760,7 @@ function drawGact(v){
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // BOUCLE PRINCIPALE
 //
 // Séparation claire des responsabilités :
@@ -779,7 +779,7 @@ function drawGact(v){
 //
 // La vidéo joue toujours en forward pour alimenter buf[].
 // IN/OUT = bornes de la région active, appliquées à vid.currentTime.
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 let lastRafT=0;
 let fpsCnt=0, fpsT0=0;
 
@@ -820,16 +820,17 @@ function loop(now){
         }
       }
 
-      // Boucle IN/OUT sur la source vidéo - reboucle SMOOTH sans discontinuité
-      if(vid.duration>0 && vt/vid.duration>=outPt){
-        vid.currentTime=inPt*vid.duration;
-        // Vide simplement le buffer, laisse absFrame et needle continuer
-        bufWrite=0;
-        bufCount=0;
-        lastVT=-1;
-        // ✓ NE PAS modifier absFrame — il continue son compte
-        // ✓ NE PAS modifier needle — la lectura continue naturellement
-      }
+           // Boucle IN/OUT sur la source vidéo - reboucle SMOOTH sans reset complet
+       if(vid.duration>0 && vt/vid.duration>=outPt){
+         vid.currentTime=inPt*vid.duration;
+         // Reset buffer mais GARDE needle à sa position
+         bufWrite=0;
+         bufCount=0;
+         absFrame=needle;  // ← KEY: absFrame = où est needle maintenant
+         lastVT=-1;
+         // NE PAS reset needle, grainAnchor, grainStart, etc.
+         // Le grain continue naturellement
+       }
     }
   }
 
@@ -960,9 +961,9 @@ playGrain(anchorFrame.sec, grainPlaySec, eRate, ePitch, grainDir);      }
   drawScope(ls); drawGact(actV); updVU();
 }
 
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 // UTILS
-// ═══════════════════════════════════════════════════════════════════[...]
+// ═══════════════════════════════════════════════════════════════════
 function fmtS(s){
   if(!isFinite(s)) return '--:--';
   const m=Math.floor(s/60), ss=Math.floor(s%60);
