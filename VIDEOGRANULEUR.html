@@ -396,12 +396,12 @@ function extractAudio(startSec, durSec, reversed){
   return ab;
 }
 
-// Planifie un nœud AudioBufferSource à audioTime (actx.currentTime + délai).
-function scheduleAudio(ab, audioTime, ePitch){
+// Planifie un nœud AudioBufferSource à audioTime avec time-stretch.
+function scheduleAudio(ab, audioTime, replayRate, ePitch){
   if(!ab||!actx||bypass) return;
   const nd=actx.createBufferSource();
   nd.buffer=ab;
-  nd.playbackRate.value=1;       // pitch intact via time-stretch
+  nd.playbackRate.value=Math.max(0.1, replayRate);  // ← TIME-STRETCH ici !
   nd.detune.value=ePitch*100;    // transposition indépendante
   nd.connect(masterGain);
   nd.start(audioTime);
@@ -411,36 +411,35 @@ function scheduleAudio(ab, audioTime, ePitch){
 
 // Lance le(s) nœud(s) audio pour un grain.
 // anchorSec  = position dans le fichier audio source
-// nomSec     = durée nominale du grain (frames vidéo / estFPS)
-// eRate      = facteur de vitesse (time-stretch, pitch intact)
+// playSec    = durée RÉELLE de lecture du grain (après time-stretch)
+// eRate      = facteur de vitesse (1=normal, 0.5=ralenti 2x, 2=double vitesse)
 // ePitch     = demi-tons
 // dir        = 'F' | 'R' | 'P'
-function playGrain(anchorSec, nomSec, eRate, ePitch, dir){
+function playGrain(anchorSec, playSec, eRate, ePitch, dir){
   if(!audioBuf||!actx||bypass) return;
   killAudio();
 
-  // Durée source lue = nomSec / eRate (time-stretch)
-  const srcDur = nomSec / Math.max(0.01, eRate);
+  // Lire srcDur d'audio, joué à playbackRate = eRate
+  // → durée réelle = srcDur / eRate = playSec ✓
+  const srcDur = playSec / Math.max(0.1, eRate);
   const t0 = actx.currentTime;
 
   if(dir==='F'){
     const ab=extractAudio(anchorSec, srcDur, false);
-    scheduleAudio(ab, t0, ePitch);
+    scheduleAudio(ab, t0, eRate, ePitch);
 
   }else if(dir==='R'){
     const ab=extractAudio(anchorSec, srcDur, true);
-    scheduleAudio(ab, t0, ePitch);
+    scheduleAudio(ab, t0, eRate, ePitch);
 
   }else{
     // PING-PONG : moitié aller puis moitié retour
-    // Chaque demi-phase lit srcDur/2 de source
-    const halfSrc  = srcDur/2;
-    // Durée réelle de chaque demi-phase = nomSec/eRate/2 = srcDur/2
-    // (le nœud joue à playbackRate=1 donc durée réelle = durée buffer)
+    const halfSrc = srcDur / 2;
+    const halfPlay = playSec / 2;
     const abFwd=extractAudio(anchorSec, halfSrc, false);
     const abRev=extractAudio(anchorSec, halfSrc, true);
-    scheduleAudio(abFwd, t0,             ePitch);
-    scheduleAudio(abRev, t0+halfSrc,     ePitch); // démarre quand fwd finit
+    scheduleAudio(abFwd, t0,             eRate, ePitch);
+    scheduleAudio(abRev, t0 + halfPlay,  eRate, ePitch);
   }
 }
 
@@ -889,8 +888,7 @@ function loop(now){
     // Frame d'ancrage pour l'audio
     const anchorFrame=bufGet(grainAnchor);
     if(anchorFrame && playing){
-      playGrain(anchorFrame.sec, grainNomSec, eRate, ePitch, grainDir);
-    }
+playGrain(anchorFrame.sec, grainPlaySec, eRate, ePitch, grainDir);    }
   }
 
   // ── Temps écoulé dans le grain courant ──
@@ -907,8 +905,7 @@ function loop(now){
       grainStart=now; elapsed=0;
       const anchorFrame=bufGet(grainAnchor);
       if(anchorFrame && playing){
-        playGrain(anchorFrame.sec, grainNomSec, eRate, ePitch, grainDir);
-      }
+playGrain(anchorFrame.sec, grainPlaySec, eRate, ePitch, grainDir);      }
     }
   }
 
