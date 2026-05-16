@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>GP-80 — ARNOLD ENGINE</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0e0c;--paper:#eeebe3;--ox:#c8391a;--rust:#8b2410;
+  --dim:#777;--ff:'IBM Plex Mono',monospace;
+}
+html,body{height:100%;overflow:hidden;font-family:var(--ff);}
+body{background:var(--paper);color:var(--ink);
+  display:grid;grid-template-rows:34px 1fr 48px 172px;}
+
+/* HEADER */
+header{background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;padding:0 14px;gap:14px;
+  border-bottom:2px solid var(--ox);}
+.htitle{font-size:9px;font-weight:700;letter-spacing:.25em;}
+.hdiv{width:1px;height:12px;background:rgba(255,255,255,.12);}
+.hled{display:flex;align-items:center;gap:4px;font-size:7px;letter-spacing:.1em;opacity:.5;}
+.led{width:4px;height:4px;border-radius:50%;background:#2a2927;}
+.led.on{background:var(--ox);box-shadow:0 0 4px var(--ox);}
+.led.amb{background:#c8921a;box-shadow:0 0 3px #c8921a;}
+.htc{margin-left:auto;font-size:8px;opacity:.28;letter-spacing:.05em;}
+
+/* MONITOR */
+.monitor{position:relative;background:#050503;overflow:hidden;cursor:crosshair;}
+#outCv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
+.mbadge{position:absolute;top:8px;left:8px;font-size:7px;font-weight:700;
+  letter-spacing:.14em;background:var(--ox);color:var(--paper);padding:2px 6px;pointer-events:none;}
+.mtc{position:absolute;bottom:7px;right:8px;font-size:7px;
+  color:rgba(240,237,230,.32);letter-spacing:.05em;pointer-events:none;}
+.nosrc{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;
+  color:rgba(240,237,230,.18);font-size:7px;letter-spacing:.15em;
+  text-transform:uppercase;cursor:pointer;}
+.nosrc.h,.lveil.h{display:none;}
+.lveil{position:absolute;inset:0;background:rgba(5,5,3,.96);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--paper);}
+.lvt{font-size:8px;font-weight:700;letter-spacing:.18em;}
+.lvbw{width:160px;height:1px;background:rgba(255,255,255,.08);}
+.lvb{height:100%;background:var(--ox);width:0%;transition:width .15s;}
+.lvs{font-size:7px;opacity:.28;letter-spacing:.06em;}
+
+/* TIMELINE */
+.tl{position:relative;background:#080806;overflow:hidden;cursor:pointer;}
+#tlCv{position:absolute;inset:0;width:100%;height:100%;}
+.tlreg{position:absolute;top:0;bottom:0;background:rgba(200,57,26,.07);
+  border-left:1px solid rgba(200,57,26,.45);border-right:1px solid rgba(200,57,26,.45);
+  pointer-events:none;z-index:2;}
+.tlhn{position:absolute;top:0;bottom:0;width:3px;background:var(--ox);
+  transform:translateX(-50%);cursor:ew-resize;z-index:4;}
+.tlhn::after{content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);width:6px;height:6px;
+  background:var(--ox);border:1.5px solid var(--paper);}
+.tlnd{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.45);
+  pointer-events:none;z-index:3;display:none;}
+
+/* PARAMS BAR */
+.params{border-top:1px solid rgba(15,14,12,.18);background:var(--paper);
+  display:grid;grid-template-columns:164px repeat(5,1fr) 96px;}
+.pcell{border-right:1px solid rgba(15,14,12,.07);padding:7px 11px;
+  display:flex;flex-direction:column;gap:3px;}
+.pcell:last-child{border-right:none;}
+
+.trow{display:flex;gap:3px;margin-top:2px;}
+.tb{flex:1;height:20px;border:1px solid rgba(15,14,12,.18);background:transparent;
+  color:var(--ink);font-family:var(--ff);font-size:6.5px;font-weight:700;
+  letter-spacing:.07em;cursor:pointer;transition:all .07s;white-space:nowrap;}
+.tb:hover,.tb.on{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tb.prim{background:var(--ox);color:var(--paper);border-color:var(--ox);}
+.tb.prim:hover{background:var(--rust);border-color:var(--rust);}
+.ldbtn{height:19px;border:1px dashed rgba(15,14,12,.16);background:transparent;
+  color:var(--dim);font-family:var(--ff);font-size:6.5px;letter-spacing:.07em;
+  cursor:pointer;transition:all .07s;width:100%;}
+.ldbtn:hover{border-color:var(--ink);color:var(--ink);}
+
+.pre-row{display:flex;gap:2px;flex-wrap:wrap;margin-top:3px;}
+.pre{flex:1;min-width:0;height:17px;border:1px solid rgba(15,14,12,.14);background:transparent;
+  color:var(--dim);font-family:var(--ff);font-size:5.5px;letter-spacing:.04em;
+  cursor:pointer;transition:all .07s;white-space:nowrap;overflow:hidden;}
+.pre:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.pre.act{background:var(--ox);color:var(--paper);border-color:var(--ox);}
+
+.plabel{font-size:6px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:2px;}
+.plabel:first-child{margin-top:0;}
+.pval{font-size:12px;font-weight:700;line-height:1.15;}
+.pval.ox{color:var(--ox);}
+.phint{font-size:5.5px;color:var(--dim);opacity:.45;letter-spacing:.02em;}
+.sw{position:relative;height:11px;display:flex;align-items:center;cursor:pointer;}
+.st{position:absolute;left:0;right:0;height:1px;top:50%;background:rgba(15,14,12,.1);}
+.sf{position:absolute;left:0;height:1px;top:50%;background:var(--ink);}
+.sf.ox{background:var(--ox);}
+.sth{position:absolute;width:6px;height:10px;background:var(--ink);transform:translateX(-50%);cursor:grab;}
+.sth:active{cursor:grabbing;}
+.sth.ox{background:var(--ox);}
+.drow{display:flex;gap:2px;margin-top:2px;}
+
+.vurow{display:flex;gap:2px;height:22px;align-items:flex-end;}
+.vcol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:1px;}
+.vseg{height:2px;background:rgba(15,14,12,.06);}
+.vseg.lo{background:var(--ox);}.vseg.md{background:var(--rust);}.vseg.hi{background:#bf1a0a;}
+.scwrap{background:#050503;height:24px;overflow:hidden;}
+#scCv{width:100%;height:100%;display:block;}
+.gaw{background:#050503;height:16px;overflow:hidden;}
+#gaCv{width:100%;height:100%;display:block;}
+
+.lforow{display:flex;align-items:center;justify-content:space-between;margin-top:2px;}
+.lfon{font-size:5.5px;letter-spacing:.05em;color:var(--dim);}
+.rok{width:16px;height:7px;border:1px solid rgba(15,14,12,.16);background:transparent;cursor:pointer;transition:background .07s;}
+.rok.on{background:var(--ox);border-color:var(--ox);}
+
+#fileInput{display:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="htitle">GP·80 — ARNOLD ENGINE</div>
+  <div class="hdiv"></div>
+  <div class="hled"><div class="led" id="lpl"></div>PLAY</div>
+  <div class="hled"><div class="led" id="lgr"></div>GRAIN</div>
+  <div class="hled"><div class="led amb" id="llfo"></div>LFO</div>
+  <div class="hled"><div class="led" id="lpk"></div>PEAK</div>
+  <div class="htc" id="htc">--:--</div>
+</header>
+
+<div class="monitor" id="monitor">
+  <canvas id="outCv"></canvas>
+  <div class="mbadge" id="mbadge">NO SIGNAL</div>
+  <div class="mtc" id="mtc">--:--</div>
+  <div class="nosrc" id="nosrc">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8">
+      <rect x="2" y="2" width="20" height="20" rx="1.5"/>
+      <polygon points="10,8 16,12 10,16"/>
+    </svg>
+    <span>DÉPOSER UNE VIDÉO</span>
+    <span style="font-size:6px;opacity:.35">ou cliquer pour charger</span>
+  </div>
+  <div class="lveil h" id="lveil">
+    <div class="lvt" id="lvt">DÉCODAGE…</div>
+    <div class="lvbw"><div class="lvb" id="lvb"></div></div>
+    <div class="lvs" id="lvs">init</div>
+  </div>
+</div>
+
+<div class="tl" id="tl">
+  <canvas id="tlCv"></canvas>
+  <div class="tlreg" id="tlreg"></div>
+  <div class="tlhn" id="tlhin" style="left:0%"></div>
+  <div class="tlhn" id="tlhout" style="left:100%"></div>
+  <div class="tlnd" id="tlnd"></div>
+</div>
+
+<div class="params">
+
+  <!-- ① Transport + Presets -->
+  <div class="pcell">
+    <button class="ldbtn" id="btnLd">▸ CHARGER VIDÉO</button>
+    <div class="trow">
+      <button class="tb prim" id="btnPl" style="flex:2">▶ LIRE</button>
+      <button class="tb" id="btnSt">■</button>
+      <button class="tb" id="btnBy">BYP</button>
+    </div>
+    <div class="plabel" style="margin-top:3px">Presets</div>
+    <div class="pre-row">
+      <button class="pre" data-pre="0">NORMAL</button>
+      <button class="pre" data-pre="1">STUTTER</button>
+      <button class="pre" data-pre="2">FREEZE</button>
+    </div>
+    <div class="pre-row">
+      <button class="pre" data-pre="3">DENSE</button>
+      <button class="pre" data-pre="4">ARNOLD</button>
+    </div>
+  </div>
+
+  <!-- ② Avance needle -->
+  <div class="pcell">
+    <div class="plabel">Avance needle</div>
+    <div class="pval ox" id="v-advance">1 fr</div>
+    <div class="sw" data-p="advance" data-min="0" data-max="32" data-v="1" data-fmt="fr">
+      <div class="st"></div><div class="sf ox" style="width:3.1%"></div>
+      <div class="sth ox" style="left:3.1%"></div>
+    </div>
+    <div class="phint">frames sautées entre grains</div>
+    <div class="phint">0 = FREEZE (même grain en boucle)</div>
+
+    <div class="plabel">Direction</div>
+    <div class="trow" style="margin-top:0">
+      <button class="tb" id="btnRv">◀ REVERSE</button>
+    </div>
+    <div class="phint">inverse le sens d'avance needle</div>
+  </div>
+
+  <!-- ③ Vitesse grain -->
+  <div class="pcell">
+    <div class="plabel">Vitesse grain</div>
+    <div class="pval" id="v-rate">1.00×</div>
+    <div class="sw" data-p="rate" data-min="0.1" data-max="3" data-v="1" data-fmt="rate">
+      <div class="st"></div><div class="sf" style="width:30.3%"></div>
+      <div class="sth" style="left:30.3%"></div>
+    </div>
+    <div class="phint">vitesse de lecture audio du grain</div>
+    <div class="phint">indépendante du pitch</div>
+
+    <div class="plabel">Dir. grain vidéo</div>
+    <div class="drow">
+      <button class="tb on" id="dFwd" style="font-size:6px">FWD</button>
+      <button class="tb" id="dRev" style="font-size:6px">REV</button>
+      <button class="tb" id="dPng" style="font-size:6px">PNG</button>
+    </div>
+    <div class="phint">PNG = forward puis backward</div>
+  </div>
+
+  <!-- ④ Taille + Répétitions -->
+  <div class="pcell">
+    <div class="plabel">Taille grain</div>
+    <div class="pval" id="v-grainSize">8 fr</div>
+    <div class="sw" data-p="grainSize" data-min="1" data-max="96" data-v="8" data-fmt="fr">
+      <div class="st"></div><div class="sf" style="width:7.4%"></div>
+      <div class="sth" style="left:7.4%"></div>
+    </div>
+    <div class="phint">durée d'un grain en frames</div>
+
+    <div class="plabel">Répétitions</div>
+    <div class="pval" id="v-repeat">2×</div>
+    <div class="sw" data-p="repeat" data-min="1" data-max="16" data-v="2" data-fmt="rep">
+      <div class="st"></div><div class="sf" style="width:6.7%"></div>
+      <div class="sth" style="left:6.7%"></div>
+    </div>
+    <div class="phint">N× le même grain avant d'avancer</div>
+  </div>
+
+  <!-- ⑤ Dispersion + LFO -->
+  <div class="pcell">
+    <div class="plabel">Dispersion</div>
+    <div class="pval" id="v-dispersion">±0 fr</div>
+    <div class="sw" data-p="dispersion" data-min="0" data-max="64" data-v="0" data-fmt="disp">
+      <div class="st"></div><div class="sf" style="width:0%"></div>
+      <div class="sth" style="left:0%"></div>
+    </div>
+    <div class="phint">offset aléatoire autour needle</div>
+
+    <div class="plabel">LFO Rate</div>
+    <div class="pval" id="v-lfoRate">0.25 Hz</div>
+    <div class="sw" data-p="lfoRate" data-min="0.01" data-max="8" data-v="0.25" data-fmt="hz">
+      <div class="st"></div><div class="sf" style="width:2.8%"></div>
+      <div class="sth" style="left:2.8%"></div>
+    </div>
+
+    <div class="plabel">LFO Amt</div>
+    <div class="pval" id="v-lfoAmt">0.30</div>
+    <div class="sw" data-p="lfoAmt" data-min="0" data-max="1" data-v="0.3" data-fmt="dec">
+      <div class="st"></div><div class="sf" style="width:30%"></div>
+      <div class="sth" style="left:30%"></div>
+    </div>
+  </div>
+
+  <!-- ⑥ Cibles LFO -->
+  <div class="pcell">
+    <div class="plabel">Cibles LFO</div>
+    <div class="lforow"><span class="lfon">AVANCE</span><div class="rok on" data-lt="advance"></div></div>
+    <div class="lforow"><span class="lfon">VITESSE</span><div class="rok" data-lt="rate"></div></div>
+    <div class="lforow"><span class="lfon">TAILLE</span><div class="rok" data-lt="grainSize"></div></div>
+    <div class="lforow"><span class="lfon">REPEAT</span><div class="rok" data-lt="repeat"></div></div>
+    <div class="lforow"><span class="lfon">DISPERS.</span><div class="rok" data-lt="dispersion"></div></div>
+  </div>
+
+  <!-- ⑦ Monitors -->
+  <div class="pcell">
+    <div class="plabel">Audio</div>
+    <div class="vurow" id="vuw"></div>
+    <div class="plabel">LFO</div>
+    <div class="scwrap"><canvas id="scCv"></canvas></div>
+    <div class="plabel">Grain</div>
+    <div class="gaw"><canvas id="gaCv"></canvas></div>
+  </div>
+
+</div>
+
+<input type="file" id="fileInput" accept="video/*"/>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// PRESETS
+// ══════════════════════════════════════════════════════════════
+const PRESETS = [
+  { name:'NORMAL',  advance:1,  rate:1.0,  grainSize:8,  repeat:1,  dispersion:0,  dir:'F', rev:false, lfoAmt:0,   lfoRate:0.25 },
+  { name:'STUTTER', advance:1,  rate:0.5,  grainSize:12, repeat:4,  dispersion:2,  dir:'F', rev:false, lfoAmt:0.3, lfoRate:2.0  },
+  { name:'FREEZE',  advance:0,  rate:1.0,  grainSize:16, repeat:8,  dispersion:6,  dir:'P', rev:false, lfoAmt:0.4, lfoRate:0.15 },
+  { name:'DENSE',   advance:2,  rate:1.0,  grainSize:3,  repeat:2,  dispersion:4,  dir:'F', rev:false, lfoAmt:0.2, lfoRate:1.0  },
+  { name:'ARNOLD',  advance:3,  rate:0.35, grainSize:20, repeat:6,  dispersion:16, dir:'P', rev:false, lfoAmt:0.7, lfoRate:0.5  },
+];
+
+// ── Paramètres actifs ──
+const P = {
+  advance:1, rate:1, grainSize:8, repeat:2, dispersion:0, lfoRate:0.25, lfoAmt:0.3
+};
+const lfoOn = { advance:true, rate:false, grainSize:false, repeat:false, dispersion:false };
+let grainDir = 'F';     // 'F' | 'R' | 'P'
+let playing  = false;
+let reverse  = false;   // reverse de l'avance needle
+let bypass   = false;
+
+// ══════════════════════════════════════════════════════════════
+// BUFFER DE FRAMES — ring buffer fixe, INDÉPENDANT de la vidéo
+// On capture toujours ; les indices sont stables.
+// ══════════════════════════════════════════════════════════════
+const BUFMAX = 256;        // ring buffer
+const frameBuf  = new Array(BUFMAX); // {img:ImageData, sec:number}
+let   bufHead   = 0;       // prochain slot d'écriture (FIFO circulaire)
+let   bufFill   = 0;       // frames valides dans le buffer (0..BUFMAX)
+
+// needle = index ABSOLU dans le ring (0..BUFMAX-1)
+// toujours dans la fenêtre valide [bufHead-bufFill .. bufHead-1] mod BUFMAX
+let   needle    = 0;
+
+// État grain courant
+let   gAnchor   = 0;   // index ring du début du grain
+let   gPos      = 0;   // position dans le grain [0..eGS-1]
+let   gRep      = 0;   // répétition courante
+let   pingDir   = 1;   // +1 ou -1 pour ping-pong
+let   grainDone = true; // faut-il démarrer un nouveau grain ?
+
+let   estFPS    = 25;   // estimé lors du chargement, stable ensuite
+let   lastVT    = -1;
+let   loaded    = false;
+
+// IN/OUT points (fraction 0..1 de la durée)
+let inPt = 0, outPt = 1;
+
+// ══════════════════════════════════════════════════════════════
+// AUDIO
+// ══════════════════════════════════════════════════════════════
+let actx=null, audioBuf=null, masterGain=null, analyser=null, activeNode=null;
+
+function initAudio() {
+  if (actx) return;
+  actx = new (window.AudioContext||window.webkitAudioContext)({latencyHint:'interactive'});
+  masterGain = actx.createGain(); masterGain.gain.value = 0.85;
+  analyser = actx.createAnalyser(); analyser.fftSize = 256;
+  masterGain.connect(analyser); analyser.connect(actx.destination);
+}
+
+async function decodeAudio(file) {
+  try {
+    lvshow('DÉCODAGE AUDIO…','lecture'); lvpct(20);
+    const ab = await file.arrayBuffer(); lvpct(55);
+    audioBuf = await actx.decodeAudioData(ab); lvpct(85);
+  } catch(e) { console.warn('audio:', e); audioBuf = null; }
+}
+
+function killAudio() {
+  if (!activeNode) return;
+  try { activeNode.stop(); } catch(e){}
+  activeNode.disconnect();
+  activeNode = null;
+}
+
+// Joue un grain audio : anchorSec dans le fichier, durée nominale grainDurSec,
+// à playbackRate eRate. La durée réelle = grainDurSec / eRate.
+function playGrainAudio(anchorSec, grainDurSec, eRate) {
+  if (!audioBuf || !actx || bypass) return;
+  killAudio();
+  const rate = Math.max(0.1, Math.min(4, eRate));
+  const s    = Math.max(0, Math.min(audioBuf.duration - 0.001, anchorSec));
+  const d    = Math.min(grainDurSec, audioBuf.duration - s);
+  if (d < 0.002) return;
+  const nd = actx.createBufferSource();
+  nd.buffer = audioBuf;
+  nd.playbackRate.value = rate;
+  nd.connect(masterGain);
+  nd.start(actx.currentTime, s, d);
+  nd.onended = () => { if (activeNode === nd) activeNode = null; };
+  activeNode = nd;
+}
+
+// ══════════════════════════════════════════════════════════════
+// VIDÉO
+// ══════════════════════════════════════════════════════════════
+const vid    = document.createElement('video');
+vid.muted=true; vid.loop=false; vid.playsInline=true; vid.preload='auto';
+
+const outCv  = document.getElementById('outCv');
+const outCtx = outCv.getContext('2d');
+const capCv  = document.createElement('canvas');
+const capCtx = capCv.getContext('2d',{willReadFrequently:true});
+
+['btnLd','nosrc'].forEach(id =>
+  document.getElementById(id).addEventListener('click', () => { initAudio(); fileInput.click(); })
+);
+document.getElementById('monitor').addEventListener('dragover', e => e.preventDefault());
+document.getElementById('monitor').addEventListener('drop', e => {
+  e.preventDefault();
+  const f = e.dataTransfer.files[0];
+  if (f) { initAudio(); loadFile(f); }
+});
+document.getElementById('fileInput').addEventListener('change', e => {
+  if (e.target.files[0]) { initAudio(); loadFile(e.target.files[0]); }
+});
+
+async function loadFile(file) {
+  if (!file.type.startsWith('video/')) return;
+  killAudio();
+  if (actx.state === 'suspended') await actx.resume();
+  await decodeAudio(file);
+
+  lvshow('CHARGEMENT VIDÉO…','décodage'); lvpct(88);
+  if (vid.src?.startsWith('blob:')) URL.revokeObjectURL(vid.src);
+  vid.src = URL.createObjectURL(file); vid.load();
+  await new Promise(res => {
+    vid.addEventListener('loadedmetadata', res, {once:true});
+    setTimeout(res, 8000);
+  });
+
+  const W = vid.videoWidth || 1280, H = vid.videoHeight || 720;
+  capCv.width = W; capCv.height = H;
+  outCv.width = W; outCv.height = H;
+  tlOffCv.width = W; tlOffCv.height = H;
+  inPt = 0; outPt = 1;
+
+  // Estimer le FPS réel de la vidéo (via metadata ou sample)
+  estFPS = await estimateFPS();
+
+  tlThumbs.length = 0; tlBuilt = false; tlBuilding = false;
+  updHandles();
+  resetEngine();
+
+  document.getElementById('nosrc').classList.add('h');
+  lvpct(100); setTimeout(lvhide, 300);
+  loaded = true;
+  vid.play().catch(()=>{});
+  playing = true; updTUI();
+}
+
+// Estime le FPS depuis les métadonnées ou par sampling rapide
+async function estimateFPS() {
+  // Essai 1 : via videoTracks
+  if (vid.videoTracks && vid.videoTracks.length) {
+    const s = vid.videoTracks[0].getSettings?.();
+    if (s && s.frameRate > 1) return Math.round(s.frameRate);
+  }
+  // Essai 2 : HTMLVideoElement.getVideoPlaybackQuality n'a pas de FPS
+  // Essai 3 : heuristique durée/seek (fiable, non-destructif)
+  // On utilise directement une valeur raisonnable + on calibre en live
+  return 25;
+}
+
+function resetEngine() {
+  // Vide le ring buffer
+  bufHead = 0; bufFill = 0; lastVT = -1;
+  // Remet la needle au début du buffer
+  needle = 0;
+  gAnchor = 0; gPos = 0; gRep = 0; pingDir = 1; grainDone = true;
+  killAudio();
+}
+
+// ══════════════════════════════════════════════════════════════
+// CAPTURE — appelée dans la boucle principale depuis les frames vidéo
+// Remplit le ring buffer. Ne remet PAS la needle à zéro.
+// ══════════════════════════════════════════════════════════════
+function captureFrame(vt) {
+  capCtx.drawImage(vid, 0, 0, capCv.width, capCv.height);
+  const img = capCtx.getImageData(0, 0, capCv.width, capCv.height);
+  frameBuf[bufHead] = { img, sec: vt };
+  bufHead = (bufHead + 1) % BUFMAX;
+  if (bufFill < BUFMAX) bufFill++;
+}
+
+// Convertit un index logique (0 = le plus ancien, bufFill-1 = le plus récent)
+// en index ring réel.
+function ringIdx(logical) {
+  // oldest = (bufHead - bufFill + BUFMAX) % BUFMAX
+  return ((bufHead - bufFill + logical) % BUFMAX + BUFMAX) % BUFMAX;
+}
+
+// Accède à une frame par index logique (clampé)
+function getFrame(logical) {
+  const l = Math.max(0, Math.min(bufFill - 1, logical));
+  return frameBuf[ringIdx(l)];
+}
+
+// ══════════════════════════════════════════════════════════════
+// PRESETS
+// ══════════════════════════════════════════════════════════════
+function applyPreset(idx) {
+  const pr = PRESETS[idx];
+  P.advance     = pr.advance;
+  P.rate        = pr.rate;
+  P.grainSize   = pr.grainSize;
+  P.repeat      = pr.repeat;
+  P.dispersion  = pr.dispersion;
+  P.lfoAmt      = pr.lfoAmt;
+  P.lfoRate     = pr.lfoRate;
+  grainDir      = pr.dir;
+  reverse       = pr.rev || false;
+
+  refreshSlider('advance',    P.advance,    0,    32);
+  refreshSlider('rate',       P.rate,       0.1,  3);
+  refreshSlider('grainSize',  P.grainSize,  1,    96);
+  refreshSlider('repeat',     P.repeat,     1,    16);
+  refreshSlider('dispersion', P.dispersion, 0,    64);
+  refreshSlider('lfoAmt',     P.lfoAmt,     0,    1);
+  refreshSlider('lfoRate',    P.lfoRate,    0.01, 8);
+
+  ['dFwd','dRev','dPng'].forEach(id => document.getElementById(id).classList.remove('on'));
+  document.getElementById(grainDir==='F'?'dFwd':grainDir==='R'?'dRev':'dPng').classList.add('on');
+  document.getElementById('btnRv').classList.toggle('on', reverse);
+
+  document.querySelectorAll('.pre').forEach((b,i) => b.classList.toggle('act', i===idx));
+
+  // Relance un grain proprement
+  grainDone = true;
+}
+
+function refreshSlider(param, val, mn, mx) {
+  const sw = document.querySelector(`.sw[data-p="${param}"]`);
+  if (!sw) return;
+  const pct = Math.max(0, Math.min(1, (val-mn)/(mx-mn)));
+  sw.querySelector('.sth').style.left = (pct*100).toFixed(1)+'%';
+  sw.querySelector('.sf').style.width  = (pct*100).toFixed(1)+'%';
+  sw.dataset.v = val;
+  const el = document.getElementById('v-'+param);
+  if (el) el.textContent = fmtV(val, sw.dataset.fmt);
+}
+
+document.querySelectorAll('.pre').forEach((b,i) =>
+  b.addEventListener('click', () => applyPreset(i))
+);
+
+// ══════════════════════════════════════════════════════════════
+// TIMELINE
+// ══════════════════════════════════════════════════════════════
+const tlEl    = document.getElementById('tl');
+const tlCv    = document.getElementById('tlCv');
+const tlCtx   = tlCv.getContext('2d');
+const tlreg   = document.getElementById('tlreg');
+const tlhin   = document.getElementById('tlhin');
+const tlhout  = document.getElementById('tlhout');
+const tlnd    = document.getElementById('tlnd');
+const tlOffCv = document.createElement('canvas');
+const TL_N=48, tlThumbs=[];
+let   tlBuilt=false, tlBuilding=false, tlDrag=null;
+
+function tlPct(e) {
+  const r = tlEl.getBoundingClientRect();
+  const x = e.touches ? e.touches[0].clientX : e.clientX;
+  return Math.max(0, Math.min(1, (x-r.left)/r.width));
+}
+
+tlEl.addEventListener('mousedown', e => {
+  const p = tlPct(e);
+  if (Math.abs(p - inPt) < 0.03)       tlDrag = 'in';
+  else if (Math.abs(p - outPt) < 0.03) tlDrag = 'out';
+  else { tlDrag = 'seek'; doSeek(p); }
+});
+document.addEventListener('mousemove', e => {
+  if (!tlDrag) return;
+  const p = tlPct(e);
+  if (tlDrag==='in')       { inPt  = Math.min(p, outPt-0.02); updHandles(); }
+  else if (tlDrag==='out') { outPt = Math.max(p, inPt+0.02);  updHandles(); }
+  else doSeek(p);
+});
+document.addEventListener('mouseup', () => { tlDrag = null; });
+
+function doSeek(p) {
+  if (!loaded) return;
+  // Seek vidéo + reset buffer (sans casser le grain engine — juste vide le buffer)
+  const t = vid.duration * (inPt + p*(outPt-inPt));
+  vid.currentTime = t;
+  resetEngine();
+}
+
+function updHandles() {
+  tlhin.style.left   = (inPt*100).toFixed(1)+'%';
+  tlhout.style.left  = (outPt*100).toFixed(1)+'%';
+  tlreg.style.left   = (inPt*100).toFixed(1)+'%';
+  tlreg.style.width  = ((outPt-inPt)*100).toFixed(1)+'%';
+}
+
+let tlPend=false;
+function drawTL() {
+  if (tlPend) return; tlPend=true;
+  requestAnimationFrame(() => {
+    tlPend=false;
+    const W = tlEl.clientWidth||600, H = tlEl.clientHeight||48;
+    if (tlCv.width!==W) { tlCv.width=W; tlCv.height=H; }
+    tlCtx.fillStyle='#080806'; tlCtx.fillRect(0,0,W,H);
+    if (tlBuilt && tlThumbs.length>0) {
+      const tw = W/TL_N, oc = tlOffCv.getContext('2d');
+      for (let i=0;i<TL_N;i++) {
+        oc.putImageData(tlThumbs[i],0,0);
+        tlCtx.drawImage(tlOffCv, i*tw, 0, tw-0.3, H);
+      }
+      tlCtx.fillStyle='rgba(8,8,6,.65)';
+      tlCtx.fillRect(0,0,inPt*W,H);
+      tlCtx.fillRect(outPt*W,0,W*(1-outPt),H);
+    } else {
+      tlCtx.fillStyle='rgba(240,237,230,.05)';
+      tlCtx.font='7px "IBM Plex Mono"'; tlCtx.textAlign='center';
+      tlCtx.fillText(tlBuilding?'CONSTRUCTION…':'CHARGEMENT…', W/2, H/2+2.5);
+    }
+  });
+}
+
+async function buildTimeline() {
+  if (!loaded || tlBuilding) return;
+  tlBuilding = true;
+  // Sauvegarde position courante
+  const wasPlaying = !vid.paused;
+  const origT = vid.currentTime;
+  if (wasPlaying) vid.pause();
+
+  tlThumbs.length = 0;
+  const oc = tlOffCv.getContext('2d');
+  for (let i=0; i<TL_N; i++) {
+    vid.currentTime = (i/(TL_N-1)) * vid.duration;
+    await new Promise(res => vid.addEventListener('seeked', res, {once:true}));
+    oc.drawImage(vid, 0, 0, tlOffCv.width, tlOffCv.height);
+    tlThumbs.push(oc.getImageData(0, 0, tlOffCv.width, tlOffCv.height));
+    if (i === Math.floor(TL_N/2)) drawTL();
+  }
+  // Restaure
+  vid.currentTime = Math.max(0, Math.min(vid.duration, origT));
+  if (wasPlaying) vid.play().catch(()=>{});
+  tlBuilding = false; tlBuilt = true;
+  drawTL();
+}
+
+// ══════════════════════════════════════════════════════════════
+// TRANSPORT
+// ══════════════════════════════════════════════════════════════
+document.getElementById('btnPl').addEventListener('click', () => {
+  if (!loaded) return;
+  initAudio(); actx.resume();
+  playing = !playing;
+  if (playing) {
+    grainDone = true;
+    vid.play().catch(()=>{});
+  } else {
+    vid.pause(); killAudio();
+  }
+  updTUI();
+});
+
+document.getElementById('btnSt').addEventListener('click', () => {
+  playing = false; vid.pause();
+  vid.currentTime = (vid.duration||0) * inPt;
+  resetEngine();
+  updTUI();
+});
+
+document.getElementById('btnRv').addEventListener('click', () => {
+  reverse = !reverse;
+  document.getElementById('btnRv').classList.toggle('on', reverse);
+});
+
+document.getElementById('btnBy').addEventListener('click', () => {
+  bypass = !bypass;
+  if (bypass) killAudio();
+  document.getElementById('btnBy').classList.toggle('on', bypass);
+});
+
+['Fwd','Rev','Png'].forEach(d => {
+  document.getElementById('d'+d).addEventListener('click', () => {
+    grainDir = d==='Fwd'?'F': d==='Rev'?'R':'P';
+    ['dFwd','dRev','dPng'].forEach(id => document.getElementById(id).classList.remove('on'));
+    document.getElementById('d'+d).classList.add('on');
+    grainDone = true;
+  });
+});
+
+function updTUI() {
+  const b = document.getElementById('btnPl');
+  b.textContent = playing ? '⏸ PAUSE' : '▶ LIRE';
+  b.className   = playing ? 'tb' : 'tb prim';
+  document.getElementById('lpl').className = 'led'+(playing?' on':'');
+}
+
+// ══════════════════════════════════════════════════════════════
+// SLIDERS
+// ══════════════════════════════════════════════════════════════
+function fmtV(v, f) {
+  switch(f) {
+    case 'fr':   return Math.round(v)+' fr';
+    case 'rate': return v.toFixed(2)+'×';
+    case 'rep':  return Math.round(v)+'×';
+    case 'disp': return '±'+Math.round(v)+' fr';
+    case 'hz':   return v.toFixed(2)+' Hz';
+    case 'dec':  return v.toFixed(2);
+    default:     return String(v);
+  }
+}
+
+document.querySelectorAll('.sw').forEach(w => {
+  const th  = w.querySelector('.sth'), sf = w.querySelector('.sf');
+  const p   = w.dataset.p, mn=+w.dataset.min, mx=+w.dataset.max, fmt=w.dataset.fmt;
+  const gx  = e => e.touches ? e.touches[0].clientX : e.clientX;
+
+  function setSlider(e) {
+    const r   = w.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(1, (gx(e)-r.left)/r.width));
+    P[p] = mn + pct*(mx-mn);
+    const ps = (pct*100).toFixed(1)+'%';
+    th.style.left = ps; sf.style.width = ps;
+    const el = document.getElementById('v-'+p);
+    if (el) el.textContent = fmtV(P[p], fmt);
+    // Ne désactive les presets que pour les params granulaires
+    // (pas pour LFO Rate/Amt qui sont des modulations)
+    document.querySelectorAll('.pre').forEach(b => b.classList.remove('act'));
+  }
+
+  w.addEventListener('mousedown', e => {
+    setSlider(e);
+    const mv = e2 => setSlider(e2);
+    document.addEventListener('mousemove', mv);
+    document.addEventListener('mouseup', () =>
+      document.removeEventListener('mousemove', mv), {once:true});
+  });
+});
+
+document.querySelectorAll('[data-lt]').forEach(r => {
+  const t = r.dataset.lt;
+  lfoOn[t] = r.classList.contains('on');
+  r.addEventListener('click', () => {
+    r.classList.toggle('on');
+    lfoOn[t] = r.classList.contains('on');
+  });
+});
+
+// ══════════════════════════════════════════════════════════════
+// VU-MÈTRE
+// ══════════════════════════════════════════════════════════════
+const VU_SEG = 10;
+const vuw = document.getElementById('vuw');
+['L','R'].forEach(ch => {
+  const c = document.createElement('div'); c.className='vcol'; c.id='vc-'+ch;
+  for (let i=0; i<VU_SEG; i++) {
+    const s = document.createElement('div'); s.className='vseg'; c.prepend(s);
+  }
+  vuw.appendChild(c);
+});
+const vuBuf = new Uint8Array(128);
+function updVU() {
+  if (!analyser) return;
+  analyser.getByteFrequencyData(vuBuf);
+  const avg = vuBuf.slice(0,32).reduce((a,b)=>a+b,0)/32/255;
+  ['L','R'].forEach((ch,ci) => {
+    const v   = Math.max(0, Math.min(1, avg*(1+(ci?0.05*(Math.random()-.5):0))));
+    const lit = Math.round(v*VU_SEG);
+    document.getElementById('vc-'+ch).querySelectorAll('.vseg').forEach((s,i) => {
+      const on  = (VU_SEG-1-i) < lit;
+      const lvl = (VU_SEG-1-i)/VU_SEG;
+      s.className = 'vseg'+(on ? (lvl>.8?' hi':lvl>.5?' md':' lo') : '');
+    });
+  });
+}
+
+// ══════════════════════════════════════════════════════════════
+// SCOPE LFO
+// ══════════════════════════════════════════════════════════════
+const scCv  = document.getElementById('scCv'), sctx = scCv.getContext('2d');
+let lfoPhase = 0;
+function drawScope(sv) {
+  const W = scCv.parentElement.clientWidth||96, H=24;
+  scCv.width=W; scCv.height=H;
+  sctx.fillStyle='#050503'; sctx.fillRect(0,0,W,H);
+  sctx.strokeStyle='rgba(255,255,255,.05)'; sctx.lineWidth=.5;
+  sctx.beginPath(); sctx.moveTo(0,H/2); sctx.lineTo(W,H/2); sctx.stroke();
+  sctx.beginPath(); sctx.strokeStyle='#c8391a'; sctx.lineWidth=1;
+  for (let x=0; x<W; x++) {
+    const y = H/2 - Math.sin((x/W)*Math.PI*4 + lfoPhase)*(H/2-2);
+    x===0 ? sctx.moveTo(x,y) : sctx.lineTo(x,y);
+  }
+  sctx.stroke();
+  const cy = H/2 - sv*(H/2-2);
+  sctx.fillStyle='#f0ede6';
+  sctx.beginPath(); sctx.arc(W-3,cy,1.5,0,Math.PI*2); sctx.fill();
+}
+
+// ══════════════════════════════════════════════════════════════
+// GRAIN ACTIVITY
+// ══════════════════════════════════════════════════════════════
+const gaCv   = document.getElementById('gaCv'), gactx = gaCv.getContext('2d');
+const gaHist = new Float32Array(128); let gaI=0;
+function drawGact(v) {
+  gaHist[gaI%128] = v; gaI++;
+  const W = gaCv.parentElement.clientWidth||96, H=16;
+  gaCv.width=W; gaCv.height=H;
+  gactx.fillStyle='#050503'; gactx.fillRect(0,0,W,H);
+  const bars=36, bw=W/bars;
+  for (let i=0; i<bars; i++) {
+    const idx = ((gaI-bars+i)%128+128)%128;
+    const bh  = Math.max(1,(gaHist[idx]||0)*(H-1));
+    gactx.fillStyle = i%2 ? '#c8391a':'#8b2410';
+    gactx.fillRect(i*bw+.3, H-bh, bw-.6, bh);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// BOUCLE PRINCIPALE — UN seul requestAnimationFrame
+// ══════════════════════════════════════════════════════════════
+// Calibration FPS en live (pendant lecture normale, pas pendant build timeline)
+let fpsCnt=0, fpsT0=performance.now();
+
+let lastT=0;
+function loop(now) {
+  requestAnimationFrame(loop);
+  const dt = Math.min((now-lastT)/1000, 0.1); lastT=now;
+
+  // ── LFO ──
+  lfoPhase += P.lfoRate * dt * Math.PI*2;
+  const ls = Math.sin(lfoPhase);
+  const la = P.lfoAmt;
+
+  // Valeurs effectives modulées par LFO
+  const eAdv  = Math.max(0,   Math.round(P.advance    + (lfoOn.advance    ? ls*la*P.advance      : 0)));
+  const eRate = Math.max(0.1,            P.rate        + (lfoOn.rate       ? ls*la*(P.rate-0.1)   : 0));
+  const eGS   = Math.max(1,   Math.round(P.grainSize   + (lfoOn.grainSize  ? ls*la*P.grainSize    : 0)));
+  const eRep  = Math.max(1,   Math.round(P.repeat       + (lfoOn.repeat     ? ls*la*P.repeat       : 0)));
+  const eDisp = Math.max(0,   Math.round(P.dispersion   + (lfoOn.dispersion ? ls*la*P.dispersion   : 0)));
+
+  // ── Capture frame vidéo ──
+  if (loaded && vid.readyState >= 2 && !tlBuilding) {
+    const vt = vid.currentTime;
+    if (vt !== lastVT) {
+      lastVT = vt;
+      captureFrame(vt);
+
+      // Calibration FPS (uniquement pendant lecture, pas pendant seek/build)
+      if (playing && !vid.paused) {
+        fpsCnt++;
+        if (now - fpsT0 > 1500 && fpsCnt > 5) {
+          const measured = fpsCnt / ((now-fpsT0)/1000);
+          estFPS = Math.max(1, Math.min(120, Math.round(measured)));
+          fpsCnt=0; fpsT0=now;
+        }
+      }
+
+      // Boucle IN/OUT : remet la tête de lecture vidéo, mais NE reset PAS le buffer.
+      // La needle continue dans le buffer, ce qui est correct.
+      if (vid.duration > 0) {
+        const pct = vt / vid.duration;
+        if (pct >= outPt) {
+          vid.currentTime = inPt * vid.duration;
+        }
+      }
+    }
+  }
+
+  // Lance la construction de la timeline une seule fois quand on a assez de frames
+  if (loaded && !tlBuilt && !tlBuilding && bufFill > 10) buildTimeline();
+  drawTL();
+
+  // ── Pas de rendu granulaire si rien n'est chargé ──
+  if (!loaded || bufFill === 0) {
+    drawIdle(now); drawScope(ls); drawGact(0); updVU(); return;
+  }
+
+  // ── BYPASS ──
+  if (bypass) {
+    const f = getFrame(bufFill-1);
+    outCtx.putImageData(f.img, 0, 0);
+    document.getElementById('mbadge').textContent = 'BYPASS';
+    document.getElementById('mtc').textContent = fmtS(f.sec);
+    document.getElementById('htc').textContent = fmtS(f.sec);
+    drawScope(ls); drawGact(0); updVU(); return;
+  }
+
+  // ── MOTEUR GRANULAIRE ──
+  // Logique :
+  //   needle  = index LOGIQUE dans le ring (0=oldest, bufFill-1=newest)
+  //   gAnchor = index logique du début du grain courant
+  //   gPos    = position dans le grain [0..eGS-1]
+  //   gRep    = répétition en cours
+  //
+  // FREEZE (eAdv=0) : needle ne bouge pas, le grain se répète indéfiniment
+  // sur les mêmes frames du buffer. Le buffer continue de recevoir de nouvelles
+  // frames mais needle n'avance pas → on lit toujours les mêmes positions.
+
+  if (grainDone && playing) {
+    // Avancer needle
+    if (eAdv === 0) {
+      // FREEZE : needle reste fixe → gAnchor reste sur la même zone
+      // On recentre simplement gAnchor sur la needle actuelle
+      // (avec dispersion optionnelle) sans bouger needle.
+    } else {
+      const dir  = reverse ? -1 : 1;
+      // Avance dans l'espace logique [0..bufFill-1]
+      needle = needle + dir * eAdv;
+      // Bornage : on reste dans le buffer valide
+      needle = Math.max(0, Math.min(bufFill-1, needle));
+      // Si on atteint un bord, on reboucle doucement
+      if (needle <= 0 && dir < 0)        needle = bufFill-1;
+      if (needle >= bufFill-1 && dir > 0) needle = 0;
+    }
+
+    // Ancrage avec dispersion
+    const disp   = eDisp > 0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
+    gAnchor      = Math.max(0, Math.min(bufFill-1, needle + disp));
+    gPos         = 0;
+    gRep         = 0;
+    pingDir      = 1;
+    grainDone    = false;
+
+    // Audio du grain
+    if (playing) {
+      const f = getFrame(gAnchor);
+      playGrainAudio(f.sec, eGS/Math.max(1,estFPS), eRate);
+    }
+  }
+
+  // ── Calcul index de frame à afficher ──
+  let readPos; // index logique dans le buffer
+
+  if (grainDir === 'F') {
+    readPos = gAnchor + gPos;
+  } else if (grainDir === 'R') {
+    readPos = gAnchor + (eGS-1) - gPos;
+  } else {
+    // PING-PONG : gPos avance/recule selon pingDir
+    readPos = gAnchor + gPos;
+  }
+  readPos = Math.max(0, Math.min(bufFill-1, readPos));
+
+  const outFrame = getFrame(readPos);
+  outCtx.putImageData(outFrame.img, 0, 0);
+
+  const outTS = outFrame.sec;
+  document.getElementById('mtc').textContent = fmtS(outTS);
+  document.getElementById('htc').textContent = fmtS(outTS);
+
+  // Needle sur TL (position de la needle dans la timeline globale)
+  if (vid.duration > 0) {
+    const nf = getFrame(Math.max(0, Math.min(bufFill-1, needle)));
+    if (nf) {
+      tlnd.style.left    = ((nf.sec/vid.duration)*100).toFixed(1)+'%';
+      tlnd.style.display = 'block';
+    }
+  }
+
+  // ── Avancer gPos ──
+  if (playing) {
+    if (grainDir === 'P') {
+      // Ping-pong : bascule aux extrémités
+      if (gPos >= eGS-1) { pingDir = -1; }
+      if (gPos <= 0)     { pingDir =  1; }
+      gPos += pingDir;
+    } else {
+      gPos++;
+    }
+
+    // Fin de grain ?
+    if (gPos >= eGS) {
+      gRep++;
+      if (gRep >= eRep) {
+        // Grain terminé : prochain tick lancera le suivant
+        grainDone = true;
+      } else {
+        // Répétition : rejoue le même grain
+        gPos = 0; pingDir = 1;
+        const f = getFrame(gAnchor);
+        playGrainAudio(f.sec, eGS/Math.max(1,estFPS), eRate);
+      }
+    }
+  }
+
+  // Badge
+  const dnLabel = {F:'FWD',R:'REV',P:'PNG'}[grainDir];
+  const advLabel = eAdv===0 ? 'FREEZE' : (reverse?'-':'+') + eAdv;
+  document.getElementById('mbadge').textContent = `GRAIN·${dnLabel}·${advLabel}`;
+  document.getElementById('lgr').className = 'led on';
+  document.getElementById('lpk').className = 'led'+(Math.random()<0.04?' on':'');
+
+  // Activité grain (pour le bargraphe)
+  const actV = Math.min(1, 0.15 + (eGS/96)*0.4 + (eRep/16)*0.3 + (eDisp/64)*0.15);
+  drawScope(ls); drawGact(actV); updVU();
+}
+
+// ══════════════════════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════════════════════
+function fmtS(s) {
+  if (!isFinite(s)) return '--:--';
+  const m  = Math.floor(s/60);
+  const ss = Math.floor(s%60);
+  return String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0');
+}
+function lvshow(t,s) {
+  document.getElementById('lveil').classList.remove('h');
+  document.getElementById('lvt').textContent = t;
+  document.getElementById('lvs').textContent = s;
+}
+function lvpct(p) { document.getElementById('lvb').style.width = p+'%'; }
+function lvhide()  { document.getElementById('lveil').classList.add('h'); }
+
+function drawIdle(now) {
+  const W=outCv.width||1280, H=outCv.height||720;
+  outCtx.fillStyle='#050503'; outCtx.fillRect(0,0,W,H);
+  for (let i=0; i<3; i++) {
+    const y = ((now*.012+i*130)%H);
+    outCtx.fillStyle = `rgba(28,26,22,${.06+Math.random()*.03})`;
+    outCtx.fillRect(0, y, W, 1+Math.random()*1.5);
+  }
+  outCtx.textAlign='center'; outCtx.textBaseline='middle';
+  outCtx.fillStyle='rgba(240,237,230,.06)';
+  outCtx.font=`700 ${Math.min(W/20,28)}px "IBM Plex Mono"`;
+  outCtx.fillText('NO SOURCE', W/2, H/2-10);
+  outCtx.font=`300 ${Math.min(W/55,11)}px "IBM Plex Mono"`;
+  outCtx.fillStyle='rgba(200,57,26,.2)';
+  outCtx.fillText('CHARGER UNE VIDÉO POUR COMMENCER', W/2, H/2+14);
+}
+
+// ── INIT ──
+outCv.width=1280; outCv.height=720;
+updHandles(); drawIdle(0);
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
