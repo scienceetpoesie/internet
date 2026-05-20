@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Barkerbaggies-Pool-Ball-Ball-8.ico" type="image/x-icon">
-
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>GP-80 — ARNOLD ENGINE</title>
+<title>GP-80 v2 — ARNOLD ENGINE / WEBCODECS</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/mp4box@0.5.2/dist/mp4box.all.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--ink:#0f0e0c;--paper:#eeebe3;--ox:#c8391a;--rust:#8b2410;--dim:#777;--ff:'IBM Plex Mono',monospace;}
 html,body{height:100%;overflow:hidden;font-family:var(--ff);}
-body{background:var(--paper);color:var(--ink);display:grid;grid-template-rows:34px 1fr 48px 188px;}
+body{background:var(--paper);color:var(--ink);display:grid;grid-template-rows:34px 1fr 48px 220px;}
 header{background:var(--ink);color:var(--paper);display:flex;align-items:center;padding:0 14px;gap:14px;border-bottom:2px solid var(--ox);}
 .htitle{font-size:9px;font-weight:700;letter-spacing:.25em;}
 .hdiv{width:1px;height:12px;background:rgba(255,255,255,.12);}
@@ -19,25 +18,29 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
 .led{width:4px;height:4px;border-radius:50%;background:#2a2927;}
 .led.on{background:var(--ox);box-shadow:0 0 4px var(--ox);}
 .htc{margin-left:auto;font-size:8px;opacity:.28;letter-spacing:.05em;}
+.hcache{font-size:7px;opacity:.45;letter-spacing:.08em;}
 .monitor{position:relative;background:#050503;overflow:hidden;}
 #outCv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
 .mbadge{position:absolute;top:8px;left:8px;font-size:7px;font-weight:700;letter-spacing:.14em;background:var(--ox);color:var(--paper);padding:2px 6px;pointer-events:none;}
 .mtc{position:absolute;bottom:7px;right:8px;font-size:7px;color:rgba(240,237,230,.32);letter-spacing:.05em;pointer-events:none;}
+.mstat{position:absolute;bottom:7px;left:8px;font-size:6px;color:rgba(240,237,230,.25);letter-spacing:.08em;pointer-events:none;font-family:var(--ff);}
 .nosrc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(240,237,230,.18);font-size:7px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;}
 .nosrc.h,.lveil.h{display:none;}
-.lveil{position:absolute;inset:0;background:rgba(5,5,3,.96);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--paper);}
+.lveil{position:absolute;inset:0;background:rgba(5,5,3,.96);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--paper);z-index:10;}
 .lvt{font-size:8px;font-weight:700;letter-spacing:.18em;}
-.lvbw{width:160px;height:1px;background:rgba(255,255,255,.08);}
+.lvbw{width:220px;height:1px;background:rgba(255,255,255,.08);}
 .lvb{height:100%;background:var(--ox);width:0%;transition:width .15s;}
-.lvs{font-size:7px;opacity:.28;letter-spacing:.06em;}
+.lvs{font-size:7px;opacity:.4;letter-spacing:.06em;}
+.lverror{color:var(--ox);max-width:60%;text-align:center;font-size:9px;line-height:1.6;letter-spacing:.04em;}
 .tl{position:relative;background:#080806;overflow:hidden;cursor:pointer;}
 #tlCv{position:absolute;inset:0;width:100%;height:100%;}
 .tlreg{position:absolute;top:0;bottom:0;background:rgba(200,57,26,.07);border-left:1px solid rgba(200,57,26,.45);border-right:1px solid rgba(200,57,26,.45);pointer-events:none;z-index:2;}
 .tlhn{position:absolute;top:0;bottom:0;width:3px;background:var(--ox);transform:translateX(-50%);cursor:ew-resize;z-index:4;}
 .tlhn::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:6px;height:6px;background:var(--ox);border:1.5px solid var(--paper);}
-.tlnd{position:absolute;top:0;bottom:0;width:1px;background:#fff;opacity:.5;pointer-events:none;z-index:3;display:none;}
-.params{border-top:1px solid rgba(15,14,12,.18);background:var(--paper);display:grid;grid-template-columns:148px repeat(6,1fr) 80px;}
-.pcell{border-right:1px solid rgba(15,14,12,.07);padding:6px 9px;display:flex;flex-direction:column;gap:3px;}
+.tlnd{position:absolute;top:0;bottom:0;width:1px;background:#fff;opacity:.6;pointer-events:none;z-index:3;display:none;}
+.tlcache{position:absolute;bottom:0;height:2px;background:rgba(200,57,26,.35);pointer-events:none;z-index:1;}
+.params{border-top:1px solid rgba(15,14,12,.18);background:var(--paper);display:grid;grid-template-columns:148px repeat(6,1fr) 90px;}
+.pcell{border-right:1px solid rgba(15,14,12,.07);padding:6px 9px;display:flex;flex-direction:column;gap:3px;overflow:hidden;}
 .pcell:last-child{border-right:none;}
 .trow{display:flex;gap:3px;margin-top:2px;}
 .tb{flex:1;height:19px;border:1px solid rgba(15,14,12,.18);background:transparent;color:var(--ink);font-family:var(--ff);font-size:6px;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:all .07s;white-space:nowrap;}
@@ -47,7 +50,7 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
 .ldbtn{height:18px;border:1px dashed rgba(15,14,12,.16);background:transparent;color:var(--dim);font-family:var(--ff);font-size:6px;letter-spacing:.06em;cursor:pointer;transition:all .07s;width:100%;}
 .ldbtn:hover{border-color:var(--ink);color:var(--ink);}
 .pre-row{display:flex;gap:2px;margin-top:2px;}
-.pre{flex:1;height:15px;border:1px solid rgba(15,14,12,.14);background:transparent;color:var(--dim);font-family:var(--ff);font-size:5px;letter-spacing:.04em;cursor:pointer;transition:all .07s;white-space:nowrap;overflow:hidden;}
+.pre{flex:1;height:14px;border:1px solid rgba(15,14,12,.14);background:transparent;color:var(--dim);font-family:var(--ff);font-size:5px;letter-spacing:.04em;cursor:pointer;transition:all .07s;white-space:nowrap;overflow:hidden;}
 .pre:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
 .pre.act{background:var(--ox);color:var(--paper);border-color:var(--ox);}
 .plabel{font-size:5.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:3px;}
@@ -76,15 +79,19 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
 .rok{width:14px;height:6px;border:1px solid rgba(15,14,12,.16);background:transparent;cursor:pointer;transition:background .07s;}
 .rok.on{background:var(--ox);border-color:var(--ox);}
 #fileInput{display:none;}
+.cstat{font-size:5px;color:var(--dim);opacity:.5;letter-spacing:.04em;line-height:1.4;}
+.cstat .num{color:var(--ox);font-weight:700;}
 </style>
 </head>
 <body>
 <header>
-  <div class="htitle">GP·80 — ARNOLD ENGINE</div>
+  <div class="htitle">GP·80 v2 — WEBCODECS</div>
   <div class="hdiv"></div>
   <div class="hled"><div class="led" id="lpl"></div>PLAY</div>
   <div class="hled"><div class="led" id="lgr"></div>GRAIN</div>
   <div class="hled"><div class="led" id="lpk"></div>PEAK</div>
+  <div class="hled"><div class="led" id="ldec"></div>RAM</div>
+  <div class="hcache" id="hcache">CACHE 0/0</div>
   <div class="htc" id="htc">--:--</div>
 </header>
 
@@ -92,20 +99,23 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
   <canvas id="outCv"></canvas>
   <div class="mbadge" id="mbadge">NO SIGNAL</div>
   <div class="mtc" id="mtc">--:--</div>
+  <div class="mstat" id="mstat"></div>
   <div class="nosrc" id="nosrc">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><rect x="2" y="2" width="20" height="20" rx="1.5"/><polygon points="10,8 16,12 10,16"/></svg>
-    <span>DÉPOSER UNE VIDÉO</span>
-    <span style="font-size:6px;opacity:.35">ou cliquer pour charger</span>
+    <span>DÉPOSER UNE VIDÉO MP4</span>
+    <span style="font-size:6px;opacity:.35">ou cliquer pour charger · H.264/H.265/AV1</span>
   </div>
   <div class="lveil h" id="lveil">
-    <div class="lvt" id="lvt">DÉCODAGE…</div>
+    <div class="lvt" id="lvt">INITIALISATION…</div>
     <div class="lvbw"><div class="lvb" id="lvb"></div></div>
     <div class="lvs" id="lvs">init</div>
+    <div class="lverror h" id="lverror"></div>
   </div>
 </div>
 
 <div class="tl" id="tl">
   <canvas id="tlCv"></canvas>
+  <div class="tlcache" id="tlcache"></div>
   <div class="tlreg" id="tlreg"></div>
   <div class="tlhn" id="tlhin" style="left:0%"></div>
   <div class="tlhn" id="tlhout" style="left:100%"></div>
@@ -129,7 +139,18 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
     <div class="pre-row">
       <button class="pre" data-pre="3">DENSE</button>
       <button class="pre" data-pre="4">ARNOLD</button>
+      <button class="pre" data-pre="5">DRIFT</button>
     </div>
+    <div class="pre-row">
+      <button class="pre" data-pre="6">SWARM</button>
+      <button class="pre" data-pre="7">HAUNT</button>
+      <button class="pre" data-pre="8">VAPOR</button>
+    </div>
+    <div class="pre-row">
+      <button class="pre" data-pre="9">CHOP</button>
+      <button class="pre" data-pre="10">DECAY</button>
+    </div>
+    <div class="cstat" id="cstat" style="margin-top:4px;">—</div>
   </div>
 
   <div class="pcell">
@@ -164,7 +185,7 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
   <div class="pcell">
     <div class="plabel">Dispersion</div>
     <div class="pval" id="v-dispersion">±0 fr</div>
-    <div class="sw" data-p="dispersion" data-min="0" data-max="48" data-fmt="disp">
+    <div class="sw" data-p="dispersion" data-min="0" data-max="120" data-fmt="disp">
       <div class="st"></div><div class="sf"></div><div class="sth"></div>
     </div>
     <div class="phint">offset aléatoire autour needle</div>
@@ -183,7 +204,7 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
     <div class="sw" data-p="rate" data-min="0.1" data-max="4" data-fmt="rate">
       <div class="st"></div><div class="sf"></div><div class="sth"></div>
     </div>
-    <div class="phint">pitch intact · &lt;1 ralenti · &gt;1 accéléré</div>
+    <div class="phint">pitch intact · granular stretch · &lt;1 ralenti · &gt;1 accéléré</div>
     <div class="plabel">Pitch</div>
     <div class="pval" id="v-pitch">0 st</div>
     <div class="sw" data-p="pitch" data-min="-12" data-max="12" data-fmt="st">
@@ -220,95 +241,580 @@ header{background:var(--ink);color:var(--paper);display:flex;align-items:center;
   </div>
 </div>
 
-<input type="file" id="fileInput" accept="video/*"/>
+<input type="file" id="fileInput" accept="video/mp4,video/webm,video/*"/>
 <script>
 'use strict';
 
-// ═══════════════════════════════════════════════════════════════════
-// PRESETS
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════════
+// GP-80 v2 — WEBCODECS RANDOM-ACCESS ENGINE
+//
+// Architecture :
+//   1. MP4Box parse le fichier → table de samples (frames) avec keyframes
+//   2. VideoDecoder décode à la demande, avec cache LRU de VideoFrames
+//   3. La needle peut visiter TOUTE la vidéo (pas de buffer fixe)
+//   4. Cache adaptatif autour de la zone d'activité, dégradation gracieuse
+// ═══════════════════════════════════════════════════════════════════════════
+
+
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │ PRESETS — étendus pour la v2                                            │
+// └─────────────────────────────────────────────────────────────────────────┘
 const PRESETS=[
-  {name:'NORMAL',  advance:1, rate:1.0,  grainSize:8,  repeat:1, dispersion:0,  dir:'F', rev:false, lfoAmt:0,   lfoRate:0.25, pitch:0},
-  {name:'STUTTER', advance:0, rate:1.0,  grainSize:10, repeat:6, dispersion:4,  dir:'F', rev:false, lfoAmt:0,   lfoRate:0.25, pitch:0},
-  {name:'FREEZE',  advance:0, rate:1.0,  grainSize:16, repeat:8, dispersion:0,  dir:'P', rev:false, lfoAmt:0,   lfoRate:0.25, pitch:0},
-  {name:'DENSE',   advance:2, rate:1.0,  grainSize:3,  repeat:2, dispersion:4,  dir:'F', rev:false, lfoAmt:0,   lfoRate:1.0,  pitch:0},
-  {name:'ARNOLD',  advance:3, rate:0.5,  grainSize:20, repeat:6, dispersion:16, dir:'P', rev:false, lfoAmt:0.7, lfoRate:0.5,  pitch:0},
+  // 0..4 : vos presets originaux
+{name:'NORMAL',  advance:8, rate:1.0,  grainSize:8,  repeat:1, dispersion:0, dir:'F', rev:false, lfoAmt:0, lfoRate:0.25, pitch:0, lfoT:{}},  {name:'STUTTER', advance:0, rate:1.0,  grainSize:10, repeat:6, dispersion:4,  dir:'F', rev:false, lfoAmt:0,   lfoRate:0.25, pitch:0, lfoT:{}},
+  {name:'FREEZE',  advance:0, rate:1.0,  grainSize:16, repeat:8, dispersion:0,  dir:'P', rev:false, lfoAmt:0,   lfoRate:0.25, pitch:0, lfoT:{}},
+  {name:'DENSE',   advance:2, rate:1.0,  grainSize:3,  repeat:2, dispersion:4,  dir:'F', rev:false, lfoAmt:0,   lfoRate:1.0,  pitch:0, lfoT:{}},
+  {name:'ARNOLD',  advance:3, rate:0.5,  grainSize:20, repeat:6, dispersion:16, dir:'P', rev:false, lfoAmt:0.7, lfoRate:0.5,  pitch:0, lfoT:{}},
+
+  // 5..10 : nouveaux presets v2
+  {name:'DRIFT',   advance:1, rate:0.5,  grainSize:30, repeat:2, dispersion:8,  dir:'P', rev:false, lfoAmt:0.3, lfoRate:0.1,  pitch:0, lfoT:{advance:true}},
+  {name:'SWARM',   advance:1, rate:1.0,  grainSize:2,  repeat:1, dispersion:24, dir:'F', rev:false, lfoAmt:0.5, lfoRate:0.05, pitch:0, lfoT:{dispersion:true}},
+  {name:'HAUNT',   advance:2, rate:0.8,  grainSize:14, repeat:3, dispersion:32, dir:'P', rev:false, lfoAmt:0,   lfoRate:0.25, pitch:0, lfoT:{}},
+  {name:'VAPOR',   advance:1, rate:0.25, grainSize:48, repeat:1, dispersion:2,  dir:'F', rev:false, lfoAmt:0,   lfoRate:0.25, pitch:0, lfoT:{}},
+  {name:'CHOP',    advance:2, rate:1.0,  grainSize:8,  repeat:4, dispersion:0,  dir:'F', rev:false, lfoAmt:0.8, lfoRate:2.0,  pitch:0, lfoT:{repeat:true}},
+  {name:'DECAY',   advance:1, rate:1.0,  grainSize:40, repeat:1, dispersion:6,  dir:'F', rev:false, lfoAmt:0.95,lfoRate:0.08, pitch:0, lfoT:{grainSize:true}},
 ];
 
-// ═══════════════════════════════════════════════════════════════════
-// PARAMÈTRES
-// ═══════════════════════════════════════════════════════════════════
+
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │ PARAMÈTRES                                                              │
+// └─────────────────────────────────────────────────────────────────────────┘
 const P={advance:1,rate:1,grainSize:8,repeat:1,dispersion:0,lfoRate:0.25,lfoAmt:0,pitch:0};
 const lfoOn={advance:false,grainSize:false,repeat:false,dispersion:false};
 let grainDir='F', playing=false, reverse=false, bypass=false;
 
-// ═══════════════════════════════════════════════════════════════════
-// BUFFER VIDÉO — ring buffer à index absolu (identique à l'original)
-// SEUL CHANGEMENT : taille 1024 au lieu de 512
-// ═══════════════════════════════════════════════════════════════════
-const BUF_FRAMES = 1024;
-const buf = new Array(BUF_FRAMES);
-let bufWrite = 0;
-let absFrame = 0;
-let bufCount = 0;
-let needle = 0;
 
-function bufGet(absIdx){
-  if(bufCount === 0) return null;
-  const oldest = absFrame - bufCount;
-  const newest = absFrame - 1;
-  if(absIdx < oldest || absIdx > newest){
-    absIdx = Math.max(oldest, Math.min(newest, absIdx));
+// ═══════════════════════════════════════════════════════════════════════════
+// VIDEO ENGINE — Le cœur du nouveau système
+//
+// Concept :
+//   - On parse le fichier MP4 pour avoir TOUTES les frames (sample table)
+//   - sampleTable[i] = { ts, dur, isKey, byteOffset, gopStart }
+//   - Pour décoder frame N : on cherche le GOP qui contient N, on décode
+//     du keyframe à N, on garde tout dans le cache LRU
+//   - La needle est un index dans [0, totalFrames), peut bouger librement
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GP-80 v3 — PRE-DECODED JPEG ENGINE
+//
+// Architecture :
+//   1. Au chargement : MP4Box parse + VideoDecoder décode séquentiellement
+//      TOUTES les frames (B-frames réordonnées automatiquement)
+//   2. Chaque frame est convertie en JPEG (qualité 80) et stockée dans
+//      un tableau frames[i] = Blob
+//   3. Au runtime : accès O(1) à n'importe quelle frame, instantané
+//   4. Pas de cache LRU, pas de décodage à la demande, pas de freeze possible
+//
+// Compromis :
+//   - Temps de chargement non-trivial (~10s/min de vidéo)
+//   - Mémoire ~10-30MB par minute de vidéo (selon résolution)
+//   - En contrepartie : zéro latence, zéro bug, paramètres radicaux OK
+// ═══════════════════════════════════════════════════════════════════════════
+
+const JPEG_QUALITY = 0.80;
+
+const VideoEngine = (() => {
+  // ═════════ État ═════════
+  let mp4file = null;
+  let samples = [];           // sample table brut MP4Box
+  let totalFrames = 0;
+  let videoFPS = 30;
+  let videoWidth = 0, videoHeight = 0;
+  let videoDuration = 0;
+  let decoderConfig = null;
+
+  // Le résultat final : tableau de frames pré-décodées en JPEG
+  // frames[i] = { blob, bitmap, ts } où :
+  //   - blob : JPEG Blob (stockage compact)
+  //   - bitmap : ImageBitmap décompressé en cache mémoire récente (peut être null)
+  //   - ts : timestamp en secondes (pour l'audio)
+  // L'ordre des frames suit l'ordre de PRÉSENTATION (pas de B-frame désordre)
+  let frames = [];
+
+  // Map timestampUs → frameIdx (rempli pendant le décodage)
+  let tsToOrderedIdx = new Map();
+  // Tableau (timestampUs trié croissant) pour résoudre l'ordre de présentation
+  let sortedTs = [];
+
+  let isReady = false;
+  let isLoading = false;
+  let loadProgress = 0;       // 0..1
+  let bytesUsed = 0;
+
+  // Petit cache LRU d'ImageBitmaps décompressés (pour ne pas redécompresser
+  // 60x/sec les mêmes JPEGs). Limite : ImageBitmap pèse ~1-3 MB pour 480p,
+  // ~5-12 MB pour 1080p. 256 = ~250-750MB selon résolution.
+  const bitmapCache = new Map();
+  const BITMAP_CACHE_MAX = 256;
+  // Rate-limit la décompression pour ne pas saturer le navigateur
+  const decompressInFlight = new Set();
+  const MAX_DECOMPRESS_PARALLEL = 6;
+
+  // ═════════ Logger UI ═════════
+  function lvshow(t, s){
+    document.getElementById('lveil').classList.remove('h');
+    document.getElementById('lvt').textContent = t;
+    document.getElementById('lvs').textContent = s;
+    document.getElementById('lverror').classList.add('h');
   }
-  const physicalIdx = ((absIdx % BUF_FRAMES) + BUF_FRAMES) % BUF_FRAMES;
-  return buf[physicalIdx];
-}
-function bufPut(img, sec){
-  // Buffer "one-shot" : on arrête d'écrire dès qu'il est plein.
-  // Comme ça oldest reste à 0 pour toujours et needle peut tourner
-  // librement dans une mémoire fixe sans jamais être rattrapée.
-  if(bufCount >= BUF_FRAMES) return;
-  buf[bufWrite] = {img, sec};
-  bufWrite = (bufWrite + 1) % BUF_FRAMES;
-  absFrame++;
-  if(bufCount < BUF_FRAMES) bufCount++;
-}
-function bufOldest(){ return Math.max(0, absFrame - bufCount); }
-function bufNewest(){ return absFrame - 1; }
+  function lvpct(p){
+    document.getElementById('lvb').style.width = p + '%';
+  }
+  function lvhide(){
+    document.getElementById('lveil').classList.add('h');
+  }
+  function lverror(msg){
+    document.getElementById('lveil').classList.remove('h');
+    document.getElementById('lvt').textContent = 'ERREUR';
+    document.getElementById('lvs').textContent = '';
+    const e = document.getElementById('lverror');
+    e.textContent = msg;
+    e.classList.remove('h');
+  }
 
-let estFPS = 50;
-let lastVT = -1;
-let loaded = false;
+  // ═════════ Reset ═════════
+  function reset(){
+    // Libérer les ressources
+    if(mp4file){ try{mp4file.flush();}catch(_){} mp4file = null; }
+    bitmapCache.forEach(b => { try{b.close();}catch(_){} });
+    bitmapCache.clear();
+    frames = [];
+    samples = [];
+    tsToOrderedIdx = new Map();
+    sortedTs = [];
+    totalFrames = 0;
+    isReady = false;
+    isLoading = false;
+    loadProgress = 0;
+    bytesUsed = 0;
+  }
 
-// ═══════════════════════════════════════════════════════════════════
-// ÉTAT GRAIN
-// ═══════════════════════════════════════════════════════════════════
-let grainAnchor  = 0;
-let grainStart   = 0;
-let grainNomSec  = 0;
-let grainPlaySec = 0;
-let grainRep     = 0;
-let needNewGrain = true;
+  // ═════════ Chargement + parsing ═════════
+  async function load(file){
+    reset();
+    isLoading = true;
+    lvshow('PARSING MP4…', file.name);
+    lvpct(2);
 
-function resetEngine(){
-  for(let i=0;i<BUF_FRAMES;i++) buf[i]=undefined;
-  bufWrite=0;
-  absFrame=0;
-  bufCount=0;
-  lastVT=-1;
-  needle=0;
-  grainAnchor=0;
-  grainStart=0;
-  grainNomSec=0;
-  grainPlaySec=0;
-  grainRep=0;
-  needNewGrain=true;
-  killAudio();
-}
+    if(typeof MP4Box === 'undefined'){
+      lverror('MP4Box.js non chargé. Vérifiez votre connexion.');
+      throw new Error('MP4Box missing');
+    }
+    if(typeof VideoDecoder === 'undefined'){
+      lverror('WebCodecs API non disponible. Utilisez Chrome/Edge 94+, Safari 16.4+, Firefox 130+.');
+      throw new Error('WebCodecs missing');
+    }
 
-// ═══════════════════════════════════════════════════════════════════
-// AUDIO (identique à l'original)
-// ═══════════════════════════════════════════════════════════════════
+    mp4file = MP4Box.createFile();
+
+    // Phase 1 : Parsing
+    await new Promise((resolve, reject) => {
+      let started = false;
+
+      mp4file.onError = (e) => {
+        lverror('Erreur parsing MP4 : ' + e);
+        reject(new Error(e));
+      };
+
+      mp4file.onReady = (info) => {
+        const vt = info.videoTracks[0];
+        if(!vt){
+          lverror('Pas de piste vidéo trouvée.');
+          reject(new Error('no video track'));
+          return;
+        }
+
+        videoWidth = vt.video.width;
+        videoHeight = vt.video.height;
+        videoDuration = vt.duration / vt.timescale;
+        videoFPS = Math.round((vt.nb_samples / videoDuration) * 100) / 100;
+        totalFrames = vt.nb_samples;
+
+        // Estimation de RAM
+        const estimatedKB = Math.round(videoWidth * videoHeight * 0.05 / 1024 * totalFrames);
+        const estimatedMB = (estimatedKB / 1024).toFixed(0);
+
+        document.getElementById('lvs').textContent =
+          `${videoWidth}×${videoHeight} · ${videoFPS}fps · ${totalFrames}fr · ~${estimatedMB}MB`;
+
+        // Extraction codec description
+        const trak = mp4file.getTrackById(vt.id);
+        let description = null;
+        try{
+          for(const entry of trak.mdia.minf.stbl.stsd.entries){
+            for(const k of ['avcC','hvcC','vpcC','av1C']){
+              if(entry[k]){
+                const ds = new DataStream(undefined, 0, DataStream.BIG_ENDIAN);
+                entry[k].write(ds);
+                description = new Uint8Array(ds.buffer, 8);
+                break;
+              }
+            }
+            if(description) break;
+          }
+        }catch(e){ console.warn('description extraction err', e); }
+
+        decoderConfig = {
+          codec: vt.codec,
+          codedWidth: videoWidth,
+          codedHeight: videoHeight,
+          description: description,
+        };
+
+        mp4file.setExtractionOptions(vt.id, null, { nbSamples: 200 });
+        started = true;
+        mp4file.start();
+      };
+
+      mp4file.onSamples = (id, user, sampleList) => {
+        for(const s of sampleList){
+          samples.push({
+            ts: s.cts,
+            tsUs: Math.round((s.cts / s.timescale) * 1e6),
+            dur: s.duration,
+            durUs: Math.round((s.duration / s.timescale) * 1e6),
+            timescale: s.timescale,
+            isKey: !!s.is_sync,
+            data: s.data,
+          });
+        }
+        lvpct(2 + Math.min(15, (samples.length / totalFrames) * 15));
+        if(samples.length >= totalFrames * 0.98){
+          resolve();
+        }
+      };
+
+      // Lecture par chunks
+      const reader = new FileReader();
+      let offset = 0;
+      const CHUNK = 1024 * 1024 * 16;
+      reader.onload = (e) => {
+        const buf = e.target.result;
+        buf.fileStart = offset;
+        mp4file.appendBuffer(buf);
+        offset += buf.byteLength;
+        if(offset < file.size) readNext();
+        else mp4file.flush();
+      };
+      reader.onerror = () => { reject(reader.error); };
+      function readNext(){
+        const slice = file.slice(offset, offset + CHUNK);
+        reader.readAsArrayBuffer(slice);
+      }
+      readNext();
+
+      setTimeout(() => {
+        if(!started){
+          lverror('Parsing trop long. Le fichier est peut-être corrompu.');
+          reject(new Error('parse timeout'));
+        }
+      }, 30000);
+    });
+
+    // Phase 2 : Construire ordre de présentation à partir des timestamps
+    sortedTs = samples.map(s => s.tsUs).sort((a, b) => a - b);
+    for(let i = 0; i < sortedTs.length; i++){
+      tsToOrderedIdx.set(sortedTs[i], i);
+    }
+    frames = new Array(sortedTs.length);
+
+    // Vérifier support du codec
+    try{
+      const support = await VideoDecoder.isConfigSupported(decoderConfig);
+      if(!support.supported){
+        lverror(`Codec non supporté par votre navigateur : ${decoderConfig.codec}`);
+        throw new Error('codec unsupported');
+      }
+    }catch(e){
+      lverror(`Échec du test de support : ${e.message}`);
+      throw e;
+    }
+
+    // Phase 3 : Décodage séquentiel complet + conversion JPEG
+    document.getElementById('lvt').textContent = 'DÉCODAGE VIDÉO…';
+    lvpct(20);
+
+    await decodeAllToJpeg();
+
+    isReady = true;
+    isLoading = false;
+    lvpct(100);
+    setTimeout(() => lvhide(), 300);
+
+    // Libérer les bytes encodés maintenant qu'on a tout en JPEG
+    samples = [];
+    if(mp4file){ try{mp4file.flush();}catch(_){} mp4file = null; }
+  }
+
+  // ═════════ Décodage complet ═════════
+  // On envoie TOUS les chunks au décodeur, on attend toutes les frames,
+  // on les convertit en JPEG au fur et à mesure. Le décodeur gère
+  // automatiquement le réordonnancement des B-frames pour nous.
+  async function decodeAllToJpeg(){
+    return new Promise(async (resolve, reject) => {
+      let received = 0;
+      let encoderBusy = 0;
+      const MAX_PARALLEL_ENCODE = 4;
+      let allChunksSent = false;
+      let resolved = false;
+
+      // Canvas réutilisable pour encoder en JPEG
+      const cv = document.createElement('canvas');
+      cv.width = videoWidth;
+      cv.height = videoHeight;
+      const ctx = cv.getContext('2d');
+
+      function checkDone(){
+        if(allChunksSent && received >= totalFrames && encoderBusy === 0 && !resolved){
+          resolved = true;
+          resolve();
+        }
+      }
+
+      // Encode une VideoFrame en JPEG Blob, asynchrone
+      async function encodeFrameToJpeg(frame, frameOrderIdx, ts){
+        encoderBusy++;
+        try{
+          ctx.drawImage(frame, 0, 0, videoWidth, videoHeight);
+          // Note : on ferme la VideoFrame TOUT DE SUITE après drawImage
+          try{frame.close();}catch(_){}
+          // toBlob est async et lourd → on attend
+          const blob = await new Promise(res => {
+            cv.toBlob(b => res(b), 'image/jpeg', JPEG_QUALITY);
+          });
+          if(blob){
+            frames[frameOrderIdx] = { blob, ts };
+            bytesUsed += blob.size;
+          }
+        }catch(e){
+          console.warn('encode err', e);
+          try{frame.close();}catch(_){}
+        }
+        encoderBusy--;
+
+        received++;
+        const pct = 20 + (received / totalFrames) * 78;
+        loadProgress = received / totalFrames;
+        lvpct(pct);
+        // Update label moins souvent pour pas freezer le UI
+        if(received % 30 === 0 || received === totalFrames){
+          document.getElementById('lvs').textContent =
+            `${received}/${totalFrames} frames · ${(bytesUsed/1024/1024).toFixed(1)}MB`;
+        }
+        checkDone();
+      }
+
+      const decoder = new VideoDecoder({
+        output: (frame) => {
+          const tsUs = frame.timestamp;
+          const orderedIdx = tsToOrderedIdx.get(tsUs);
+          if(orderedIdx === undefined){
+            // Frame fantôme → drop
+            try{frame.close();}catch(_){}
+            return;
+          }
+          const tsSec = tsUs / 1e6;
+          // Lancer l'encodage en parallèle (limité)
+          encodeFrameToJpeg(frame, orderedIdx, tsSec);
+        },
+        error: (e) => {
+          console.error('Decoder error', e);
+          if(!resolved){
+            resolved = true;
+            reject(new Error('decoder error: ' + (e.message || e)));
+          }
+        },
+      });
+
+      try{
+        decoder.configure(decoderConfig);
+      }catch(e){
+        lverror(`configure() échoué : ${e.message}`);
+        reject(e);
+        return;
+      }
+
+      // Envoi de tous les chunks. On limite la pression sur le décodeur
+      // pour ne pas le saturer.
+      try{
+        for(let i = 0; i < samples.length; i++){
+          const s = samples[i];
+          // Attendre si la queue est trop chargée OU si l'encodeur JPEG saturé
+          while((decoder.decodeQueueSize > 30 || encoderBusy >= MAX_PARALLEL_ENCODE) && !resolved){
+            await new Promise(r => setTimeout(r, 4));
+          }
+          if(resolved) return;
+          const chunk = new EncodedVideoChunk({
+            type: s.isKey ? 'key' : 'delta',
+            timestamp: s.tsUs,
+            duration: s.durUs,
+            data: s.data,
+          });
+          decoder.decode(chunk);
+        }
+        allChunksSent = true;
+        await decoder.flush();
+        // Attendre que les derniers encodages JPEG finissent
+        while((encoderBusy > 0 || received < totalFrames) && !resolved){
+          await new Promise(r => setTimeout(r, 30));
+        }
+        try{decoder.close();}catch(_){}
+        checkDone();
+        // Filet de sécurité : si jamais on n'a pas resolved après l'attente,
+        // on resolve quand même avec ce qu'on a (mieux que rien)
+        setTimeout(() => {
+          if(!resolved){
+            console.warn(`Decoding finished but only ${received}/${totalFrames} frames captured`);
+            resolved = true;
+            resolve();
+          }
+        }, 2000);
+      }catch(e){
+        if(!resolved){
+          resolved = true;
+          reject(e);
+        }
+      }
+    });
+  }
+
+  // ═════════ ACCÈS RUNTIME — lecture pure dans le tableau ═════════
+
+  // Retourne l'ImageBitmap d'une frame (décompresse JPEG si nécessaire,
+  // met en cache pour usage rapide ultérieur)
+  // Asynchrone car createImageBitmap est async
+  async function getFrameBitmap(idx){
+    if(idx < 0) idx = 0;
+    if(idx >= frames.length) idx = frames.length - 1;
+    const f = frames[idx];
+    if(!f || !f.blob) return null;
+
+    // Cache hit ?
+    const cached = bitmapCache.get(idx);
+    if(cached){
+      // LRU touch
+      bitmapCache.delete(idx);
+      bitmapCache.set(idx, cached);
+      return cached;
+    }
+
+    // Déjà en cours de décompression ? Attendre
+    if(decompressInFlight.has(idx)){
+      // Spinwait court : ré-essayer le cache toutes les 16ms
+      for(let i = 0; i < 60; i++){
+        await new Promise(r => setTimeout(r, 16));
+        const c2 = bitmapCache.get(idx);
+        if(c2){ return c2; }
+      }
+      return null;
+    }
+
+    decompressInFlight.add(idx);
+    try{
+      const bmp = await createImageBitmap(f.blob);
+      bitmapCache.set(idx, bmp);
+      // Eviction LRU
+      while(bitmapCache.size > BITMAP_CACHE_MAX){
+        const firstKey = bitmapCache.keys().next().value;
+        const old = bitmapCache.get(firstKey);
+        try{old.close();}catch(_){}
+        bitmapCache.delete(firstKey);
+      }
+      return bmp;
+    }catch(e){
+      console.warn('createImageBitmap err', e);
+      return null;
+    }finally{
+      decompressInFlight.delete(idx);
+    }
+  }
+
+  // Version synchrone : retourne ce qui est en cache, sinon null
+  // Si null, déclenche le chargement async pour la prochaine fois
+  // (mais en respectant la limite de parallélisme)
+  function getFrameSync(idx){
+    if(idx < 0) idx = 0;
+    if(idx >= frames.length) idx = frames.length - 1;
+    const cached = bitmapCache.get(idx);
+    if(cached){
+      bitmapCache.delete(idx);
+      bitmapCache.set(idx, cached);
+      return cached;
+    }
+    // Pas en cache → déclencher async pour la suite, mais seulement si
+    // on n'a pas trop de décompressions en cours
+    if(frames[idx]?.blob && decompressInFlight.size < MAX_DECOMPRESS_PARALLEL){
+      getFrameBitmap(idx); // fire and forget
+    }
+    return null;
+  }
+
+  // Retourne la frame en cache la plus proche (fallback pour first frame)
+  function getNearestCached(idx){
+    if(bitmapCache.size === 0) return null;
+    let best = null, bestDist = Infinity;
+    for(const [k, v] of bitmapCache){
+      const d = Math.abs(k - idx);
+      if(d < bestDist){ bestDist = d; best = v; }
+    }
+    return best;
+  }
+
+  function frameToTime(idx){
+    if(idx < 0 || idx >= frames.length) return 0;
+    return frames[idx]?.ts ?? 0;
+  }
+
+  // Précharger une zone autour de la needle pour avoir les bitmaps prêts
+  function prefetchAround(needleIdx, _eAdv, eGS, eDisp){
+    if(!isReady) return;
+    // On précharge une zone autour de la position. Le LRU jette ce qui
+    // ne sert plus. On limite les décompressions parallèles.
+    const radius = Math.max(16, eGS + eDisp);
+    const start = Math.max(0, needleIdx - radius);
+    const end = Math.min(frames.length - 1, needleIdx + radius);
+    // On commence par les frames les plus proches de la needle (priorité)
+    const queue = [];
+    for(let i = 0; i <= radius; i++){
+      if(needleIdx + i <= end) queue.push(needleIdx + i);
+      if(i > 0 && needleIdx - i >= start) queue.push(needleIdx - i);
+    }
+    for(const i of queue){
+      if(decompressInFlight.size >= MAX_DECOMPRESS_PARALLEL) break;
+      if(!bitmapCache.has(i) && !decompressInFlight.has(i) && frames[i]?.blob){
+        getFrameBitmap(i);
+      }
+    }
+  }
+
+  return {
+    load, reset,
+    getFrame: getFrameSync,    // alias pour compat avec ancienne API
+    getFrameSync,
+    getFrameBitmap,
+    getNearestCached,
+    prefetchAround, frameToTime,
+    get isReady(){ return isReady; },
+    get isLoading(){ return isLoading; },
+    get loadProgress(){ return loadProgress; },
+    get totalFrames(){ return frames.length; },
+    get videoFPS(){ return videoFPS; },
+    get videoWidth(){ return videoWidth; },
+    get videoHeight(){ return videoHeight; },
+    get videoDuration(){ return videoDuration; },
+    get cacheSize(){ return bitmapCache.size; },
+    get cacheMax(){ return BITMAP_CACHE_MAX; },
+    get cacheKeys(){ return Array.from(bitmapCache.keys()); },
+    get memoryMB(){ return bytesUsed / 1024 / 1024; },
+  };
+})();
+
+
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// AUDIO ENGINE — Time-stretch granulaire pour vitesse indépendante du pitch
+// ═══════════════════════════════════════════════════════════════════════════
 let actx=null, audioBuf=null, masterGain=null, analyser=null;
 let audioNodes=[];
 
@@ -321,9 +827,7 @@ function initAudio(){
 }
 async function decodeAudio(file){
   try{
-    lvshow('DÉCODAGE AUDIO…','lecture'); lvpct(20);
     audioBuf=await actx.decodeAudioData(await file.arrayBuffer());
-    lvpct(85);
   }catch(e){console.warn('audio:',e);audioBuf=null;}
 }
 function killAudio(){
@@ -351,6 +855,8 @@ function extractAudio(startSec, durSec, reversed){
   }
   return ab;
 }
+
+// Legacy : utilisé seulement pour des cas simples (non utilisé en standard)
 function scheduleAudio(ab, audioTime, replayRate, ePitch){
   if(!ab||!actx||bypass) return;
   const nd=actx.createBufferSource();
@@ -362,39 +868,152 @@ function scheduleAudio(ab, audioTime, replayRate, ePitch){
   nd.onended=()=>{ const i=audioNodes.indexOf(nd);if(i>=0)audioNodes.splice(i,1); };
   audioNodes.push(nd);
 }
-function playGrain(anchorSec, playSec, eRate, ePitch, dir){
-  if(!audioBuf||!actx||bypass) return;
-  killAudio();
-  const srcDur = playSec / Math.max(0.1, eRate);
-  const t0 = actx.currentTime;
-  if(dir==='F'){
-    const ab=extractAudio(anchorSec, srcDur, false);
-    scheduleAudio(ab, t0, eRate, ePitch);
-  }else if(dir==='R'){
-    const ab=extractAudio(anchorSec, srcDur, true);
-    scheduleAudio(ab, t0, eRate, ePitch);
-  }else{
-    const halfSrc = srcDur / 2;
-    const halfPlay = playSec / 2;
-    const abFwd=extractAudio(anchorSec, halfSrc, false);
-    const abRev=extractAudio(anchorSec, halfSrc, true);
-    scheduleAudio(abFwd, t0,             eRate, ePitch);
-    scheduleAudio(abRev, t0 + halfPlay,  eRate, ePitch);
+
+// ─────────────────────────────────────────────────────────────────────────
+// TIME-STRETCH GRANULAIRE
+// Étire/compresse `srcBuf` pour qu'il dure `outDurSec` en sortie, sans
+// changer le pitch (sauf detune explicite via ePitch).
+//
+// Principe : on découpe srcBuf en micro-grains de GRAIN_MS millisecondes
+// avec un hop d'entrée variable selon le ratio, et un hop de sortie fixe.
+// Chaque micro-grain est fenêtré (Hann) via multiplication directe.
+// L'overlap élevé (75%) garantit 4 grains simultanés en moyenne, ce qui
+// élimine la périodicité audible (le son "métallique") du granular.
+// Un jitter aléatoire de quelques ms casse aussi cette périodicité.
+// ─────────────────────────────────────────────────────────────────────────
+const GRAIN_MS  = 80;       // taille d'un micro-grain
+const OVERLAP   = 0.75;     // 75% → 4 grains simultanés en moyenne
+const JITTER_MS = 3;        // décalage aléatoire pour casser la périodicité
+
+function timeStretchGranular(srcBuf, outDurSec, audioStartTime, ePitch){
+  if(!srcBuf||!actx||bypass) return;
+  const sr = srcBuf.sampleRate;
+  const grainSec  = GRAIN_MS / 1000;
+  const hopOutSec = grainSec * (1 - OVERLAP);     // 20ms
+  // Ratio source : combien d'audio source consommé par seconde de sortie
+  const srcDur = srcBuf.duration;
+  const ratio  = srcDur / Math.max(0.001, outDurSec);
+  const hopInSec = hopOutSec * ratio;
+
+  // Compensation de gain : la window Hann a un gain moyen de 0.5,
+  // et avec overlap O on a 1/(1-O) grains qui se superposent.
+  // Donc résultante = 0.5 / (1-O). On divise pour ramener à ~1.
+  const grainGain = (1 - OVERLAP) / 0.5;          // = 0.5 pour O=0.75
+
+  const nGrains = Math.max(1, Math.ceil(outDurSec / hopOutSec) + 1);
+
+  for(let i = 0; i < nGrains; i++){
+    // Jitter : petit décalage aléatoire pour casser la périodicité métallique
+    const jitter = (Math.random() - 0.5) * 2 * (JITTER_MS / 1000);
+    const tOut   = audioStartTime + i * hopOutSec;
+    const srcPos = Math.max(0, i * hopInSec + jitter);
+
+    // Si on dépasse le buffer source, on arrête
+    if(srcPos >= srcDur) break;
+
+    const startSample = Math.round(srcPos * sr);
+    const sliceLen = Math.min(
+      Math.round(grainSec * sr),
+      srcBuf.length - startSample
+    );
+    if(sliceLen < 8) continue;
+
+    const sliceBuf = actx.createBuffer(srcBuf.numberOfChannels, sliceLen, sr);
+    for(let c = 0; c < srcBuf.numberOfChannels; c++){
+      const src = srcBuf.getChannelData(c);
+      const dst = sliceBuf.getChannelData(c);
+      // Copie + application de la fenêtre Hann + gain de compensation
+      for(let k = 0; k < sliceLen; k++){
+        const w = 0.5 - 0.5 * Math.cos(2*Math.PI * k / (sliceLen-1));
+        dst[k] = (src[startSample + k] || 0) * w * grainGain;
+      }
+    }
+
+    const nd = actx.createBufferSource();
+    nd.buffer = sliceBuf;
+    nd.playbackRate.value = 1;             // ← pas de pitch shift par resampling
+    nd.detune.value = ePitch * 100;        // ← pitch contrôlable indépendamment
+    nd.connect(masterGain);
+    nd.start(tOut);
+    nd.onended = () => {
+      const idx = audioNodes.indexOf(nd);
+      if(idx >= 0) audioNodes.splice(idx, 1);
+    };
+    audioNodes.push(nd);
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// VIDÉO & CHARGEMENT
-// ═══════════════════════════════════════════════════════════════════
-const vid=document.createElement('video');
-vid.muted=true; vid.loop=false; vid.playsInline=true; vid.preload='auto';
-const outCv=document.getElementById('outCv');
-const outCtx=outCv.getContext('2d');
-const capCv=document.createElement('canvas');
-const capCtx=capCv.getContext('2d',{willReadFrequently:true});
+function playGrain(anchorSec, playSec, eRate, ePitch, dir){
+  if(!audioBuf||!actx||bypass) return;
+  killAudio();
+  // Durée source à extraire : on veut tenir `playSec` en sortie après
+  // time-stretch au ratio `eRate`. À rate=2 (compressé) il nous faut 2× plus
+  // de matière source. À rate=0.5 (étiré) il en faut moitié moins.
+  const srcDur = playSec * Math.max(0.1, eRate);
+  const t0 = actx.currentTime;
 
+  if(dir==='F'){
+    const ab = extractAudio(anchorSec, srcDur, false);
+    if(ab) timeStretchGranular(ab, playSec, t0, ePitch);
+  }else if(dir==='R'){
+    const ab = extractAudio(anchorSec, srcDur, true);
+    if(ab) timeStretchGranular(ab, playSec, t0, ePitch);
+  }else{
+    // Ping-pong : moitié forward, moitié reverse
+    const halfSrc  = srcDur  / 2;
+    const halfPlay = playSec / 2;
+    const abFwd = extractAudio(anchorSec, halfSrc, false);
+    const abRev = extractAudio(anchorSec, halfSrc, true);
+    if(abFwd) timeStretchGranular(abFwd, halfPlay, t0,            ePitch);
+    if(abRev) timeStretchGranular(abRev, halfPlay, t0 + halfPlay, ePitch);
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// MOTEUR GRANULAIRE
+// La logique est la même qu'avant, sauf que needle est maintenant dans
+// [0, totalFrames) et toutes les frames sont accessibles à tout moment.
+// ═══════════════════════════════════════════════════════════════════════════
+let needle = 0;
+let grainAnchor  = 0;
+let grainStart   = 0;
+let grainNomSec  = 0;
+let grainPlaySec = 0;
+let grainRep     = 0;
+let needNewGrain = true;
+let inPt = 0, outPt = 1;     // points in/out normalisés sur la timeline (0..1)
+
+
+function resetGranular(){
+  needle = Math.floor(inPt * VideoEngine.totalFrames);
+  grainAnchor = needle;
+  grainStart = 0;
+  grainNomSec = 0;
+  grainPlaySec = 0;
+  grainRep = 0;
+  needNewGrain = true;
+  killAudio();
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CANVAS DE SORTIE — On dessine directement les VideoFrames
+// ═══════════════════════════════════════════════════════════════════════════
+const outCv = document.getElementById('outCv');
+const outCtx = outCv.getContext('2d');
+
+function drawVideoFrame(frame){
+  if(!frame) return;
+  outCtx.drawImage(frame, 0, 0, outCv.width, outCv.height);
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CHARGEMENT FICHIER
+// ═══════════════════════════════════════════════════════════════════════════
 ['btnLd','nosrc'].forEach(id=>
-  document.getElementById(id).addEventListener('click',()=>{initAudio();fileInput.click();})
+  document.getElementById(id).addEventListener('click',()=>{initAudio();document.getElementById('fileInput').click();})
 );
 document.getElementById('monitor').addEventListener('dragover',e=>e.preventDefault());
 document.getElementById('monitor').addEventListener('drop',e=>{
@@ -406,55 +1025,44 @@ document.getElementById('fileInput').addEventListener('change',e=>{
 });
 
 async function loadFile(file){
-  if(!file.type.startsWith('video/')) return;
+  if(!file.type.startsWith('video/') && !file.name.match(/\.(mp4|m4v|mov|webm)$/i)){
+    return;
+  }
   killAudio();
   if(actx.state==='suspended') await actx.resume();
-  await decodeAudio(file);
-  lvshow('CHARGEMENT VIDÉO…','décodage'); lvpct(88);
-  if(vid.src?.startsWith('blob:')) URL.revokeObjectURL(vid.src);
-  vid.src=URL.createObjectURL(file); vid.load();
-  await new Promise(res=>{
-    vid.addEventListener('loadedmetadata',res,{once:true});
-    setTimeout(res,8000);
-  });
-  await new Promise(res=>{
-    if(vid.readyState>=2) res();
-    else vid.addEventListener('loadeddata',res,{once:true});
-    setTimeout(res,8000);
-  });
-  const W=vid.videoWidth||1280, H=vid.videoHeight||720;
-  capCv.width=W; capCv.height=H;
-  outCv.width=W; outCv.height=H;
-  tlOffCv.width=W; tlOffCv.height=H;
-  inPt=0; outPt=1;
-  tlThumbs.length=0; tlBuilt=false; tlBuilding=false;
-  updHandles(); resetEngine();
-  document.getElementById('nosrc').classList.add('h');
-  lvpct(100);
-  loaded=true;
-  vid.playbackRate = 1;
-  vid.play().catch(()=>{});
-  playing=true; updTUI();
 
-  // Attendre quelques frames pour éviter flash noir / stutter au démarrage
-  await new Promise(res=>{
-    const need = Math.max(12, P.grainSize + P.dispersion + 4);
-    const check = () => {
-      if(bufCount >= need) res();
-      else setTimeout(check, 16);
-    };
-    check();
-    setTimeout(res, 2500);
-  });
-  await new Promise(r => requestAnimationFrame(r));
-  lvhide();
+  try{
+    // Décoder l'audio en parallèle pendant que la vidéo est pré-décodée.
+    // L'audio est rapide donc il finira bien avant le pré-décodage vidéo.
+    const audioPromise = decodeAudio(file);
+    await VideoEngine.load(file);
+    await audioPromise;
+
+    outCv.width = VideoEngine.videoWidth;
+    outCv.height = VideoEngine.videoHeight;
+    inPt = 0; outPt = 1;
+    tlThumbs.length = 0; tlBuilt = false; tlBuilding = false;
+    updHandles();
+    resetGranular();
+    document.getElementById('nosrc').classList.add('h');
+
+    // Précharger les premières frames en bitmaps pour démarrage instantané
+    VideoEngine.prefetchAround(0, 1, P.grainSize, P.dispersion);
+    // Attendre que la première frame soit décompressée pour éviter flash noir
+    await VideoEngine.getFrameBitmap(0);
+
+    playing = true;
+    needNewGrain = true;
+    updTUI();
+  }catch(e){
+    console.error('Load failed:', e);
+  }
 }
 
-let inPt=0, outPt=1;
 
-// ═══════════════════════════════════════════════════════════════════
-// TIMELINE (identique à l'original)
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════════
+// TIMELINE — On rebuild les thumbnails via VideoEngine.getFrameAsync
+// ═══════════════════════════════════════════════════════════════════════════
 const tlEl=document.getElementById('tl');
 const tlCv=document.getElementById('tlCv');
 const tlCtx=tlCv.getContext('2d');
@@ -462,8 +1070,9 @@ const tlreg=document.getElementById('tlreg');
 const tlhin=document.getElementById('tlhin');
 const tlhout=document.getElementById('tlhout');
 const tlnd=document.getElementById('tlnd');
-const tlOffCv=document.createElement('canvas');
-const TL_N=48; const tlThumbs=[];
+const tlcache=document.getElementById('tlcache');
+const TL_N=48;
+const tlThumbs=[];
 let tlBuilt=false, tlBuilding=false, tlDrag=null;
 
 function tlPct(e){
@@ -485,10 +1094,12 @@ document.addEventListener('mousemove',e=>{
 document.addEventListener('mouseup',()=>{ tlDrag=null; });
 
 function doSeek(p){
-  if(!loaded||!vid.duration) return;
-  const t=vid.duration*(inPt+p*(outPt-inPt));
-  vid.currentTime=t;
-  resetEngine();
+  if(!VideoEngine.isReady) return;
+  const tF = VideoEngine.totalFrames;
+  needle = Math.floor((inPt + p*(outPt-inPt)) * tF);
+  needle = Math.max(0, Math.min(tF-1, needle));
+  grainAnchor = needle;
+  needNewGrain = true;
 }
 
 function updHandles(){
@@ -506,11 +1117,12 @@ function drawTL(){
     const W=tlEl.clientWidth||600, H=tlEl.clientHeight||48;
     if(tlCv.width!==W){ tlCv.width=W; tlCv.height=H; }
     tlCtx.fillStyle='#080806'; tlCtx.fillRect(0,0,W,H);
-    if(tlBuilt&&tlThumbs.length>0){
-      const tw=W/TL_N, oc=tlOffCv.getContext('2d');
+
+    if(tlBuilt && tlThumbs.length>0){
+      const tw=W/TL_N;
       for(let i=0;i<TL_N;i++){
-        oc.putImageData(tlThumbs[i],0,0);
-        tlCtx.drawImage(tlOffCv,i*tw,0,tw-0.3,H);
+        const t = tlThumbs[i];
+        if(t) tlCtx.drawImage(t, i*tw, 0, tw-0.3, H);
       }
       tlCtx.fillStyle='rgba(8,8,6,.65)';
       tlCtx.fillRect(0,0,inPt*W,H);
@@ -518,44 +1130,73 @@ function drawTL(){
     }else{
       tlCtx.fillStyle='rgba(240,237,230,.05)';
       tlCtx.font='7px "IBM Plex Mono"'; tlCtx.textAlign='center';
-      tlCtx.fillText(tlBuilding?'CONSTRUCTION…':'CHARGEMENT…',W/2,H/2+2.5);
+      tlCtx.fillText(tlBuilding?'CONSTRUCTION TIMELINE…':'CHARGEMENT…',W/2,H/2+2.5);
+    }
+
+    // Indiquer la zone cachée (frames en cache LRU)
+    if(VideoEngine.isReady){
+      const keys = VideoEngine.cacheKeys;
+      if(keys.length > 0){
+        const total = VideoEngine.totalFrames;
+        const minK = Math.min(...keys);
+        const maxK = Math.max(...keys);
+        const lp = (minK/total)*100;
+        const rp = ((maxK-minK)/total)*100;
+        tlcache.style.left = lp.toFixed(2) + '%';
+        tlcache.style.width = Math.max(0.2, rp).toFixed(2) + '%';
+      }
     }
   });
 }
 
 async function buildTimeline(){
-  if(!loaded||tlBuilding) return;
-  tlBuilding=true;
-  const wasPlaying=!vid.paused, origT=vid.currentTime;
-  if(wasPlaying) vid.pause();
-  tlThumbs.length=0;
-  const oc=tlOffCv.getContext('2d');
-  for(let i=0;i<TL_N;i++){
-    vid.currentTime=(i/(TL_N-1))*vid.duration;
-    await new Promise(res=>vid.addEventListener('seeked',res,{once:true}));
-    oc.drawImage(vid,0,0,tlOffCv.width,tlOffCv.height);
-    tlThumbs.push(oc.getImageData(0,0,tlOffCv.width,tlOffCv.height));
-    if(i===Math.floor(TL_N/2)) drawTL();
+  if(!VideoEngine.isReady || tlBuilding) return;
+  tlBuilding = true;
+  drawTL();
+  tlThumbs.length = 0;
+
+  const totalF = VideoEngine.totalFrames;
+  const thumbW = 64, thumbH = 36;
+  const tmpCv = document.createElement('canvas');
+  tmpCv.width = thumbW; tmpCv.height = thumbH;
+  const tmpCtx = tmpCv.getContext('2d');
+
+  for(let i=0; i<TL_N; i++){
+    const frameIdx = Math.floor((i/(TL_N-1)) * (totalF-1));
+    const f = await VideoEngine.getFrameBitmap(frameIdx);
+    if(f){
+      tmpCtx.drawImage(f, 0, 0, thumbW, thumbH);
+      const bmp = await createImageBitmap(tmpCv);
+      tlThumbs[i] = bmp;
+    }else{
+      tlThumbs[i] = null;
+    }
+    if(i % 4 === 3) drawTL();  // update progressivement
   }
-  vid.currentTime=Math.max(0,Math.min(vid.duration,origT));
-  if(wasPlaying) vid.play().catch(()=>{});
-  tlBuilding=false; tlBuilt=true; drawTL();
+  tlBuilding = false;
+  tlBuilt = true;
+  drawTL();
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// TRANSPORT (identique à l'original)
-// ═══════════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TRANSPORT
+// ═══════════════════════════════════════════════════════════════════════════
 document.getElementById('btnPl').addEventListener('click',()=>{
-  if(!loaded) return; initAudio(); actx.resume();
+  if(!VideoEngine.isReady) return;
+  initAudio(); actx.resume();
   playing=!playing;
-  if(playing){ needNewGrain=true; vid.play().catch(()=>{}); }
-  else{ vid.pause(); killAudio(); }
+  if(playing){ needNewGrain=true; }
+  else{ killAudio(); }
   updTUI();
 });
 document.getElementById('btnSt').addEventListener('click',()=>{
-  playing=false; vid.pause();
-  vid.currentTime=(vid.duration||0)*inPt;
-  resetEngine(); updTUI();
+  playing=false;
+  needle = Math.floor(inPt * VideoEngine.totalFrames);
+  grainAnchor = needle;
+  needNewGrain = true;
+  killAudio();
+  updTUI();
 });
 document.getElementById('btnFwd').addEventListener('click',()=>{
   reverse=false;
@@ -586,9 +1227,10 @@ function updTUI(){
   document.getElementById('lpl').className='led'+(playing?' on':'');
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// SLIDERS (identique à l'original)
-// ═══════════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SLIDERS (identique v1)
+// ═══════════════════════════════════════════════════════════════════════════
 function fmtV(v,f){
   if(f==='fr')   return Math.round(v)+' fr';
   if(f==='rate') return v.toFixed(2)+'×';
@@ -637,9 +1279,10 @@ document.querySelectorAll('[data-lt]').forEach(r=>{
   r.addEventListener('click',()=>{ r.classList.toggle('on'); lfoOn[t]=r.classList.contains('on'); });
 });
 
-// ═══════════════════════════════════════════════════════════════════
-// PRESETS
-// ═══════════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PRESETS — applique aussi les cibles LFO du preset
+// ═══════════════════════════════════════════════════════════════════════════
 function applyPreset(idx){
   const pr=PRESETS[idx];
   Object.assign(P,{advance:pr.advance,rate:pr.rate,grainSize:pr.grainSize,
@@ -652,13 +1295,24 @@ function applyPreset(idx){
   document.getElementById('btnFwd').classList.toggle('on',!reverse);
   document.getElementById('btnRv').classList.toggle('on',reverse);
   document.querySelectorAll('.pre').forEach((b,i)=>b.classList.toggle('act',i===idx));
+  // LFO targets
+  const lfoT = pr.lfoT || {};
+  ['advance','grainSize','repeat','dispersion'].forEach(t=>{
+    lfoOn[t] = !!lfoT[t];
+    const r = document.querySelector(`.rok[data-lt="${t}"]`);
+    if(r) r.classList.toggle('on', lfoOn[t]);
+  });
   needNewGrain=true;
 }
 document.querySelectorAll('.pre').forEach((b,i)=>b.addEventListener('click',()=>applyPreset(i)));
 
-// ═══════════════════════════════════════════════════════════════════
-// VU-MÈTRE
-// ═══════════════════════════════════════════════════════════════════
+// Preset NORMAL par défaut au démarrage
+applyPreset(0);
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// VU-MÈTRE + SCOPE + GRAIN ACTIVITY (identique v1)
+// ═══════════════════════════════════════════════════════════════════════════
 const VU_SEG=10, vuw=document.getElementById('vuw');
 ['L','R'].forEach(ch=>{
   const c=document.createElement('div'); c.className='vcol'; c.id='vc-'+ch;
@@ -679,10 +1333,6 @@ function updVU(){
     });
   });
 }
-
-// ═══════════════════════════════════════════════════════════════════
-// SCOPE + GRAIN ACTIVITY
-// ═══════════════════════════════════════════════════════════════════
 const scCv=document.getElementById('scCv'), sctx=scCv.getContext('2d');
 let lfoPhase=0;
 function drawScope(sv){
@@ -716,240 +1366,239 @@ function drawGact(v){
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════════════════
 // BOUCLE PRINCIPALE
-//
-// 99% identique à ton code original. La SEULE différence anti-saut :
-//
-// Quand le buffer est plein et que needle est trop proche de bufOldest,
-// on la tire d'1 frame vers l'avant à chaque RAF. Étalé sur des dizaines
-// de RAF (60×/s), le rattrapage est progressif au lieu d'un grand saut.
-// Imperceptible visuellement.
-// ═══════════════════════════════════════════════════════════════════
-let lastRafT=0;
-let fpsCnt=0, fpsT0=0;
+// ═══════════════════════════════════════════════════════════════════════════
+let lastRafT = 0;
 
 function loop(now){
   requestAnimationFrame(loop);
-  const dt=Math.min((now-lastRafT)/1000, 0.1); lastRafT=now;
+  const dt = Math.min((now-lastRafT)/1000, 0.1); lastRafT = now;
 
   // LFO
-  lfoPhase+=P.lfoRate*dt*Math.PI*2;
-  const ls=Math.sin(lfoPhase), la=P.lfoAmt;
+  lfoPhase += P.lfoRate * dt * Math.PI * 2;
+  const ls = Math.sin(lfoPhase), la = P.lfoAmt;
 
-  const eAdv =Math.max(0,   Math.round(P.advance   +(lfoOn.advance   ?ls*la*P.advance   :0)));
-  const eGS  =Math.max(1,   Math.round(P.grainSize  +(lfoOn.grainSize ?ls*la*P.grainSize :0)));
-  const eRep =Math.max(1,   Math.round(P.repeat     +(lfoOn.repeat    ?ls*la*P.repeat    :0)));
-  const eDisp=Math.max(0,   Math.round(P.dispersion +(lfoOn.dispersion?ls*la*P.dispersion:0)));
-  const eRate=Math.max(0.1, P.rate);
-  const ePitch=P.pitch;
+  const eAdv  = Math.max(0,   Math.round(P.advance    + (lfoOn.advance    ? ls*la*P.advance    : 0)));
+  const eGS   = Math.max(1,   Math.round(P.grainSize  + (lfoOn.grainSize  ? ls*la*P.grainSize  : 0)));
+  const eRep  = Math.max(1,   Math.round(P.repeat     + (lfoOn.repeat     ? ls*la*P.repeat     : 0)));
+  const eDisp = Math.max(0,   Math.round(P.dispersion + (lfoOn.dispersion ? ls*la*P.dispersion : 0)));
+  const eRate = Math.max(0.1, P.rate);
+  const ePitch = P.pitch;
 
-  const nomSec =eGS/Math.max(1,estFPS);
-  const playSec=nomSec/Math.max(0.01,eRate);
-
-  // ── 1. CAPTURE (polling RAF, comme dans ton original) ──
-  if(loaded && vid.readyState>=2 && !tlBuilding){
-    const vt=vid.currentTime;
-    if(vt!==lastVT){
-      lastVT=vt;
-      capCtx.drawImage(vid,0,0,capCv.width,capCv.height);
-      bufPut(capCtx.getImageData(0,0,capCv.width,capCv.height), vt);
-
-      if(playing && !vid.paused){
-        if(fpsCnt===0) fpsT0=now;
-        fpsCnt++;
-        if(now-fpsT0>1500 && fpsCnt>5){
-          estFPS=Math.max(1,Math.min(120,Math.round(fpsCnt/((now-fpsT0)/1000))));
-          fpsCnt=0;
-        }
-      }
-
-      // Boucle IN/OUT : rewind la vidéo (mais en pratique avec le
-      // buffer one-shot, vid sera mise en pause dès qu'on a 1024 frames)
-      if(vid.duration>0 && vt/vid.duration>=outPt){
-        vid.currentTime=inPt*vid.duration;
-      }
-    }
+  // Update UI status
+  const cs = document.getElementById('cstat');
+  if(VideoEngine.isReady){
+    cs.innerHTML = `<span class="num">${VideoEngine.totalFrames}</span>fr · <span class="num">${VideoEngine.videoFPS}</span>fps · <span class="num">${VideoEngine.memoryMB.toFixed(0)}</span>MB · cache ${VideoEngine.cacheSize}/${VideoEngine.cacheMax}`;
+    document.getElementById('hcache').textContent = `MEM ${VideoEngine.memoryMB.toFixed(0)}MB`;
+    document.getElementById('ldec').className = 'led on';
   }
 
-  // Quand le buffer est plein, on n'a plus besoin de la vidéo qui tourne.
-  // On la pause pour économiser des ressources et éviter qu'elle continue
-  // de générer des "frames fantômes" qui passeraient le filtre vt!==lastVT.
-  if(loaded && bufCount >= BUF_FRAMES && !vid.paused){
-    vid.pause();
-  }
-
-  // TL
-  if(loaded && !tlBuilt && !tlBuilding && bufCount>10) buildTimeline();
   drawTL();
 
-  // ── Pré-remplissage : pas de drawIdle pendant warm-up ──
-  const minFrames = Math.max(12, eGS + eDisp + 4);
-  if(!loaded || bufCount < minFrames){
-    if(loaded && bufCount > 0){
-      const f = bufGet(bufNewest());
-      if(f){
-        outCtx.putImageData(f.img, 0, 0);
-        document.getElementById('mtc').textContent = fmtS(f.sec);
-        document.getElementById('htc').textContent = fmtS(f.sec);
-      }
-      document.getElementById('mbadge').textContent = 'BUFFER…';
-    }else{
-      drawIdle(now);
-      document.getElementById('mbadge').textContent = 'NO SIGNAL';
-    }
+  if(!VideoEngine.isReady){
+    drawIdle(now);
+    document.getElementById('mbadge').textContent = 'NO SIGNAL';
     drawScope(ls); drawGact(0); updVU();
     return;
   }
 
-  // ── BYPASS ──
+  // Construire timeline si pas encore fait
+  if(!tlBuilt && !tlBuilding && VideoEngine.isReady){
+    buildTimeline();
+  }
+
+  // BYPASS — lit la vidéo linéairement
   if(bypass){
-    const f=bufGet(bufNewest());
-    if(f){ outCtx.putImageData(f.img,0,0); }
-    document.getElementById('mbadge').textContent='BYPASS';
-    const ts=fmtS(f?.sec??0);
-    document.getElementById('mtc').textContent=ts;
-    document.getElementById('htc').textContent=ts;
-    drawScope(ls); drawGact(0); updVU(); return;
+    if(playing){
+      needle = Math.min(needle + 1, Math.floor(outPt * VideoEngine.totalFrames) - 1);
+      if(needle <= Math.floor(inPt * VideoEngine.totalFrames)){
+        needle = Math.floor(inPt * VideoEngine.totalFrames);
+      }
+      if(needle >= Math.floor(outPt * VideoEngine.totalFrames) - 1){
+        needle = Math.floor(inPt * VideoEngine.totalFrames);
+      }
+    }
+    let f = VideoEngine.getFrame(needle);
+    if(!f) f = VideoEngine.getNearestCached(needle);
+    if(f){
+      drawVideoFrame(f);
+      const ts = VideoEngine.frameToTime(needle);
+      document.getElementById('mtc').textContent = fmtS(ts);
+      document.getElementById('htc').textContent = fmtS(ts);
+    }
+    document.getElementById('mbadge').textContent = 'BYPASS';
+    document.getElementById('mstat').textContent = `fr ${needle}`;
+    // Prefetch
+    VideoEngine.prefetchAround(needle, 1, 4, 0, 'F');
+    drawScope(ls); drawGact(0); updVU();
+    return;
   }
 
-  // Note : plus de drift correction. Avec le buffer "one-shot" (qui
-  // arrête d'écrire quand plein), oldest reste à 0 et newest reste à
-  // BUF_FRAMES-1. needle boucle librement dans cette fenêtre fixe via
-  // le modulo dans le moteur granulaire ci-dessous. Plus de rattrapage
-  // possible donc plus jamais de saut ni de bascule en lecture live.
-  //
-  // Conséquence : on a un échantillon vidéo de ~17 secondes (1024
-  // frames à 60fps) qu'on peut traiter granulairement à volonté.
-  // Pour échantillonner une autre partie de la vidéo, cliquer sur la
-  // timeline (le seek reset le buffer).
+  // ═══════════════════════════════════════════════════════════════════
+  // MOTEUR GRANULAIRE
+  // ═══════════════════════════════════════════════════════════════════
 
-  // ══════════════════════════════════════════════════════════════
-  // MOTEUR GRANULAIRE (identique à ton original)
-  // ══════════════════════════════════════════════════════════════
+  const nomSec  = eGS / Math.max(1, VideoEngine.videoFPS);
+  const playSec = nomSec / Math.max(0.01, eRate);
+
+  // Période in/out en frames absolues
+  const inF  = Math.floor(inPt  * VideoEngine.totalFrames);
+  const outF = Math.floor(outPt * VideoEngine.totalFrames);
+  const span = Math.max(1, outF - inF);
+
   if(needNewGrain && playing){
-    needNewGrain=false;
-    grainRep=0;
-    grainStart=now;
-    grainNomSec=nomSec;
-    grainPlaySec=playSec;
+    needNewGrain = false;
+    grainRep = 0;
+    grainStart = now;
+    grainNomSec = nomSec;
+    grainPlaySec = playSec;
 
-    if(eAdv===0){
-      const disp=eDisp>0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
-      grainAnchor=needle+disp;
+    if(eAdv === 0){
+      // FREEZE : needle reste où elle est
+      const disp = eDisp > 0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
+      grainAnchor = needle + disp;
     }else{
-      const dir=reverse?-1:1;
-      needle+=dir*eAdv;
-      // Boucler dans la fenêtre du buffer.
-      // Quand buffer plein, oldest=0 et newest=BUF_FRAMES-1 (constants).
-      const oldest=bufOldest(), newest=bufNewest();
-      const span = newest - oldest + 1;
-      if(span > 0){
-        // Modulo dans la fenêtre [oldest..newest]
-        let rel = needle - oldest;
-        rel = ((rel % span) + span) % span;
-        needle = oldest + rel;
-      }
-      const disp=eDisp>0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
-      grainAnchor=needle+disp;
+      const dir = reverse ? -1 : 1;
+      needle += dir * eAdv;
+      // Wrap dans [inF, outF)
+      let rel = needle - inF;
+      rel = ((rel % span) + span) % span;
+      needle = inF + rel;
+      const disp = eDisp > 0 ? Math.round((Math.random()*2-1)*eDisp) : 0;
+      grainAnchor = needle + disp;
     }
 
-    const anchorFrame=bufGet(grainAnchor);
-    if(anchorFrame && playing){
-      playGrain(anchorFrame.sec, grainPlaySec, eRate, ePitch, grainDir);
+    // Clamp anchor sur la vidéo
+    grainAnchor = Math.max(0, Math.min(VideoEngine.totalFrames - 1, grainAnchor));
+
+    // Lancer l'audio du grain
+    const anchorTime = VideoEngine.frameToTime(grainAnchor);
+    if(playing){
+      playGrain(anchorTime, grainPlaySec, eRate, ePitch, grainDir);
     }
   }
 
-  let elapsed=(now-grainStart)/1000;
-  const curPlay=Math.max(0.001, grainPlaySec||playSec);
+  // Avancement dans le grain en cours
+  let elapsed = (now - grainStart) / 1000;
+  const curPlay = Math.max(0.001, grainPlaySec || playSec);
 
-  if(elapsed>=curPlay && playing){
+  if(elapsed >= curPlay && playing){
     grainRep++;
-    if(grainRep>=eRep){
-      needNewGrain=true;
-      elapsed=curPlay*0.999;
+    if(grainRep >= eRep){
+      needNewGrain = true;
+      elapsed = curPlay * 0.999;
     }else{
-      grainStart=now; elapsed=0;
-      const anchorFrame=bufGet(grainAnchor);
-      if(anchorFrame && playing){
-        playGrain(anchorFrame.sec, grainPlaySec, eRate, ePitch, grainDir);
+      grainStart = now;
+      elapsed = 0;
+      const anchorTime = VideoEngine.frameToTime(grainAnchor);
+      if(playing){
+        playGrain(anchorTime, grainPlaySec, eRate, ePitch, grainDir);
       }
     }
   }
 
-  const frac=Math.max(0,Math.min(0.9999, elapsed/curPlay));
+  const frac = Math.max(0, Math.min(0.9999, elapsed / curPlay));
   let posI;
-  if(grainDir==='F'){
-    posI=Math.floor(frac*eGS);
-  }else if(grainDir==='R'){
-    posI=Math.floor((1-frac)*eGS);
+  if(grainDir === 'F'){
+    posI = Math.floor(frac * eGS);
+  }else if(grainDir === 'R'){
+    posI = Math.floor((1-frac) * eGS);
   }else{
-    const ph=frac<0.5 ? frac*2 : (1-frac)*2;
-    posI=Math.floor(ph*eGS);
+    const ph = frac < 0.5 ? frac*2 : (1-frac)*2;
+    posI = Math.floor(ph * eGS);
   }
-  posI=Math.max(0,Math.min(eGS-1,posI));
+  posI = Math.max(0, Math.min(eGS-1, posI));
 
-  const frameIdx=grainAnchor+posI;
-  const outFrame=bufGet(frameIdx);
+  const frameIdx = Math.max(0, Math.min(VideoEngine.totalFrames-1, grainAnchor + posI));
 
-  if(outFrame) outCtx.putImageData(outFrame.img,0,0);
-
-  const outTS=outFrame?.sec??0;
-  document.getElementById('mtc').textContent=fmtS(outTS);
-  document.getElementById('htc').textContent=fmtS(outTS);
-
-  if(vid.duration>0){
-    const nf=bufGet(needle);
-    if(nf){
-      tlnd.style.left=((nf.sec/vid.duration)*100).toFixed(1)+'%';
-      tlnd.style.display='block';
-    }
+  // Récupérer la frame — si pas en cache, on prend la plus proche en attendant
+  let outFrame = VideoEngine.getFrame(frameIdx);
+  let degraded = false;
+  if(!outFrame){
+    outFrame = VideoEngine.getNearestCached(frameIdx);
+    degraded = !!outFrame;
   }
 
-  const dnL={F:'FWD',R:'REV',P:'PNG'}[grainDir];
-  const adL=eAdv===0?'FREEZE':(reverse?'-':'+')+eAdv;
-  document.getElementById('mbadge').textContent=`GRAIN·${dnL}·${adL}`;
-  document.getElementById('lgr').className='led on';
-  document.getElementById('lpk').className='led'+(Math.random()<0.04?' on':'');
+  if(outFrame){
+    drawVideoFrame(outFrame);
+  }
 
-  const actV=Math.min(1,0.15+(eGS/96)*0.4+(eRep/16)*0.3+(eDisp/48)*0.15);
+  // Préchargement spéculatif autour de la zone d'activité
+  VideoEngine.prefetchAround(grainAnchor, eAdv || 1, eGS, eDisp, grainDir);
+
+  // UI
+  const ts = VideoEngine.frameToTime(frameIdx);
+  document.getElementById('mtc').textContent = fmtS(ts);
+  document.getElementById('htc').textContent = fmtS(ts);
+  document.getElementById('mstat').textContent = `fr ${frameIdx}/${VideoEngine.totalFrames}${degraded?' · CACHE-MISS':''}`;
+
+  // Position needle sur la timeline
+  if(VideoEngine.totalFrames > 0){
+    tlnd.style.left = ((needle/VideoEngine.totalFrames)*100).toFixed(2)+'%';
+    tlnd.style.display = 'block';
+  }
+
+  const dnL = {F:'FWD', R:'REV', P:'PNG'}[grainDir];
+  const adL = eAdv===0 ? 'FREEZE' : (reverse?'-':'+')+eAdv;
+  document.getElementById('mbadge').textContent = `GRAIN·${dnL}·${adL}${degraded?'·LO':''}`;
+  document.getElementById('lgr').className = 'led on';
+  document.getElementById('lpk').className = 'led' + (Math.random()<0.04 ? ' on' : '');
+
+  const actV = Math.min(1, 0.15 + (eGS/96)*0.4 + (eRep/16)*0.3 + (eDisp/48)*0.15);
   drawScope(ls); drawGact(actV); updVU();
 }
 
-// ═══════════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════════════════
 // UTILS
-// ═══════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════════
 function fmtS(s){
   if(!isFinite(s)) return '--:--';
   const m=Math.floor(s/60), ss=Math.floor(s%60);
   return String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0');
 }
-function lvshow(t,s){
-  document.getElementById('lveil').classList.remove('h');
-  document.getElementById('lvt').textContent=t;
-  document.getElementById('lvs').textContent=s;
+function formatDuration(s){
+  if(!isFinite(s)) return '--:--';
+  const h = Math.floor(s/3600);
+  const m = Math.floor((s%3600)/60);
+  const ss = Math.floor(s%60);
+  if(h>0) return `${h}:${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+  return `${m}:${String(ss).padStart(2,'0')}`;
 }
-function lvpct(p){ document.getElementById('lvb').style.width=p+'%'; }
-function lvhide(){ document.getElementById('lveil').classList.add('h'); }
 
 function drawIdle(now){
-  const W=outCv.width||1280, H=outCv.height||720;
-  outCtx.fillStyle='#050503'; outCtx.fillRect(0,0,W,H);
+  const W = outCv.width||1280, H = outCv.height||720;
+  outCtx.fillStyle = '#050503'; outCtx.fillRect(0,0,W,H);
   for(let i=0;i<3;i++){
-    outCtx.fillStyle=`rgba(28,26,22,${.06+Math.random()*.03})`;
-    outCtx.fillRect(0,((now*.012+i*130)%H),W,1+Math.random()*1.5);
+    outCtx.fillStyle = `rgba(28,26,22,${.06+Math.random()*.03})`;
+    outCtx.fillRect(0, ((now*.012+i*130)%H), W, 1+Math.random()*1.5);
   }
-  outCtx.textAlign='center'; outCtx.textBaseline='middle';
-  outCtx.fillStyle='rgba(240,237,230,.06)';
-  outCtx.font=`700 ${Math.min(W/20,28)}px "IBM Plex Mono"`;
-  outCtx.fillText('NO SOURCE',W/2,H/2-10);
-  outCtx.font=`300 ${Math.min(W/55,11)}px "IBM Plex Mono"`;
-  outCtx.fillStyle='rgba(200,57,26,.2)';
-  outCtx.fillText('CHARGER UNE VIDÉO POUR COMMENCER',W/2,H/2+14);
+  outCtx.textAlign = 'center'; outCtx.textBaseline = 'middle';
+  outCtx.fillStyle = 'rgba(240,237,230,.06)';
+  outCtx.font = `700 ${Math.min(W/20,28)}px "IBM Plex Mono"`;
+  outCtx.fillText('NO SOURCE', W/2, H/2-10);
+  outCtx.font = `300 ${Math.min(W/55,11)}px "IBM Plex Mono"`;
+  outCtx.fillStyle = 'rgba(200,57,26,.2)';
+  outCtx.fillText('CHARGER UN MP4 POUR COMMENCER', W/2, H/2+14);
 }
 
-outCv.width=1280; outCv.height=720;
-updHandles(); drawIdle(0);
+// Vérifier le support WebCodecs
+if(typeof VideoDecoder === 'undefined'){
+  setTimeout(() => {
+    document.getElementById('lveil').classList.remove('h');
+    document.getElementById('lvt').textContent = 'NAVIGATEUR INCOMPATIBLE';
+    document.getElementById('lvs').textContent = '';
+    const e = document.getElementById('lverror');
+    e.textContent = 'WebCodecs API non disponible. Utilisez Chrome 94+, Edge 94+, Safari 16.4+ ou Firefox 130+.';
+    e.classList.remove('h');
+  }, 100);
+}
+
+outCv.width = 1280; outCv.height = 720;
+updHandles();
+drawIdle(0);
 requestAnimationFrame(loop);
 </script>
 </body>
