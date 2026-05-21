@@ -68,32 +68,10 @@
   <div class="cadre">
     <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/gif/2/enconstruction.gif?raw=true" alt="Image vintage">
   </div>
-<script>
-(() => {
-  let spawnRate = 1;
+<script type="module">
+import { antsCursor } from './js/antsCursor.js'
 
-  document.addEventListener("mousemove", (e) => {
-    for (let i = 0; i < spawnRate; i++) {
-      const dot = document.createElement("div");
-      dot.className = "echo";
-
-      const offsetX = (Math.random() - 0.5) * 20;
-      const offsetY = (Math.random() - 0.5) * 20;
-
-      dot.style.left = (e.clientX + offsetX) + "px";
-      dot.style.top = (e.clientY + offsetY) + "px";
-
-      dot.style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
-
-      document.body.appendChild(dot);
-
-      // ⚠️ important pour éviter crash immédiat
-      setTimeout(() => dot.remove(), 2000);
-    }
-
-    spawnRate = Math.min(30, spawnRate + 0.02);
-  });
-})();
+antsCursor()
 </script>
 </body>
 </html>
