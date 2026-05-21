@@ -21,7 +21,7 @@ body{
   color:#000;
   display:grid;
   grid-template-rows:40px 1fr 44px 32px;
-  grid-template-columns:1fr 220px;
+  grid-template-columns:1fr 240px;
   grid-template-areas:"header header""main sidebar""tl sidebar""footer footer";
 }
 header{grid-area:header;background:linear-gradient(90deg,#000080,#0000c0 50%,#000080);border-bottom:2px solid #ffff00;display:flex;align-items:center;gap:10px;padding:0 8px;}
@@ -41,6 +41,7 @@ header{grid-area:header;background:linear-gradient(90deg,#000080,#0000c0 50%,#00
 .led.on{background:#00ff00;box-shadow:0 0 5px #00ff00;}
 .led.on.r{background:#ff2200;box-shadow:0 0 5px #ff2200;}
 .led.on.a{background:#ffaa00;box-shadow:0 0 5px #ffaa00;}
+.led.on.c{background:#00ffff;box-shadow:0 0 5px #00ffff;}
 .htc{margin-left:auto;font-family:var(--ff);font-size:18px;color:#00ff00;background:#000;padding:1px 6px;border:2px inset #808080;}
 .main-area{grid-area:main;display:flex;flex-direction:column;background:#000;overflow:hidden;padding:3px;gap:3px;}
 .monitor-wrap{flex:1;position:relative;overflow:hidden;background:#000;border:3px solid var(--bd);border-top-color:var(--bl);border-left-color:var(--bl);}
@@ -74,13 +75,14 @@ header{grid-area:header;background:linear-gradient(90deg,#000080,#0000c0 50%,#00
 .sidebar::-webkit-scrollbar-thumb{background:var(--panel);border:2px solid var(--bd);border-top-color:var(--bl);border-left-color:var(--bl);}
 .stitle{font-family:var(--ffl);font-size:8px;font-weight:700;letter-spacing:.12em;color:#fff;background:linear-gradient(90deg,#000080,#0050a0);padding:2px 5px;margin:6px -7px 4px;}
 .stitle:first-child{margin-top:0;}
+.stitle.tr{background:linear-gradient(90deg,#400040,#a000a0);}
 .prow{display:flex;align-items:center;gap:4px;margin-bottom:3px;}
 .prow-lbl{font-family:var(--ffl);font-size:7px;font-weight:700;color:#000060;letter-spacing:.06em;min-width:46px;white-space:nowrap;}
 .prow-val{font-family:var(--ff);font-size:16px;color:#000080;min-width:42px;text-align:right;background:#fff;border:1px inset var(--bd);padding:0 2px;line-height:1.1;}
 .sw{flex:1;position:relative;height:16px;display:flex;align-items:center;cursor:pointer;user-select:none;}
 .st{position:absolute;left:4px;right:4px;height:2px;top:50%;transform:translateY(-50%);background:var(--bd);border:1px solid var(--bdd);border-bottom-color:var(--bl);border-right-color:var(--bl);}
 .sf{position:absolute;left:4px;height:2px;top:50%;transform:translateY(-50%);background:#000080;}
-.sf.a{background:#804000;}.sf.r{background:#800000;}
+.sf.a{background:#804000;}.sf.r{background:#800000;}.sf.t{background:#800080;}
 .sth{position:absolute;width:10px;height:16px;background:var(--panel);transform:translateX(-50%);cursor:ew-resize;border:2px solid var(--bd);border-top-color:var(--bl);border-left-color:var(--bl);border-bottom-color:var(--bdd);border-right-color:var(--bdd);}
 .dir-row{display:flex;gap:5px;margin-bottom:4px;align-items:center;}
 .dir-lbl{font-family:var(--ffl);font-size:7px;font-weight:700;color:#000060;letter-spacing:.06em;min-width:46px;white-space:nowrap;}
@@ -92,7 +94,7 @@ header{grid-area:header;background:linear-gradient(90deg,#000080,#0000c0 50%,#00
 .lfon{font-family:var(--ffl);font-size:7px;font-weight:700;color:#000060;}
 .rok{width:20px;height:12px;border:2px solid var(--bd);border-top-color:var(--bdd);border-left-color:var(--bdd);background:var(--panel);cursor:pointer;}
 .rok.on{background:#000080;border-top-color:#8080ff;border-left-color:#8080ff;}
-.scwrap{background:#000;height:22px;overflow:hidden;border:2px inset var(--bd);margin-bottom:4px;margin-top:2px;}
+.scwrap{background:#000;height:42px;overflow:hidden;border:2px inset var(--bd);margin-bottom:4px;margin-top:2px;}
 #scCv{width:100%;height:100%;display:block;}
 .vu-bottom{margin-top:auto;padding-top:5px;border-top:2px solid var(--bd);}
 .vurow{display:flex;gap:2px;height:22px;align-items:flex-end;margin-bottom:3px;}
@@ -104,17 +106,22 @@ header{grid-area:header;background:linear-gradient(90deg,#000080,#0000c0 50%,#00
 .load-btn{width:100%;padding:5px 4px;background:#000080;border:2px solid #8080ff;border-top-color:#c0c0ff;border-left-color:#c0c0ff;border-bottom-color:#000040;border-right-color:#000040;color:#ffff00;font-family:var(--ffl);font-size:9px;font-weight:900;letter-spacing:.06em;cursor:pointer;margin-bottom:4px;}
 .load-btn:hover{background:#0000c0;}
 .load-btn:active{border-top-color:#000040;border-left-color:#000040;border-bottom-color:#c0c0ff;border-right-color:#c0c0ff;padding:6px 3px 4px 5px;}
-.pre-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:2px;}
-.pre{background:var(--panel);border:2px solid var(--bd);border-top-color:var(--bl);border-left-color:var(--bl);border-bottom-color:var(--bdd);border-right-color:var(--bdd);color:#000;font-family:var(--ffl);font-size:7px;font-weight:700;padding:3px 2px;cursor:pointer;letter-spacing:.02em;text-align:center;white-space:nowrap;overflow:hidden;}
+.pre-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:2px;}
+.pre{background:var(--panel);border:2px solid var(--bd);border-top-color:var(--bl);border-left-color:var(--bl);border-bottom-color:var(--bdd);border-right-color:var(--bdd);color:#000;font-family:var(--ffl);font-size:9px;font-weight:700;padding:7px 3px;cursor:pointer;letter-spacing:.04em;text-align:center;white-space:nowrap;overflow:hidden;min-height:28px;}
 .pre:active,.pre.act{border-top-color:var(--bdd);border-left-color:var(--bdd);border-bottom-color:var(--bl);border-right-color:var(--bl);}
 .pre.act{background:#000080;color:#00ff00;}
+/* TRAILS sync switch */
+.swrow{display:flex;gap:3px;margin-bottom:4px;align-items:center;}
+.swseg{flex:1;display:flex;gap:2px;}
+.swbtn{flex:1;background:var(--panel);border:2px solid var(--bd);border-top-color:var(--bl);border-left-color:var(--bl);border-bottom-color:var(--bdd);border-right-color:var(--bdd);font-family:var(--ffl);font-size:7px;font-weight:700;color:#000;cursor:pointer;padding:4px 0;text-align:center;letter-spacing:.04em;min-height:22px;}
+.swbtn.on{background:#400040;color:#ff80ff;border-top-color:var(--bdd);border-left-color:var(--bdd);border-bottom-color:var(--bl);border-right-color:var(--bl);}
+#fileInput{display:none;}
 footer{grid-area:footer;background:#000060;border-top:2px solid #ffff00;display:flex;align-items:center;gap:0;overflow:hidden;padding:0 4px;}
 .fi{display:flex;align-items:center;gap:0;flex:1;border-right:1px solid rgba(255,255,0,.2);padding:0 6px;}
 .fi:last-child{border-right:none;}
 .fi-l{font-family:var(--ffl);font-size:6.5px;font-weight:700;color:rgba(255,255,0,.5);letter-spacing:.1em;margin-right:4px;white-space:nowrap;}
 .fi-v{font-family:var(--ff);font-size:16px;color:#00ff00;}
 .fi-needle{font-family:var(--ff);font-size:18px;color:#ff80ff;}
-#fileInput{display:none;}
 </style>
 </head>
 <body>
@@ -130,6 +137,7 @@ footer{grid-area:footer;background:#000060;border-top:2px solid #ffff00;display:
   <div class="hled-g">
     <div class="hled"><div class="led" id="lpl"></div>PLAY</div>
     <div class="hled"><div class="led" id="lgr"></div>GRAIN</div>
+    <div class="hled"><div class="led" id="ltr"></div>TRAIL</div>
     <div class="hled"><div class="led" id="lpk"></div>PEAK</div>
     <div class="hled"><div class="led" id="ldec"></div>RAM</div>
   </div>
@@ -169,13 +177,13 @@ footer{grid-area:footer;background:#000060;border-top:2px solid #ffff00;display:
   <div class="prow">
     <span class="prow-lbl">AVANCE</span>
     <div class="sw" data-p="advance" data-min="0" data-max="32" data-fmt="fr" data-step="1"><div class="st"></div><div class="sf a"></div><div class="sth"></div></div>
-    <span class="prow-val" id="v-advance">8 fr</span>
+    <span class="prow-val" id="v-advance">15 fr</span>
   </div>
   <div class="stitle">GRAIN</div>
   <div class="prow">
     <span class="prow-lbl">TAILLE</span>
     <div class="sw" data-p="grainSize" data-min="1" data-max="96" data-fmt="fr" data-step="1"><div class="st"></div><div class="sf"></div><div class="sth"></div></div>
-    <span class="prow-val" id="v-grainSize">8 fr</span>
+    <span class="prow-val" id="v-grainSize">15 fr</span>
   </div>
   <div class="prow">
     <span class="prow-lbl">REPEAT</span>
@@ -204,6 +212,29 @@ footer{grid-area:footer;background:#000060;border-top:2px solid #ffff00;display:
     <div class="sw" data-p="pitch" data-min="-12" data-max="12" data-fmt="st" data-step="1"><div class="st"></div><div class="sf"></div><div class="sth"></div></div>
     <span class="prow-val" id="v-pitch">0 st</span>
   </div>
+  <div class="stitle tr">TRAILS</div>
+  <div class="prow">
+    <span class="prow-lbl">AMOUNT</span>
+    <div class="sw" data-p="trailAmt" data-min="0" data-max="1" data-fmt="dec" data-step="0.01"><div class="st"></div><div class="sf t"></div><div class="sth"></div></div>
+    <span class="prow-val" id="v-trailAmt">0.00</span>
+  </div>
+  <div class="prow">
+    <span class="prow-lbl">MIX</span>
+    <div class="sw" data-p="trailMix" data-min="0" data-max="1" data-fmt="dec" data-step="0.01"><div class="st"></div><div class="sf t"></div><div class="sth"></div></div>
+    <span class="prow-val" id="v-trailMix">0.40</span>
+  </div>
+  <div class="swrow">
+    <span class="prow-lbl">SYNC</span>
+    <div class="swseg">
+      <div class="swbtn on" data-sync="grain">GRAIN</div>
+      <div class="swbtn" data-sync="free">FREE</div>
+    </div>
+  </div>
+  <div class="prow">
+    <span class="prow-lbl" id="trailTimeLbl">TIME</span>
+    <div class="sw" data-p="trailTime" data-min="0.25" data-max="4" data-fmt="trail" data-step="0.25"><div class="st"></div><div class="sf t"></div><div class="sth"></div></div>
+    <span class="prow-val" id="v-trailTime">1.00x</span>
+  </div>
   <div class="stitle">LFO</div>
   <div class="prow">
     <span class="prow-lbl">RATE</span>
@@ -220,6 +251,7 @@ footer{grid-area:footer;background:#000060;border-top:2px solid #ffff00;display:
   <div class="lforow"><span class="lfon">TAILLE</span><div class="rok" data-lt="grainSize"></div></div>
   <div class="lforow"><span class="lfon">REPEAT</span><div class="rok" data-lt="repeat"></div></div>
   <div class="lforow"><span class="lfon">DISPERS</span><div class="rok" data-lt="dispersion"></div></div>
+  <div class="lforow"><span class="lfon">TRAILS</span><div class="rok" data-lt="trailAmt"></div></div>
   <div class="stitle">PRESETS</div>
   <div class="pre-grid">
     <button class="pre" data-pre="0">NORMAL</button>
@@ -227,12 +259,17 @@ footer{grid-area:footer;background:#000060;border-top:2px solid #ffff00;display:
     <button class="pre" data-pre="2">FREEZE</button>
     <button class="pre" data-pre="3">DENSE</button>
     <button class="pre" data-pre="4">ARNOLD</button>
-    <button class="pre" data-pre="5">DRIFT</button>
-    <button class="pre" data-pre="6">SWARM</button>
+    <button class="pre" data-pre="5">SWARM</button>
+    <button class="pre" data-pre="6">AVC</button>
     <button class="pre" data-pre="7">HAUNT</button>
     <button class="pre" data-pre="8">VAPOR</button>
     <button class="pre" data-pre="9">CHOP</button>
     <button class="pre" data-pre="10">DECAY</button>
+    <button class="pre" data-pre="11">BREATH</button>
+    <button class="pre" data-pre="12">DUB</button>
+    <button class="pre" data-pre="13">SMEAR</button>
+    <button class="pre" data-pre="14">PULSE</button>
+    <button class="pre" data-pre="15">SPECTER</button>
   </div>
   <div class="vu-bottom">
     <div class="vurow" id="vuw"></div>
@@ -255,25 +292,36 @@ footer{grid-area:footer;background:#000060;border-top:2px solid #ffff00;display:
 <script>
 'use strict';
 
+// ── PRESETS ────────────────────────────────────────────────────────────────
+// + window (forme d'enveloppe) + trail (persistance vidéo + écho audio liés)
 const PRESETS=[
-  {name:'NORMAL',  advance:8, rate:1.0,  grainSize:8,  repeat:1, dispersion:0,  dir:'F', lfoAmt:0,    lfoRate:0.25, pitch:0, lfoT:{}},
-  {name:'STUTTER', advance:0, rate:1.0,  grainSize:10, repeat:6, dispersion:4,  dir:'F', lfoAmt:0,    lfoRate:0.25, pitch:0, lfoT:{}},
-  {name:'FREEZE',  advance:0, rate:1.0,  grainSize:16, repeat:8, dispersion:0,  dir:'P', lfoAmt:0,    lfoRate:0.25, pitch:0, lfoT:{}},
-  {name:'DENSE',   advance:2, rate:1.0,  grainSize:3,  repeat:2, dispersion:4,  dir:'F', lfoAmt:0,    lfoRate:1.0,  pitch:0, lfoT:{}},
-  {name:'ARNOLD',  advance:3, rate:0.5,  grainSize:20, repeat:6, dispersion:16, dir:'P', lfoAmt:0.7,  lfoRate:0.5,  pitch:0, lfoT:{}},
-  {name:'DRIFT',   advance:1, rate:0.5,  grainSize:30, repeat:2, dispersion:8,  dir:'P', lfoAmt:0.3,  lfoRate:0.1,  pitch:0, lfoT:{advance:true}},
-  {name:'SWARM',   advance:1, rate:1.0,  grainSize:2,  repeat:1, dispersion:24, dir:'F', lfoAmt:0.5,  lfoRate:0.05, pitch:0, lfoT:{dispersion:true}},
-  {name:'HAUNT',   advance:2, rate:0.8,  grainSize:14, repeat:3, dispersion:32, dir:'P', lfoAmt:0,    lfoRate:0.25, pitch:0, lfoT:{}},
-  {name:'VAPOR',   advance:1, rate:0.25, grainSize:48, repeat:1, dispersion:2,  dir:'F', lfoAmt:0,    lfoRate:0.25, pitch:0, lfoT:{}},
-  {name:'CHOP',    advance:2, rate:1.0,  grainSize:8,  repeat:4, dispersion:0,  dir:'F', lfoAmt:0.8,  lfoRate:2.0,  pitch:0, lfoT:{repeat:true}},
-  {name:'DECAY',   advance:1, rate:1.0,  grainSize:40, repeat:1, dispersion:6,  dir:'F', lfoAmt:0.95, lfoRate:0.08, pitch:0, lfoT:{grainSize:true}},
+  {name:'NORMAL',  advance:15, rate:1.0,  grainSize:15, repeat:1, dispersion:0,  dir:'F', lfoAmt:0,    lfoRate:0.25, pitch:0,  window:'rect',  trailAmt:0.00, trailMix:0.40, trailSync:'grain', trailTime:1.0, lfoT:{}},
+  {name:'STUTTER', advance:1,  rate:1.0,  grainSize:11, repeat:1, dispersion:0,  dir:'F', lfoAmt:0.25, lfoRate:0.25, pitch:0,  window:'rect',  trailAmt:0.00, trailMix:0.40, trailSync:'grain', trailTime:1.0, lfoT:{}},
+  {name:'FREEZE',  advance:0,  rate:0.75, grainSize:12, repeat:1, dispersion:0,  dir:'P', lfoAmt:0.25, lfoRate:0.25, pitch:-1, window:'hann',  trailAmt:0.55, trailMix:0.50, trailSync:'grain', trailTime:2.0, lfoT:{}},
+  {name:'DENSE',   advance:2,  rate:1.0,  grainSize:3,  repeat:2, dispersion:4,  dir:'F', lfoAmt:0,    lfoRate:1.0,  pitch:0,  window:'rect',  trailAmt:0.00, trailMix:0.40, trailSync:'grain', trailTime:1.0, lfoT:{}},
+  {name:'ARNOLD',  advance:3,  rate:1.0,  grainSize:20, repeat:2, dispersion:16, dir:'P', lfoAmt:0.7,  lfoRate:0.5,  pitch:0,  window:'rect',  trailAmt:0.00, trailMix:0.40, trailSync:'grain', trailTime:1.0, lfoT:{}},
+  {name:'SWARM',   advance:1,  rate:1.0,  grainSize:2,  repeat:1, dispersion:24, dir:'F', lfoAmt:0.5,  lfoRate:0.05, pitch:3,  window:'rect',  trailAmt:0.30, trailMix:0.35, trailSync:'grain', trailTime:0.5, lfoT:{dispersion:true}},
+  {name:'AVC',     advance:1,  rate:1.0,  grainSize:4,  repeat:1, dispersion:6,  dir:'P', lfoAmt:1.0,  lfoRate:7.35, pitch:0,  window:'rect',  trailAmt:0.00, trailMix:0.40, trailSync:'grain', trailTime:1.0, lfoT:{dispersion:true}},
+  {name:'HAUNT',   advance:2,  rate:0.8,  grainSize:14, repeat:3, dispersion:32, dir:'P', lfoAmt:0,    lfoRate:0.25, pitch:0,  window:'gauss', trailAmt:0.65, trailMix:0.55, trailSync:'grain', trailTime:1.5, lfoT:{}},
+  {name:'VAPOR',   advance:1,  rate:0.25, grainSize:48, repeat:1, dispersion:2,  dir:'F', lfoAmt:0,    lfoRate:0.25, pitch:0,  window:'hann',  trailAmt:0.75, trailMix:0.60, trailSync:'grain', trailTime:2.0, lfoT:{}},
+  {name:'CHOP',    advance:2,  rate:1.0,  grainSize:8,  repeat:4, dispersion:0,  dir:'F', lfoAmt:0.8,  lfoRate:2.0,  pitch:0,  window:'asym',  trailAmt:0.25, trailMix:0.30, trailSync:'grain', trailTime:0.5, lfoT:{repeat:true}},
+  {name:'DECAY',   advance:1,  rate:1.0,  grainSize:40, repeat:1, dispersion:6,  dir:'F', lfoAmt:0.95, lfoRate:0.08, pitch:0,  window:'asym',  trailAmt:0.50, trailMix:0.45, trailSync:'grain', trailTime:1.0, lfoT:{grainSize:true}},
+  // Nouveaux presets exploitant WINDOW + TRAILS
+  {name:'BREATH',  advance:8,  rate:0.5,  grainSize:24, repeat:1, dispersion:0,  dir:'F', lfoAmt:0.4,  lfoRate:0.12, pitch:0,  window:'gauss', trailAmt:0.70, trailMix:0.55, trailSync:'grain', trailTime:1.5, lfoT:{grainSize:true}},
+  {name:'DUB',     advance:6,  rate:1.0,  grainSize:6,  repeat:1, dispersion:0,  dir:'F', lfoAmt:0,    lfoRate:0.25, pitch:0,  window:'rasym', trailAmt:0.80, trailMix:0.65, trailSync:'free',  trailTime:380, lfoT:{}},
+  {name:'SMEAR',   advance:1,  rate:0.5,  grainSize:32, repeat:1, dispersion:8,  dir:'P', lfoAmt:0.3,  lfoRate:0.15, pitch:-2, window:'hann',  trailAmt:0.88, trailMix:0.70, trailSync:'grain', trailTime:2.0, lfoT:{}},
+  {name:'PULSE',   advance:4,  rate:1.0,  grainSize:4,  repeat:1, dispersion:0,  dir:'F', lfoAmt:0,    lfoRate:0.25, pitch:0,  window:'asym',  trailAmt:0.55, trailMix:0.50, trailSync:'free',  trailTime:120, lfoT:{}},
+  {name:'SPECTER', advance:2,  rate:0.4,  grainSize:18, repeat:2, dispersion:18, dir:'P', lfoAmt:0.6,  lfoRate:0.08, pitch:5,  window:'gauss', trailAmt:0.92, trailMix:0.75, trailSync:'grain', trailTime:3.0, lfoT:{dispersion:true,grainSize:true}},
 ];
 
-const P={advance:8,rate:1,grainSize:8,repeat:1,dispersion:0,lfoRate:0.25,lfoAmt:0,pitch:0};
-const lfoOn={advance:false,grainSize:false,repeat:false,dispersion:false};
+// Defaults
+const P={advance:15,rate:1,grainSize:15,repeat:1,dispersion:0,lfoRate:0.25,lfoAmt:0,pitch:0,
+         trailAmt:0,trailMix:0.4,trailTime:1.0};
+const lfoOn={advance:false,grainSize:false,repeat:false,dispersion:false,trailAmt:false};
 let grainDir='F', playing=false, bypass=false;
+let trailSync='grain';    // 'grain' | 'free'
 
-// VIDEO ENGINE
+// VIDEO ENGINE (inchangé pour l'essentiel)
 const JPEG_QUALITY=0.80;
 const VideoEngine=(()=>{
   let mp4file=null,samples=[],totalFrames=0,videoFPS=30,videoWidth=0,videoHeight=0,videoDuration=0;
@@ -389,9 +437,31 @@ const VideoEngine=(()=>{
     get cacheMax(){return BITMAP_CACHE_MAX;},get cacheKeys(){return Array.from(bitmapCache.keys());},get memoryMB(){return bytesUsed/1024/1024;}};
 })();
 
-// AUDIO ENGINE
+// ── AUDIO ENGINE + ECHO BUS ────────────────────────────────────────────────
 let actx=null,audioBuf=null,masterGain=null,analyser=null,audioNodes=[];
-function initAudio(){if(actx)return;actx=new(window.AudioContext||window.webkitAudioContext)({latencyHint:'interactive'});masterGain=actx.createGain();masterGain.gain.value=0.85;analyser=actx.createAnalyser();analyser.fftSize=256;masterGain.connect(analyser);analyser.connect(actx.destination);}
+// Echo bus : delay avec feedback + mix wet vers master
+// Routing : grain → dryGain → master ; grain → echoSend → delay → feedback loop → wetGain → master
+let echoSend=null,echoDelay=null,echoFb=null,echoWet=null,dryGain=null;
+const ECHO_MAX_S=4.0; // capacité max du DelayNode
+function initAudio(){
+  if(actx)return;
+  actx=new(window.AudioContext||window.webkitAudioContext)({latencyHint:'interactive'});
+  masterGain=actx.createGain();masterGain.gain.value=0.85;
+  analyser=actx.createAnalyser();analyser.fftSize=256;
+  // Bus echo
+  dryGain=actx.createGain();dryGain.gain.value=1.0;
+  echoSend=actx.createGain();echoSend.gain.value=0.0;
+  echoDelay=actx.createDelay(ECHO_MAX_S);echoDelay.delayTime.value=0.4;
+  echoFb=actx.createGain();echoFb.gain.value=0.0;
+  echoWet=actx.createGain();echoWet.gain.value=0.0;
+  // Câblage : echoSend → delay → echoWet → master ; delay → feedback → delay
+  echoSend.connect(echoDelay);
+  echoDelay.connect(echoFb);echoFb.connect(echoDelay);
+  echoDelay.connect(echoWet);
+  dryGain.connect(masterGain);
+  echoWet.connect(masterGain);
+  masterGain.connect(analyser);analyser.connect(actx.destination);
+}
 async function decodeAudio(file){try{audioBuf=await actx.decodeAudioData(await file.arrayBuffer());}catch(e){console.warn('audio:',e);audioBuf=null;}}
 function killAudio(){audioNodes.forEach(n=>{try{n.stop();}catch(e){}try{n.disconnect();}catch(e){}});audioNodes=[];}
 function killAudioImmediate(){killAudio();}
@@ -401,17 +471,73 @@ function extractAudio(startSec,durSec,reversed){
   for(let c=0;c<nch;c++){const src=audioBuf.getChannelData(c);const dst=ab.getChannelData(c);if(reversed){for(let i=0;i<realLen;i++)dst[i]=src[end-1-i];}else{dst.set(src.subarray(s,end));}}
   return ab;
 }
-const GRAIN_MS=80,OVERLAP=0.75,JITTER_MS=3,CROSSFADE_MS=12;
+
+// Met à jour les paramètres du bus echo en fonction de TRAILS
+function updateEchoBus(eTrailAmt,eTrailMix,curPlaySec){
+  if(!actx||!echoDelay)return;
+  const now=actx.currentTime;
+  // delay time
+  let dt;
+  if(trailSync==='grain'){dt=Math.max(0.01,Math.min(ECHO_MAX_S,(curPlaySec||0.5)*P.trailTime));}
+  else{dt=Math.max(0.01,Math.min(ECHO_MAX_S,P.trailTime/1000));}
+  echoDelay.delayTime.setTargetAtTime(dt,now,0.02);
+  // feedback (limité à 0.92 pour éviter le runaway)
+  const fb=Math.min(0.92,eTrailAmt*0.92);
+  echoFb.gain.setTargetAtTime(fb,now,0.02);
+  // send amount + wet mix
+  const send=eTrailAmt>0?1.0:0.0;
+  echoSend.gain.setTargetAtTime(send,now,0.02);
+  echoWet.gain.setTargetAtTime(eTrailMix*eTrailAmt,now,0.02);
+  // dry reste à 1 (on additionne wet par dessus, comme un send classique)
+}
+
+// ── TIME-STRETCH GRANULAIRE ─────────────────────────────────────────────────
+// Enveloppe : Hann sur les micro-grains SOLA (interne) + xfade anti-clic sur l'envelope master.
+const TS_GRAIN_MS=80, TS_OVERLAP=0.75, TS_JITTER_MS=3, TS_XFADE_MS=12;
+function applyAntiClickEnv(envGain,audioStartTime,outDurSec){
+  const xf=Math.min(TS_XFADE_MS/1000,outDurSec*0.1);
+  envGain.gain.setValueAtTime(0,audioStartTime);
+  envGain.gain.linearRampToValueAtTime(1,audioStartTime+xf);
+  envGain.gain.setValueAtTime(1,audioStartTime+outDurSec-xf);
+  envGain.gain.linearRampToValueAtTime(0,audioStartTime+outDurSec);
+}
 function timeStretchGranular(srcBuf,outDurSec,audioStartTime,ePitch,useJitter){
-  if(!srcBuf||!actx||bypass)return null;const sr=srcBuf.sampleRate;const grainSec=GRAIN_MS/1000;const hopOutSec=grainSec*(1-OVERLAP);const srcDur=srcBuf.duration;const ratio=srcDur/Math.max(0.001,outDurSec);const hopInSec=hopOutSec*ratio;const grainGain=(1-OVERLAP)/0.5;const nGrains=Math.max(1,Math.ceil(outDurSec/hopOutSec)+1);
-  const envGain=actx.createGain();const xf=CROSSFADE_MS/1000;envGain.gain.setValueAtTime(0,audioStartTime);envGain.gain.linearRampToValueAtTime(1,audioStartTime+xf);envGain.gain.setValueAtTime(1,audioStartTime+outDurSec-xf);envGain.gain.linearRampToValueAtTime(0,audioStartTime+outDurSec);envGain.connect(masterGain);
+  if(!srcBuf||!actx||bypass)return null;
+  const sr=srcBuf.sampleRate;
+  const grainSec=TS_GRAIN_MS/1000;
+  const hopOutSec=grainSec*(1-TS_OVERLAP);
+  const srcDur=srcBuf.duration;
+  const ratio=srcDur/Math.max(0.001,outDurSec);
+  const hopInSec=hopOutSec*ratio;
+  const grainGain=(1-TS_OVERLAP)/0.5;
+  const nGrains=Math.max(1,Math.ceil(outDurSec/hopOutSec)+1);
+  const envGain=actx.createGain();
+  applyAntiClickEnv(envGain,audioStartTime,outDurSec);
+  envGain.connect(dryGain);envGain.connect(echoSend);
   const localNodes=[];
   for(let i=0;i<nGrains;i++){
-    const jitter=useJitter?(Math.random()-0.5)*2*(JITTER_MS/1000):0;const tOut=audioStartTime+i*hopOutSec;const srcPos=Math.max(0,i*hopInSec+jitter);if(srcPos>=srcDur)break;if(tOut>=audioStartTime+outDurSec)break;
-    const startSample=Math.round(srcPos*sr);const sliceLen=Math.min(Math.round(grainSec*sr),srcBuf.length-startSample);if(sliceLen<8)continue;
+    const jitter=useJitter?(Math.random()-0.5)*2*(TS_JITTER_MS/1000):0;
+    const tOut=audioStartTime+i*hopOutSec;
+    const srcPos=Math.max(0,i*hopInSec+jitter);
+    if(srcPos>=srcDur)break;
+    if(tOut>=audioStartTime+outDurSec)break;
+    const startSample=Math.round(srcPos*sr);
+    const sliceLen=Math.min(Math.round(grainSec*sr),srcBuf.length-startSample);
+    if(sliceLen<8)continue;
     const sliceBuf=actx.createBuffer(srcBuf.numberOfChannels,sliceLen,sr);
-    for(let c=0;c<srcBuf.numberOfChannels;c++){const src=srcBuf.getChannelData(c);const dst=sliceBuf.getChannelData(c);for(let k=0;k<sliceLen;k++){const w=0.5-0.5*Math.cos(2*Math.PI*k/(sliceLen-1));dst[k]=(src[startSample+k]||0)*w*grainGain;}}
-    const nd=actx.createBufferSource();nd.buffer=sliceBuf;nd.playbackRate.value=1;nd.detune.value=ePitch*100;nd.connect(envGain);nd.start(tOut);
+    for(let c=0;c<srcBuf.numberOfChannels;c++){
+      const src=srcBuf.getChannelData(c);const dst=sliceBuf.getChannelData(c);
+      for(let k=0;k<sliceLen;k++){
+        const w=0.5-0.5*Math.cos(2*Math.PI*k/(sliceLen-1));
+        dst[k]=(src[startSample+k]||0)*w*grainGain;
+      }
+    }
+    const nd=actx.createBufferSource();
+    nd.buffer=sliceBuf;
+    nd.playbackRate.value=1;
+    nd.detune.value=ePitch*100;
+    nd.connect(envGain);
+    nd.start(tOut);
     nd.onended=()=>{const idx=audioNodes.indexOf(nd);if(idx>=0)audioNodes.splice(idx,1);try{nd.disconnect();}catch(_){}};
     audioNodes.push(nd);localNodes.push(nd);
   }
@@ -419,20 +545,14 @@ function timeStretchGranular(srcBuf,outDurSec,audioStartTime,ePitch,useJitter){
   return{envGain,nodes:localNodes};
 }
 
-// ── NOUVEAU : lecture directe sans granulation ──
-// Utilisé quand isContiguous=true (NORMAL, REV, PING en mode lisse)
 function playDirectAt(ab,playSec,audioStartTime,ePitch){
   if(!actx||bypass||!ab)return null;
-  const xf=Math.min(0.020,playSec*0.08);
   const gain=actx.createGain();
-  gain.gain.setValueAtTime(0,audioStartTime);
-  gain.gain.linearRampToValueAtTime(1,audioStartTime+xf);
-  gain.gain.setValueAtTime(1,audioStartTime+playSec-xf);
-  gain.gain.linearRampToValueAtTime(0,audioStartTime+playSec);
-  gain.connect(masterGain);
+  applyAntiClickEnv(gain,audioStartTime,playSec);
+  gain.connect(dryGain);gain.connect(echoSend);
   const nd=actx.createBufferSource();
   nd.buffer=ab;
-  nd.playbackRate.value=ab.duration/Math.max(0.001,playSec);
+  nd.playbackRate.value=1;
   nd.detune.value=ePitch*100;
   nd.connect(gain);
   nd.start(audioStartTime);
@@ -444,15 +564,17 @@ function playDirectAt(ab,playSec,audioStartTime,ePitch){
 }
 
 function playGrainAt(anchorSec,playSec,eRate,ePitch,dir,audioStartTime,useJitter){
-  if(!audioBuf||!actx||bypass)return null;const srcDur=playSec*Math.max(0.1,eRate);const result={nodes:[],envGains:[]};
+  if(!audioBuf||!actx||bypass)return null;
+  const srcDur=playSec*Math.max(0.1,eRate);
+  const result={nodes:[],envGains:[]};
   function addResult(r){if(!r)return;if(r.nodes)result.nodes.push(...r.nodes);if(r.envGain)result.envGains.push(r.envGain);}
-  if(!useJitter){
-    // Mode direct : BufferSource simple, sans granulation — lecture lisse FWD/REV/PING
+  const rateIsOne=Math.abs(eRate-1)<0.01;
+  const canDirect=!useJitter && rateIsOne;
+  if(canDirect){
     if(dir==='F'){const ab=extractAudio(anchorSec,srcDur,false);if(ab)addResult(playDirectAt(ab,playSec,audioStartTime,ePitch));}
     else if(dir==='R'){const ab=extractAudio(anchorSec,srcDur,true);if(ab)addResult(playDirectAt(ab,playSec,audioStartTime,ePitch));}
     else{const halfSrc=srcDur/2;const halfPlay=playSec/2;const abFwd=extractAudio(anchorSec,halfSrc,false);const abRev=extractAudio(anchorSec,halfSrc,true);if(abFwd)addResult(playDirectAt(abFwd,halfPlay,audioStartTime,ePitch));if(abRev)addResult(playDirectAt(abRev,halfPlay,audioStartTime+halfPlay,ePitch));}
   }else{
-    // Mode granulaire (stutter, freeze, dense, drift, swarm…)
     if(dir==='F'){const ab=extractAudio(anchorSec,srcDur,false);if(ab)addResult(timeStretchGranular(ab,playSec,audioStartTime,ePitch,useJitter));}
     else if(dir==='R'){const ab=extractAudio(anchorSec,srcDur,true);if(ab)addResult(timeStretchGranular(ab,playSec,audioStartTime,ePitch,useJitter));}
     else{const halfSrc=srcDur/2;const halfPlay=playSec/2;const abFwd=extractAudio(anchorSec,halfSrc,false);const abRev=extractAudio(anchorSec,halfSrc,true);if(abFwd)addResult(timeStretchGranular(abFwd,halfPlay,audioStartTime,ePitch,useJitter));if(abRev)addResult(timeStretchGranular(abRev,halfPlay,audioStartTime+halfPlay,ePitch,useJitter));}
@@ -469,13 +591,94 @@ function cancelPendingGrain(grainResult){
 // GRANULAR ENGINE
 let needle=0,grainAnchor=0,grainNomSec=0,grainPlaySec=0,grainRep=0,needNewGrain=true,inPt=0,outPt=1;
 let grainAudioStart=0,grainStart=0,grainPrescheduled=false,pendingNeedle=null,pendingAnchor=null;
-let grainSnapGS=8,grainSnapRate=1,grainSnapAdv=8,grainSnapDir='F';
+let grainSnapGS=15,grainSnapRate=1,grainSnapAdv=15,grainSnapDir='F';
 let pendingAudioNodes=[];
 function resetGranular(){needle=Math.floor(inPt*VideoEngine.totalFrames);grainAnchor=needle;grainStart=0;grainAudioStart=0;grainNomSec=0;grainPlaySec=0;grainRep=0;needNewGrain=true;grainPrescheduled=false;pendingNeedle=null;pendingAnchor=null;pendingAudioNodes=[];killAudioImmediate();}
 
-// CANVAS
+// ── CANVAS + GHOST FEEDBACK ────────────────────────────────────────────────
+// Système de récursion type "frame feedback" (caméra qui se filme dans son moniteur).
+// Tempo discret : on capture la sortie composite dans ghostCv à chaque "tick TIME"
+// (sync grain : tick = trailTime × playSec ; sync free : tick = trailTime ms).
+// Entre deux ticks, le ghost reste figé. À chaque RAF, l'output = frame courante
+// puis ghost dessiné par-dessus avec alpha = AMOUNT (= persistance des couches).
+// La récursion vient du fait qu'au prochain tick, on snapshot l'output COMPOSITE :
+// donc le ghost_new contient déjà ghost_old × AMOUNT atténué, qui contient lui-même
+// ghost_older × AMOUNT², etc. Cascade naturelle de N couches.
 const outCv=document.getElementById('outCv');const outCtx=outCv.getContext('2d');
-function drawVideoFrame(frame){if(!frame)return;outCtx.drawImage(frame,0,0,outCv.width,outCv.height);}
+let ghostCv=null,ghostCtx=null;
+let ghostHasContent=false;       // évite d'afficher un ghost vide les premiers ticks
+let nextGhostTickAudio=0;        // prochain tick programmé sur l'horloge audio (sec)
+let nextGhostTickPerf=0;         // fallback sur performance.now() si pas d'actx
+function ensureGhostCv(){
+  if(!ghostCv){ghostCv=document.createElement('canvas');ghostCtx=ghostCv.getContext('2d');ghostHasContent=false;}
+  if(ghostCv.width!==outCv.width||ghostCv.height!==outCv.height){
+    ghostCv.width=outCv.width;ghostCv.height=outCv.height;
+    ghostCtx.fillStyle='#000';ghostCtx.fillRect(0,0,ghostCv.width,ghostCv.height);
+    ghostHasContent=false;
+  }
+}
+function resetGhost(){
+  if(ghostCv){ghostCtx.fillStyle='#000';ghostCtx.fillRect(0,0,ghostCv.width,ghostCv.height);}
+  ghostHasContent=false;nextGhostTickAudio=0;nextGhostTickPerf=0;
+}
+// Renvoie la durée du prochain tick ghost en secondes, calée sur le système actuel.
+function ghostTickDurSec(curPlaySec){
+  if(trailSync==='grain')return Math.max(0.04,(curPlaySec||0.2)*P.trailTime);
+  return Math.max(0.02,P.trailTime/1000);
+}
+function drawVideoFrame(frame,eTrailAmt,eTrailMix,curPlaySec,nowMs){
+  if(!frame)return;
+  ensureGhostCv();
+  const W=outCv.width,H=outCv.height;
+  // === Pas de trails : dessin direct, ghost est figé (mais réutilisable s'il revient) ===
+  if(eTrailAmt<=0.001){
+    outCtx.globalAlpha=1.0;
+    outCtx.fillStyle='#000';outCtx.fillRect(0,0,W,H);
+    outCtx.drawImage(frame,0,0,W,H);
+    // Quand AMOUNT=0 on coupe la récursion (sinon des restes éternels persisteraient).
+    if(ghostHasContent){resetGhost();}
+    return;
+  }
+  // === Avec trails : composite = frame + ghost × (AMOUNT × MIX) ===
+  // AMOUNT contrôle l'opacité (donc persistance) des couches, MIX = balance dry/wet finale.
+  // On compose dans un ordre qui garantit que la frame courante reste lisible :
+  //   1) fond noir
+  //   2) frame courante à pleine opacité (dry)
+  //   3) ghost par-dessus avec alpha = AMOUNT × MIX (couches fantomatiques)
+  outCtx.globalAlpha=1.0;
+  outCtx.fillStyle='#000';outCtx.fillRect(0,0,W,H);
+  outCtx.globalCompositeOperation='source-over';
+  outCtx.drawImage(frame,0,0,W,H);
+  if(ghostHasContent){
+    outCtx.globalAlpha=Math.max(0,Math.min(1,eTrailAmt*eTrailMix));
+    outCtx.drawImage(ghostCv,0,0,W,H);
+    outCtx.globalAlpha=1.0;
+  }
+  // === Tick : capture l'output composite dans ghostCv ===
+  // C'est ici que la récursion opère : on snapshot ce qui vient d'être affiché, qui
+  // contient déjà ghost_old × (amount×mix) par-dessus la frame.
+  const tickDur=ghostTickDurSec(curPlaySec);
+  let shouldCapture=false;
+  if(actx){
+    const tNow=actx.currentTime;
+    if(nextGhostTickAudio===0){nextGhostTickAudio=tNow+tickDur;}
+    else if(tNow>=nextGhostTickAudio){shouldCapture=true;
+      // garde le rythme même si on a sauté plusieurs ticks
+      while(nextGhostTickAudio<=tNow)nextGhostTickAudio+=tickDur;}
+  }else{
+    if(nextGhostTickPerf===0){nextGhostTickPerf=nowMs+tickDur*1000;}
+    else if(nowMs>=nextGhostTickPerf){shouldCapture=true;
+      while(nextGhostTickPerf<=nowMs)nextGhostTickPerf+=tickDur*1000;}
+  }
+  if(shouldCapture){
+    ghostCtx.globalCompositeOperation='source-over';
+    ghostCtx.globalAlpha=1.0;
+    ghostCtx.fillStyle='#000';
+    ghostCtx.fillRect(0,0,W,H);
+    ghostCtx.drawImage(outCv,0,0,W,H);
+    ghostHasContent=true;
+  }
+}
 
 // FILE LOAD
 ['btnLd','nosrc'].forEach(id=>document.getElementById(id).addEventListener('click',()=>{initAudio();document.getElementById('fileInput').click();}));
@@ -489,6 +692,7 @@ async function loadFile(file){
   try{
     const audioPromise=decodeAudio(file);await VideoEngine.load(file);await audioPromise;
     outCv.width=VideoEngine.videoWidth;outCv.height=VideoEngine.videoHeight;
+    ghostCv=null; // force recreation
     inPt=0;outPt=1;tlThumbs.length=0;tlBuilt=false;tlBuilding=false;
     updHandles();resetGranular();
     document.getElementById('nosrc').classList.add('h');
@@ -585,11 +789,35 @@ function updTUI(){
   document.getElementById('lpl').className='led'+(playing?' on':'');
 }
 
+// ── TRAILS SYNC SWITCH ─────────────────────────────────────────────────────
+function setTrailSync(mode){
+  trailSync=mode;
+  document.querySelectorAll('.swbtn').forEach(b=>b.classList.toggle('on',b.dataset.sync===mode));
+  // Reconfigure le slider TIME : grain → [0.25..4]x ; free → [20..1000]ms
+  const sw=document.querySelector('.sw[data-p="trailTime"]');
+  const lbl=document.getElementById('trailTimeLbl');
+  if(mode==='grain'){
+    sw.dataset.min='0.25';sw.dataset.max='4';sw.dataset.step='0.25';sw.dataset.fmt='trail';
+    lbl.textContent='TIME';
+    if(P.trailTime>4||P.trailTime<0.25)P.trailTime=1.0;
+  }else{
+    sw.dataset.min='20';sw.dataset.max='1000';sw.dataset.step='5';sw.dataset.fmt='ms';
+    lbl.textContent='TIME';
+    if(P.trailTime<20)P.trailTime=380;
+    if(P.trailTime>1000)P.trailTime=380;
+  }
+  refreshSlider('trailTime',P.trailTime);
+  document.querySelectorAll('.pre').forEach(b=>b.classList.remove('act'));
+}
+document.querySelectorAll('.swbtn').forEach(b=>b.addEventListener('click',()=>setTrailSync(b.dataset.sync)));
+
 // SLIDERS
 function fmtV(v,f){
   if(f==='fr')return Math.round(v)+' fr';if(f==='rate')return v.toFixed(2)+'x';if(f==='rep')return Math.round(v)+'x';
   if(f==='disp')return '+-'+Math.round(v);if(f==='hz'){const hz=v.toFixed(2);return hz.length>5?v.toFixed(1)+'Hz':hz+'Hz';}
-  if(f==='dec')return v.toFixed(2);if(f==='st')return (v>=0?'+':'')+Math.round(v)+'st';return String(v);
+  if(f==='dec')return v.toFixed(2);if(f==='st')return (v>=0?'+':'')+Math.round(v)+'st';
+  if(f==='trail')return v.toFixed(2)+'x';if(f==='ms')return Math.round(v)+'ms';
+  return String(v);
 }
 function refreshSlider(param,val){
   const sw=document.querySelector(`.sw[data-p="${param}"]`);if(!sw)return;
@@ -600,10 +828,10 @@ function refreshSlider(param,val){
 Object.keys(P).forEach(k=>refreshSlider(k,P[k]));
 let activeSlider=null;
 document.querySelectorAll('.sw').forEach(w=>{
-  const p=w.dataset.p,mn=+w.dataset.min,mx=+w.dataset.max,fmt=w.dataset.fmt;
-  const step=w.dataset.step?+w.dataset.step:((mx-mn)>20?1:0.01);
+  const p=w.dataset.p;
   const gx=e=>e.touches?e.touches[0].clientX:e.clientX;
   function setVal(e){
+    const mn=+w.dataset.min,mx=+w.dataset.max,fmt=w.dataset.fmt;
     const r=w.getBoundingClientRect();const pct=Math.max(0,Math.min(1,(gx(e)-r.left)/r.width));
     P[p]=mn+pct*(mx-mn);const ps=(pct*100).toFixed(1)+'%';
     w.querySelector('.sth').style.left=ps;w.querySelector('.sf').style.width=ps;
@@ -611,6 +839,7 @@ document.querySelectorAll('.sw').forEach(w=>{
     document.querySelectorAll('.pre').forEach(b=>b.classList.remove('act'));
   }
   function setValRaw(val){
+    const mn=+w.dataset.min,mx=+w.dataset.max,fmt=w.dataset.fmt;
     val=Math.max(mn,Math.min(mx,val));P[p]=val;
     const pct=(val-mn)/(mx-mn);const ps=(pct*100).toFixed(1)+'%';
     w.querySelector('.sth').style.left=ps;w.querySelector('.sf').style.width=ps;
@@ -618,12 +847,13 @@ document.querySelectorAll('.sw').forEach(w=>{
     document.querySelectorAll('.pre').forEach(b=>b.classList.remove('act'));
   }
   w.addEventListener('mousedown',e=>{
-    activeSlider={el:w,p,mn,mx,fmt,step,setValRaw};setVal(e);
+    const step=w.dataset.step?+w.dataset.step:0.01;
+    activeSlider={el:w,p,step,setValRaw};setVal(e);
     const mv=e2=>setVal(e2);
     document.addEventListener('mousemove',mv);
     document.addEventListener('mouseup',()=>{document.removeEventListener('mousemove',mv);if(activeSlider&&activeSlider.el===w)activeSlider=null;},{once:true});
   });
-  w.addEventListener('click',()=>{activeSlider={el:w,p,mn,mx,fmt,step,setValRaw};});
+  w.addEventListener('click',()=>{const step=w.dataset.step?+w.dataset.step:0.01;activeSlider={el:w,p,step,setValRaw};});
 });
 window.addEventListener('wheel',e=>{
   if(!activeSlider)return;e.preventDefault();
@@ -638,12 +868,20 @@ document.querySelectorAll('[data-lt]').forEach(r=>{
 // PRESETS
 function applyPreset(idx){
   const pr=PRESETS[idx];
-  Object.assign(P,{advance:pr.advance,rate:pr.rate,grainSize:pr.grainSize,repeat:pr.repeat,dispersion:pr.dispersion,lfoAmt:pr.lfoAmt,lfoRate:pr.lfoRate,pitch:pr.pitch??0});
-  grainDir=pr.dir;Object.keys(P).forEach(k=>refreshSlider(k,P[k]));updateDirBtns(null);
+  // Sync mode d'abord (modifie les bornes de trailTime)
+  setTrailSync(pr.trailSync||'grain');
+  Object.assign(P,{
+    advance:pr.advance,rate:pr.rate,grainSize:pr.grainSize,repeat:pr.repeat,dispersion:pr.dispersion,
+    lfoAmt:pr.lfoAmt,lfoRate:pr.lfoRate,pitch:pr.pitch??0,
+    trailAmt:pr.trailAmt??0,trailMix:pr.trailMix??0.4,trailTime:pr.trailTime??1.0
+  });
+  grainDir=pr.dir;
+  resetGhost();
+  Object.keys(P).forEach(k=>refreshSlider(k,P[k]));updateDirBtns(null);
   document.getElementById('dirHint').textContent={F:'FWD',R:'REV',P:'PING'}[grainDir]||'FWD';
   document.querySelectorAll('.pre').forEach((b,i)=>b.classList.toggle('act',i===idx));
   const lfoT=pr.lfoT||{};
-  ['advance','grainSize','repeat','dispersion'].forEach(t=>{lfoOn[t]=!!lfoT[t];const r=document.querySelector(`.rok[data-lt="${t}"]`);if(r)r.classList.toggle('on',lfoOn[t]);});
+  ['advance','grainSize','repeat','dispersion','trailAmt'].forEach(t=>{lfoOn[t]=!!lfoT[t];const r=document.querySelector(`.rok[data-lt="${t}"]`);if(r)r.classList.toggle('on',lfoOn[t]);});
   needNewGrain=true;grainPrescheduled=false;pendingNeedle=null;pendingAnchor=null;killAudioImmediate();
 }
 document.querySelectorAll('.pre').forEach((b,i)=>b.addEventListener('click',()=>applyPreset(i)));
@@ -656,7 +894,19 @@ const vuBuf=new Uint8Array(128);
 function updVU(){if(!analyser)return;analyser.getByteFrequencyData(vuBuf);const avg=vuBuf.slice(0,32).reduce((a,b)=>a+b,0)/32/255;['L','R'].forEach((ch,ci)=>{const v=Math.max(0,Math.min(1,avg*(1+(ci?0.05*(Math.random()-.5):0))));const lit=Math.round(v*VU_SEG);document.getElementById('vc-'+ch).querySelectorAll('.vseg').forEach((s,i)=>{const on=(VU_SEG-1-i)<lit,lvl=(VU_SEG-1-i)/VU_SEG;s.className='vseg'+(on?(lvl>.8?' hi':lvl>.5?' md':' lo'):'');});});}
 const scCv=document.getElementById('scCv'),sctx=scCv.getContext('2d');
 let lfoPhase=0;
-function drawScope(sv){const W=scCv.parentElement.clientWidth||80,H=22;scCv.width=W;scCv.height=H;sctx.fillStyle='#000';sctx.fillRect(0,0,W,H);sctx.strokeStyle='rgba(0,255,0,.08)';sctx.lineWidth=.5;sctx.beginPath();sctx.moveTo(0,H/2);sctx.lineTo(W,H/2);sctx.stroke();sctx.beginPath();sctx.strokeStyle='#00cc00';sctx.lineWidth=1.5;for(let x=0;x<W;x++){const y=H/2-Math.sin((x/W)*Math.PI*4+lfoPhase)*(H/2-2);x===0?sctx.moveTo(x,y):sctx.lineTo(x,y);}sctx.stroke();sctx.fillStyle='#00ff00';sctx.beginPath();sctx.arc(W-4,H/2-sv*(H/2-2),2,0,Math.PI*2);sctx.fill();}
+function drawScope(sv){
+  const W=scCv.parentElement.clientWidth||80,H=scCv.parentElement.clientHeight||42;
+  scCv.width=W;scCv.height=H;
+  sctx.fillStyle='#000';sctx.fillRect(0,0,W,H);
+  sctx.strokeStyle='rgba(0,255,0,.10)';sctx.lineWidth=.5;
+  sctx.beginPath();sctx.moveTo(0,H/2);sctx.lineTo(W,H/2);sctx.stroke();
+  sctx.beginPath();sctx.moveTo(W/2,0);sctx.lineTo(W/2,H);sctx.stroke();
+  sctx.beginPath();sctx.strokeStyle='#00cc00';sctx.lineWidth=1.8;
+  for(let x=0;x<W;x++){const y=H/2-Math.sin((x/W)*Math.PI*4+lfoPhase)*(H/2-3);x===0?sctx.moveTo(x,y):sctx.lineTo(x,y);}
+  sctx.stroke();
+  sctx.fillStyle='#00ff00';
+  sctx.beginPath();sctx.arc(W-5,H/2-sv*(H/2-3),3,0,Math.PI*2);sctx.fill();
+}
 const gaCv=document.getElementById('gaCv'),gactx=gaCv.getContext('2d');
 const gaHist=new Float32Array(128);let gaI=0;
 function drawGact(v){gaHist[gaI%128]=v;gaI++;const W=gaCv.parentElement.clientWidth||80,H=12;gaCv.width=W;gaCv.height=H;gactx.fillStyle='#000';gactx.fillRect(0,0,W,H);const bars=32,bw=W/bars;for(let i=0;i<bars;i++){const idx=((gaI-bars+i)%128+128)%128;const bh=Math.max(1,(gaHist[idx]||0)*(H-1));gactx.fillStyle=i%2?'#007700':'#00cc00';gactx.fillRect(i*bw+.3,H-bh,bw-.6,bh);}}
@@ -674,6 +924,9 @@ function loop(now){
   const eRep=Math.max(1,Math.round(P.repeat+(lfoOn.repeat?ls*la*P.repeat:0)));
   const eDisp=Math.max(0,Math.round(P.dispersion+(lfoOn.dispersion?ls*la*P.dispersion:0)));
   const eRate=Math.max(0.1,P.rate);const ePitch=P.pitch;
+  // TRAILS amount peut être modulé par LFO
+  const eTrailAmt=Math.max(0,Math.min(1,P.trailAmt+(lfoOn.trailAmt?ls*la*P.trailAmt:0)));
+  const eTrailMix=Math.max(0,Math.min(1,P.trailMix));
   const isContiguous=eAdv===eGS&&eRep===1&&eDisp===0;
   const useJitter=!isContiguous;
 
@@ -690,14 +943,19 @@ function loop(now){
   if(bypass){
     if(playing){needle=Math.min(needle+1,Math.floor(outPt*VideoEngine.totalFrames)-1);if(needle>=Math.floor(outPt*VideoEngine.totalFrames)-1)needle=Math.floor(inPt*VideoEngine.totalFrames);}
     let f=VideoEngine.getFrame(needle);if(!f)f=VideoEngine.getNearestCached(needle);
-    if(f){drawVideoFrame(f);const ts=VideoEngine.frameToTime(needle);document.getElementById('mtc').textContent=fmtS(ts);document.getElementById('htc').textContent=fmtS(ts);}
+    if(f){drawVideoFrame(f,0,0,0.2,now);const ts=VideoEngine.frameToTime(needle);document.getElementById('mtc').textContent=fmtS(ts);document.getElementById('htc').textContent=fmtS(ts);}
     document.getElementById('mbadge').textContent='BYPASS';document.getElementById('mstat').textContent=`fr ${needle}`;
-    VideoEngine.prefetchAround(needle,1,4,0);drawScope(ls);drawGact(0);updVU();return;
+    VideoEngine.prefetchAround(needle,1,4,0);drawScope(ls);drawGact(0);updVU();
+    document.getElementById('ltr').className='led';
+    return;
   }
 
   const nomSec=eGS/Math.max(1,VideoEngine.videoFPS);
   const playSec=nomSec/Math.max(0.01,eRate);
   const inF=Math.floor(inPt*VideoEngine.totalFrames);const outF=Math.floor(outPt*VideoEngine.totalFrames);const span=Math.max(1,outF-inF);
+
+  // Mise à jour du bus écho (audio)
+  updateEchoBus(eTrailAmt,eTrailMix,playSec);
 
   function advanceNeedle(curN){
     if(eAdv===0)return curN;
@@ -716,17 +974,18 @@ function loop(now){
     grainAnchor=Math.max(0,Math.min(VideoEngine.totalFrames-1,needle+disp));
     grainAudioStart=(actx?actx.currentTime:0)+LEAD_TIME_S;grainStart=now;
     const anchorTime=VideoEngine.frameToTime(grainAnchor);
-    playGrainAt(anchorTime,grainPlaySec,eRate,ePitch,grainDir,grainAudioStart,useJitter);
+    playGrainAt(anchorTime,grainPlaySec,eRate,ePitch,grainDir,grainAudioStart,useJitter,windowShape);
   }
 
   const rateChanged=Math.abs(eRate-grainSnapRate)/Math.max(0.01,grainSnapRate)>0.05;
   const gsChanged=eGS!==grainSnapGS;const dirChanged=grainDir!==grainSnapDir;
-  const paramsChanged=rateChanged||gsChanged||dirChanged;
+  const shapeChanged=windowShape!==grainSnapShape;
+  const paramsChanged=rateChanged||gsChanged||dirChanged||shapeChanged;
   if(paramsChanged&&playing){
     if(pendingAudioNodes.length>0){for(const r of pendingAudioNodes)cancelPendingGrain(r);pendingAudioNodes=[];}
     pendingNeedle=null;pendingAnchor=null;grainPrescheduled=false;
     const newPlaySec=eGS/Math.max(1,VideoEngine.videoFPS)/Math.max(0.01,eRate);
-    grainPlaySec=newPlaySec;grainSnapGS=eGS;grainSnapRate=eRate;grainSnapDir=grainDir;grainSnapAdv=eAdv;
+    grainPlaySec=newPlaySec;grainSnapGS=eGS;grainSnapRate=eRate;grainSnapDir=grainDir;grainSnapAdv=eAdv;grainSnapShape=windowShape;
   }
 
   const curPlay=Math.max(0.001,grainPlaySec||playSec);
@@ -740,7 +999,7 @@ function loop(now){
     const nextAnchor=Math.max(0,Math.min(VideoEngine.totalFrames-1,nextNeedle+disp));
     pendingNeedle=nextNeedle;pendingAnchor=nextAnchor;
     const nextAudioStart=grainAudioStart+curPlay;const nextAnchorTime=VideoEngine.frameToTime(nextAnchor);
-    if(actx){const r=playGrainAt(nextAnchorTime,grainPlaySec,eRate,ePitch,grainDir,nextAudioStart,useJitter);if(r)pendingAudioNodes.push(r);}
+    if(actx){const r=playGrainAt(nextAnchorTime,grainPlaySec,eRate,ePitch,grainDir,nextAudioStart,useJitter,windowShape);if(r)pendingAudioNodes.push(r);}
   }
 
   if(elapsed>=curPlay&&playing){
@@ -748,7 +1007,7 @@ function loop(now){
       grainAudioStart=grainAudioStart+curPlay;grainStart=grainStart+curPlay*1000;
       needle=pendingNeedle;grainAnchor=pendingAnchor;pendingNeedle=null;pendingAnchor=null;pendingAudioNodes=[];
       grainRep=(grainRep+1)%Math.max(1,eRep);grainPrescheduled=false;
-      grainSnapGS=eGS;grainSnapRate=eRate;grainSnapAdv=eAdv;grainSnapDir=grainDir;
+      grainSnapGS=eGS;grainSnapRate=eRate;grainSnapAdv=eAdv;grainSnapDir=grainDir;grainSnapShape=windowShape;
       elapsed=Math.max(0,(actx?actx.currentTime-grainAudioStart:0));
     }else{needNewGrain=true;grainRep=0;elapsed=curPlay*0.999;}
   }
@@ -762,13 +1021,15 @@ function loop(now){
   const frameIdx=Math.max(0,Math.min(VideoEngine.totalFrames-1,grainAnchor+posI));
   let outFrame=VideoEngine.getFrame(frameIdx);let degraded=false;
   if(!outFrame){outFrame=VideoEngine.getNearestCached(frameIdx);degraded=!!outFrame;}
-  if(outFrame)drawVideoFrame(outFrame);
+  // Calcul de l'alpha vidéo via la window shape (équivalent visuel de l'enveloppe audio)
+  const frameAlpha=windowEnv(frac,grainSnapShape);
+  if(outFrame)drawVideoFrame(outFrame,frameAlpha,eTrailAmt,eTrailMix);
   VideoEngine.prefetchAround(grainAnchor,eAdv||1,eGS,eDisp);
 
   const ts=VideoEngine.frameToTime(frameIdx);
   document.getElementById('mtc').textContent=fmtS(ts);
   document.getElementById('htc').textContent=fmtS(ts);
-  document.getElementById('mstat').textContent=`fr ${frameIdx}/${VideoEngine.totalFrames}${degraded?' MISS':''}${isContiguous?' CONT':''}`;
+  document.getElementById('mstat').textContent=`fr ${frameIdx}/${VideoEngine.totalFrames}${degraded?' MISS':''}${isContiguous?' CONT':''} ${grainSnapShape.toUpperCase()}`;
   document.getElementById('si-needle').textContent=`${frameIdx}`;
   document.getElementById('si-tc').textContent=fmtS(ts);
 
@@ -776,11 +1037,13 @@ function loop(now){
   const dnL={F:'FWD',R:'REV',P:'PNG'}[grainDir];
   const adL=eAdv===0?'FREEZE':'+'+eAdv;
   const badge=document.getElementById('mbadge');
-  badge.textContent=`GRAIN ${dnL} ${adL}${degraded?' LO':''}`;
+  const trailTag=eTrailAmt>0.05?` TR${Math.round(eTrailAmt*99)}`:'';
+  badge.textContent=`GRAIN ${dnL} ${adL}${trailTag}${degraded?' LO':''}`;
   badge.className='mbadge'+(VideoEngine.isReady?' ok':'');
   document.getElementById('lgr').className='led on';
+  document.getElementById('ltr').className='led'+(eTrailAmt>0.05?' on c':'');
   document.getElementById('lpk').className='led'+(Math.random()<0.04?' on r':'');
-  const actV=Math.min(1,0.15+(eGS/96)*0.4+(eRep/16)*0.3+(eDisp/48)*0.15);
+  const actV=Math.min(1,0.15+(eGS/96)*0.4+(eRep/16)*0.3+(eDisp/48)*0.15+eTrailAmt*0.2);
   drawScope(ls);drawGact(actV);updVU();
 }
 
