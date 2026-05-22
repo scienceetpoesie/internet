@@ -32,17 +32,47 @@ body {
 
 /* ── SECTION ── */
 .section-block { padding: 28px 24px 10px 24px; }
-.section-title { font-family: "Arial Black", Arial, sans-serif; font-size: 15px; font-weight: 900; color: #2B1A00; letter-spacing: 3px; text-transform: uppercase; border-bottom: 3px solid #7A5C1E; padding-bottom: 6px; margin: 0 0 20px 0; }
+
+/* FIX 3 : métatitres en serif, titres de brochures en sans-serif */
+.section-title {
+  font-family: "Times New Roman", Times, serif; /* serif pour les métatitres */
+  font-size: 15px; font-weight: 900; color: #2B1A00;
+  letter-spacing: 3px; text-transform: uppercase;
+  border-bottom: 3px solid #7A5C1E; padding-bottom: 6px; margin: 0 0 20px 0;
+}
 .section-title span { color: #7A5C1E; font-size: 18px; margin-right: 6px; }
 
 /* ── GRILLE ── */
 .quinconce-grid { display: flex; flex-wrap: wrap; gap: 0; padding: 0; }
 .book-item { width: 20%; padding: 12px; box-sizing: border-box; text-align: center; display: flex; flex-direction: column; align-items: center; }
-.book-cover-wrap { display: block; width: 180px; position: relative; cursor: pointer !important; border: 3px outset #8B6914; box-shadow: 4px 4px 0 #7A5C1E, 6px 6px 0 #4A3000; transition: transform 0.08s, box-shadow 0.08s; background: #888; overflow: hidden; }
+
+/* FIX 5 : couverture cliquable vs non-cliquable */
+.book-cover-wrap {
+  display: block; width: 180px; position: relative;
+  cursor: pointer !important;
+  border: 3px outset #8B6914;
+  box-shadow: 4px 4px 0 #7A5C1E, 6px 6px 0 #4A3000;
+  transition: transform 0.08s, box-shadow 0.08s;
+  background: #888; overflow: hidden;
+}
 .book-cover-wrap:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #7A5C1E, 9px 9px 0 #4A3000; border-style: inset; }
+
+/* Couvertures sans extrait : pas de hover, pas de curseur pointer */
+.book-cover-wrap.no-preview {
+  cursor: default !important;
+  pointer-events: none;
+}
+
 .book-cover-wrap img { display: block; width: 180px; height: auto; image-rendering: pixelated; }
 .book-cover-placeholder { width: 180px; height: auto; min-height: 240px; background: #C0B080; display: flex; align-items: center; justify-content: center; font-family: "Courier New", monospace; font-size: 10px; color: #5A4010; text-align: center; padding: 10px; box-sizing: border-box; }
-.book-title { font-family: "Times New Roman", Times, serif; font-size: 12px; font-style: normal; color: #2B1A00; margin-top: 8px; line-height: 1.4; width: 180px; max-width: 180px; display: block; text-align: center; }
+
+/* FIX 3 : titres de brochures en sans-serif */
+.book-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px; font-style: normal; color: #2B1A00;
+  margin-top: 8px; line-height: 1.4; width: 180px; max-width: 180px;
+  display: block; text-align: center;
+}
 
 /* ── FOOTER ── */
 .footer-band { background-color: #2B1A00; color: #E8D890; text-align: center; padding: 10px; font-family: "Courier New", Courier, monospace; font-size: 12px; border-top: 4px solid #7A5C1E; margin-top: 20px; }
@@ -50,35 +80,22 @@ body {
 .footer-bottom { background-color: #1A0E00; color: #8B7040; text-align: center; padding: 5px; font-family: "Courier New", monospace; font-size: 10px; }
 
 /* ══════════════════════════════════════════
-   LIGHTBOX CORRIGÉE
-   Structure :
-     ┌─────────────────────────┐
-     │   [×]          flèches  │
-     │                         │
-     │    [loader / image]     │
-     │                         │
-     │  — Titre du livre —     │  ← toujours visible, en bas
-     │    1 / N                │
-     └─────────────────────────┘
+   LIGHTBOX
    ══════════════════════════════════════════ */
 
 #lightbox {
   display: none;
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background: rgba(20,10,0,0.92);
   z-index: 9999;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  touch-action: none;
+  align-items: center; justify-content: center;
+  overflow: hidden; touch-action: none;
 }
 #lightbox.open { display: flex; }
 
 /* Bouton fermer */
 #lightbox-close {
-  position: absolute;
-  top: 18px; right: 24px;
+  position: absolute; top: 18px; right: 24px;
   font-family: "Arial Black", Arial, sans-serif;
   font-size: 22px; color: #FFFF00;
   cursor: pointer !important;
@@ -87,7 +104,8 @@ body {
 }
 #lightbox-close:hover { background: #CC0000; border-style: inset; }
 
-/* Flèches navigation — autour de l'image */
+/* FIX 1 : flèches décollées de l'image — positionnées par rapport à #lb-img-wrap */
+/* FIX 2 : pas de boucle — grisées en bout de série */
 .lb-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
   font-family: "Arial Black", Arial, sans-serif;
@@ -97,33 +115,37 @@ body {
   padding: 6px 12px; line-height: 1;
   user-select: none; z-index: 10001; display: none;
 }
-.lb-nav:hover { background: #7A5C1E; border-style: inset; }
+.lb-nav:hover:not(.lb-disabled) { background: #7A5C1E; border-style: inset; }
 .lb-nav.visible { display: block; }
-#lb-prev { left: -54px; }
-#lb-next { right: -54px; }
 
-/* Conteneur central vertical : image puis titre puis compteur */
-#lb-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 90vw;
-  max-height: 95vh;
+/* FIX 2 : état désactivé (premier / dernier) */
+.lb-nav.lb-disabled {
+  color: #5A4A20;
+  background: #2B1A00;
+  cursor: default !important;
+  border-style: inset;
+  opacity: 0.45;
 }
 
-/* Zone image (position relative pour le loader superposé) */
+/* FIX 1 : décalage latéral — flèches à 18px à l'extérieur de l'image */
+#lb-prev { left: -72px; }
+#lb-next { right: -72px; }
+
+/* Conteneur central vertical */
+#lb-inner {
+  display: flex; flex-direction: column; align-items: center;
+  max-width: 90vw; max-height: 95vh;
+}
+
+/* Zone image */
 #lb-img-wrap {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 120px;
-  min-height: 120px;
+  display: flex; align-items: center; justify-content: center;
+  min-width: 120px; min-height: 120px;
 }
 
 #lightbox-img {
-  max-width: 88vw;
-  max-height: 78vh;
+  max-width: 88vw; max-height: 78vh;
   width: auto; height: auto;
   display: none;
   border: 4px solid #C8A83C;
@@ -136,40 +158,32 @@ body {
 #lightbox-img.loaded { display: block; }
 #lightbox-img.dragging { cursor: grabbing; transition: none; }
 
-/* TITRE — sous l'image, visible dès l'ouverture */
+/* TITRE */
 #lightbox-caption {
-  margin-top: 14px;
-  text-align: center;
+  margin-top: 14px; text-align: center;
   font-family: "Times New Roman", Times, serif;
-  font-style: italic;
-  color: #E8D890;
-  font-size: 15px;
-  letter-spacing: 1px;
-  min-height: 22px;
+  font-style: italic; color: #E8D890;
+  font-size: 15px; letter-spacing: 1px; min-height: 22px;
 }
 
 /* Compteur pages */
 #lb-counter {
-  display: none;
-  margin-top: 5px;
+  display: none; margin-top: 5px;
   font-family: "Courier New", Courier, monospace;
   font-size: 11px; font-weight: bold;
   color: #C8A83C; letter-spacing: 2px;
 }
 #lb-counter.visible { display: block; }
 
-/* Loader géocities — centré dans toute la lightbox */
+/* FIX 4 : loader avec 11 étoiles (une enlevée) */
 #lb-loader {
-  display: none;
-  position: fixed; inset: 0;
-  flex-direction: column;
-  align-items: center; justify-content: center;
+  display: none; position: fixed; inset: 0;
+  flex-direction: column; align-items: center; justify-content: center;
   gap: 0; z-index: 10; pointer-events: none;
 }
 #lb-loader.visible { display: flex; }
 @keyframes spin-stars { from{transform:rotate(0deg);}to{transform:rotate(360deg);} }
 #lb-loader svg { animation: spin-stars 2.5s linear infinite; transform-origin: 50px 50px; }
-
 
 /* Sparkles */
 .sparkle { position:fixed; pointer-events:none; z-index:99997; animation:sparkleBurst 0.45s linear forwards; transform-origin:center; user-select:none; font-family:"Courier New",monospace; font-weight:bold; }
@@ -186,41 +200,33 @@ body {
 
 <!-- ════ LIGHTBOX ════ -->
 <div id="lightbox">
-
   <div id="lightbox-close" onclick="closeLightbox()">&#x2715;</div>
-
   <div id="lb-inner">
-
-    <!-- Zone image + loader superposé + flèches collées -->
     <div id="lb-img-wrap">
       <div id="lb-prev" class="lb-nav" onclick="lbNavigate(-1)">&#9668;</div>
       <div id="lb-next" class="lb-nav" onclick="lbNavigate(1)">&#9658;</div>
+
+      <!-- FIX 4 : 11 étoiles au lieu de 12 (suppression d'une étoile) -->
       <div id="lb-loader">
         <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <g transform="translate(50,12) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(69,19) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(83,31) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(88,50) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(83,69) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(69,81) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(50,88) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(31,81) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(17,69) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(12,50) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(17,31) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
-          <g transform="translate(31,19) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
+          <g transform="translate(72,21) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
+          <g transform="translate(88,44) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
+          <g transform="translate(85,70) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
+          <g transform="translate(65,86) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
+          <g transform="translate(40,88) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
+          <g transform="translate(19,76) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
+          <g transform="translate(8,52) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
+          <g transform="translate(13,28) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
+          <g transform="translate(30,12) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
+          <g transform="translate(50,50) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
         </svg>
-
       </div>
+
       <img id="lightbox-img" src="" alt="">
     </div>
-
-    <!-- Titre TOUJOURS visible, sous l'image -->
     <div id="lightbox-caption"></div>
-
-    <!-- Compteur (multi-pages seulement) -->
     <div id="lb-counter"></div>
-
   </div>
 </div>
 
@@ -343,8 +349,9 @@ body {
   <div class="section-title"><span>&#x25BA;</span> LIVRES</div>
   <div class="quinconce-grid">
 
+    <!-- FIX 5 : livres sans extrait → classe no-preview, pas d'onclick -->
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('À propos des Francs-Médecins','EXTRAIT_LIVRE_1_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/couv%20(med).png?raw=true" alt="À propos des Francs-Médecins" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">À propos des Francs-Médecins</div>
       </div>
@@ -352,7 +359,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Revue n°0','EXTRAIT_REVUE_1_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(0).png?raw=true" alt="Revue n°0" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°0</div>
       </div>
@@ -360,7 +367,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Le Mythe du XXIe','EXTRAIT_LIVRE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/couv%20Le%20mythe%20du%2020%20si%C3%A8cle.png?raw=true" alt="Le Mythe du XXIe" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Le Mythe du XXIe</div>
       </div>
@@ -376,7 +383,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Chier et Sperme','EXTRAIT_LIVRE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/couv%20chier%20et%20sperme.png?raw=true" alt="Chier et Sperme" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Chier et Sperme</div>
       </div>
@@ -392,11 +399,11 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Mille Milliard de Dollars pour un Opéra','EXTRAIT_LIVRE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/couv%20Mille%20milliard.png?raw=true" alt="Mille Milliard de Dollars pour un Opéra" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="book-cover-placeholder" style="display:none">Mille Milliard de Dollars pour un Opéra</div>
+        <div class="book-cover-placeholder" style="display:none">1.000.000.000.000$ pour un Opéra</div>
       </div>
-      <div class="book-title">Mille Milliard de Dollars pour un Opéra</div>
+      <div class="book-title">10<sup>12</sup> de Dollars pour un Opéra</div>
     </div>
 
     <div class="book-item">
@@ -408,7 +415,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('SMOUCOUASST VEGAMERS','EXTRAIT_LIVRE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/couv%20scoumouast%20vegamers.jpg?raw=true" alt="SMOUCOUASST VEGAMERS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">SMOUCOUASST VEGAMERS</div>
       </div>
@@ -423,8 +430,9 @@ body {
   <div class="section-title"><span>&#x25BA;</span> REVUES</div>
   <div class="quinconce-grid">
 
+    <!-- FIX 5 : revues sans extrait → no-preview -->
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Revue n°1','EXTRAIT_REVUE_1_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(1).png?raw=true" alt="Revue n°1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°1</div>
       </div>
@@ -432,7 +440,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Revue n°2','EXTRAIT_REVUE_2_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(2).png?raw=true" alt="Revue n°2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°2</div>
       </div>
@@ -440,7 +448,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Revue n°3','EXTRAIT_REVUE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(3).png?raw=true" alt="Revue n°3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°3</div>
       </div>
@@ -448,7 +456,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Revue n°4','EXTRAIT_REVUE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(4).png?raw=true" alt="Revue n°4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°4</div>
       </div>
@@ -456,7 +464,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Revue n°5','EXTRAIT_REVUE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(5).png?raw=true" alt="Revue n°5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°5</div>
       </div>
@@ -464,7 +472,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Revue n°6','EXTRAIT_REVUE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(6).png?raw=true" alt="Revue n°6" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°6</div>
       </div>
@@ -472,7 +480,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Revue n°7','EXTRAIT_REVUE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(7).png?raw=true" alt="Revue n°7" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°7</div>
       </div>
@@ -480,7 +488,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Revue n°8','EXTRAIT_REVUE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(8).png?raw=true" alt="Revue n°8" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°8</div>
       </div>
@@ -488,7 +496,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Revue n°9','EXTRAIT_REVUE_3_URL')">
+      <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(9).png?raw=true" alt="Revue n°9" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°9</div>
       </div>
@@ -513,9 +521,7 @@ document.getElementById('fyear').innerHTML = new Date().getFullYear();
 
 /* ══════════════════════════════════════════════════════════
    LIGHTBOX
-   Signature : openLightbox(titre, url1 [, url2, url3, ...])
-   → premier argument = titre (string)
-   → arguments 1…n   = URLs des pages/extraits
+   FIX 2 : pas de boucle — les flèches se grisent en bout de série
    ══════════════════════════════════════════════════════════ */
 
 var lbImg     = document.getElementById('lightbox-img');
@@ -536,16 +542,30 @@ function resetView(){
   lbImg.classList.remove('dragging','loaded');
 }
 
+/* Met à jour l'état disabled des flèches selon la position actuelle */
+function updateNavState(){
+  if(lbPages.length <= 1) return;
+  if(lbIndex === 0){
+    lbPrev.classList.add('lb-disabled');
+  } else {
+    lbPrev.classList.remove('lb-disabled');
+  }
+  if(lbIndex === lbPages.length - 1){
+    lbNext.classList.add('lb-disabled');
+  } else {
+    lbNext.classList.remove('lb-disabled');
+  }
+}
+
 function openLightbox(titre){
   lbPages=[];
   for(var i=1;i<arguments.length;i++) lbPages.push(arguments[i]);
   lbIndex=0;
   resetView();
   lbImg.src='';
-  /* Titre affiché immédiatement, flèches masquées jusqu'au chargement */
   lbCaption.textContent='— '+titre+' —';
-  lbPrev.classList.remove('visible');
-  lbNext.classList.remove('visible');
+  lbPrev.classList.remove('visible','lb-disabled');
+  lbNext.classList.remove('visible','lb-disabled');
   lbCounter.classList.remove('visible');
   document.getElementById('lightbox').classList.add('open');
   lbLoadPage(0);
@@ -555,7 +575,6 @@ function lbLoadPage(idx){
   resetView();
   lbLoader.classList.add('visible');
   lbImg.classList.remove('loaded');
-  /* Masquer les flèches pendant le chargement */
   lbPrev.classList.remove('visible');
   lbNext.classList.remove('visible');
   lbCounter.classList.remove('visible');
@@ -564,29 +583,49 @@ function lbLoadPage(idx){
   var url=lbPages[idx], tmp=new Image();
   tmp.onload=function(){
     lbImg.src=url; lbLoader.classList.remove('visible'); lbImg.classList.add('loaded');
-    /* Flèches et compteur visibles seulement maintenant */
-    if(multi){ lbPrev.classList.add('visible'); lbNext.classList.add('visible'); lbCounter.classList.add('visible'); }
+    if(multi){
+      lbPrev.classList.add('visible');
+      lbNext.classList.add('visible');
+      lbCounter.classList.add('visible');
+      updateNavState(); /* FIX 2 */
+    }
   };
   tmp.onerror=function(){
     lbLoader.classList.remove('visible'); lbImg.src=url; lbImg.classList.add('loaded');
-    if(multi){ lbPrev.classList.add('visible'); lbNext.classList.add('visible'); lbCounter.classList.add('visible'); }
+    if(multi){
+      lbPrev.classList.add('visible');
+      lbNext.classList.add('visible');
+      lbCounter.classList.add('visible');
+      updateNavState(); /* FIX 2 */
+    }
   };
   tmp.src=url;
 }
 
-function lbNavigate(dir){ lbIndex=(lbIndex+dir+lbPages.length)%lbPages.length; lbLoadPage(lbIndex); }
+function lbNavigate(dir){
+  var next = lbIndex + dir;
+  /* FIX 2 : on bloque si on est aux extrémités */
+  if(next < 0 || next >= lbPages.length) return;
+  lbIndex = next;
+  lbLoadPage(lbIndex);
+}
 
 function closeLightbox(){
   resetView();
   lbLoader.classList.remove('visible');
-  lbPrev.classList.remove('visible'); lbNext.classList.remove('visible'); lbCounter.classList.remove('visible');
+  lbPrev.classList.remove('visible','lb-disabled');
+  lbNext.classList.remove('visible','lb-disabled');
+  lbCounter.classList.remove('visible');
   document.getElementById('lightbox').classList.remove('open');
   lbImg.src=''; lbCaption.textContent=''; lbPages=[]; lbIndex=0;
 }
 
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape') closeLightbox();
-  if(lbPages.length>1){ if(e.key==='ArrowLeft') lbNavigate(-1); if(e.key==='ArrowRight') lbNavigate(1); }
+  if(lbPages.length>1){
+    if(e.key==='ArrowLeft') lbNavigate(-1);
+    if(e.key==='ArrowRight') lbNavigate(1);
+  }
 });
 
 lbImg.addEventListener('wheel',function(e){ e.preventDefault(); e.stopPropagation(); scale=Math.min(Math.max(scale+(e.deltaY>0?-0.15:0.15),0.5),5); applyTransform(); },{passive:false});
