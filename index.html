@@ -34,7 +34,6 @@ td.header-center { background-color: #000080; text-align: center; padding: 18px 
 td.header-right { background-color: #008000; width: 70px; padding: 0; vertical-align: top; border-left: 4px solid #004000; overflow: hidden; }
 td.header-right img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center center; }
 
-/* ===== FIX HOVER CASES IMAGES ===== */
 .card-body a:has(img) {
   display: block;
   background: none;
@@ -45,28 +44,13 @@ td.header-right img { display: block; width: 100%; height: 100%; object-fit: cov
   outline: none;
 }
 .card-body a:has(img):hover {
-  background: none;
-}
-/* Le fond pastel (div parente) s'assombrit au hover */
-.card-body a:has(img):hover + div,
-.img-hover-wrap:hover {
-  filter: brightness(0.82);
-}
-.img-hover-wrap {
-  transition: filter 0.2s;
-}
-/* L'image descend légèrement au hover pour effet 3D */
-.card-body a:has(img) img {
-  transition: transform 0.18s;
+  background: rgba(0,0,0,0.12);
+  border: none;
+  outline: none;
 }
 .card-body a:has(img):hover img {
-  transform: translateY(2px);
+  opacity: 1;
 }
-/* Le div coloré s'assombrit quand le a:has(img) est en hover — via la div parente */
-.gif-card-slot { transition: filter 0.2s; }
-.gif-card-slot:hover { filter: brightness(0.82); }
-.gif-card-slot:hover a:has(img) img { transform: translateY(2px); }
-/* ===== FIN FIX ===== */
 
 h1.site-title { font-family: "Times New Roman", Times, serif; font-size: 58px; font-weight: bold; color: #FFFF00; margin: 0; padding: 0; letter-spacing: 4px; text-decoration: underline; text-shadow: 3px 3px #000000; position: relative; animation: titlePulse 12s ease-in-out infinite; }
 @keyframes titlePulse { 0%{text-shadow:3px 3px #000000;}10%{text-shadow:3px 3px #000000,0 0 18px #FFFF00,0 0 32px #FF8800;}20%{text-shadow:3px 3px #000000;}100%{text-shadow:3px 3px #000000;} }
