@@ -34,7 +34,7 @@ cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/ass
     height: 0;
     width: 100%;
     z-index: 200;
-    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
+    pointer-events: none;
   }
 
   .flame-border {
@@ -377,7 +377,7 @@ cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/ass
          oninput="updateFlames(this.value)">
   <div class="fc-btn-row">
     <button class="fc-btn" onclick="updateFlames(60)" title="minimum">▼</button>
-    <button class="fc-btn" onclick="updateFlames(60)" title="normal">◉</button>
+    <button class="fc-btn" onclick="updateFlames(150)" title="normal">◉</button>
     <button class="fc-btn" onclick="updateFlames(300)" title="inferno">▲</button>
   </div>
 
