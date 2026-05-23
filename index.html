@@ -35,6 +35,20 @@ td.header-center { background-color: #000080; text-align: center; padding: 18px 
 td.header-right { background-color: #008000; width: 70px; padding: 0; vertical-align: top; border-left: 4px solid #004000; overflow: hidden; }
 td.header-right img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center center; }
 
+.card-body a img {
+  display: block;
+}
+.card-body a:has(img) {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  outline: none;
+}
+
+  
 h1.site-title { font-family: "Times New Roman", Times, serif; font-size: 58px; font-weight: bold; color: #FFFF00; margin: 0; padding: 0; letter-spacing: 4px; text-decoration: underline; text-shadow: 3px 3px #000000; position: relative; animation: titlePulse 12s ease-in-out infinite; }
 @keyframes titlePulse { 0%{text-shadow:3px 3px #000000;}10%{text-shadow:3px 3px #000000,0 0 18px #FFFF00,0 0 32px #FF8800;}20%{text-shadow:3px 3px #000000;}100%{text-shadow:3px 3px #000000;} }
 td.header-center::after { display: none; }
