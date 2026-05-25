@@ -191,11 +191,9 @@ input[type=range].wslider::-webkit-slider-thumb{-webkit-appearance:none;width:5p
 .bk{position:absolute;height:22px;width:5px;background:#1e180e;border-top:1px solid #3a3020;border-left:1px solid #3a3020;border-right:1px solid #080604;border-bottom:2px solid #080604;border-radius:0 0 1px 1px;cursor:pointer;pointer-events:all;box-sizing:border-box;}
 .bk.pressed{background:#b05010;}.bk.arp-held{background:#b05010;}.bk.arp-ping{background:#c09020;border-bottom-color:#301404;border-bottom-width:1px;}
 .arp-corner{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;flex:1;}
-.arp-top{display:flex;flex-direction:column;align-items:center;gap:1px;margin-bottom:4px;}
-.arp-lbl{font-family:'Courier New',monospace;font-size:3px;color:#7a6a48;letter-spacing:1px;}
-.arp-sw{width:11px;height:5px;background:#1a1408;border-top:1px solid #0a0804;border-left:1px solid #0a0804;border-right:1px solid #7a6a40;border-bottom:1px solid #7a6a40;cursor:pointer;position:relative;box-sizing:border-box;}
-.arp-thumb{width:4px;height:3px;background:#b8a870;border-top:1px solid #d8c890;border-left:1px solid #d8c890;border-right:1px solid #5a4a20;border-bottom:1px solid #5a4a20;position:absolute;top:0;left:0;transition:left 0.09s;}
-.arp-sw.on .arp-thumb{left:5px;background:#e8c030;}
+.arp-top{display:flex;flex-direction:column;align-items:center;gap:1px;margin-bottom:4px;margin-top:-8px;}
+.arp-btn{width:18px;height:8px;background:#a09070;border-top:1px solid #c8b890;border-left:1px solid #c8b890;border-right:1px solid #3a2c18;border-bottom:1px solid #3a2c18;font-family:'Courier New',monospace;font-size:4px;font-weight:bold;color:#2a1e08;letter-spacing:0.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;user-select:none;box-sizing:border-box;}
+.arp-btn.on{background:#c0a01a;border-top-color:#3a2c18;border-left-color:#3a2c18;border-right-color:#c8b890;border-bottom-color:#c8b890;color:#1a1000;}
 .arp-bot{display:flex;flex-direction:column;align-items:center;gap:1px;}
 input[type=range].tslider{-webkit-appearance:none;appearance:none;width:24px;height:2px;background:#8a7a60;outline:none;padding:0;margin:0;display:block;}
 input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4px;height:5px;background:#c4b990;cursor:pointer;border-radius:1px;}
@@ -536,7 +534,7 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
         <div class="bottom-row">
           <div class="keys-wrap" id="kw"><div class="wkeys" id="wkeys"></div><div class="bkeys" id="bkeys"></div></div>
           <div class="arp-corner">
-            <div class="arp-top"><div class="arp-lbl">ARP</div><div class="arp-sw" id="arp-sw" onclick="toggleArp()"><div class="arp-thumb"></div></div></div>
+            <div class="arp-top"><div class="arp-btn" id="arp-sw" onclick="toggleArp()">ARP</div></div>
             <div class="arp-bot">
               <input type="range" class="tslider" id="tslider" min="0" max="100" step="1" value="65" oninput="setTempo(this.value)">
               <div class="bpm-lbl" id="bpm-lbl">120</div>
@@ -962,7 +960,7 @@ document.addEventListener('touchend',function(){mouseDown=false;if(!arpOn)stopSo
   window.addEventListener('resize',placeStars);
 })();
 /* ══ BASSE PROFONDE MODULÉE (bouton BRUN → son intestinal) ══ */
-var bbNodes=[],bbRaf=null;
+var bbNodes=[],bbRaf=null,bbMasterGain=null;
 function startBrownBass(){
   if(bbNodes.length)return;
   initCtx();if(!analyser)return;
@@ -996,7 +994,8 @@ function startBrownBass(){
   for(var i=0;i<512;i++){var x=i/256-1;rc[i]=x<-0.15?Math.min((-x-0.15)*0.08,0.055):0;}
   rect.curve=rc;
   lfo.connect(rect);rect.connect(mGn.gain);
-  mSrc.connect(mbp);mbp.connect(mGn);mGn.connect(analyser);
+  var bbMaster=ctx.createGain();bbMaster.gain.value=1;bbMaster.connect(analyser);bbMasterGain=bbMaster;
+  mSrc.connect(mbp);mbp.connect(mGn);mGn.connect(bbMaster);
   // Waveshaper bass principal
   var wv=ctx.createWaveShaper();
   var cr=new Float32Array(512);
@@ -1004,9 +1003,9 @@ function startBrownBass(){
   wv.curve=cr;
   var mg=ctx.createGain();mg.gain.value=0.38;
   lfo2.connect(lg2);lg2.connect(mg.gain);
-  o1.connect(wv);o2.connect(wv);wv.connect(mg);mg.connect(analyser);
+  o1.connect(wv);o2.connect(wv);wv.connect(mg);mg.connect(bbMaster);
   [o1,o2,lfo,lfo2,mSrc].forEach(function(n){n.start(now);});
-  bbNodes=[o1,o2,lfo,lfo2,mSrc,lg,lg2,wv,mg,mbp,mGn,rect];
+  bbNodes=[o1,o2,lfo,lfo2,mSrc,lg,lg2,wv,mg,mbp,mGn,rect,bbMaster];
   (function upd(){
     if(!bbNodes.length)return;
     var t=ctx.currentTime;
@@ -1023,8 +1022,13 @@ function startBrownBass(){
 }
 function stopBrownBass(){
   if(bbRaf){cancelAnimationFrame(bbRaf);bbRaf=null;}
-  bbNodes.forEach(function(n){try{if(n.stop)n.stop(0);n.disconnect();}catch(e){}});
-  bbNodes=[];
+  if(!bbNodes.length)return;
+  if(bbMasterGain&&ctx){
+    bbMasterGain.gain.setValueAtTime(bbMasterGain.gain.value,ctx.currentTime);
+    bbMasterGain.gain.linearRampToValueAtTime(0.0001,ctx.currentTime+0.08);
+  }
+  var stale=bbNodes.slice();bbNodes=[];bbMasterGain=null;
+  setTimeout(function(){stale.forEach(function(n){try{if(n.stop)n.stop(0);n.disconnect();}catch(e){}});},100);
 }
 
 /* ══ BRUIT BLANC / ROSE / BRUN ══ */
@@ -1082,9 +1086,19 @@ function startNoise(type){
 
 function stopNoise(type){
   if(type==='brown'){stopBrownBass();noiseNodes.brown=null;return;}
-  if(noiseNodes[type]){try{noiseNodes[type].stop();noiseNodes[type].disconnect();}catch(e){} noiseNodes[type]=null;}
-  if(noiseGains[type]){try{noiseGains[type].disconnect();}catch(e){} noiseGains[type]=null;}
-  if(type==='pink'&&noisePinkFilter){try{noisePinkFilter.disconnect();}catch(e){} noisePinkFilter=null;}
+  var src=noiseNodes[type],gain=noiseGains[type];
+  noiseNodes[type]=null;noiseGains[type]=null;
+  if(gain&&ctx){
+    gain.gain.setValueAtTime(gain.gain.value,ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.0001,ctx.currentTime+0.06);
+  }
+  var pf=(type==='pink')?noisePinkFilter:null;
+  if(type==='pink')noisePinkFilter=null;
+  setTimeout(function(){
+    if(src){try{src.stop();src.disconnect();}catch(e){}}
+    if(gain){try{gain.disconnect();}catch(e){}}
+    if(pf){try{pf.disconnect();}catch(e){}}
+  },80);
 }
 
 function toggleNoise(type){
