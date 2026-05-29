@@ -33,9 +33,8 @@ body {
 /* ── SECTION ── */
 .section-block { padding: 28px 24px 10px 24px; }
 
-/* FIX 3 : métatitres en serif, titres de brochures en sans-serif */
 .section-title {
-  font-family: "Times New Roman", Times, serif; /* serif pour les métatitres */
+  font-family: "Times New Roman", Times, serif;
   font-size: 15px; font-weight: 900; color: #2B1A00;
   letter-spacing: 3px; text-transform: uppercase;
   border-bottom: 3px solid #7A5C1E; padding-bottom: 6px; margin: 0 0 20px 0;
@@ -46,7 +45,6 @@ body {
 .quinconce-grid { display: flex; flex-wrap: wrap; gap: 0; padding: 0; }
 .book-item { width: 20%; padding: 12px; box-sizing: border-box; text-align: center; display: flex; flex-direction: column; align-items: center; }
 
-/* FIX 5 : couverture cliquable vs non-cliquable */
 .book-cover-wrap {
   display: block; width: 180px; position: relative;
   cursor: pointer !important;
@@ -57,7 +55,6 @@ body {
 }
 .book-cover-wrap:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #7A5C1E, 9px 9px 0 #4A3000; border-style: inset; }
 
-/* Couvertures sans extrait : pas de hover, pas de curseur pointer */
 .book-cover-wrap.no-preview {
   cursor: default !important;
   pointer-events: none;
@@ -66,7 +63,6 @@ body {
 .book-cover-wrap img { display: block; width: 180px; height: auto; image-rendering: pixelated; }
 .book-cover-placeholder { width: 180px; height: auto; min-height: 240px; background: #C0B080; display: flex; align-items: center; justify-content: center; font-family: "Courier New", monospace; font-size: 10px; color: #5A4010; text-align: center; padding: 10px; box-sizing: border-box; }
 
-/* FIX 3 : titres de brochures en sans-serif */
 .book-title {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px; font-style: normal; color: #2B1A00;
@@ -104,8 +100,20 @@ body {
 }
 #lightbox-close:hover { background: #CC0000; border-style: inset; }
 
-/* FIX 1 : flèches décollées de l'image — positionnées par rapport à #lb-img-wrap */
-/* FIX 2 : pas de boucle — grisées en bout de série */
+/* Bouton "Lire en ligne" — symétrique, côté gauche */
+#lightbox-read {
+  display: none;
+  position: absolute; top: 18px; left: 24px;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 13px; color: #FFFF00;
+  cursor: pointer !important;
+  text-decoration: none;
+  background: #4A3000; border: 2px outset #8B6914;
+  padding: 2px 10px; line-height: 1.8; z-index: 10002;
+  letter-spacing: 1px; white-space: nowrap;
+}
+#lightbox-read:hover { background: #1A6B1A; border-style: inset; }
+
 .lb-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
   font-family: "Arial Black", Arial, sans-serif;
@@ -118,7 +126,6 @@ body {
 .lb-nav:hover:not(.lb-disabled) { background: #7A5C1E; border-style: inset; }
 .lb-nav.visible { display: block; }
 
-/* FIX 2 : état désactivé (premier / dernier) */
 .lb-nav.lb-disabled {
   color: #5A4A20;
   background: #2B1A00;
@@ -127,17 +134,14 @@ body {
   opacity: 0.45;
 }
 
-/* FIX 1 : décalage latéral — flèches à 18px à l'extérieur de l'image */
 #lb-prev { left: -72px; }
 #lb-next { right: -72px; }
 
-/* Conteneur central vertical */
 #lb-inner {
   display: flex; flex-direction: column; align-items: center;
   max-width: 90vw; max-height: 95vh;
 }
 
-/* Zone image */
 #lb-img-wrap {
   position: relative;
   display: flex; align-items: center; justify-content: center;
@@ -158,7 +162,6 @@ body {
 #lightbox-img.loaded { display: block; }
 #lightbox-img.dragging { cursor: grabbing; transition: none; }
 
-/* TITRE */
 #lightbox-caption {
   margin-top: 14px; text-align: center;
   font-family: "Times New Roman", Times, serif;
@@ -166,7 +169,6 @@ body {
   font-size: 15px; letter-spacing: 1px; min-height: 22px;
 }
 
-/* Compteur pages */
 #lb-counter {
   display: none; margin-top: 5px;
   font-family: "Courier New", Courier, monospace;
@@ -175,7 +177,6 @@ body {
 }
 #lb-counter.visible { display: block; }
 
-/* FIX 4 : loader avec 11 étoiles (une enlevée) */
 #lb-loader {
   display: none; position: fixed; inset: 0;
   flex-direction: column; align-items: center; justify-content: center;
@@ -185,7 +186,6 @@ body {
 @keyframes spin-stars { from{transform:rotate(0deg);}to{transform:rotate(360deg);} }
 #lb-loader svg { animation: spin-stars 2.5s linear infinite; transform-origin: 50px 50px; }
 
-/* Sparkles */
 .sparkle { position:fixed; pointer-events:none; z-index:99997; animation:sparkleBurst 0.45s linear forwards; transform-origin:center; user-select:none; font-family:"Courier New",monospace; font-weight:bold; }
 @keyframes sparkleBurst { 0%{opacity:1;transform:translate(-50%,-50%);}100%{opacity:0;transform:translate(var(--tx),var(--ty));} }
 </style>
@@ -201,12 +201,12 @@ body {
 <!-- ════ LIGHTBOX ════ -->
 <div id="lightbox">
   <div id="lightbox-close" onclick="closeLightbox()">&#x2715;</div>
+  <a id="lightbox-read" href="#" target="_blank">&#9654; LIRE EN LIGNE</a>
   <div id="lb-inner">
     <div id="lb-img-wrap">
       <div id="lb-prev" class="lb-nav" onclick="lbNavigate(-1)">&#9668;</div>
       <div id="lb-next" class="lb-nav" onclick="lbNavigate(1)">&#9658;</div>
 
-      <!-- FIX 4 : 11 étoiles au lieu de 12 (suppression d'une étoile) -->
       <div id="lb-loader">
         <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <g transform="translate(50,12) translate(-7,-7)"><polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#FFFF00" stroke="#000" stroke-width="0.6"/></g>
@@ -245,7 +245,7 @@ body {
   <div class="quinconce-grid">
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Contre la Musique','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/extrait%20CONTRE%20la%20Musique.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox('Contre la Musique','','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/extrait%20CONTRE%20la%20Musique.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/Contre%20la%20musique.jpg?raw=true" alt="Contre la Musique" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">CONTRE<br>LA MUSIQUE</div>
       </div>
@@ -253,7 +253,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Le Réalisme-Symboliste','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/real%20symb%20(1).jpg?raw=true','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/real%20symb%20(2).jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox('Le Réalisme-Symboliste','','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/real%20symb%20(1).jpg?raw=true','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/real%20symb%20(2).jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(real-symb).png?raw=true" alt="Le Réalisme-Symboliste" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Le Réalisme-Symboliste</div>
       </div>
@@ -261,7 +261,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('')">
+      <div class="book-cover-wrap" onclick="openLightbox('La Dictature de la Classe Moyenne','','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(dicature).png?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(dicature).png?raw=true" alt="LA DICTATURE DE LA CLASSE MOYENNE" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">LA DICTATURE DE LA CLASSE MOYENNE</div>
       </div>
@@ -269,7 +269,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Le Socialisme des Imbéciles','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/socialisme%20des%20imb%C3%A9ciles.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox('Le Socialisme des Imbéciles','','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/socialisme%20des%20imb%C3%A9ciles.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(le%20socialisme%20des%20imb).png?raw=true" alt="Le Socialisme des Imbéciles" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">LE SOCIALISME<br>DES IMBÉCILES</div>
       </div>
@@ -277,7 +277,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox(&quot;Qu'est-t-il vraiment arrivé à Coluche&quot;,'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/Coluche.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox(&quot;Qu'est-t-il vraiment arrivé à Coluche&quot;,'','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/Coluche.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(coluche).png?raw=true" alt="Qu'est-t-il vraiment arrivé à Coluche" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Qu'est-t-il vraiment arrivé à Coluche</div>
       </div>
@@ -285,7 +285,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('NASDAS = CHRIST','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/Nasdas.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox('NASDAS = CHRIST','','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/Nasdas.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(nasdas).png?raw=true" alt="NASDAS = CHRIST" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">NASDAS = CHRIST</div>
       </div>
@@ -293,7 +293,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Booba Kikki','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/Booba%20kikki.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox('Booba Kikki','','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/Booba%20kikki.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(booba%20kikki).png?raw=true" alt="Booba Kikki" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Booba Kikki</div>
       </div>
@@ -301,7 +301,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Comment prendre le controle des hommes','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/comment%20prendre%20le%20controle.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox('Comment prendre le controle des hommes','','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/comment%20prendre%20le%20controle.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(comment%20prendre).png?raw=true" alt="Comment prendre le controle des hommes" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Comment prendre le controle des hommes</div>
       </div>
@@ -309,7 +309,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox(&quot;Le Cirque de l'art contemporain&quot;,'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/le%20cirque.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox(&quot;Le Cirque de l'art contemporain&quot;,'','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/le%20cirque.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(le%20cirque).png?raw=true" alt="Le Cirque de l'art contemporain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Le Cirque de l'art contemporain</div>
       </div>
@@ -317,7 +317,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Le Maso-érotisme de Droite','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/masoerotisme.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox('Le Maso-érotisme de Droite','','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/masoerotisme.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(maso).png?raw=true" alt="Le Maso-érotisme de Droite" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Le Maso-érotisme de Droite</div>
       </div>
@@ -325,7 +325,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Les conférenciers auf-klärer académicien chercheurs de vérité...','https://raw.githubusercontent.com/scienceetpoesie/internet/main/galerie/brochures/extraits/extraitconferenciersapolliniens.jpg')">
+      <div class="book-cover-wrap" onclick="openLightbox('Les conférenciers auf-klärer académicien chercheurs de vérité...','','https://raw.githubusercontent.com/scienceetpoesie/internet/main/galerie/brochures/extraits/extraitconferenciersapolliniens.jpg')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(conf%C3%A9rencier%20egypto).png?raw=true" alt="Les conférenciers auf-klärer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Les petits notables conférenciers...</div>
       </div>
@@ -333,7 +333,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('Bonne année 1993','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/Bonne%20Ann%C3%A9e%201993.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox('Bonne année 1993','','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/Bonne%20Ann%C3%A9e%201993.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/BROCHURE%20(1993).png?raw=true" alt="Bonne année 1993" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">BONNE ANNÉE<br>1993</div>
       </div>
@@ -348,7 +348,6 @@ body {
   <div class="section-title"><span>&#x25BA;</span> LIVRES</div>
   <div class="quinconce-grid">
 
-    <!-- FIX 5 : livres sans extrait → classe no-preview, pas d'onclick -->
     <div class="book-item">
       <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/couv%20(med).png?raw=true" alt="À propos des Francs-Médecins" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
@@ -358,13 +357,14 @@ body {
     </div>
 
     <div class="book-item">
-       <div class="book-cover-wrap" onclick="openLightbox('S&P n°0','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-001.jpg?raw=true', 
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-002.jpg?raw=true', 
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-003.jpg?raw=true', 
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-004.jpg?raw=true', 
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-005.jpg?raw=true', 
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-006.jpg?raw=true', 
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-007.jpg?raw=true', )">
+      <div class="book-cover-wrap" onclick="openLightbox('S&P n°0','',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-001.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-002.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-003.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-004.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-005.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-006.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%200/S&P%20n%C2%B00%20INTRO-007.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(0).png?raw=true" alt="Revue n°0" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">REVUE<br>N°0</div>
       </div>
@@ -379,14 +379,14 @@ body {
       <div class="book-title">Le Mythe du XXIe</div>
     </div>
 
-  <div class="book-item">
-  <div class="book-cover-wrap" onclick="window.open('pdf/La gentrification dans la Mode.html', '_blank')" style="cursor:pointer;">
-    <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/brochure%20(HBG).png?raw=true" alt="Le modèle H.B.G." onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-    <div class="book-cover-placeholder" style="display:none">Le modèle H.B.G.</div>
-  </div>
-  <div class="book-title">La gentrification dans la mode</div>
-</div>
-    
+    <div class="book-item">
+      <div class="book-cover-wrap" onclick="window.open('pdf/La gentrification dans la Mode.html', '_blank')" style="cursor:pointer;">
+        <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/brochure%20(HBG).png?raw=true" alt="Le modèle H.B.G." onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="book-cover-placeholder" style="display:none">Le modèle H.B.G.</div>
+      </div>
+      <div class="book-title">La gentrification dans la mode</div>
+    </div>
+
     <div class="book-item">
       <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/couv%20chier%20et%20sperme.png?raw=true" alt="Chier et Sperme" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
@@ -396,7 +396,7 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox(&quot;L'Archi-pelle des Goulets&quot;,'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/x%20-%20L%E2%80%99Archipelle%20des%20Goulets.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox(&quot;L'Archi-pelle des Goulets&quot;,'','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/x%20-%20L%E2%80%99Archipelle%20des%20Goulets.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/L'Archi-pelle%20des%20Goulets.png?raw=true" alt="L'Archi-pelle des Goulets" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">L'Archi-pelle des Goulets</div>
       </div>
@@ -412,7 +412,12 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('L+/-MDdCmEA','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-001.jpg?raw=true','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-002.jpg?raw=true','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-003.jpg?raw=true','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-004.jpg?raw=true','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-005.jpg?raw=true')">
+      <div class="book-cover-wrap" onclick="openLightbox('L+/-MDdCmEA','',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-001.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-002.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-003.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-004.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-005.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/couv%20L+-MDdCmEA.jpg?raw=true" alt="Les plus ou moins Malheureuses Décennies de la Classe Moyenne euro-américaine" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Les plus ou moins Malheureuses Décennies de la Classe Moyenne euro-américaine</div>
       </div>
@@ -420,13 +425,14 @@ body {
     </div>
 
     <div class="book-item">
-      <div class="book-cover-wrap" onclick="openLightbox('SMOUCOUASST VEGAMERS','https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-001.jpg?raw=true', 
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-002.jpg?raw=true',
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-003.jpg?raw=true',
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-004.jpg?raw=true',
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-005.jpg?raw=true',
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-006.jpg?raw=true',
-                                                          'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-007.jpg?raw=true', )">
+      <div class="book-cover-wrap" onclick="openLightbox('SMOUCOUASST VEGAMERS','',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-001.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-002.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-003.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-004.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-005.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-006.jpg?raw=true',
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/scoumouasst/SCOUMOUASST%20VEGAMERS-007.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/couv%20scoumouast%20vegamers.jpg?raw=true" alt="SMOUCOUASST VEGAMERS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">SMOUCOUASST VEGAMERS</div>
       </div>
@@ -441,7 +447,6 @@ body {
   <div class="section-title"><span>&#x25BA;</span> REVUES</div>
   <div class="quinconce-grid">
 
-    <!-- FIX 5 : revues sans extrait → no-preview -->
     <div class="book-item">
       <div class="book-cover-wrap no-preview">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/S&P%20(1).png?raw=true" alt="Revue n°1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
@@ -532,7 +537,9 @@ document.getElementById('fyear').innerHTML = new Date().getFullYear();
 
 /* ══════════════════════════════════════════════════════════
    LIGHTBOX
-   FIX 2 : pas de boucle — les flèches se grisent en bout de série
+   Signature : openLightbox(titre, lien, page1, page2, ...)
+   - lien : chemin vers un fichier HTML à ouvrir dans un nouvel onglet
+             mettre '' (chaîne vide) comme placeholder si pas encore de lien
    ══════════════════════════════════════════════════════════ */
 
 var lbImg     = document.getElementById('lightbox-img');
@@ -541,6 +548,7 @@ var lbPrev    = document.getElementById('lb-prev');
 var lbNext    = document.getElementById('lb-next');
 var lbCounter = document.getElementById('lb-counter');
 var lbCaption = document.getElementById('lightbox-caption');
+var lbReadBtn = document.getElementById('lightbox-read');
 
 var lbPages = [], lbIndex = 0;
 var scale=1, posX=0, posY=0, dragStartX, dragStartY, dragging=false;
@@ -553,7 +561,6 @@ function resetView(){
   lbImg.classList.remove('dragging','loaded');
 }
 
-/* Met à jour l'état disabled des flèches selon la position actuelle */
 function updateNavState(){
   if(lbPages.length <= 1) return;
   if(lbIndex === 0){
@@ -568,9 +575,10 @@ function updateNavState(){
   }
 }
 
-function openLightbox(titre){
+/* lien = chemin HTML ou '' pour placeholder sans lien actif */
+function openLightbox(titre, lien){
   lbPages=[];
-  for(var i=1;i<arguments.length;i++) lbPages.push(arguments[i]);
+  for(var i=2;i<arguments.length;i++) lbPages.push(arguments[i]);
   lbIndex=0;
   resetView();
   lbImg.src='';
@@ -578,6 +586,16 @@ function openLightbox(titre){
   lbPrev.classList.remove('visible','lb-disabled');
   lbNext.classList.remove('visible','lb-disabled');
   lbCounter.classList.remove('visible');
+
+  /* Bouton "Lire en ligne" : visible uniquement si lien non vide */
+  if(lien && lien.length > 0){
+    lbReadBtn.href = lien;
+    lbReadBtn.style.display = 'inline-block';
+  } else {
+    lbReadBtn.href = '#';
+    lbReadBtn.style.display = 'none';
+  }
+
   document.getElementById('lightbox').classList.add('open');
   lbLoadPage(0);
 }
@@ -598,7 +616,7 @@ function lbLoadPage(idx){
       lbPrev.classList.add('visible');
       lbNext.classList.add('visible');
       lbCounter.classList.add('visible');
-      updateNavState(); /* FIX 2 */
+      updateNavState();
     }
   };
   tmp.onerror=function(){
@@ -607,7 +625,7 @@ function lbLoadPage(idx){
       lbPrev.classList.add('visible');
       lbNext.classList.add('visible');
       lbCounter.classList.add('visible');
-      updateNavState(); /* FIX 2 */
+      updateNavState();
     }
   };
   tmp.src=url;
@@ -615,7 +633,6 @@ function lbLoadPage(idx){
 
 function lbNavigate(dir){
   var next = lbIndex + dir;
-  /* FIX 2 : on bloque si on est aux extrémités */
   if(next < 0 || next >= lbPages.length) return;
   lbIndex = next;
   lbLoadPage(lbIndex);
@@ -627,6 +644,8 @@ function closeLightbox(){
   lbPrev.classList.remove('visible','lb-disabled');
   lbNext.classList.remove('visible','lb-disabled');
   lbCounter.classList.remove('visible');
+  lbReadBtn.style.display = 'none';
+  lbReadBtn.href = '#';
   document.getElementById('lightbox').classList.remove('open');
   lbImg.src=''; lbCaption.textContent=''; lbPages=[]; lbIndex=0;
 }
