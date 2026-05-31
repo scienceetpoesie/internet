@@ -8,6 +8,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Accueil - Science &amp; Poésie</title>
@@ -261,6 +262,48 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
 .noise-btn-pink.active { background:#D07898; border-top-color:#A04060; border-left-color:#A04060; border-right-color:#FFD0E0; border-bottom-color:#FFD0E0; }
 .noise-btn-brown { background:#4E2810; color:#F0D8B8; border-top-color:#7A4828; border-left-color:#7A4828; border-right-color:#200800; border-bottom-color:#200800; }
 .noise-btn-brown.active { background:#3A1800; border-top-color:#200800; border-left-color:#200800; border-right-color:#7A4828; border-bottom-color:#7A4828; }
+
+/* ===================== MOBILE ===================== */
+@media (max-width: 920px) {
+  /* Le wrapper ne déborde plus : il s'adapte à l'écran */
+  #page-wrapper { width: 100%; }
+
+  /* Les 3 colonnes (gauche / centre / droite) passent les unes
+     SOUS les autres au lieu d'être côte à côte */
+  table.main-layout,
+  table.main-layout tbody,
+  table.main-layout tr { display: block; width: 100%; }
+  td.sidebar-left,
+  td.center-content,
+  td.sidebar-right {
+    display: block;
+    width: auto;
+    border: none;
+    border-bottom: 4px solid #444;
+  }
+
+  /* Idem pour les cartes empilées qui sont en 2 colonnes */
+  table.cards-table,
+  table.cards-table tbody { display: block; width: 100%; }
+  table.cards-table tr { display: block; width: 100%; }
+  td.card { display: block; width: auto !important; }
+
+  /* La barre de nav : les onglets passent sur 2-3 lignes au lieu
+     d'être écrasés */
+  table.navbar, table.navbar tbody, table.navbar tr {
+    display: flex; flex-wrap: wrap; width: 100%;
+  }
+  td.nav-cell { flex: 1 1 33%; }
+  td.nav-cell a { font-size: 11px; }
+}
+
+@media (max-width: 920px) {
+  /* Réactiver le vrai curseur sur tactile : le curseur custom
+     n'a pas de sens sans souris */
+  * { cursor: auto !important; }
+  #star-cursor { display: none; }
+}
+  
 </style>
 </head>
 <body>
