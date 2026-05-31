@@ -3,6 +3,7 @@
 <head>
 <link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/%20antiart.ico" type="image/x-icon">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Publications — Science &amp; Poésie</title>
 <style type="text/css">
 * { cursor: none !important; }
@@ -188,6 +189,63 @@ body {
 
 .sparkle { position:fixed; pointer-events:none; z-index:99997; animation:sparkleBurst 0.45s linear forwards; transform-origin:center; user-select:none; font-family:"Courier New",monospace; font-weight:bold; }
 @keyframes sparkleBurst { 0%{opacity:1;transform:translate(-50%,-50%);}100%{opacity:0;transform:translate(var(--tx),var(--ty));} }
+
+/* ═══════════════════════════════════════════════════════════
+   ADAPTATION MOBILE
+   Tout est confiné dans @media (max-width: 1160px).
+   La version ordinateur (≥ 1160px) reste strictement identique.
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 1160px) {
+  /* Le wrapper s'adapte à l'écran au lieu d'imposer 1120px */
+  #page-wrapper { width: 100%; }
+
+  /* La grille passe de 5 colonnes à 2 */
+  .book-item { width: 50%; }
+
+  /* Les couvertures (180px fixe) remplissent leur colonne */
+  .book-cover-wrap,
+  .book-cover-wrap img,
+  .book-cover-placeholder,
+  .book-title { width: 100%; max-width: 100%; }
+
+  /* En-tête : titre + bouton retour s'empilent si trop serrés */
+  .page-header { flex-wrap: wrap; gap: 8px; padding: 14px 16px 12px 16px; }
+  .page-header h1 { font-size: 24px; letter-spacing: 1px; }
+
+  .section-block { padding: 22px 14px 8px 14px; }
+
+  /* Le curseur étoile n'a pas de sens au doigt → vrai curseur système */
+  * { cursor: auto !important; }
+  #star-cursor { display: none; }
+}
+
+/* Très petits écrans (téléphones étroits) : 1 seule colonne plus confortable */
+@media (max-width: 560px) {
+  .book-item { width: 50%; padding: 8px; }
+  .book-title { font-size: 11px; }
+}
+
+/* === LIGHTBOX : zoom tactile natif sur mobile === */
+@media (max-width: 1160px) {
+  /* On rend la lightbox zoomable/défilable par le navigateur lui-même */
+  #lightbox {
+    touch-action: auto;                 /* ré-autorise le pinch-to-zoom natif */
+    overflow: auto;                     /* permet de se déplacer dans l'image zoomée */
+    -webkit-overflow-scrolling: touch;
+  }
+  #lightbox-img {
+    max-width: 95vw;
+    max-height: none;                   /* l'image peut dépasser la hauteur → scroll */
+    cursor: auto;
+  }
+  /* Flèches ramenées dans l'écran (sinon hors-champ à -72px) et agrandies */
+  .lb-nav { font-size: 22px; padding: 10px 14px; }
+  #lb-prev { left: 4px; }
+  #lb-next { right: 4px; }
+  /* Boutons du haut un peu plus accessibles */
+  #lightbox-close { top: 10px; right: 10px; }
+  #lightbox-read { top: 10px; left: 10px; }
+}
 </style>
 </head>
 <body>
@@ -417,7 +475,7 @@ body {
         'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-002.jpg?raw=true',
         'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-003.jpg?raw=true',
         'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-004.jpg?raw=true',
-        'https://github.com/scienceetpoesie/internet/bl/maobin/galerie/brochures/extraits/L+-MDdCmEA-005.jpg?raw=true')">
+        'https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/extraits/L+-MDdCmEA-005.jpg?raw=true')">
         <img src="https://github.com/scienceetpoesie/internet/blob/main/galerie/brochures/couv%20L+-MDdCmEA.jpg?raw=true" alt="Les plus ou moins Malheureuses Décennies de la Classe Moyenne euro-américaine" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="book-cover-placeholder" style="display:none">Les plus ou moins Malheureuses Décennies de la Classe Moyenne euro-américaine</div>
       </div>
@@ -528,6 +586,11 @@ body {
 </div>
 
 <script>
+/* ══ Détection souris vs tactile ══
+   Sert à n'activer le zoom molette / preventDefault que sur ordinateur.
+   Sur mobile, le navigateur garde la main sur le pinch-to-zoom natif. */
+var hasMouse = window.matchMedia('(pointer: fine)').matches;
+
 /* ══ Curseur ══ */
 var cursor = document.getElementById('star-cursor');
 document.addEventListener('mousemove', function(e){ cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px'; });
@@ -658,13 +721,19 @@ document.addEventListener('keydown',function(e){
   }
 });
 
-lbImg.addEventListener('wheel',function(e){ e.preventDefault(); e.stopPropagation(); scale=Math.min(Math.max(scale+(e.deltaY>0?-0.15:0.15),0.5),5); applyTransform(); },{passive:false});
+/* ── Zoom molette + glisser : UNIQUEMENT sur ordinateur (souris) ──
+   Sur mobile, on ne touche à rien : le pinch-to-zoom natif du
+   navigateur fonctionne grâce au CSS (touch-action:auto). */
+if (hasMouse) {
+  lbImg.addEventListener('wheel',function(e){ e.preventDefault(); e.stopPropagation(); scale=Math.min(Math.max(scale+(e.deltaY>0?-0.15:0.15),0.5),5); applyTransform(); },{passive:false});
 
-lbImg.addEventListener('mousedown',function(e){ e.preventDefault(); dragging=true; dragStartX=e.clientX-posX; dragStartY=e.clientY-posY; lbImg.classList.add('dragging'); });
-document.addEventListener('mousemove',function(e){ if(!dragging)return; posX=e.clientX-dragStartX; posY=e.clientY-dragStartY; applyTransform(); });
-document.addEventListener('mouseup',function(){ dragging=false; lbImg.classList.remove('dragging'); });
+  lbImg.addEventListener('mousedown',function(e){ e.preventDefault(); dragging=true; dragStartX=e.clientX-posX; dragStartY=e.clientY-posY; lbImg.classList.add('dragging'); });
+  document.addEventListener('mousemove',function(e){ if(!dragging)return; posX=e.clientX-dragStartX; posY=e.clientY-dragStartY; applyTransform(); });
+  document.addEventListener('mouseup',function(){ dragging=false; lbImg.classList.remove('dragging'); });
 
-document.getElementById('lightbox').addEventListener('wheel',function(e){ e.preventDefault(); },{passive:false});
+  document.getElementById('lightbox').addEventListener('wheel',function(e){ e.preventDefault(); },{passive:false});
+}
+
 document.getElementById('lightbox').addEventListener('click',function(e){ if(e.target===this) closeLightbox(); });
 
 /* ══ Sparkles ══ */
