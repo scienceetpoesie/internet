@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="icon" href="https://github.com/scienceetpoesie/notre-entente/raw/refs/heads/main/assets/coeur" type="image/x-icon">
 <meta charset="utf-8">
 <title>Modulateur d'homme blanc de 50+</title>
@@ -257,6 +258,85 @@ canvas {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.slider-row input[type=range] {
+  flex:1; cursor:pointer;
+  -webkit-appearance:none; appearance:none;
+  height:5px;
+  border-radius:3px;
+  outline:none;
+  touch-action: none;        /* ← empêche le scroll pendant le glissement */
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4);
+  background: linear-gradient(to right, var(--shadow) 0%, var(--shadow) 0%, var(--gold) 0%, var(--gold) 100%);
+}
+  .slider-row input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance:none; appearance:none;
+  width:22px; height:22px;
+  border-radius:50%;
+  background: var(--bord);
+  border: 2px solid var(--bord-hi);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12);
+  cursor:pointer;
+}
+.slider-row input[type=range]::-moz-range-thumb {
+  width:22px; height:22px; border-radius:50%;
+  background: var(--bord);
+  border: 2px solid var(--bord-hi);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.55);
+  cursor:pointer;
+}
+@media (max-width: 640px) {
+  body {
+    padding: 16px 10px;
+    gap: 16px;
+    justify-content: flex-start;
+  }
+
+  .scene {
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+  }
+
+  /* le canvas prend toute la largeur dispo */
+  .canvas-frame {
+    max-width: 100%;
+    width: 100%;
+  }
+  canvas {
+    width: 100%;
+  }
+
+  /* les deux boutons côte à côte sous le canvas */
+  #soundBtn { order: 2; }
+  .canvas-frame { order: 1; }
+  #imgBtn { order: 3; }
+
+  #infoLine {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding: 0 4px;
+  }
+  #mainTitle {
+    white-space: normal;
+    border-right: none;
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .controls {
+    width: 100%;
+    padding: 14px 14px;
+  }
+
+  /* labels au-dessus des sliders pour gagner de la largeur */
+  .slider-row { flex-wrap: wrap; gap: 6px 12px; }
+  .slider-row label { width: auto; flex: 1 1 100%; }
+  .slider-row input[type=range] { flex: 1 1 auto; }
+}
+  
 </style>
 </head>
 <body>
