@@ -79,6 +79,35 @@ button:active {
     object-fit: contain;
     border: 2px solid #a0a0a0; /* liseré gris autour de l’image */
 }
+
+/* ===== Menu clic droit ===== */
+#likeMenu {
+    position: absolute;
+    display: none;
+    background: #c0c0c0;
+    border: 2px outset white;
+    padding: 2px;
+    list-style: none;
+    margin: 0;
+    z-index: 2000;
+    font-family: "Times New Roman";
+    font-size: 15px;
+}
+#likeMenu li {
+    padding: 6px 18px;
+    cursor: pointer;
+    border: 2px outset transparent;
+}
+#likeMenu li:hover {
+    border: 2px outset white;
+    background: #b0b0b0;
+}
+/* option actuellement sélectionnée pour l'image courante */
+#likeMenu li.selected {
+    border: 2px inset black;
+    background: #a8a8a8;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -101,6 +130,12 @@ button:active {
 <div class="footer">
     <p>Science & Poésie - 2025 - 🄯</p>
 </div>
+
+<!-- Menu clic droit -->
+<ul id="likeMenu">
+    <li data-vote="like">👍 J'aime</li>
+    <li data-vote="dislike">👎 J'aime pas</li>
+</ul>
 
 <script>
 var images = [
@@ -199,6 +234,7 @@ function initShuffle() {
 // Affiche l'image courante
 function showImage() {
     document.getElementById("gallery").src = images[shuffledIndices[currentIndex]];
+    resetVote(); // réinitialise le vote à chaque changement d'image
 }
 
 // Image suivante (shuffle)
@@ -216,13 +252,52 @@ function prevImage() {
     }
 }
 
+/* ===== Logique du menu clic droit (J'aime / J'aime pas) ===== */
+var currentVote = null; // null | "like" | "dislike" -> vote de l'image courante
+var likeMenu = document.getElementById("likeMenu");
+var galleryImg = document.getElementById("gallery");
+
+// remet le vote à zéro (appelé quand on change d'image)
+function resetVote() {
+    currentVote = null;
+}
+
+// met en surbrillance l'option déjà choisie dans le menu
+function refreshMenuSelection() {
+    likeMenu.querySelectorAll("li").forEach(function(li) {
+        li.classList.toggle("selected", li.dataset.vote === currentVote);
+    });
+}
+
+// ouvre le menu uniquement sur l'image
+galleryImg.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+    refreshMenuSelection();
+    likeMenu.style.left = e.pageX + "px";
+    likeMenu.style.top = e.pageY + "px";
+    likeMenu.style.display = "block";
+});
+
+// clic sur une option -> on enregistre le vote (en mémoire) et on ferme
+likeMenu.addEventListener("click", function(e) {
+    var li = e.target.closest("li");
+    if (!li) return;
+    currentVote = li.dataset.vote;
+    likeMenu.style.display = "none";
+});
+
+// fermer le menu si on clique ailleurs
+document.addEventListener("click", function() {
+    likeMenu.style.display = "none";
+});
+// éviter que le clic droit ailleurs ouvre ce menu personnalisé
+document.addEventListener("contextmenu", function(e) {
+    if (e.target !== galleryImg) likeMenu.style.display = "none";
+});
+
 // Initialisation
 initShuffle();
 showImage();
-
-
-
-    
 </script>
 
 </body>
