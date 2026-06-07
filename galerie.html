@@ -94,19 +94,18 @@ button:active {
     font-size: 15px;
 }
 #likeMenu li {
-    padding: 6px 18px;
+    padding: 6px 18px 6px 26px; /* place à gauche pour le tick */
     cursor: pointer;
-    border: 2px outset transparent;
+    position: relative;
 }
 #likeMenu li:hover {
-    border: 2px outset white;
     background: #b0b0b0;
 }
 /* option actuellement sélectionnée pour l'image courante */
-#likeMenu li.selected {
-    border: 2px inset black;
-    background: #a8a8a8;
-    font-weight: bold;
+#likeMenu li.selected::before {
+    content: "\2713"; /* ✓ */
+    position: absolute;
+    left: 8px;
 }
 </style>
 </head>
@@ -133,8 +132,8 @@ button:active {
 
 <!-- Menu clic droit -->
 <ul id="likeMenu">
-    <li data-vote="like">👍 J'aime</li>
-    <li data-vote="dislike">👎 J'aime pas</li>
+    <li data-vote="like">J'aime</li>
+    <li data-vote="dislike">J'aime pas</li>
 </ul>
 
 <script>
