@@ -70,7 +70,7 @@ body {
     #3CCB6E 50% 66.667%, #00C2DE 66.667% 83.333%, #9B5DE5 83.333% 100%); }
 
 /* ── SECTION ── */
-.section-block { padding: 26px 24px 10px 24px; }
+.section-block { padding: 14px 24px 10px 24px; }
 .section-title {
   font-family: "Arial Black", Arial, sans-serif;
   font-size: 15px; font-weight: 900; color: #111111;
@@ -90,7 +90,7 @@ body {
 
 .album-face {
   width: 180px; height: 180px; box-sizing: border-box;
-  border: 3px solid #FFFFFF;
+  border: 2px solid #999999;
   box-shadow: 5px 5px 0 var(--sh, #00C2DE);
   transition: box-shadow 0.08s, transform 0.08s;
   overflow: hidden; background: #888;
@@ -98,11 +98,11 @@ body {
 .album-card:hover .album-face { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--sh, #00C2DE); }
 
 /* la couleur d'ombre tourne sur les 6 teintes du titre, carte après carte */
-.album-grid .album-item:nth-child(6n+1){ --sh: #E6007E; }
-.album-grid .album-item:nth-child(6n+2){ --sh: #FF8A3D; }
-.album-grid .album-item:nth-child(6n+3){ --sh: #FFE000; }
+.album-grid .album-item:nth-child(6n+1){ --sh: #8ECAE6; } /* electro : bleu clair */
+.album-grid .album-item:nth-child(6n+2){ --sh: #3C4A63; } /* rock : bleu foncé grisé */
+.album-grid .album-item:nth-child(6n+3){ --sh: #6F5B92; } /* jazz : violet foncé pastel */
 .album-grid .album-item:nth-child(6n+4){ --sh: #3CCB6E; }
-.album-grid .album-item:nth-child(6n+5){ --sh: #00C2DE; }
+.album-grid .album-item:nth-child(6n+5){ --sh: #313E63; } /* sse rejects : bleu marine légèrement grisé */
 .album-grid .album-item:nth-child(6n+6){ --sh: #9B5DE5; }
 
 .album-cover img { display: block; width: 180px; height: 180px; }
@@ -144,6 +144,25 @@ body {
 .album-title { font-family: "Arial Black", Arial, sans-serif; font-size: 12px; color: #111111; margin-top: 9px; line-height: 1.3; width: 180px; }
 .album-artist { font-family: "Times New Roman", serif; font-style: italic; font-size: 13px; color: #E6007E; }
 .album-year { font-family: "Courier New", monospace; font-size: 10px; color: #555; letter-spacing: 2px; margin-top: 2px; }
+
+/* ── CADRE BLANC 3D 90's (entre rainbow-hr et ALBUMS) ── */
+.album-frame {
+  margin: 18px 24px 8px; padding: 12px 16px;
+  background: #FFFFFF;
+  border: 4px outset #E6E6E6;
+  box-shadow: 2px 2px 0 #BFBFBF;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.album-frame .frame-icon {
+  width: 64px; height: 64px; display: block;
+  border: 2px inset #CCCCCC; background: #FFFFFF;
+}
+.album-frame .frame-text {
+  flex: 1; text-align: center; padding: 0 18px;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 15px; font-weight: 900; color: #E6007E;
+  letter-spacing: 2px; line-height: 1.4;
+}
 
 /* ── FOOTER ── */
 .footer-band { background-color: #FFFFFF; color: #111111; text-align: center; padding: 10px; font-family: "Courier New", Courier, monospace; font-size: 12px; border-top: 5px solid #E6007E; margin-top: 20px; }
@@ -208,6 +227,12 @@ body {
 
 <hr class="rainbow-hr">
 
+<div class="album-frame">
+  <img class="frame-icon" src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/panneaux%20interdit/anti%20music%20scale.jpg?raw=true" alt="anti music">
+  <div class="frame-text">&#9733; VOTRE TEXTE ICI &#9733;</div>
+  <img class="frame-icon" src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/panneaux%20interdit/anti%20music%20scale.jpg?raw=true" alt="anti music">
+</div>
+
 <!-- ════ ALBUMS ════ -->
 <div class="section-block">
   <div class="section-title"><span>&#9654;</span> ALBUMS</div>
@@ -220,83 +245,207 @@ body {
     <div class="album-item">
       <div class="album-card" onclick="toggleDetail(this)">
         <div class="album-face album-cover">
-          <div class="cover-placeholder" style="background:#E6007E;color:#FFE000">SOLEIL<br>MÉCANIQUE</div>
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ1%20-%20best%20of%20electro.jpg?raw=true" alt="Soleil Mécanique">
         </div>
         <div class="album-face album-back">
-          <h4>FACE A / B</h4>
+          <h4>MUSIQUE ELECTRO</h4>
           <ol>
-            <li>Ouverture <span>3:14</span></li>
-            <li>Soleil mécanique <span>4:02</span></li>
-            <li>Nuit de néon <span>5:20</span></li>
-            <li>Retour de manivelle <span>3:48</span></li>
+            <li>Augier du pommier</li>
+            <li>Du corbillard au podium</li>
+            <li>le service public</li>
+            <li>The lake is on fire</li>
+            <li>zukunftaufzugsmusik</li>
+            <li>Radio-mistral (la derniere radio pirate)</li>
+            <li>14 year old drizabone</li>
+            <li>Déambulisco</li>
+            <li>socialisme (interlude)</li>
+            <li>Lord Millepim's</li>
+            <li>Michtanga</li>
+            <li>CCR delta 32 (prod aphex twink)</li>
+            <li>à la recherche de la chappe de crystal</li>
+            <li>Bendwheel blaster-scratch toutawseundouane</li>
+            <li>STARCRADE 3000</li>
           </ol>
-          <div class="meta">1983 &middot; 33 tours</div>
+          <div class="meta">best of &middot; electro</div>
         </div>
       </div>
-      <div class="album-title">Soleil Mécanique</div>
-      <div class="album-artist">Les Apolliniens</div>
-      <div class="album-year">1983</div>
+      <div class="album-title">MUSIQUE ELECTRO</div>
+      <div class="album-artist"></div>
+      <div class="album-year">3000</div>
     </div>
 
     <div class="album-item">
       <div class="album-card" onclick="toggleDetail(this)">
         <div class="album-face album-cover">
-          <div class="cover-placeholder" style="background:#3CCB6E;color:#FFF">CLASSE<br>MOYENNE<br>BLUES</div>
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ2%20-%20best%20of%20ROCK.jpg?raw=true" alt="Classe Moyenne Blues">
         </div>
         <div class="album-face album-back">
-          <h4>FACE A / B</h4>
+          <h4>MUSIQUE ROCK</h4>
           <ol>
-            <li>Pavillon-témoin <span>2:55</span></li>
-            <li>Crédit revolving <span>4:31</span></li>
-            <li>Classe moyenne blues <span>6:10</span></li>
+            <li>La g. consolidation du fakir B. II</li>
+            <li>Montenegro Gti</li>
+            <li>La rage du danseur classique</li>
+            <li>Croire chercher quelque-chose dans les plaines Nasca</li>
+            <li>Mode essorage entre les dunes</li>
+            <li>Kyste &amp; Bisque (crotterock)</li>
+            <li>Les Princes de la Cote</li>
+            <li>Y'a des bon chtard</li>
+            <li>La messe des dockers du havre</li>
+            <li>avec Connexion Pluton, dites adieu a la poussiere dans votre saturateur</li>
+            <li>Les martyrs de la peugeot</li>
+            <li>Yatouketombé (u.phonie-medley XXX)</li>
+            <li>Dinons ensemble</li>
+            <li>Enfant du Vaudou (Voodoo's Child)</li>
+            <li>Taxage de clope qui au drame RIP FRED</li>
           </ol>
-          <div class="meta">1986 &middot; 33 tours</div>
+          <div class="meta">best of &middot; rock</div>
         </div>
       </div>
-      <div class="album-title">Classe Moyenne Blues</div>
-      <div class="album-artist">Orchestre du Pavillon</div>
-      <div class="album-year">1986</div>
+      <div class="album-title">MUSIQUE ROCK</div>
+      <div class="album-artist"></div>
+      <div class="album-year">4000</div>
     </div>
 
     <div class="album-item">
       <div class="album-card" onclick="toggleDetail(this)">
         <div class="album-face album-cover">
-          <div class="cover-placeholder" style="background:#FF8A3D;color:#FFF">NASDAS<br>=<br>CHRIST</div>
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ3%20-%20best%20of%20JAZZ.jpg?raw=true" alt="Nasdas = Christ">
         </div>
         <div class="album-face album-back">
-          <h4>FACE A / B</h4>
+          <h4>MUSIQUE JAZZ</h4>
           <ol>
-            <li>Intro live <span>1:08</span></li>
-            <li>Nasdas = Christ <span>3:33</span></li>
-            <li>Story du jour <span>4:44</span></li>
-            <li>Outro <span>0:58</span></li>
+            <li>Hymne du monde entier</li>
+            <li>Dans l'attente que le moine sur son 31 soit</li>
+            <li>Tartinot Martinot au parc de boule</li>
+            <li>Blocus sur le nil</li>
+            <li>Requiem pour grand galop</li>
+            <li>Assis sans la soupe</li>
+            <li>Gneissbop de Dies Solis</li>
+            <li>Chaises volantes</li>
+            <li>à la recherche du scooter de pierre gataz [intro]</li>
+            <li>a la recherche du scooter de pierre gataz</li>
+            <li>Charmeur de serflex (microtonal Yamaha)</li>
+            <li>Djjjtetrdtrd</li>
+            <li>Hymne des USA</li>
+            <li>Sous la mer du Rochrome</li>
+            <li>Pas de péridurale dans la vallé du Nil</li>
           </ol>
-          <div class="meta">maxi 45 tours</div>
+          <div class="meta">best of &middot; jazz</div>
         </div>
       </div>
-      <div class="album-title">Nasdas = Christ</div>
-      <div class="album-artist">DJ Antiart</div>
-      <div class="album-year">1989</div>
+      <div class="album-title">MUSIQUE JAZZ</div>
+      <div class="album-artist"></div>
+      <div class="album-year">3000</div>
     </div>
 
     <div class="album-item">
       <div class="album-card" onclick="toggleDetail(this)">
         <div class="album-face album-cover">
-          <div class="cover-placeholder" style="background:#9B5DE5;color:#FFE000">BONNE<br>ANNÉE<br>1993</div>
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ4%20-%20best%20of%20VARI%C3%89T%C3%89.jpg?raw=true" alt="Bonne Année 1993">
         </div>
         <div class="album-face album-back">
-          <h4>FACE A / B</h4>
+          <h4>MUSIQUE POP</h4>
           <ol>
-            <li>Compte à rebours <span>2:12</span></li>
-            <li>Bonne année 1993 <span>4:00</span></li>
-            <li>Gueule de bois <span>3:21</span></li>
+            <li>Le costume de Guy Marchand</li>
+            <li>123456789</li>
+            <li>Tout le monde aime les gendarmes</li>
+            <li>les mains dans les airs</li>
+            <li>ça blanchit le jaune</li>
+            <li>Pour l'amour du risque de prendre en stop un camionneur (mettre plus de place entre le solo et ...</li>
+            <li>Musique de spa (feat Sami)</li>
+            <li>Coltard Cevlar Caviar</li>
+            <li>La danse de Jacques Medecin</li>
+            <li>j'ai pas declare ma pirogue au fisc (repeter j'arrive comme l'empire ottoman un 3e fois)</li>
+            <li>Willy Wonka en Toscane</li>
+            <li>Toujours partant pour S. Vartan</li>
+            <li>J'ai jeté ces chiennes ringardes dans la tombe (reprise de Cardi B)</li>
+            <li>L'ORAGE A FAIS TOMBER SUR NOUS TOUTE LA PLUIE DU CIEL</li>
+            <li>sous le ciel d'une l'étoile bleue</li>
+            <li>Faites de la bière</li>
           </ol>
-          <div class="meta">cassette</div>
+          <div class="meta">best of &middot; pop</div>
         </div>
       </div>
-      <div class="album-title">Bonne Année 1993</div>
-      <div class="album-artist">Les Conférenciers</div>
-      <div class="album-year">1988</div>
+      <div class="album-title">MUSIQUE POP</div>
+      <div class="album-artist"></div>
+      <div class="album-year">6000</div>
+    </div>
+
+    <div class="album-item">
+      <div class="album-card" onclick="toggleDetail(this)">
+        <div class="album-face album-cover">
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SS100-%20SS%20REJECTS.jpg?raw=true" alt="SSE rejects">
+        </div>
+        <div class="album-face album-back">
+          <h4>SSE REJECTS</h4>
+          <ol>
+            <li>samuel l. jackson</li>
+            <li>augier du pommier</li>
+            <li>les méfaits du téléphone</li>
+            <li>les scounoumes</li>
+            <li>fetr ustikk petch</li>
+            <li>jhgnbdjbfuy</li>
+            <li>ubugajabi</li>
+            <li>abstract craft</li>
+            <li>djjjtetrdtrd</li>
+            <li>p'tite virée en corvette</li>
+            <li>chaises volantes</li>
+            <li>à la vedette de sauvetage</li>
+            <li>eeeeeeeeeeeeejjll</li>
+            <li>techno pour érotomane</li>
+            <li>zukunftaufzugsmusik</li>
+            <li>noix de coco fermentée</li>
+            <li>haute fonction administrative</li>
+            <li>débarquemenrama</li>
+            <li>fugue de 0 et de 1</li>
+            <li>je suis toxique</li>
+            <li>rockeur au grand cœur</li>
+            <li>film de jeux d'action vidéo</li>
+            <li>un synthétiseur dans l'espace</li>
+            <li>UDF punique au Mont-Cenis</li>
+            <li>le fantôme du carrefour city</li>
+            <li>slam pour l'académie FR</li>
+            <li>course contre la rage de dent</li>
+            <li>panique au concours canin</li>
+            <li>rock n roll</li>
+            <li>ich weuch nicht greeburgt</li>
+            <li>carl yung habite disneyland</li>
+            <li>turbo-jazz</li>
+            <li>krifrifrifri (world war 0)</li>
+            <li>Nice Baie des Anges par A.</li>
+            <li>Détente été vibration</li>
+            <li>police polka (remix trap)</li>
+            <li>dédicace à saddam hussein</li>
+            <li>musique de marée noire</li>
+            <li>tête de gondolier</li>
+            <li>reviens sophie</li>
+            <li>jeux vidéo de film d'action</li>
+            <li>le jour les vaches sont jaunes</li>
+            <li>musique désentraînante</li>
+            <li>turbo-jazz 2</li>
+            <li>abysse en plastique</li>
+            <li>sad music</li>
+            <li>le deuxième mariage</li>
+            <li>sonnerie pour ton mobile</li>
+            <li>couscous entre blancs</li>
+            <li>rire lambert</li>
+            <li>8 ancient eagle</li>
+            <li>la maman des poissons (bobby lapointe remix psytrance)</li>
+            <li>le blues de bernard</li>
+            <li>en égypte avec jimmy page</li>
+            <li>torréfacteur (scato club)</li>
+            <li>enfant du vaudou (voodoo's child)</li>
+            <li>six jeunes m'abusent</li>
+            <li>floutage artistique</li>
+            <li>ange tombé du camion</li>
+            <li>(bonus) patrice dans la matrice</li>
+          </ol>
+          <div class="meta">SSE rejects</div>
+        </div>
+      </div>
+      <div class="album-title">SSE rejects</div>
+      <div class="album-artist"></div>
+      <div class="album-year"></div>
     </div>
 
   </div>
@@ -335,11 +484,13 @@ function toggleDetail(card){
   // construit l'encart à partir de la tracklist (.album-back) déjà présente
   var back   = card.querySelector('.album-back');
   var title  = item.querySelector('.album-title').innerHTML;
-  var artist = item.querySelector('.album-artist').innerHTML;
+  var artistEl = item.querySelector('.album-artist');
+  var artist = artistEl ? artistEl.innerHTML.trim() : '';
+  var head   = artist ? title+' &mdash; <span>'+artist+'</span>' : title;
   var panel = document.createElement('div');
   panel.className = 'album-detail';
   panel.ownerItem = item;
-  panel.innerHTML = '<div class="detail-head">'+title+' &mdash; <span>'+artist+'</span></div>' + back.innerHTML;
+  panel.innerHTML = '<div class="detail-head">'+head+'</div>' + back.innerHTML;
 
   // repère le dernier album de la même ligne (même offsetTop) et insère après
   var items = grid.querySelectorAll('.album-item');
