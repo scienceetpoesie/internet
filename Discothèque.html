@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/%20antiart.ico" type="image/x-icon">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discographie — Science &amp; Poésie</title>
+<style type="text/css">
+* { cursor: none !important; }
+#star-cursor { position: fixed; top: -100px; left: -100px; width: 16px; height: 16px; pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); }
+
+/* ══ FOND — papier clair + grille (même principe qu'avant, recoloré 80s) ══ */
+body {
+  background-color: #008080; /* le teal Windows 95 */
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,0,255,.20) 0 14px, transparent 14px 28px),
+    repeating-linear-gradient(-45deg, rgba(255,255,0,.18) 0 14px, transparent 14px 28px),
+    radial-gradient(rgba(255,255,255,.30) 2px, transparent 3px);
+  background-size: 40px 40px, 40px 40px, 22px 22px;
+  margin: 0; padding: 0;
+  font-family: "Comic Sans MS", "Times New Roman", cursive, serif;
+}
+#page-wrapper {
+  width: 1120px; margin: 0 auto;
+  background-color: #FFFF66; /* jaune citron */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Cpath d='M0 0 H30 M0 0 V30' fill='none' stroke='%23FF66CC' stroke-width='1.5' stroke-dasharray='6 3 2 4'/%3E%3C/svg%3E");
+  background-size: 30px 30px;
+  border: 6px ridge #FF00FF;
+}
+
+/* ── MARQUEE ── */
+.marquee-band { background-color: #FFFFFF; color: #111111; font-family: "Courier New", Courier, monospace; font-size: 13px; font-weight: bold; padding: 4px 0; overflow: hidden; white-space: nowrap; }
+.marquee-band.alt { background-color: #E6007E; color: #FFE000; }
+.marquee-inner { display: inline-block; animation: marquee 22s linear infinite; }
+@keyframes marquee { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
+
+/* ── HEADER ── */
+.page-header { background-color: #FFFFFF; border-bottom: 5px solid #E6007E; padding: 18px 24px 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+/* ── TITRE façon premier logo Google (1998) : serif coloré, statique, ombre douce ── */
+.page-header h1.wordart {
+  margin: 0; padding: 10px 0;
+  font-family: Georgia, "Times New Roman", serif; font-weight: bold;
+  font-size: 46px; letter-spacing: 1px;
+  display: inline-block; line-height: 1;
+  white-space: nowrap; text-align: center;
+}
+.page-header h1.wordart span {
+  display: inline-block;
+  /* embossage : reflet clair en haut-gauche + creux foncé en bas-droite + légère profondeur */
+  text-shadow:
+    -1px -1px 0 rgba(255,255,255,0.50),
+     1px  1px 0 rgba(0,0,0,0.80),
+     3px  3px 4px rgba(0,0,0,0.45);
+}
+
+/* une couleur par lettre (statique, palette de la page) */
+.page-header h1.wordart span:nth-child(6n+1){ color: #E6007E; }
+.page-header h1.wordart span:nth-child(6n+2){ color: #FF8A3D; }
+.page-header h1.wordart span:nth-child(6n+3){ color: #FFE000; }
+.page-header h1.wordart span:nth-child(6n+4){ color: #3CCB6E; }
+.page-header h1.wordart span:nth-child(6n+5){ color: #00C2DE; }
+.page-header h1.wordart span:nth-child(6n+6){ color: #9B5DE5; }
+.back-link { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: 900; color: #111111; text-decoration: none; background: #00C2DE; border: 2px outset #7FE6F4; padding: 4px 10px; letter-spacing: 1px; }
+.back-link:hover { background: #FFE000; border-style: inset; }
+
+/* ── BANDE rayée — les 6 couleurs du titre ── */
+.memphis-strip { height: 14px; background:
+  linear-gradient(180deg,
+    #E6007E 0 16.667%, #FF8A3D 16.667% 33.333%, #FFE000 33.333% 50%,
+    #3CCB6E 50% 66.667%, #00C2DE 66.667% 83.333%, #9B5DE5 83.333% 100%); }
+
+/* ── SECTION ── */
+.section-block { padding: 26px 24px 10px 24px; }
+.section-title {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 15px; font-weight: 900; color: #111111;
+  letter-spacing: 3px; text-transform: uppercase;
+  border-width: 0 0 4px; border-style: solid;
+  border-image: linear-gradient(90deg, #E6007E, #FF8A3D, #FFE000, #3CCB6E, #00C2DE, #9B5DE5) 1;
+  padding-bottom: 6px; margin: 0 0 22px 0;
+}
+.section-title span { color: #9B5DE5; font-size: 18px; margin-right: 6px; }
+
+/* ── GRILLE ── */
+.album-grid { display: flex; flex-wrap: wrap; gap: 0; padding: 0; }
+.album-item { width: 20%; padding: 12px; box-sizing: border-box; text-align: center; display: flex; flex-direction: column; align-items: center; }
+
+/* Carte : pochette OU tracklist, même empreinte 180px (clic = bascule) */
+.album-card { width: 180px; height: 180px; position: relative; cursor: pointer !important; }
+
+.album-face {
+  width: 180px; height: 180px; box-sizing: border-box;
+  border: 3px solid #FFFFFF;
+  box-shadow: 5px 5px 0 var(--sh, #00C2DE);
+  transition: box-shadow 0.08s, transform 0.08s;
+  overflow: hidden; background: #888;
+}
+.album-card:hover .album-face { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--sh, #00C2DE); }
+
+/* la couleur d'ombre tourne sur les 6 teintes du titre, carte après carte */
+.album-grid .album-item:nth-child(6n+1){ --sh: #E6007E; }
+.album-grid .album-item:nth-child(6n+2){ --sh: #FF8A3D; }
+.album-grid .album-item:nth-child(6n+3){ --sh: #FFE000; }
+.album-grid .album-item:nth-child(6n+4){ --sh: #3CCB6E; }
+.album-grid .album-item:nth-child(6n+5){ --sh: #00C2DE; }
+.album-grid .album-item:nth-child(6n+6){ --sh: #9B5DE5; }
+
+.album-cover img { display: block; width: 180px; height: 180px; }
+.cover-placeholder { width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; box-sizing: border-box; font-family: "Arial Black", sans-serif; font-size: 15px; color: #FFF; letter-spacing: 1px; }
+
+/* Dos : tracklist (cachée par défaut) */
+.album-back { display: none; background: #FFFFFF; color: #FFE000; border-color: #FFE000; box-shadow: 4px 4px 0 #E6007E, 6px 6px 0 #00C2DE; padding: 10px 12px; text-align: left; font-family: "Courier New", monospace; font-size: 11px; line-height: 1.5; }
+.album-card.flip .album-cover { display: none; }
+.album-card.flip .album-back { display: block; }
+.album-back h4 { margin: 0 0 5px; font-family: "Arial Black", sans-serif; font-size: 11px; color: #00C2DE; letter-spacing: 1px; border-bottom: 1px solid #E6007E; padding-bottom: 3px; }
+.album-back ol { margin: 0; padding-left: 18px; }
+.album-back li span { color: #E6007E; float: right; }
+.album-back .meta { margin-top: 7px; font-size: 10px; color: #00C2DE; }
+
+/* ── ENCART DÉTAIL — pleine largeur, sous la ligne de l'album cliqué ── */
+.album-detail {
+  width: 100%; box-sizing: border-box;
+  margin: 2px 12px 22px;
+  background: #FFFFFF; color: #111111;
+  border: 3px solid #FFE000;
+  box-shadow: 6px 6px 0 #E6007E, 9px 9px 0 #00C2DE;
+  padding: 16px 22px 18px;
+  font-family: "Courier New", monospace;
+}
+.album-detail .detail-head {
+  font-family: "Arial Black", sans-serif; font-size: 15px; color: #E6007E;
+  letter-spacing: 1px; border-bottom: 2px solid #E6007E;
+  padding-bottom: 8px; margin-bottom: 12px;
+}
+.album-detail .detail-head span { font-family: "Times New Roman", serif; font-style: italic; font-weight: normal; color: #9B5DE5; }
+.album-detail h4 { margin: 0 0 8px; font-family: "Arial Black", sans-serif; font-size: 12px; color: #E6007E; letter-spacing: 2px; }
+.album-detail ol { margin: 0; padding: 0 0 0 22px; font-size: 13px; line-height: 1.9; columns: 2; column-gap: 44px; }
+.album-detail li { break-inside: avoid; }
+.album-detail li span { color: #9B5DE5; float: right; }
+.album-detail .meta { margin-top: 12px; font-size: 11px; color: #008080; letter-spacing: 1px; }
+.album-item.active .album-face { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--sh, #00C2DE); }
+
+/* Légende */
+.album-title { font-family: "Arial Black", Arial, sans-serif; font-size: 12px; color: #111111; margin-top: 9px; line-height: 1.3; width: 180px; }
+.album-artist { font-family: "Times New Roman", serif; font-style: italic; font-size: 13px; color: #E6007E; }
+.album-year { font-family: "Courier New", monospace; font-size: 10px; color: #555; letter-spacing: 2px; margin-top: 2px; }
+
+/* ── FOOTER ── */
+.footer-band { background-color: #FFFFFF; color: #111111; text-align: center; padding: 10px; font-family: "Courier New", Courier, monospace; font-size: 12px; border-top: 5px solid #E6007E; margin-top: 20px; }
+.footer-band a { color: #E6007E; }
+.footer-bottom { background-color: #FFFFFF; color: #777; text-align: center; padding: 5px; font-family: "Courier New", monospace; font-size: 10px; }
+
+/* ══════════════ DÉCO DÉLIBÉRÉMENT IMMONDE (90s) ══════════════ */
+@keyframes blink { 50% { opacity: 0; } }
+.blink { animation: blink 1s step-end infinite; }
+.rainbow-hr { height: 9px; border: 2px outset #FFF; margin: 12px 22px; box-shadow: 2px 2px 0 #FFF;
+  background: repeating-linear-gradient(90deg, #E6007E 0 18px, #FF8A3D 18px 36px, #FFE000 36px 54px, #3CCB6E 54px 72px, #00C2DE 72px 90px, #9B5DE5 90px 108px); }
+.marquee-band.ugly { background-color: #00FF00; color: #FF00FF; }
+.marquee-band.ugly2 { background-color: #0000CD; color: #FFFF00; }
+.construction { background: #FFFF00; color: #FF0000; text-align: center; font-family: "Comic Sans MS", cursive; font-weight: bold; font-size: 16px; padding: 9px; border-top: 4px ridge #FF00FF; border-bottom: 4px ridge #FF00FF; letter-spacing: 1px; }
+.construction span.bolt { color: #FFF; }
+.badge-new { display: inline-block; background: #FF0000; color: #FFFF00; font-family: "Comic Sans MS", cursive; font-weight: bold; font-size: 11px; padding: 1px 6px; transform: rotate(-11deg); border: 1px solid #FFF; box-shadow: 1px 1px 0 #FFF; margin-left: 8px; vertical-align: middle; }
+.junk-band { background: #008080; text-align: center; padding: 16px 10px; }
+.counter { font-family: "Courier New", monospace; font-size: 14px; color: #00FF00; background: #FFF; display: inline-block; padding: 4px 10px; border: 3px inset #999; letter-spacing: 4px; }
+.bestviewed { font-family: "Comic Sans MS", cursive; font-size: 12px; color: #FFFF66; text-align: center; padding: 8px 0 0; line-height: 1.7; text-shadow: 1px 1px 0 #FFF; }
+.guestbook { display: inline-block; margin-top: 8px; font-family: "Comic Sans MS", cursive; font-weight: bold; font-size: 13px; color: #FFF; text-decoration: none; background: #FF99CC; border: 3px outset #FF00FF; padding: 5px 12px; }
+.guestbook:hover { border-style: inset; background: #FFCC00; }
+
+.sparkle { position:fixed; pointer-events:none; z-index:99997; animation:sparkleBurst 0.45s linear forwards; transform-origin:center; user-select:none; font-family:"Courier New",monospace; font-weight:bold; }
+@keyframes sparkleBurst { 0%{opacity:1;transform:translate(-50%,-50%);}100%{opacity:0;transform:translate(var(--tx),var(--ty));} }
+
+/* ── MOBILE ── */
+@media (max-width: 1160px) {
+  #page-wrapper { width: 100%; }
+  .album-item { width: 50%; }
+  .album-card, .album-face, .album-cover img, .cover-placeholder, .album-title { width: 100%; max-width: 100%; }
+  .album-card { height: auto; }
+  .album-face { height: auto; min-height: 180px; }
+  .page-header { flex-wrap: wrap; gap: 8px; padding: 14px 16px; }
+  .page-header h1.wordart { font-size: 30px; padding: 6px 0; white-space: normal; }
+  .section-block { padding: 22px 14px 8px; }
+  * { cursor: auto !important; }
+  #star-cursor { display: none; }
+}
+@media (max-width: 560px) {
+  .album-item { width: 50%; padding: 8px; }
+  .album-title { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<div id="star-cursor">
+  <svg width="16" height="16" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="7,1 8.5,5.5 13,5.5 9.5,8.5 10.8,13 7,10.2 3.2,13 4.5,8.5 1,5.5 5.5,5.5" fill="#E6007E" stroke="#FFF" stroke-width="0.6"/>
+  </svg>
+</div>
+
+<div id="page-wrapper">
+
+<div class="marquee-band"><span class="marquee-inner">&nbsp;&nbsp;&nbsp;*** SCIENCE &amp; POESIE — DISCOGRAPHIE ***&nbsp;&nbsp;&nbsp;33 tours * 45 tours * cassettes&nbsp;&nbsp;&nbsp;*** clique sur une pochette pour voir les titres ***&nbsp;&nbsp;&nbsp;</span></div>
+<div class="memphis-strip"></div>
+
+<div class="page-header">
+  <h1 class="wordart"><span>D</span><span>I</span><span>S</span><span>C</span><span>O</span><span>G</span><span>R</span><span>A</span><span>P</span><span>H</span><span>I</span><span>E</span></h1>
+  <a href="index.html" class="back-link">&#9668; Retour à l'accueil</a>
+</div>
+
+<hr class="rainbow-hr">
+
+<!-- ════ ALBUMS ════ -->
+<div class="section-block">
+  <div class="section-title"><span>&#9654;</span> ALBUMS</div>
+  <div class="album-grid">
+
+    <!-- ░░ MODÈLE D'ALBUM — dupliquer ce bloc ░░
+         Pochette : remplacer .cover-placeholder par <img src="..."> (180x180)
+         Titres   : éditer la <ol> de .album-back
+    -->
+    <div class="album-item">
+      <div class="album-card" onclick="toggleDetail(this)">
+        <div class="album-face album-cover">
+          <div class="cover-placeholder" style="background:#E6007E;color:#FFE000">SOLEIL<br>MÉCANIQUE</div>
+        </div>
+        <div class="album-face album-back">
+          <h4>FACE A / B</h4>
+          <ol>
+            <li>Ouverture <span>3:14</span></li>
+            <li>Soleil mécanique <span>4:02</span></li>
+            <li>Nuit de néon <span>5:20</span></li>
+            <li>Retour de manivelle <span>3:48</span></li>
+          </ol>
+          <div class="meta">1983 &middot; 33 tours</div>
+        </div>
+      </div>
+      <div class="album-title">Soleil Mécanique</div>
+      <div class="album-artist">Les Apolliniens</div>
+      <div class="album-year">1983</div>
+    </div>
+
+    <div class="album-item">
+      <div class="album-card" onclick="toggleDetail(this)">
+        <div class="album-face album-cover">
+          <div class="cover-placeholder" style="background:#3CCB6E;color:#FFF">CLASSE<br>MOYENNE<br>BLUES</div>
+        </div>
+        <div class="album-face album-back">
+          <h4>FACE A / B</h4>
+          <ol>
+            <li>Pavillon-témoin <span>2:55</span></li>
+            <li>Crédit revolving <span>4:31</span></li>
+            <li>Classe moyenne blues <span>6:10</span></li>
+          </ol>
+          <div class="meta">1986 &middot; 33 tours</div>
+        </div>
+      </div>
+      <div class="album-title">Classe Moyenne Blues</div>
+      <div class="album-artist">Orchestre du Pavillon</div>
+      <div class="album-year">1986</div>
+    </div>
+
+    <div class="album-item">
+      <div class="album-card" onclick="toggleDetail(this)">
+        <div class="album-face album-cover">
+          <div class="cover-placeholder" style="background:#FF8A3D;color:#FFF">NASDAS<br>=<br>CHRIST</div>
+        </div>
+        <div class="album-face album-back">
+          <h4>FACE A / B</h4>
+          <ol>
+            <li>Intro live <span>1:08</span></li>
+            <li>Nasdas = Christ <span>3:33</span></li>
+            <li>Story du jour <span>4:44</span></li>
+            <li>Outro <span>0:58</span></li>
+          </ol>
+          <div class="meta">maxi 45 tours</div>
+        </div>
+      </div>
+      <div class="album-title">Nasdas = Christ</div>
+      <div class="album-artist">DJ Antiart</div>
+      <div class="album-year">1989</div>
+    </div>
+
+    <div class="album-item">
+      <div class="album-card" onclick="toggleDetail(this)">
+        <div class="album-face album-cover">
+          <div class="cover-placeholder" style="background:#9B5DE5;color:#FFE000">BONNE<br>ANNÉE<br>1993</div>
+        </div>
+        <div class="album-face album-back">
+          <h4>FACE A / B</h4>
+          <ol>
+            <li>Compte à rebours <span>2:12</span></li>
+            <li>Bonne année 1993 <span>4:00</span></li>
+            <li>Gueule de bois <span>3:21</span></li>
+          </ol>
+          <div class="meta">cassette</div>
+        </div>
+      </div>
+      <div class="album-title">Bonne Année 1993</div>
+      <div class="album-artist">Les Conférenciers</div>
+      <div class="album-year">1988</div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="rainbow-hr">
+
+<div class="footer-band">&copy; 1996&ndash;<span id="fyear"></span> SCIENCE &amp; PO&Eacute;SIE &nbsp;|&nbsp; <a href="index.html">Accueil</a> &nbsp;|&nbsp; <a href="brochures.html">Publications</a></div>
+<div class="footer-bottom">no cookies &nbsp;&bull;&nbsp; no pub &nbsp;&bull;&nbsp; ILOVEEVERYBODY123</div>
+
+</div>
+
+<script>
+/* Curseur étoile */
+var cursor = document.getElementById('star-cursor');
+document.addEventListener('mousemove', function(e){ cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px'; });
+
+/* Année footer */
+document.getElementById('fyear').innerHTML = new Date().getFullYear();
+
+/* Encart détail : ouvre une bande pleine largeur sous la ligne de l'album */
+function toggleDetail(card){
+  var item = card.parentNode;                 // .album-item
+  while(item && item.className.indexOf('album-item')===-1) item = item.parentNode;
+  var grid = item.parentNode;                 // .album-grid
+
+  var existing = grid.querySelector('.album-detail');
+  var sameAlbum = existing && existing.ownerItem === item;
+
+  // toujours refermer l'encart courant + désactiver les cartes
+  if(existing) existing.parentNode.removeChild(existing);
+  var actives = grid.querySelectorAll('.album-item.active');
+  for(var a=0;a<actives.length;a++) actives[a].classList.remove('active');
+  if(sameAlbum) return;                       // re-clic = simple fermeture
+
+  // construit l'encart à partir de la tracklist (.album-back) déjà présente
+  var back   = card.querySelector('.album-back');
+  var title  = item.querySelector('.album-title').innerHTML;
+  var artist = item.querySelector('.album-artist').innerHTML;
+  var panel = document.createElement('div');
+  panel.className = 'album-detail';
+  panel.ownerItem = item;
+  panel.innerHTML = '<div class="detail-head">'+title+' &mdash; <span>'+artist+'</span></div>' + back.innerHTML;
+
+  // repère le dernier album de la même ligne (même offsetTop) et insère après
+  var items = grid.querySelectorAll('.album-item');
+  var top = item.offsetTop, last = item;
+  for(var i=0;i<items.length;i++){ if(Math.abs(items[i].offsetTop-top)<2) last = items[i]; }
+  grid.insertBefore(panel, last.nextSibling);
+  item.classList.add('active');
+}
+
+/* Sparkles au clic (palette 80s) */
+document.addEventListener('click',function(e){
+  var ch=['*','*','★','✦','·','+'], co=['#E6007E','#FF8A3D','#FFE000','#3CCB6E','#00C2DE','#9B5DE5'];
+  for(var i=0;i<6;i++)(function(i){ var el=document.createElement('div'); el.className='sparkle'; el.style.left=e.clientX+'px'; el.style.top=e.clientY+'px'; var a=(i/6)*2*Math.PI,d=30+Math.random()*20; el.style.setProperty('--tx',(Math.cos(a)*d)+'px'); el.style.setProperty('--ty',(Math.sin(a)*d)+'px'); el.style.fontSize=(i%2===0)?'14px':'9px'; el.style.color=co[i]; el.innerHTML=ch[i]; document.body.appendChild(el); setTimeout(function(){ if(el.parentNode)el.parentNode.removeChild(el); },460); })(i);
+});
+</script>
+</body>
+</html>
