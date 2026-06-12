@@ -572,6 +572,7 @@ body {
             <li data-f="8 grand caquet =(3).mp3">grand caquet =(3)</li>
             <li data-f="9 au rooftop pyramide.mp3">au rooftop de la pyramide</li>
             <li data-f="10 gin + get 27.mp3">gin + get 27 = chartreuse</li>
+            <li data-f="11 9 6 9 - gay bar.mp3">9 6 9 - gay bar</li>
             <li data-f="13 valsez jeunese !!.mp3">valsez jeunese !!</li>
             <li data-f="14 le jumeau d'angèle.mp3">le jumeau d'angèle</li>
             <li data-f="15 M-Raevzbguerz 2.mp3">Raevzbguerz</li>
@@ -588,16 +589,34 @@ body {
             <li data-f="26 - Jj0oOUuBbLlii t0uUTt - JjuULl.mp3">Jj0oOUuBbLlii t0uUTt - JjuULl</li>
             <li data-f="27 crooner in a rapture mood.mp3">crooner in a rapture mood</li>
             <li data-f="28 IPS de GPA.mp3">IPS de GVA</li>
+            <li data-f="30 Détente (2).mp3">Détente</li>
             <li data-f="32 - neo post hip.mp3">STARCRADE 3000</li>
             <li data-f="32 achoo remix.mp3">achoo remix</li>
             <li data-f="33 neandertalus.mp3">volcandertalus</li>
             <li data-f="34 LOOPA pour rappeur chinois.mp3">loop pour rappeur clairvallois</li>
             <li data-f="40 dereto d'aspig.mp3">dereto d'aspig (whitehaven)</li>
+            <li data-f="41 quadruple-décimètre.mp3">quadruple-décimètre</li>
+            <li data-f="42 rock club speed song.mp3">rock club speed song</li>
             <li data-f="50 Pierre en rillete.mp3">pierre en riz</li>
             <li data-f="666 - La Verité sur Neverland.mp3">La Verité sur Neverland (polyphonic pygmee music)</li>
+            <li data-f="796 shit melody.mp3">shit melody</li>
             <li data-f="866 miaoumiaou.mp3">miaoumiaou</li>
+            <li data-f="886 regarder Arte sous crack.mp3">regarder Arte sous crack</li>
+            <li data-f="889Screeching festival.mp3">Screeching festival</li>
+            <li data-f="969 CONCIENCA.mp3">CONCIENCA</li>
             <li data-f="999 bonus track lididloleedjeunene.mp3">(bonus track) lididloleedjeunene</li>
             <li data-f="messages à tout les ditirenbiens et truculiens encore en vie.mp3">Message à tout les ditirenbiens et truculiens encore en vie</li>
+            <li data-f="arithmeetc.mp3">arithmeetc</li>
+            <li data-f="gogo dagistino.mp3">gogo dagistino</li>
+            <li data-f="rose d'un jour.mp3">rose d'un jour</li>
+            <li data-f="s1 (cock in the pit).mp3">s1 (cock in the pit)</li>
+            <li data-f="s2 (la tapine du temps).mp3">s2 (la tapine du temps)</li>
+            <li data-f="s3 (lobby muzak).mp3">s3 (lobby muzak)</li>
+            <li data-f="s4 (motus générique).mp3">s4 (motus générique)</li>
+            <li data-f="s5 (lester is calling).mp3">s5 (lester is calling)</li>
+            <li data-f="s6 heavyphase (golden ratio).mp3">s6 heavyphase (golden ratio)</li>
+            <li data-f="s7 (house of snuff).mp3">s7 (house of snuff)</li>
+            <li data-f="s8 (il cinghuale).mp3">s8 (il cinghuale)</li>
           </ol>
           <div class="meta">BcP de Bruit POUR rien</div>
         </div>
@@ -664,7 +683,7 @@ function toggleDetail(card){
   if(existing) existing.parentNode.removeChild(existing);
   var actives = grid.querySelectorAll('.album-item.active');
   for(var a=0;a<actives.length;a++) actives[a].classList.remove('active');
-  if(sameAlbum){ stopSS(); return; }          // re-clic = simple fermeture
+  if(sameAlbum){ if(ssPlayer.paused) stopSS(); return; } // re-clic = fermeture (on ne coupe le son que s'il est en pause)
 
   // construit l'encart à partir de la tracklist (.album-back) déjà présente
   var back   = card.querySelector('.album-back');
@@ -832,22 +851,3 @@ document.addEventListener('click', function(e){
 });
 
 /* quand un morceau finit, enchaîne sur le titre jouable suivant */
-ssPlayer.addEventListener('ended', function(){
-  var cur = document.querySelector('.album-detail li.playing');
-  if(cur){
-    var next = cur.nextElementSibling;
-    while(next && !next.classList.contains('playable')) next = next.nextElementSibling;
-    cur.classList.remove('playing');
-    if(next){ playLi(next); return; }
-  }
-});
-
-/* Sparkles au clic (palette 80s) */
-document.addEventListener('click',function(e){
-  var ch=['*','*','★','✦','·','+'], co=['#E6007E','#FF8A3D','#FFE000','#3CCB6E','#00C2DE','#9B5DE5'];
-  for(var i=0;i<6;i++)(function(i){ var el=document.createElement('div'); el.className='sparkle'; el.style.left=e.clientX+'px'; el.style.top=e.clientY+'px'; var a=(i/6)*2*Math.PI,d=30+Math.random()*20; el.style.setProperty('--tx',(Math.cos(a)*d)+'px'); el.style.setProperty('--ty',(Math.sin(a)*d)+'px'); el.style.fontSize=(i%2===0)?'14px':'9px'; el.style.color=co[i]; el.innerHTML=ch[i]; document.body.appendChild(el); setTimeout(function(){ if(el.parentNode)el.parentNode.removeChild(el); },460); })(i);
-});
-</script>
-
-</body>
-</html>
