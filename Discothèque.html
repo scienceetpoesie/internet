@@ -140,7 +140,7 @@ body {
 .album-detail .meta { margin-top: 12px; font-size: 11px; color: #008080; letter-spacing: 1px; }
 .album-item.active .album-face { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--sh, #00C2DE); }
 
-/* ── Titres jouables (SS-Rejects) ── */
+/* ── Titres jouables ── */
 .album-detail li.playable { cursor: pointer !important; }
 .album-detail li.playable:hover { color: #E6007E; text-decoration: underline; }
 .album-detail li.playing { color: #E6007E; font-weight: bold; }
@@ -262,29 +262,33 @@ body {
     <!-- ░░ MODÈLE D'ALBUM — dupliquer ce bloc ░░
          Pochette : remplacer .cover-placeholder par <img src="..."> (180x180)
          Titres   : éditer la <ol> de .album-back
+         Audio    : data-base="https://archive.org/download/IDENTIFIER/" sur .album-back
+                    + data-f="nom-exact-du-fichier.mp3" sur chaque <li>  (nom BRUT, non encodé)
     -->
-<div class="album-item">
+
+    <!-- ===== MUSIQUE ELECTRO ===== -->
+    <div class="album-item">
       <div class="album-card" onclick="toggleDetail(this)">
         <div class="album-face album-cover">
-          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ1%20-%20best%20of%20electro.jpg?raw=true" alt="Soleil Mécanique">
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ1%20-%20best%20of%20electro.jpg?raw=true" alt="MUSIQUE ELECTRO">
         </div>
-        <div class="album-face album-back">
+        <div class="album-face album-back" data-base="https://archive.org/download/musique-electro/">
           <ol>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/Augier%20du%20pommier.mp3')">Augier du pommier</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/du%20corbillard%20au%20podium.mp3')">Du corbillard au podium</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/le%20service%20publique.mp3')">le service public</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/The%20Lake%20is%20on%20fire.mp3')">The lake is on fire</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/Aufzugsmusik%20der%20Zukunft.mp3')">zukunftaufzugsmusik</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/Radio%20mistral%205la%20derni%C3%A8re%20radio%20pirate.mp3')">Radio-mistral (la derniere radio pirate)</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/14%20a%C3%B1os%20drizabone.mp3')">14 year old drizabone</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/D%C3%A9ambulisco.mp3')">Déambulisco</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/socialisme.mp3')">socialisme (interlude)</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/Lord%20Millepim%27s.mp3')">Lord Millepim's</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/Michtanga.mp3')">Michtanga</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/CCR%20delta%2032%20%28prod%20aphex%20twink%29.mp3')">CCR delta 32 (prod aphex twink)</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/%C3%A0%20la%20poursuite%20de%20la%20chappe%20de%20crystal.mp3')">à la recherche de la chappe de crystal</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/bendwheel%20blaster-scratch%20toutawseundouane.mp3')">Bendwheel blaster-scratch toutawseundouane</li>
-            <li onclick="playTrack(event, 'https://archive.org/download/musique-electro/STARCRADE%203000.mp3')">STARCRADE 3000</li>
+            <li data-f="Augier du pommier.mp3">Augier du pommier</li>
+            <li data-f="du corbillard au podium.mp3">Du corbillard au podium</li>
+            <li data-f="le service publique.mp3">le service public</li>
+            <li data-f="The Lake is on fire.mp3">The lake is on fire</li>
+            <li data-f="Aufzugsmusik der Zukunft.mp3">zukunftaufzugsmusik</li>
+            <li data-f="Radio mistral 5la dernière radio pirate.mp3">Radio-mistral (la derniere radio pirate)</li>
+            <li data-f="14 años drizabone.mp3">14 year old drizabone</li>
+            <li data-f="Déambulisco.mp3">Déambulisco</li>
+            <li data-f="socialisme.mp3">socialisme (interlude)</li>
+            <li data-f="Lord Millepim's.mp3">Lord Millepim's</li>
+            <li data-f="Michtanga.mp3">Michtanga</li>
+            <li data-f="CCR delta 32 (prod aphex twink).mp3">CCR delta 32 (prod aphex twink)</li>
+            <li data-f="à la poursuite de la chappe de crystal.mp3">à la recherche de la chappe de crystal</li>
+            <li data-f="bendwheel blaster-scratch toutawseundouane.mp3">Bendwheel blaster-scratch toutawseundouane</li>
+            <li data-f="STARCRADE 3000.mp3">STARCRADE 3000</li>
           </ol>
           <div class="meta">best of &middot; electro</div>
         </div>
@@ -294,10 +298,11 @@ body {
       <div class="album-year">3000</div>
     </div>
 
+    <!-- ===== MUSIQUE ROCK (audio à venir : ajouter data-base + data-f) ===== -->
     <div class="album-item">
       <div class="album-card" onclick="toggleDetail(this)">
         <div class="album-face album-cover">
-          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ2%20-%20best%20of%20ROCK.jpg?raw=true" alt="Classe Moyenne Blues">
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ2%20-%20best%20of%20ROCK.jpg?raw=true" alt="MUSIQUE ROCK">
         </div>
         <div class="album-face album-back">
           <ol>
@@ -325,10 +330,11 @@ body {
       <div class="album-year">4000</div>
     </div>
 
+    <!-- ===== MUSIQUE JAZZ (audio à venir : ajouter data-base + data-f) ===== -->
     <div class="album-item">
       <div class="album-card" onclick="toggleDetail(this)">
         <div class="album-face album-cover">
-          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ3%20-%20best%20of%20JAZZ.jpg?raw=true" alt="Nasdas = Christ">
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ3%20-%20best%20of%20JAZZ.jpg?raw=true" alt="MUSIQUE JAZZ">
         </div>
         <div class="album-face album-back">
           <ol>
@@ -356,10 +362,11 @@ body {
       <div class="album-year">3000</div>
     </div>
 
+    <!-- ===== MUSIQUE POP (audio à venir : ajouter data-base + data-f) ===== -->
     <div class="album-item">
       <div class="album-card" onclick="toggleDetail(this)">
         <div class="album-face album-cover">
-          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ4%20-%20best%20of%20VARI%C3%89T%C3%89.jpg?raw=true" alt="Bonne Année 1993">
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ4%20-%20best%20of%20VARI%C3%89T%C3%89.jpg?raw=true" alt="MUSIQUE POP">
         </div>
         <div class="album-face album-back">
           <ol>
@@ -388,12 +395,13 @@ body {
       <div class="album-year">6000</div>
     </div>
 
+    <!-- ===== SSE rejects ===== -->
     <div class="album-item">
       <div class="album-card" onclick="toggleDetail(this)">
         <div class="album-face album-cover">
           <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SS100-%20SS%20REJECTS.jpg?raw=true" alt="SSE rejects">
         </div>
- <div class="album-face album-back">
+        <div class="album-face album-back" data-base="https://archive.org/download/ss-rejects/">
           <ol class="ss-tracks">
             <li data-f="Samuel L. Jackson a un message pour vous.mp3">samuel l. jackson</li>
             <li data-f="Augier du pommier rajoutez basse fin.mp3">augier du pommier</li>
@@ -467,9 +475,6 @@ body {
   </div>
 </div>
 
-  </div>
-</div>
-
 <hr class="rainbow-hr">
 
 <div class="footer-band">&copy; 1996&ndash;<span id="fyear"></span> SCIENCE &amp; PO&Eacute;SIE &nbsp;|&nbsp; <a href="index.html">Accueil</a> &nbsp;|&nbsp; <a href="brochures.html">Publications</a></div>
@@ -517,6 +522,9 @@ function toggleDetail(card){
   panel.ownerItem = item;
   panel.innerHTML = '<div class="detail-head">'+head+'</div>' + back.innerHTML;
 
+  // reporte la base audio de l'album (si présente) sur l'encart
+  panel.setAttribute('data-base', back.getAttribute('data-base') || '');
+
   // marque les titres jouables dans l'encart fraîchement créé
   markPlayable(panel);
 
@@ -528,8 +536,8 @@ function toggleDetail(card){
   item.classList.add('active');
 }
 
-/* ── Lecteur SS-Rejects ── */
-var SS_BASE = "https://archive.org/download/ss-rejects/";
+/* ── Lecteur audio (multi-albums) ── */
+var SS_BASE = "https://archive.org/download/ss-rejects/"; // repli si un album n'a pas de data-base
 var ssPlayer = document.getElementById('ss-player');
 var ssBar = document.getElementById('audio-bar');
 var ssNow = document.getElementById('now-title');
@@ -560,7 +568,10 @@ document.addEventListener('click', function(e){
   for(var i=0;i<prev.length;i++) prev[i].classList.remove('playing');
   li.classList.add('playing');
   ssNow.textContent = li.textContent;
-  ssPlayer.src = SS_BASE + encodeURIComponent(f);
+  // base propre à l'album courant (data-base sur l'encart), sinon repli
+  var detail = li.closest ? li.closest('.album-detail') : null;
+  var base = (detail && detail.getAttribute('data-base')) || SS_BASE;
+  ssPlayer.src = base + encodeURIComponent(f);
   ssPlayer.play();
   ssBar.classList.add('on');
 });
@@ -576,7 +587,7 @@ document.addEventListener('click',function(e){
   var ch=['*','*','★','✦','·','+'], co=['#E6007E','#FF8A3D','#FFE000','#3CCB6E','#00C2DE','#9B5DE5'];
   for(var i=0;i<6;i++)(function(i){ var el=document.createElement('div'); el.className='sparkle'; el.style.left=e.clientX+'px'; el.style.top=e.clientY+'px'; var a=(i/6)*2*Math.PI,d=30+Math.random()*20; el.style.setProperty('--tx',(Math.cos(a)*d)+'px'); el.style.setProperty('--ty',(Math.sin(a)*d)+'px'); el.style.fontSize=(i%2===0)?'14px':'9px'; el.style.color=co[i]; el.innerHTML=ch[i]; document.body.appendChild(el); setTimeout(function(){ if(el.parentNode)el.parentNode.removeChild(el); },460); })(i);
 });
+</script>
 
-  
 </body>
 </html>
