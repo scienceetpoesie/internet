@@ -325,7 +325,7 @@ var categories = [
     { label: "TOUT",          match: null },
     { label: "COMPLOTISTE",    match: ["conspiracy"] },
     { label: "Garfield",        match: ["garfield"] },
-    { label: "ÉSOTÉRIQUE",        match: ["mystique, game"] },
+    { label: "ÉSOTÉRIQUE",        match: ["mystique", "game"] },
     { label: "PUBLICITAIRE",             match: ["pub"] },
     { label: "SCIENTIFIQUE",         match: ["science"] },
     { label: "Tintin",          match: ["tintin"] },
@@ -365,6 +365,36 @@ function initShuffle() {
     currentIndex = 0;
 }
 
+// Convertit une URL GitHub "blob ... ?raw=true" en URL CDN jsDelivr.
+// jsDelivr est un CDN mondial mis en cache : pas de redirection, beaucoup plus rapide.
+function toCDN(url) {
+    var m = url.match(/^https:\/\/github\.com\/([^\/]+)\/([^\/]+)\/blob\/([^\/]+)\/(.+?)(\?raw=true)?$/);
+    if (!m) return url;   // si l'URL n'a pas la forme attendue, on la laisse telle quelle
+    return "https://cdn.jsdelivr.net/gh/" + m[1] + "/" + m[2] + "@" + m[3] + "/" + m[4];
+}
+
+// Cache de préchargement : on garde les objets Image déjà demandés.
+var preloadCache = {};
+function preload(rawUrl) {
+    var url = toCDN(rawUrl);
+    if (preloadCache[url]) return;
+    var im = new Image();
+    im.src = url;                 // déclenche le téléchargement en arrière-plan
+    preloadCache[url] = im;
+}
+
+// Précharge les prochaines images de la file (et la précédente).
+function preloadAround() {
+    for (let k = 1; k <= 3; k++) {
+        if (currentIndex + k < shuffledIndices.length) {
+            preload(images[shuffledIndices[currentIndex + k]]);
+        }
+    }
+    if (currentIndex - 1 >= 0) {
+        preload(images[shuffledIndices[currentIndex - 1]]);
+    }
+}
+
 // Affiche l'image courante
     function showImage() {
     if (shuffledIndices.length === 0) return;
@@ -373,7 +403,8 @@ function initShuffle() {
     document.getElementById("lb-error").classList.remove("visible"); // efface une erreur précédente
     img.style.visibility = "hidden";   // l'image en cache ne reste pas
     loader.classList.add("visible");   // cœurs de chargement
-    img.src = images[shuffledIndices[currentIndex]];
+    img.src = toCDN(images[shuffledIndices[currentIndex]]);  // si déjà préchargée → instantané
+    preloadAround();                   // prépare les images voisines
 }
 
 // Extrait un nom de fichier lisible depuis l'URL GitHub
