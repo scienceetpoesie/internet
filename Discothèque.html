@@ -140,6 +140,27 @@ body {
 .album-detail .meta { margin-top: 12px; font-size: 11px; color: #008080; letter-spacing: 1px; }
 .album-item.active .album-face { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--sh, #00C2DE); }
 
+/* ── Titres jouables (SS-Rejects) ── */
+.album-detail li.playable { cursor: pointer !important; }
+.album-detail li.playable:hover { color: #E6007E; text-decoration: underline; }
+.album-detail li.playing { color: #E6007E; font-weight: bold; }
+.album-detail li.playing::before { content: "\25B6 "; color: #3CCB6E; }
+.album-detail li.noaudio { opacity: 0.45; }
+
+/* ── Lecteur fixe en bas ── */
+#audio-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 99998;
+  background: #FFFFFF; border-top: 5px solid #E6007E;
+  font-family: "Courier New", monospace; font-size: 12px;
+  padding: 8px 14px; display: none; align-items: center; gap: 12px;
+  box-shadow: 0 -3px 0 #00C2DE; }
+#audio-bar.on { display: flex; }
+#audio-bar .now { flex: 1; color: #111; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#audio-bar .now b { color: #9B5DE5; }
+#audio-bar audio { height: 32px; }
+#audio-bar .close-bar { background: #00C2DE; border: 2px outset #7FE6F4;
+  font-weight: 900; font-size: 11px; padding: 3px 9px; cursor: pointer !important; color: #111; }
+@media (max-width: 560px){ #audio-bar { flex-wrap: wrap; } #audio-bar audio { width: 100%; } }
+
 /* Légende */
 .album-title { font-family: "Arial Black", Arial, sans-serif; font-size: 12px; color: #111111; margin-top: 9px; line-height: 1.3; width: 180px; }
 .album-artist { font-family: "Times New Roman", serif; font-style: italic; font-size: 13px; color: #E6007E; }
@@ -378,67 +399,67 @@ body {
         </div>
         <div class="album-face album-back">
           <h4>SSE REJECTS</h4>
-          <ol>
-            <li>samuel l. jackson</li>
-            <li>augier du pommier</li>
-            <li>les méfaits du téléphone</li>
-            <li>les scounoumes</li>
-            <li>fetr ustikk petch</li>
-            <li>jhgnbdjbfuy</li>
-            <li>ubugajabi</li>
-            <li>abstract craft</li>
-            <li>djjjtetrdtrd</li>
-            <li>p'tite virée en corvette</li>
-            <li>chaises volantes</li>
-            <li>à la vedette de sauvetage</li>
-            <li>eeeeeeeeeeeeejjll</li>
-            <li>techno pour érotomane</li>
-            <li>zukunftaufzugsmusik</li>
-            <li>noix de coco fermentée</li>
-            <li>haute fonction administrative</li>
-            <li>débarquemenrama</li>
-            <li>fugue de 0 et de 1</li>
-            <li>je suis toxique</li>
-            <li>rockeur au grand cœur</li>
-            <li>film de jeux d'action vidéo</li>
-            <li>un synthétiseur dans l'espace</li>
-            <li>UDF punique au Mont-Cenis</li>
-            <li>le fantôme du carrefour city</li>
-            <li>slam pour l'académie FR</li>
-            <li>course contre la rage de dent</li>
-            <li>panique au concours canin</li>
-            <li>rock n roll</li>
-            <li>ich weuch nicht greeburgt</li>
-            <li>carl yung habite disneyland</li>
-            <li>turbo-jazz</li>
-            <li>krifrifrifri (world war 0)</li>
-            <li>Nice Baie des Anges par A.</li>
-            <li>Détente été vibration</li>
-            <li>police polka (remix trap)</li>
-            <li>dédicace à saddam hussein</li>
-            <li>musique de marée noire</li>
-            <li>tête de gondolier</li>
-            <li>reviens sophie</li>
-            <li>jeux vidéo de film d'action</li>
-            <li>le jour les vaches sont jaunes</li>
-            <li>musique désentraînante</li>
-            <li>turbo-jazz 2</li>
-            <li>abysse en plastique</li>
-            <li>sad music</li>
-            <li>le deuxième mariage</li>
-            <li>sonnerie pour ton mobile</li>
-            <li>couscous entre blancs</li>
-            <li>rire lambert</li>
-            <li>8 ancient eagle</li>
-            <li>la maman des poissons (bobby lapointe remix psytrance)</li>
-            <li>le blues de bernard</li>
-            <li>en égypte avec jimmy page</li>
-            <li>torréfacteur (scato club)</li>
-            <li>enfant du vaudou (voodoo's child)</li>
-            <li>six jeunes m'abusent</li>
-            <li>floutage artistique</li>
-            <li>ange tombé du camion</li>
-            <li>(bonus) patrice dans la matrice</li>
+          <ol class="ss-tracks">
+            <li data-f="Samuel L. Jackson a un message pour vous.mp3">samuel l. jackson</li>
+            <li data-f="Augier du pommier rajoutez basse fin.mp3">augier du pommier</li>
+            <li data-f="Les mefaits du telephone.mp3">les méfaits du téléphone</li>
+            <li data-f="les scounoumes.mp3">les scounoumes</li>
+            <li data-f="fetr ustîkk petr setch.mp3">fetr ustikk petch</li>
+            <li data-f="jhgnbdjbfuy.mp3">jhgnbdjbfuy</li>
+            <li data-f="ubugajabi couper fin.mp3">ubugajabi</li>
+            <li class="noaudio">abstract craft</li>
+            <li data-f="djjjtetrdtrd.mp3">djjjtetrdtrd</li>
+            <li data-f="ptite virée en corvette.mp3">p'tite virée en corvette</li>
+            <li data-f="chaises volantes.mp3">chaises volantes</li>
+            <li class="noaudio">à la vedette de sauvetage</li>
+            <li data-f="eeeeeeeeeeeeejjjjjjjjjjj.mp3">eeeeeeeeeeeeejjll</li>
+            <li data-f="techno pour heroinomane erotomane à remixer pour en faire un truc fou mettre batterie plus rapidement.mp3">techno pour érotomane</li>
+            <li data-f="Aufzugsmusik der Zukunft.mp3">zukunftaufzugsmusik</li>
+            <li data-f="noix de coco fermetné decouper.mp3">noix de coco fermentée</li>
+            <li data-f="haute foncton ardinistrative.mp3">haute fonction administrative</li>
+            <li data-f="Debarquemenrama.mp3">débarquemenrama</li>
+            <li data-f="fugue de 0 et de 1 (robot-barocco).mp3">fugue de 0 et de 1</li>
+            <li data-f="je suis toxique.mp3">je suis toxique</li>
+            <li data-f="rockeur au grand coeur.mp3">rockeur au grand cœur</li>
+            <li data-f="film de jeux d'action vidéo.mp3">film de jeux d'action vidéo</li>
+            <li data-f="un synthetizeur dans l'espace.mp3">un synthétiseur dans l'espace</li>
+            <li data-f="UDF punique Mont-Cenis.mp3">UDF punique au Mont-Cenis</li>
+            <li class="noaudio">le fantôme du carrefour city</li>
+            <li class="noaudio">slam pour l'académie FR</li>
+            <li data-f="course contre la rage de dent.mp3">course contre la rage de dent</li>
+            <li data-f="panique au concours canin a decouper.mp3">panique au concours canin</li>
+            <li class="noaudio">rock n roll</li>
+            <li data-f="ich weuch nicht greeburgt.mp3">ich weuch nicht greeburgt</li>
+            <li data-f="Carl YUNG disneyland.mp3">carl yung habite disneyland</li>
+            <li data-f="turbo jazz.mp3">turbo-jazz</li>
+            <li data-f="krifrifrifri (world war 0).mp3">krifrifrifri (world war 0)</li>
+            <li data-f="Nice Baie des Anges chanté par Alex.mp3">Nice Baie des Anges par A.</li>
+            <li data-f="detente vibration musique pour m6.mp3">Détente été vibration</li>
+            <li data-f="police polka (remix trap).mp3">police polka (remix trap)</li>
+            <li data-f="dedicace à sadam hussein.mp3">dédicace à saddam hussein</li>
+            <li data-f="musique de marée noire.mp3">musique de marée noire</li>
+            <li class="noaudio">tête de gondolier</li>
+            <li data-f="reviens sophie version doom.mp3">reviens sophie</li>
+            <li data-f="jeux video de film d'action.mp3">jeux vidéo de film d'action</li>
+            <li class="noaudio">le jour les vaches sont jaunes</li>
+            <li class="noaudio">musique désentraînante</li>
+            <li data-f="turbo jazz 2.mp3">turbo-jazz 2</li>
+            <li data-f="abysse en plastique.mp3">abysse en plastique</li>
+            <li class="noaudio">sad music</li>
+            <li data-f="le deuxieme mariage.mp3">le deuxième mariage</li>
+            <li data-f="une sonnerie pour ton mobile.mp3">sonnerie pour ton mobile</li>
+            <li data-f="couscous de blanc.mp3">couscous entre blancs</li>
+            <li class="noaudio">rire lambert</li>
+            <li data-f="8 ancien eagle.mp3">8 ancient eagle</li>
+            <li data-f="La maman des poissons bobby lapointe (remix psytrance).flac.mp3">la maman des poissons (bobby lapointe remix psytrance)</li>
+            <li data-f="le blues de bernard.mp3">le blues de bernard</li>
+            <li data-f="en egypte avec jimmy page.mp3">en égypte avec jimmy page</li>
+            <li data-f="torrefacteur (scato-club).mp3">torréfacteur (scato club)</li>
+            <li data-f="Enfant du Vaudou (Voodoo's Child).mp3">enfant du vaudou (voodoo's child)</li>
+            <li data-f="six jeunes m'abusent  creer un dynamique.mp3">six jeunes m'abusent</li>
+            <li class="noaudio">floutage artistique</li>
+            <li data-f="Ange tombé du camion sur beton monegasque final a reequilibrze.mp3">ange tombé du camion</li>
+            <li data-f="bonus track patrice.mp3">(bonus) patrice dans la matrice</li>
           </ol>
           <div class="meta">SSE rejects</div>
         </div>
@@ -455,6 +476,12 @@ body {
 
 <div class="footer-band">&copy; 1996&ndash;<span id="fyear"></span> SCIENCE &amp; PO&Eacute;SIE &nbsp;|&nbsp; <a href="index.html">Accueil</a> &nbsp;|&nbsp; <a href="brochures.html">Publications</a></div>
 <div class="footer-bottom">no cookies &nbsp;&bull;&nbsp; no pub &nbsp;&bull;&nbsp; ILOVEEVERYBODY123</div>
+
+<div id="audio-bar">
+  <span class="now">♪ <b id="now-title">—</b></span>
+  <audio id="ss-player" controls preload="none"></audio>
+  <button class="close-bar" onclick="stopSS()">✕ STOP</button>
+</div>
 
 </div>
 
@@ -479,7 +506,7 @@ function toggleDetail(card){
   if(existing) existing.parentNode.removeChild(existing);
   var actives = grid.querySelectorAll('.album-item.active');
   for(var a=0;a<actives.length;a++) actives[a].classList.remove('active');
-  if(sameAlbum) return;                       // re-clic = simple fermeture
+  if(sameAlbum){ stopSS(); return; }          // re-clic = simple fermeture
 
   // construit l'encart à partir de la tracklist (.album-back) déjà présente
   var back   = card.querySelector('.album-back');
@@ -492,6 +519,9 @@ function toggleDetail(card){
   panel.ownerItem = item;
   panel.innerHTML = '<div class="detail-head">'+head+'</div>' + back.innerHTML;
 
+  // marque les titres jouables dans l'encart fraîchement créé
+  markPlayable(panel);
+
   // repère le dernier album de la même ligne (même offsetTop) et insère après
   var items = grid.querySelectorAll('.album-item');
   var top = item.offsetTop, last = item;
@@ -499,6 +529,49 @@ function toggleDetail(card){
   grid.insertBefore(panel, last.nextSibling);
   item.classList.add('active');
 }
+
+/* ── Lecteur SS-Rejects ── */
+var SS_BASE = "https://archive.org/download/ss-rejects/";
+var ssPlayer = document.getElementById('ss-player');
+var ssBar = document.getElementById('audio-bar');
+var ssNow = document.getElementById('now-title');
+
+function markPlayable(scope){
+  var lis = scope.querySelectorAll('li[data-f]');
+  for(var i=0;i<lis.length;i++){
+    if(!lis[i].classList.contains('noaudio')) lis[i].classList.add('playable');
+  }
+}
+
+function stopSS(){
+  ssPlayer.pause(); ssPlayer.removeAttribute('src'); ssPlayer.load();
+  ssBar.classList.remove('on');
+  var p = document.querySelectorAll('.album-detail li.playing');
+  for(var i=0;i<p.length;i++) p[i].classList.remove('playing');
+}
+
+/* délégation : clic sur un <li data-f> joue le fichier */
+document.addEventListener('click', function(e){
+  var li = e.target;
+  while(li && li.tagName !== 'LI') li = li.parentNode;
+  if(!li || !li.getAttribute) return;
+  var f = li.getAttribute('data-f');
+  if(!f || !li.classList.contains('playable')) return;
+  e.stopPropagation();
+  var prev = document.querySelectorAll('.album-detail li.playing');
+  for(var i=0;i<prev.length;i++) prev[i].classList.remove('playing');
+  li.classList.add('playing');
+  ssNow.textContent = li.textContent;
+  ssPlayer.src = SS_BASE + encodeURIComponent(f);
+  ssPlayer.play();
+  ssBar.classList.add('on');
+});
+
+/* quand un morceau finit, retire le surlignage */
+ssPlayer.addEventListener('ended', function(){
+  var p = document.querySelectorAll('.album-detail li.playing');
+  for(var i=0;i<p.length;i++) p[i].classList.remove('playing');
+});
 
 /* Sparkles au clic (palette 80s) */
 document.addEventListener('click',function(e){
