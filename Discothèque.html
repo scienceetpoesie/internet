@@ -105,6 +105,14 @@ body {
 .album-grid .album-item:nth-child(6n+5){ --sh: #313E63; } /* sse rejects : bleu marine légèrement grisé */
 .album-grid .album-item:nth-child(6n+6){ --sh: #9B5DE5; }
 
+/* ── Couleur du nom de l'album dans l'encart ouvert (une par album) ── */
+.album-grid .album-item:nth-child(6n+1){ --tc: #E0479A; } /* electro : rose fluo (un peu cassé) */
+.album-grid .album-item:nth-child(6n+2){ --tc: #3A5170; } /* rock : bleu foncé gris */
+.album-grid .album-item:nth-child(6n+3){ --tc: #4C7A57; } /* jazz : vert gris un peu foncé */
+.album-grid .album-item:nth-child(6n+4){ --tc: #A07F1A; } /* pop : jaune foncé gris */
+.album-grid .album-item:nth-child(6n+5){ --tc: #6F6F6F; } /* rejects : gris normal */
+.album-grid .album-item:nth-child(6n+6){ --tc: #7E50A6; } /* bcp de bruit : violet un peu foncé */
+
 .album-cover img { display: block; width: 180px; height: 180px; }
 .cover-placeholder { width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; box-sizing: border-box; font-family: "Arial Black", sans-serif; font-size: 15px; color: #FFF; letter-spacing: 1px; }
 
@@ -134,32 +142,68 @@ body {
 }
 .album-detail .detail-head span { font-family: "Times New Roman", serif; font-style: italic; font-weight: normal; color: #9B5DE5; }
 .album-detail h4 { margin: 0 0 8px; font-family: "Arial Black", sans-serif; font-size: 12px; color: #E6007E; letter-spacing: 2px; }
-.album-detail ol { margin: 0; padding: 0 0 0 22px; font-size: 13px; line-height: 1.9; columns: 2; column-gap: 44px; }
+.album-detail ol { margin: 0; padding: 0 0 0 22px; font-family: Georgia, "Times New Roman", "Palatino Linotype", serif; font-size: 15px; line-height: 1.9; columns: 2; column-gap: 44px; }
 .album-detail li { break-inside: avoid; }
 .album-detail li span { color: #9B5DE5; float: right; }
+.album-detail li::marker { content: counter(list-item) "\00A0\00A0\2013\00A0\00A0"; }
 .album-detail .meta { margin-top: 12px; font-size: 11px; color: #008080; letter-spacing: 1px; }
 .album-item.active .album-face { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--sh, #00C2DE); }
 
 /* ── Titres jouables ── */
 .album-detail li.playable { cursor: pointer !important; }
-.album-detail li.playable:hover { color: #E6007E; text-decoration: underline; }
-.album-detail li.playing { color: #E6007E; font-weight: bold; }
-.album-detail li.playing::before { content: "\25B6 "; color: #3CCB6E; }
+.album-detail li.playable:hover { color: #E6007E; }
+.album-detail li.playing { font-weight: normal; }
+.album-detail li.playing::before { content: "\00A0\25B6\00A0\00A0"; color: #00BFFF; }
 .album-detail li.noaudio { opacity: 0.45; }
 
-/* ── Lecteur fixe en bas ── */
-#audio-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 99998;
-  background: #FFFFFF; border-top: 5px solid #E6007E;
-  font-family: "Courier New", monospace; font-size: 12px;
-  padding: 8px 14px; display: none; align-items: center; gap: 12px;
-  box-shadow: 0 -3px 0 #00C2DE; }
-#audio-bar.on { display: flex; }
-#audio-bar .now { flex: 1; color: #111; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#audio-bar .now b { color: #9B5DE5; }
-#audio-bar audio { height: 32px; }
-#audio-bar .close-bar { background: #00C2DE; border: 2px outset #7FE6F4;
-  font-weight: 900; font-size: 11px; padding: 3px 9px; cursor: pointer !important; color: #111; }
-@media (max-width: 560px){ #audio-bar { flex-wrap: wrap; } #audio-bar audio { width: 100%; } }
+/* ── Lecteur fixe en bas — fenêtre façon Windows 95 / Winamp ── */
+#audio-bar { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%);
+  width: 1104px; max-width: calc(100% - 28px); box-sizing: border-box; z-index: 99998;
+  background: #C0C0C0; border: 3px outset #DFDFDF;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+  font-family: "MS Sans Serif", Tahoma, "Courier New", monospace; font-size: 12px;
+  padding: 2px; display: none; }
+#audio-bar.on { display: block; }
+
+/* corps gris avec contrôles maison façon Win95 */
+#audio-bar .winamp-body { display: flex; align-items: center; gap: 8px; padding: 8px 10px 9px; }
+
+/* boutons gris bombés (lecture / pause / stop) */
+#audio-bar .w95-btn, #audio-bar .close-bar { flex: 0 0 auto; width: 30px; height: 30px;
+  background: #C0C0C0; border: 2px outset #FFFFFF;
+  font-weight: 900; font-size: 13px; line-height: 1; color: #000;
+  padding: 0; cursor: pointer !important; font-family: "Courier New", monospace; }
+#audio-bar .w95-btn:active, #audio-bar .close-bar:active { border-style: inset; }
+
+/* écran LCD vert : titre + minuteur */
+#audio-bar .now { flex: 3; min-width: 60px; color: #000; background: #000; padding: 4px 8px;
+  border: 2px inset #DFDFDF; overflow: hidden; }
+#now-scroll { display: inline-block; white-space: nowrap; }
+@keyframes title-bounce {
+  0%, 30%  { transform: translateX(0); }
+  55%, 75% { transform: translateX(var(--sd, 0px)); }
+  100%     { transform: translateX(0); }
+}
+#audio-bar .ss-time { flex: 0 0 auto; background: #000; padding: 4px 8px; border: 2px inset #DFDFDF;
+  white-space: nowrap; letter-spacing: 1px; }
+#audio-bar .now, #audio-bar .now b, #audio-bar .ss-time {
+  color: #00BFFF; font-family: "Courier New", monospace; text-shadow: 0 0 3px rgba(0,191,255,0.6); }
+
+/* curseurs (progression + volume) façon Win95 */
+#audio-bar .w95-range { -webkit-appearance: none; appearance: none; height: 18px;
+  background: transparent; cursor: pointer !important; }
+#audio-bar .w95-range.seek { flex: 1 1 30%; min-width: 80px; }
+#audio-bar .w95-range.vol { flex: 0 0 70px; width: 70px; }
+#audio-bar .w95-range::-webkit-slider-runnable-track { height: 6px; background: #808080; border: 2px inset #DFDFDF; }
+#audio-bar .w95-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
+  width: 12px; height: 18px; margin-top: -9px; background: #C0C0C0; border: 2px outset #FFFFFF; }
+#audio-bar .w95-range::-moz-range-track { height: 6px; background: #808080; border: 2px inset #DFDFDF; }
+#audio-bar .w95-range::-moz-range-thumb { width: 12px; height: 18px; border-radius: 0;
+  background: #C0C0C0; border: 2px outset #FFFFFF; }
+#audio-bar .vol-ico { flex: 0 0 auto; font-size: 14px; }
+#audio-bar audio { display: none; }
+@media (max-width: 560px){ #audio-bar .winamp-body { flex-wrap: wrap; }
+  #audio-bar .now { flex: 1 1 100%; } #audio-bar .w95-range.seek { flex: 1 1 100%; } }
 
 /* Légende */
 .album-title { font-family: "Arial Black", Arial, sans-serif; font-size: 12px; color: #111111; margin-top: 9px; line-height: 1.3; width: 180px; }
@@ -183,6 +227,23 @@ body {
   font-family: "Arial Black", Arial, sans-serif;
   font-size: 15px; font-weight: 900; color: #000000;
   letter-spacing: 2px; line-height: 1.4;
+}
+
+.album-frame .frame-lead {
+  margin: 0 0 8px;
+}
+
+.album-frame .frame-star {
+  margin: 8px 0;
+  letter-spacing: 0; /* l'étoile n'a pas besoin de l'espacement */
+}
+
+.album-frame .frame-detail {
+  margin: 8px 0 0;
+  font-size: 13.9px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-family: Arial, sans-serif;
 }
 
 /* ── FOOTER ── */
@@ -238,7 +299,7 @@ body {
 
 <div id="page-wrapper">
 
-<div class="marquee-band"><span class="marquee-inner">&nbsp;&nbsp;&nbsp;*** SCIENCE &amp; POESIE — DISCOTHÈQUE ***&nbsp;&nbsp;&nbsp;33 tours * 45 tours * cassettes&nbsp;&nbsp;&nbsp;*** clique sur une pochette pour voir les titres ***&nbsp;&nbsp;&nbsp;</span></div>
+<div class="marquee-band"><span class="marquee-inner">&nbsp;&nbsp;&nbsp;*** SCIENCE &amp; POESIE — DISCOTHÈQUE ***&nbsp;&nbsp;&nbsp;33 tours * 45 tours * cassettes&nbsp;&nbsp;&nbsp;*** cliquez sur une pochette pour entendre les titres ***&nbsp;&nbsp;&nbsp;</span></div>
 <div class="memphis-strip"></div>
 
 <div class="page-header">
@@ -250,7 +311,11 @@ body {
 
 <div class="album-frame">
   <img class="frame-icon" src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/panneaux%20interdit/anti%20music%20scale.jpg?raw=true" alt="anti music">
-  <div class="frame-text">&#9733; S&P vous rappelle que la musique est un vecteur de dérive sectaire &#9733;</div>
+  <div class="frame-text">
+    <p class="frame-lead"><strong>S&#38;P vous rappelle que la musique constitue un vecteur reconnu de dérive sectaire.</strong></p>
+    <p class="frame-star">&#9733;</p>
+    <p class="frame-detail">Dans le cadre de notre démarche, son écoute n'est pas retenue en dehors d'un cadre d'examen analytique et raisonné.</p>
+  </div>
   <img class="frame-icon" src="https://github.com/scienceetpoesie/internet/blob/main/assets/icons/panneaux%20interdit/anti%20music%20scale.jpg?raw=true" alt="anti music">
 </div>
 
@@ -286,11 +351,11 @@ body {
             <li data-f="Lord Millepim's.mp3">Lord Millepim's</li>
             <li data-f="Michtanga.mp3">Michtanga</li>
             <li data-f="CCR delta 32 (prod aphex twink).mp3">CCR delta 32 (prod aphex twink)</li>
-            <li data-f="à la poursuite de la chappe de crystal.mp3">à la recherche de la chappe de crystal</li>
+            <li data-f="à la poursuite de la chappe de crystal.mp3">à la poursuite de la chappe de crystal</li>
             <li data-f="bendwheel blaster-scratch toutawseundouane.mp3">Bendwheel blaster-scratch toutawseundouane</li>
             <li data-f="STARCRADE 3000.mp3">STARCRADE 3000</li>
           </ol>
-          <div class="meta">best of &middot; electro</div>
+          <div class="meta">Le meilleur de SSE Vol. 1 : ELECTRO</div>
         </div>
       </div>
       <div class="album-title">MUSIQUE ELECTRO</div>
@@ -304,25 +369,25 @@ body {
         <div class="album-face album-cover">
           <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ2%20-%20best%20of%20ROCK.jpg?raw=true" alt="MUSIQUE ROCK">
         </div>
-        <div class="album-face album-back">
+        <div class="album-face album-back" data-base="https://archive.org/download/musique-rock/">
           <ol>
-            <li>La g. consolidation du fakir B. II</li>
-            <li>Montenegro Gti</li>
-            <li>La rage du danseur classique</li>
-            <li>Croire chercher quelque-chose dans les plaines Nasca</li>
-            <li>Mode essorage entre les dunes</li>
-            <li>Kyste &amp; Bisque (crotterock)</li>
-            <li>Les Princes de la Cote</li>
-            <li>Y'a des bon chtard</li>
-            <li>La messe des dockers du havre</li>
-            <li>avec Connexion Pluton, dites adieu a la poussiere dans votre saturateur</li>
-            <li>Les martyrs de la peugeot</li>
-            <li>Yatouketombé (u.phonie-medley XXX)</li>
-            <li>Dinons ensemble</li>
-            <li>Enfant du Vaudou (Voodoo's Child)</li>
-            <li>Taxage de clope qui au drame RIP FRED</li>
+            <li data-f="Le grand avalage de sabre à cocktail.mp3">Le grand avalage de sabre à cocktail</li>
+            <li data-f="Montenegro Gti.mp3">Montenegro Gti</li>
+            <li data-f="la rage du danseur classique.mp3">La rage du danseur classique</li>
+            <li data-f="Croire chercher quelque-chose dans les plaines Nasca.mp3">Nascalines nig-gim-a-na smthng sicrocket-apparatus</li>
+            <li data-f="mode essorage entre les dunes.mp3">Mode essorage entre les orientalistes</li>
+            <li data-f="Kyste &amp; Bisque (crotterock).mp3">Kyste &amp; Bisque (crotterock)</li>
+            <li data-f="Les Princes de la Côte.mp3">Les Princes de la Côte</li>
+            <li data-f="y'a des bon chtard.mp3">Y'a des bons chtards ?</li>
+            <li data-f="La messe des dockers du havre.mp3">La messe des dockers du Havre</li>
+            <li data-f="avec Connexion Pluton, dites adieu a la poussiere dans votre saturateur.mp3"> avec Connexion Pluton, dites adieu à la poussiere du saturateur</li>
+            <li data-f="les martyrs disto.mp3">Les martyrs de la peugeot</li>
+            <li data-f="Yatouketombé medley.mp3">Yatouketombé (aphonie-medley XXX)</li>
+            <li data-f="Dinons ensemble test nouveau.mp3">dinons ensemble (goth anthem)</li>
+            <li data-f="Enfant du Vaudou (Voodoo's Child).mp3">Enfant du Vaudou (Voodoo's Child cover)</li>
+            <li data-f="taxage de clope qui au drame RIP FRED.mp3">Taxage de clope qui au drame (RIP FRED)</li>
           </ol>
-          <div class="meta">best of &middot; rock</div>
+          <div class="meta">Le meilleur de SSE Vol. 2 : ROCK</div>
         </div>
       </div>
       <div class="album-title">MUSIQUE ROCK</div>
@@ -336,30 +401,30 @@ body {
         <div class="album-face album-cover">
           <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ3%20-%20best%20of%20JAZZ.jpg?raw=true" alt="MUSIQUE JAZZ">
         </div>
-        <div class="album-face album-back">
+        <div class="album-face album-back" data-base="https://archive.org/download/musique-jazz/">
           <ol>
-            <li>Hymne du monde entier</li>
-            <li>Dans l'attente que le moine sur son 31 soit</li>
-            <li>Tartinot Martinot au parc de boule</li>
-            <li>Blocus sur le nil</li>
-            <li>Requiem pour grand galop</li>
-            <li>Assis sans la soupe</li>
-            <li>Gneissbop de Dies Solis</li>
-            <li>Chaises volantes</li>
-            <li>à la recherche du scooter de pierre gataz [intro]</li>
-            <li>a la recherche du scooter de pierre gataz</li>
-            <li>Charmeur de serflex (microtonal Yamaha)</li>
-            <li>Djjjtetrdtrd</li>
-            <li>Hymne des USA</li>
-            <li>Sous la mer du Rochrome</li>
-            <li>Pas de péridurale dans la vallé du Nil</li>
+            <li data-f="hymne du monde entier.mp3">Hymne du monde entier</li>
+            <li data-f="dans l'attente que le moine sur son 31 soit.mp3">Dans l'attente que le moine sur son 31 soit</li>
+            <li data-f="Tartinot Martinot au parc d'été.mp3">Tartinot Martinot au parc d'été</li>
+            <li data-f="blocus sur le nil.mp3">Blocus sur le nil</li>
+            <li data-f="requiem pour grand galop.mp3">Requiem pour grand galop</li>
+            <li data-f="assis sans la soupe.mp3">Assis sans la soupe</li>
+            <li data-f="Gneissbop de Dies Solis.mp3">Gneissbop de Dies Solis</li>
+            <li data-f="chaises volantes.mp3">Chaises volantes</li>
+            <li data-f="la recherche du scooter de pierre gataz intro.mp3">à la recherche du ... [intro]</li>
+            <li data-f="a la recherche du scooter de pierre gataz.mp3">a la recherche du scooter de pierre gataz</li>
+            <li data-f="Charmeur de serflex (microtonal yamaha).mp3">Le charmeur de serflex (microtone yamaha)</li>
+            <li data-f="djjjtetrdtrd.mp3">Djjjtetrdtrd</li>
+            <li data-f="hymne des USA.mp3">Hymne des USA</li>
+            <li data-f="Sous la mer du Rochrome.mp3">Sous la mer du Rochrome</li>
+            <li data-f="Pas de péridurale dans la vallé du Nil.mp3">Dans la vallée du Mal</li>
           </ol>
-          <div class="meta">best of &middot; jazz</div>
+          <div class="meta">Le meilleur de SSE Vol. 3 : JAZZ</div>
         </div>
       </div>
       <div class="album-title">MUSIQUE JAZZ</div>
       <div class="album-artist"></div>
-      <div class="album-year">3000</div>
+      <div class="album-year">5000</div>
     </div>
 
     <!-- ===== MUSIQUE POP (audio à venir : ajouter data-base + data-f) ===== -->
@@ -368,26 +433,26 @@ body {
         <div class="album-face album-cover">
           <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/SZ4%20-%20best%20of%20VARI%C3%89T%C3%89.jpg?raw=true" alt="MUSIQUE POP">
         </div>
-        <div class="album-face album-back">
+        <div class="album-face album-back" data-base="https://archive.org/download/musique-pop/">
           <ol>
-            <li>Le costume de Guy Marchand</li>
-            <li>123456789</li>
-            <li>Tout le monde aime les gendarmes</li>
-            <li>les mains dans les airs</li>
-            <li>ça blanchit le jaune</li>
-            <li>Pour l'amour du risque de prendre en stop un camionneur</li>
-            <li>Musique de spa (feat Sami)</li>
-            <li>Coltard Cevlar Caviar</li>
-            <li>La danse de Jacques Medecin</li>
-            <li>j'ai pas declare ma pirogue au fisc (repeter j'arrive comme l'empire ottoman un 3e fois)</li>
-            <li>Willy Wonka en Toscane</li>
-            <li>Toujours partant pour S. Vartan</li>
-            <li>J'ai jeté ces chiennes ringardes dans la tombe (reprise de Cardi B)</li>
-            <li>L'ORAGE A FAIS TOMBER SUR NOUS TOUTE LA PLUIE DU CIEL</li>
-            <li>sous le ciel d'une l'étoile bleue</li>
-            <li>Faites de la bière</li>
+            <li data-f="Le costume en satin de Guy Marchand.mp3">Le costume de Guy Marchand</li>
+            <li data-f="123456789.mp3">123456789</li>
+            <li data-f="Tout le monde aime les gendarmes.mp3">Tout le monde aime les gendarmes</li>
+            <li data-f="les mains dans les airs.mp3">Les mains dans les airs</li>
+            <li data-f="ça blanchit le jaune.mp3">ça blanchit le jaune</li>
+            <li data-f="Prendre en stop un camonnieur.mp3">Pour l'amour du risque de prendre en stop un camionneur</li>
+            <li data-f="Reprise de Shay (feat Sami).mp3">Reprise de Shay  (feat Sami)</li>
+            <li data-f="Coltard Cevlar Caviar.mp3">Coltard Cevlar Caviar</li>
+            <li data-f="La danse de Jacques Medecin.mp3">La danse de Jacques Medecin</li>
+            <li data-f="j'ai pas déclaré ma pirogue au fisc.mp3">J'ai pas déclaré ma pirogue au fisc</li>
+            <li data-f="W. Wonka en Toscane.mp3">W. Wonka en Toscane</li>
+            <li data-f="Toujours partant pour S. Vartan.mp3">Toujours partant pour L. Vartan</li>
+            <li data-f="J'ai jeté ces chiennes ringardes dans la tombe (par Cardio Bé) 2.mp3">J'ai jeté ces chiennes ringardes dans la tombe (reprise de Cardi B)</li>
+            <li data-f="L'ORAGE A FAIS TOMBER SUR NOUS TOUTE LA PLUIE DU CIEL.mp3">L'ORAGE A FAIS TOMBER SUR NOUS TOUTE LA PLUIE DU CIEL</li>
+            <li data-f="sous le ciel d'une l'etoile bleue.mp3">sous le ciel d'une étoile bleue</li>
+            <li data-f="Faites de la bière.mp3">Faites de la bière</li>
           </ol>
-          <div class="meta">best of &middot; pop</div>
+          <div class="meta">Le meilleur de SSE Vol. 4 : POP</div>
         </div>
       </div>
       <div class="album-title">MUSIQUE POP</div>
@@ -469,7 +534,60 @@ body {
       </div>
       <div class="album-title">SSE rejects</div>
       <div class="album-artist"></div>
-      <div class="album-year"></div>
+      <div class="album-year">8000</div>
+    </div>
+
+    <!-- ===== bcp de bruit ===== -->
+    <div class="album-item">
+      <div class="album-card" onclick="toggleDetail(this)">
+        <div class="album-face album-cover">
+          <img src="https://github.com/scienceetpoesie/internet/blob/main/assets/1%20-%20POCHETTES/bcp%20de%20bruit.jpg?raw=true" alt="Bcp de bruit pour rien">
+        </div>
+        <div class="album-face album-back" data-base="https://archive.org/download/bcp-de-bruit-pour-rien/">
+          <ol class="ss-tracks">
+            <li data-f="1 jfrcoppé hardstyl.mp3">jfrcoppé hardstyl</li>
+            <li data-f="2 kekmaster.mp3">kekmaster</li>
+            <li data-f="3 attardance + carousset.mp3">attardance + carousset</li>
+            <li data-f="4 cartoon spear.mp3">cartoon spear</li>
+            <li data-f="5 C SYMPA.mp3">C SYMPA</li>
+            <li data-f="6 mitraïyet + nudisqavv.mp3">mitraïyet + nudisqavv</li>
+            <li data-f="7 kjchval 69☆⍟☆°•´¨`» (dernier).mp3">kjchval 69☆⍟☆°•´¨`»</li>
+            <li data-f="8 grand caquet =(3).mp3">grand caquet =(3)</li>
+            <li data-f="9 au rooftop pyramide.mp3">au rooftop de la pyramide</li>
+            <li data-f="10 gin + get 27.mp3">gin + get 27 = chartreuse</li>
+            <li data-f="13 valsez jeunese !!.mp3">valsez jeunese !!</li>
+            <li data-f="14 le jumeau d'angèle.mp3">le jumeau d'angèle</li>
+            <li data-f="15 M-Raevzbguerz 2.mp3">Raevzbguerz</li>
+            <li data-f="16 mon premier brèccquaure.mp3">mon premier breakcore</li>
+            <li data-f="17 Le Grand Chlem.mp3">Le Grand Chlem (full mix)</li>
+            <li data-f="19 rien ni personne.mp3">rien ni personne</li>
+            <li data-f="20 89.5 RTL.mp3">89.5 RTL</li>
+            <li data-f="gigi dagogo FINAL.mp3">gigi dagogo</li>
+            <li data-f="21 arioso.mp3">arioso à la gomme</li>
+            <li data-f="22 404 - S-O-L-I-T-A-I-R-E.mp3">S-O-L-I-T-A-I-R-E (Lonely Becarro)</li>
+            <li data-f="23 venusian beat.mp3">venusian beat</li>
+            <li data-f="24 comodor europa.mp3">comodor europa</li>
+            <li data-f="25 753 Transmit from struisbaai.mp3">Transmit from struisbaai</li>
+            <li data-f="26 - Jj0oOUuBbLlii t0uUTt - JjuULl.mp3">Jj0oOUuBbLlii t0uUTt - JjuULl</li>
+            <li data-f="27 crooner in a rapture mood.mp3">crooner in a rapture mood</li>
+            <li data-f="28 IPS de GPA.mp3">IPS de GVA</li>
+            <li data-f="32 - neo post hip.mp3">STARCRADE 3000</li>
+            <li data-f="32 achoo remix.mp3">achoo remix</li>
+            <li data-f="33 neandertalus.mp3">volcandertalus</li>
+            <li data-f="34 LOOPA pour rappeur chinois.mp3">loop pour rappeur clairvallois</li>
+            <li data-f="40 dereto d'aspig.mp3">dereto d'aspig (whitehaven)</li>
+            <li data-f="50 Pierre en rillete.mp3">pierre en riz</li>
+            <li data-f="666 - La Verité sur Neverland.mp3">La Verité sur Neverland (polyphonic pygmee music)</li>
+            <li data-f="866 miaoumiaou.mp3">miaoumiaou</li>
+            <li data-f="999 bonus track lididloleedjeunene.mp3">(bonus track) lididloleedjeunene</li>
+            <li data-f="messages à tout les ditirenbiens et truculiens encore en vie.mp3">Message à tout les ditirenbiens et truculiens encore en vie</li>
+          </ol>
+          <div class="meta">BcP de Bruit POUR rien</div>
+        </div>
+      </div>
+      <div class="album-title">BcP de Bruit POUR rien</div>
+      <div class="album-artist"></div>
+      <div class="album-year">2024</div>
     </div>
 
   </div>
@@ -481,9 +599,16 @@ body {
 <div class="footer-bottom">no cookies &nbsp;&bull;&nbsp; no pub &nbsp;&bull;&nbsp; ILOVEEVERYBODY123</div>
 
 <div id="audio-bar">
-  <span class="now">♪ <b id="now-title">—</b></span>
-  <audio id="ss-player" controls preload="none"></audio>
-  <button class="close-bar" onclick="stopSS()">✕ STOP</button>
+  <div class="winamp-body">
+    <button class="w95-btn" id="ss-playpause" onclick="ssToggle()" title="Lecture / Pause">&#9658;</button>
+    <span class="now"><span id="now-scroll">&#9834; <b id="now-title">&mdash;</b></span></span>
+    <input type="range" class="w95-range seek" id="ss-seek" min="0" max="1000" value="0" step="1" title="Position">
+    <span class="ss-time"><span id="ss-cur">0:00</span>/<span id="ss-dur">0:00</span></span>
+    <span class="vol-ico">&#128266;</span>
+    <input type="range" class="w95-range vol" id="ss-vol" min="0" max="100" value="100" step="1" title="Volume">
+    <button class="close-bar" onclick="stopSS()" title="Stop">&#10005;</button>
+    <audio id="ss-player" preload="none"></audio>
+  </div>
 </div>
 
 </div>
@@ -501,6 +626,9 @@ function toggleDetail(card){
   var item = card.parentNode;                 // .album-item
   while(item && item.className.indexOf('album-item')===-1) item = item.parentNode;
   var grid = item.parentNode;                 // .album-grid
+
+  // mémorise la position de l'album cliqué pour que la page ne saute pas
+  var anchorTop = item.getBoundingClientRect().top;
 
   var existing = grid.querySelector('.album-detail');
   var sameAlbum = existing && existing.ownerItem === item;
@@ -525,6 +653,11 @@ function toggleDetail(card){
   // reporte la base audio de l'album (si présente) sur l'encart
   panel.setAttribute('data-base', back.getAttribute('data-base') || '');
 
+  // colore le nom de l'album avec sa couleur fixe (--tc), définie par album en CSS
+  var tc = getComputedStyle(item).getPropertyValue('--tc').trim() || '#E6007E';
+  var headEl = panel.querySelector('.detail-head');
+  if(headEl){ headEl.style.color = tc; headEl.style.borderBottomColor = tc; }
+
   // marque les titres jouables dans l'encart fraîchement créé
   markPlayable(panel);
 
@@ -534,6 +667,10 @@ function toggleDetail(card){
   for(var i=0;i<items.length;i++){ if(Math.abs(items[i].offsetTop-top)<2) last = items[i]; }
   grid.insertBefore(panel, last.nextSibling);
   item.classList.add('active');
+
+  // rétablit la position de l'album cliqué (compense le décalage du DOM)
+  var delta = item.getBoundingClientRect().top - anchorTop;
+  if(delta) window.scrollBy(0, delta);
 }
 
 /* ── Lecteur audio (multi-albums) ── */
@@ -541,6 +678,51 @@ var SS_BASE = "https://archive.org/download/ss-rejects/"; // repli si un album n
 var ssPlayer = document.getElementById('ss-player');
 var ssBar = document.getElementById('audio-bar');
 var ssNow = document.getElementById('now-title');
+var nowScroll = document.getElementById('now-scroll');
+function refreshTitleScroll(){
+  nowScroll.style.animation = 'none';
+  nowScroll.style.removeProperty('--sd');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    var ow = nowScroll.scrollWidth - nowScroll.parentNode.clientWidth;
+    if(ow > 4){
+      var dur = Math.max(10, ow/6);
+      nowScroll.style.setProperty('--sd', '-'+ow+'px');
+      nowScroll.style.animation = 'title-bounce '+dur+'s ease-in-out infinite';
+    }
+  }); });
+}
+
+/* ── Contrôles maison (lecture/pause, position, minuteur, volume) ── */
+var ssPlay = document.getElementById('ss-playpause');
+var ssSeek = document.getElementById('ss-seek');
+var ssVol  = document.getElementById('ss-vol');
+var ssCur  = document.getElementById('ss-cur');
+var ssDur  = document.getElementById('ss-dur');
+var ssSeeking = false;
+
+function fmtTime(t){
+  if(!isFinite(t) || t < 0) t = 0;
+  var m = Math.floor(t/60), s = Math.floor(t%60);
+  return m + ':' + (s<10?'0':'') + s;
+}
+function ssToggle(){
+  if(!ssPlayer.src) return;
+  if(ssPlayer.paused) ssPlayer.play(); else ssPlayer.pause();
+}
+ssPlayer.addEventListener('play',  function(){ ssPlay.innerHTML = '&#10074;&#10074;'; }); // ❚❚
+ssPlayer.addEventListener('pause', function(){ ssPlay.innerHTML = '&#9658;'; });          // ▶
+ssPlayer.addEventListener('loadedmetadata', function(){ ssDur.textContent = fmtTime(ssPlayer.duration); });
+ssPlayer.addEventListener('timeupdate', function(){
+  ssCur.textContent = fmtTime(ssPlayer.currentTime);
+  if(!ssSeeking && ssPlayer.duration){
+    ssSeek.value = Math.round(1000 * ssPlayer.currentTime / ssPlayer.duration);
+  }
+});
+ssSeek.addEventListener('input',  function(){ ssSeeking = true;
+  if(ssPlayer.duration) ssCur.textContent = fmtTime(ssSeek.value/1000 * ssPlayer.duration); });
+ssSeek.addEventListener('change', function(){ ssSeeking = false;
+  if(ssPlayer.duration) ssPlayer.currentTime = ssSeek.value/1000 * ssPlayer.duration; });
+ssVol.addEventListener('input', function(){ ssPlayer.volume = ssVol.value/100; });
 
 function markPlayable(scope){
   var lis = scope.querySelectorAll('li[data-f]');
@@ -552,9 +734,58 @@ function markPlayable(scope){
 function stopSS(){
   ssPlayer.pause(); ssPlayer.removeAttribute('src'); ssPlayer.load();
   ssBar.classList.remove('on');
+  nowScroll.style.animation = 'none'; nowScroll.style.removeProperty('--sd');
+  ssSeek.value = 0; ssCur.textContent = '0:00'; ssDur.textContent = '0:00';
+  ssPlay.innerHTML = '&#9658;';
   var p = document.querySelectorAll('.album-detail li.playing');
   for(var i=0;i<p.length;i++) p[i].classList.remove('playing');
 }
+
+/* joue un <li data-f> donné */
+function playLi(li){
+  if(!li || !li.getAttribute) return;
+  var f = li.getAttribute('data-f');
+  if(!f || !li.classList.contains('playable')) return;
+  var prev = document.querySelectorAll('.album-detail li.playing');
+  for(var i=0;i<prev.length;i++) prev[i].classList.remove('playing');
+  li.classList.add('playing');
+  ssNow.textContent = li.textContent;
+  refreshTitleScroll();
+  // base propre à l'album courant (data-base sur l'encart), sinon repli
+  var detail = li.closest ? li.closest('.album-detail') : null;
+  var base = (detail && detail.getAttribute('data-base')) || SS_BASE;
+  ssPlayer.src = base + encodeURIComponent(f);
+  ssPlayer.play();
+  ssBar.classList.add('on');
+  // précharge le titre suivant pendant la lecture (réduit le blanc entre 2 morceaux)
+  var nx = li.nextElementSibling;
+  while(nx && !nx.classList.contains('playable')) nx = nx.nextElementSibling;
+  if(nx) prefetchLi(nx);
+}
+
+/* ── Préchargement : amorce la redirection archive.org + le buffering ── */
+var ssPrefetch = null;       // <audio> caché réutilisé pour amorcer le téléchargement
+var ssPrefetchUrl = '';      // dernière URL amorcée (évite de relancer en boucle)
+function prefetchLi(li){
+  if(!li || !li.getAttribute) return;
+  var f = li.getAttribute('data-f');
+  if(!f || !li.classList.contains('playable')) return;
+  var detail = li.closest ? li.closest('.album-detail') : null;
+  var base = (detail && detail.getAttribute('data-base')) || SS_BASE;
+  var url = base + encodeURIComponent(f);
+  if(url === ssPrefetchUrl) return;            // déjà amorcé
+  if(ssPlayer.src && url === ssPlayer.src) return; // déjà en lecture
+  ssPrefetchUrl = url;
+  if(!ssPrefetch){ ssPrefetch = new Audio(); ssPrefetch.preload = 'auto'; }
+  ssPrefetch.src = url;        // déclenche DNS + 302 + début de buffering, mis en cache
+}
+
+/* survol d'un titre jouable → on précharge sans jouer */
+document.addEventListener('mouseover', function(e){
+  var li = e.target;
+  while(li && li.tagName !== 'LI') li = li.parentNode;
+  if(li && li.getAttribute) prefetchLi(li);
+});
 
 /* délégation : clic sur un <li data-f> joue le fichier */
 document.addEventListener('click', function(e){
@@ -564,22 +795,18 @@ document.addEventListener('click', function(e){
   var f = li.getAttribute('data-f');
   if(!f || !li.classList.contains('playable')) return;
   e.stopPropagation();
-  var prev = document.querySelectorAll('.album-detail li.playing');
-  for(var i=0;i<prev.length;i++) prev[i].classList.remove('playing');
-  li.classList.add('playing');
-  ssNow.textContent = li.textContent;
-  // base propre à l'album courant (data-base sur l'encart), sinon repli
-  var detail = li.closest ? li.closest('.album-detail') : null;
-  var base = (detail && detail.getAttribute('data-base')) || SS_BASE;
-  ssPlayer.src = base + encodeURIComponent(f);
-  ssPlayer.play();
-  ssBar.classList.add('on');
+  playLi(li);
 });
 
-/* quand un morceau finit, retire le surlignage */
+/* quand un morceau finit, enchaîne sur le titre jouable suivant */
 ssPlayer.addEventListener('ended', function(){
-  var p = document.querySelectorAll('.album-detail li.playing');
-  for(var i=0;i<p.length;i++) p[i].classList.remove('playing');
+  var cur = document.querySelector('.album-detail li.playing');
+  if(cur){
+    var next = cur.nextElementSibling;
+    while(next && !next.classList.contains('playable')) next = next.nextElementSibling;
+    cur.classList.remove('playing');
+    if(next){ playLi(next); return; }
+  }
 });
 
 /* Sparkles au clic (palette 80s) */
