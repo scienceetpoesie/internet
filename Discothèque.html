@@ -576,17 +576,7 @@ document.addEventListener('click',function(e){
   var ch=['*','*','★','✦','·','+'], co=['#E6007E','#FF8A3D','#FFE000','#3CCB6E','#00C2DE','#9B5DE5'];
   for(var i=0;i<6;i++)(function(i){ var el=document.createElement('div'); el.className='sparkle'; el.style.left=e.clientX+'px'; el.style.top=e.clientY+'px'; var a=(i/6)*2*Math.PI,d=30+Math.random()*20; el.style.setProperty('--tx',(Math.cos(a)*d)+'px'); el.style.setProperty('--ty',(Math.sin(a)*d)+'px'); el.style.fontSize=(i%2===0)?'14px':'9px'; el.style.color=co[i]; el.innerHTML=ch[i]; document.body.appendChild(el); setTimeout(function(){ if(el.parentNode)el.parentNode.removeChild(el); },460); })(i);
 });
-<script>
-  function playTrack(event, url) {
-    event.stopPropagation();          // empêche le clic de refermer la carte
-    var player = document.getElementById('player');
-    player.src = url;
-    player.play();
-  }
-</script>
+
   
 </body>
-   <audio id="player" controls preload="none"
-       style="position:fixed; bottom:0; left:0; width:100%; z-index:9999;"></audio>
-</script>
 </html>
