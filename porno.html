@@ -12,12 +12,24 @@ body {
     text-align: center;
 }
 
-.container {
-    margin: 100px auto;
-    width: 600px;
+/* Bloc unique : visualiseur + catégories soudés dans un même cadre */
+.wrapper {
+    display: flex;
+    width: 800px;
+    max-width: 95vw;
+    height: calc(100vh - 190px);   /* tient dans la fenêtre à 100%, pas de scroll */
+    margin: 30px auto 0;
     background: #c0c0c0;
-    border: 4px outset white;
-    
+    border: 4px solid #9c7488;   /* un seul cadre pour les deux */
+    box-sizing: border-box;
+}
+
+.visualiser {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #a0a0a0;   /* séparation interne entre les deux blocs */
 }
 
 h1 {
@@ -25,7 +37,11 @@ h1 {
 }
 
 .buttons {
-    margin-top: 10px;
+    height: 70px;                  /* bande réservée sous l'image */
+    display: flex;
+    align-items: center;           /* boutons centrés verticalement dans la bande */
+    justify-content: center;
+    gap: 12px;
 }
 
 button {
@@ -43,7 +59,21 @@ button:active {
 .footer {
     margin-top: 20px;
     font-size: 19px;
-    font-family:"time new roman"
+    font-family:"time new roman";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.footer .corpo {
+    font-size: 13px;
+    font-style: italic;
+    color: #3a0a25;
+    max-width: 320px;
+    text-align: left;
+    line-height: 1.4;
 }
     .star {
     position: fixed;
@@ -63,12 +93,54 @@ button:active {
 }
 .image-frame {
     width: 100%;
-    height: 70vh;
+    flex: 1;                       /* prend toute la hauteur libre du visualiseur */
+    min-height: 0;
     background-color: #c0c0c0; /* même gris que le container */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top:-10px;
+    position: relative;
+}
+
+#lb-loader {
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    background: #c0c0c0; /* recouvre l'image précédente */
+    z-index: 5;
+}
+
+#lb-loader.visible { display: flex; }
+
+@keyframes spin-hearts { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+#lb-loader svg { animation: spin-hearts 2.5s linear infinite; transform-origin: 50px 50px; }
+
+#lb-error {
+    display: none;
+    position: absolute;
+    inset: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    background: #c0c0c0;
+    z-index: 6;
+}
+
+#lb-error.visible { display: flex; }
+
+#lb-error .err-title { font-size: 20px; color: #d6002e; }
+
+#lb-error .err-name {
+    font-family: "Courier New", monospace;
+    font-size: 16px;
+    color: black;
+    word-break: break-all;
+    max-width: 90%;
 }
 
 .image-frame img {
@@ -77,6 +149,47 @@ button:active {
     object-fit: contain;
     border: 3px solid #a0a0a0; /* liseré gris autour de l’image */
 }
+
+/* Menu Catégories : second bloc soudé, même hauteur automatiquement (flex) */
+.categories {
+    width: 180px;
+    flex: none;
+    background: #c0c0c0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.categories h2 {
+    margin: 0;
+    padding: 6px 4px;
+    font-size: 22px;
+    font-family: "Bodoni", "Times New Roman", serif;
+    background: #c0c0c0;
+    color: black;
+    border-bottom: 2px solid #a0a0a0;
+}
+
+.categories .cat-list {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    overflow-y: auto;
+    justify-content: flex-start;   /* collé en haut, espace libre en bas pour en ajouter */
+}
+
+.categories button {
+    width: 100%;
+    text-align: center;
+}
+
+.categories button.active {
+    border: 2px inset black;
+    background: #b0b0b0;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -84,19 +197,43 @@ button:active {
 <div class="star left">★</div>
 <div class="star right">★</div>
     
-<div class="container">
+<div class="wrapper">
+<div class="visualiser">
 <div class="image-frame">
     <img id="gallery">
+    <div id="lb-error">
+        <div class="err-title">⚠ Image introuvable</div>
+        <div class="err-name" id="lb-error-name"></div>
+    </div>
+    <div id="lb-loader">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+            <text x="50" y="14" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#d6002e" transform="rotate(0,50,14)">❤</text>
+            <text x="76" y="24" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#d6002e" transform="rotate(45,76,24)">❤</text>
+            <text x="86" y="50" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#d6002e" transform="rotate(90,86,50)">❤</text>
+            <text x="76" y="76" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#d6002e" transform="rotate(135,76,76)">❤</text>
+            <text x="50" y="86" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#d6002e" transform="rotate(180,50,86)">❤</text>
+            <text x="24" y="76" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#d6002e" transform="rotate(225,24,76)">❤</text>
+            <text x="14" y="50" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#d6002e" transform="rotate(270,14,50)">❤</text>
+            <text x="24" y="24" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#d6002e" transform="rotate(315,24,24)">❤</text>
+        </svg>
+    </div>
 </div>
 
     <div class="buttons">
         <button onclick="prevImage()">⬅ précédent</button>
         <button onclick="nextImage()">suivant ➡</button>
     </div>
+</div><!-- .visualiser -->
+
+<div class="categories">
+    <h2>Catégories</h2>
+    <div class="cat-list" id="catList"></div>
 </div>
+</div><!-- .wrapper -->
 
 <div class="footer">
     <p>Science & Poésie - 2025 - 🄯</p>
+    <p class="corpo">Tous les contenus présentés sur ce site sont des œuvres artistiques et satiriques. Les modèles et personnages représentés sont fictifs et âgés de plus de 18 ans. Toute reproduction est interdite. © S&P Entertainment Group.</p>
 </div>
 
 <script>
@@ -183,6 +320,22 @@ var images = [
 "https://github.com/scienceetpoesie/internet/blob/main/galerie/porno/x%20-%20magazine%20couverture%20%201.png?raw=true",
 ];
 
+// Catégories : libellé affiché -> motif(s) cherché(s) dans l'URL
+var categories = [
+    { label: "Toutes",          match: null },
+    { label: "Conspiration",    match: ["conspiracy"] },
+    { label: "Jeux vidéo",      match: ["game"] },
+    { label: "Garfield",        match: ["garfield"] },
+    { label: "Mystique",        match: ["mystique"] },
+    { label: "Pub",             match: ["pub"] },
+    { label: "Science",         match: ["science"] },
+    { label: "Tintin",          match: ["tintin"] },
+    { label: "Vintage érotica", match: ["vintage%20erotica"] },
+    { label: "Magazines",       match: ["page%20magazine", "x%20-%20magazine", "porn"] },
+];
+
+var currentCategory = 0;   // index dans categories
+var filtered = [];         // indices d'images de la catégorie courante
 var shuffledIndices = [];
 var currentIndex = 0;
 
@@ -194,17 +347,81 @@ function shuffle(array) {
     return array;
 }
 
-// Initialise le shuffle
+// Construit la liste des images correspondant à la catégorie courante
+function applyCategory() {
+    var cat = categories[currentCategory];
+    filtered = [];
+    for (let i = 0; i < images.length; i++) {
+        if (!cat.match || cat.match.some(m => images[i].includes(m))) {
+            filtered.push(i);
+        }
+    }
+}
+
+// Initialise le shuffle (sur la catégorie filtrée)
 function initShuffle() {
-    shuffledIndices = [];
-    for (let i = 0; i < images.length; i++) shuffledIndices.push(i);
+    applyCategory();
+    shuffledIndices = filtered.slice();
     shuffledIndices = shuffle(shuffledIndices);
     currentIndex = 0;
 }
 
 // Affiche l'image courante
     function showImage() {
-    document.getElementById("gallery").src = images[shuffledIndices[currentIndex]];
+    if (shuffledIndices.length === 0) return;
+    var img = document.getElementById("gallery");
+    var loader = document.getElementById("lb-loader");
+    document.getElementById("lb-error").classList.remove("visible"); // efface une erreur précédente
+    img.style.visibility = "hidden";   // l'image en cache ne reste pas
+    loader.classList.add("visible");   // cœurs de chargement
+    img.src = images[shuffledIndices[currentIndex]];
+}
+
+// Extrait un nom de fichier lisible depuis l'URL GitHub
+function imageName(url) {
+    var path = url.split("?")[0];              // enlève ?raw=true
+    var file = path.split("/").pop();          // dernier segment
+    try { file = decodeURIComponent(file); } catch (e) {}
+    return file;
+}
+
+// Quand l'image est chargée : on retire le loader et on l'affiche
+function setupLoader() {
+    var img = document.getElementById("gallery");
+    var loader = document.getElementById("lb-loader");
+    img.onload = function() {
+        loader.classList.remove("visible");
+        img.style.visibility = "visible";
+    };
+    img.onerror = function() {
+        loader.classList.remove("visible");
+        img.style.visibility = "hidden";   // pas d'icône cassée
+        document.getElementById("lb-error-name").textContent =
+            imageName(images[shuffledIndices[currentIndex]]);
+        document.getElementById("lb-error").classList.add("visible");
+    };
+}
+
+// Change de catégorie
+function selectCategory(i) {
+    currentCategory = i;
+    initShuffle();
+    showImage();
+    document.querySelectorAll(".categories button").forEach((b, idx) => {
+        b.classList.toggle("active", idx === i);
+    });
+}
+
+// Génère les boutons de catégories
+function buildCategories() {
+    var list = document.getElementById("catList");
+    categories.forEach((cat, i) => {
+        var b = document.createElement("button");
+        b.textContent = cat.label;
+        if (i === currentCategory) b.classList.add("active");
+        b.onclick = () => selectCategory(i);
+        list.appendChild(b);
+    });
 }
 
 // Image suivante (shuffle)
@@ -223,6 +440,8 @@ function prevImage() {
 }
 
 // Initialisation
+setupLoader();
+buildCategories();
 initShuffle();
 showImage();
 
