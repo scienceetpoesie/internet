@@ -327,6 +327,8 @@ input[type=range].tslider::-webkit-slider-thumb{-webkit-appearance:none;width:4p
       <li><a href="enconstruction.html">&#9658; Prédictions</a></li>
       <li><a href="enconstruction.html">&#9658; Lexique</a></li> 
       <li><a href="ENCYCLOPEDIE.html">&#9658; Encyclop&eacute;die</a></li>
+      <li><a href="enconstruction.html">&#9658; Sport</a></li>
+      <li><a href="enconstruction.html">&#9658; Gastronomie</a></li>
        <li><a href="Discothèque.html">&#9658; Discothèque</a></li>
     </ul></div>
     <div class="sidebar-section"><h3>Statut</h3><p><span class="blink">&#9632;</span> PROJET    ACTIF<br><br>&laquo;&nbsp;xxxxxx&nbsp;&raquo;<br>en cours&hellip;</p></div>
@@ -868,7 +870,7 @@ function triggerKonamiEgg(){
 }
 
 /* ══ Citations ══ */
-var citations=['&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;','&laquo;&nbsp;Le collectif précède l\'individu.&nbsp;&raquo;','&laquo;&nbsp;Tout signe est une serrure.&nbsp;&raquo;','&laquo;&nbsp;L\'ésotérisme est une sociologie inversée.&nbsp;&raquo;','&laquo;&nbsp;La structure invisible gouverne.&nbsp;&raquo;','&laquo;&nbsp;Fragment III : en attente de réception.&nbsp;&raquo;','&laquo;&nbsp;ϪꙮʘɮҨȢɮꙚ&nbsp;&raquo;','&laquo;&nbsp;Croire sans comprendre est une technique.&nbsp;&raquo;'];
+var citations=['&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;','&laquo;&nbsp;Les gourous ont les mains savonneuses.&nbsp;&raquo;','&laquo;&nbsp;La réponse était dans la question.&nbsp;&raquo;','&laquo;&nbsp;On a le temps les mecs&nbsp;&excl; Le soleil explose pas avant&nbsp;&lbrack;x&rbrack;.&nbsp;&raquo;''&laquo;&nbsp;La vie est un jambon, un jambon sans couenne.&nbsp;&raquo;','&laquo;&nbsp;&laquo;&nbsp;quand je dis ..x.. vous dites ..y..&nbsp;!<br>... x&nbsp;!<br>- z&nbsp;!!<br>- x&nbsp;?!<br>- z&nbsp;!!&nbsp;&raquo;.&nbsp;&raquo;','&laquo;&nbsp;ϪꙮʘɮҨȢɮꙚ&nbsp;&raquo;','&laquo;&nbsp;Avoir les dents longues, c\'est pas pratiques pour lécher des culs.&nbsp;&raquo;'];
 var citIdx=0,citEl=document.getElementById('citation-text');
 if(citEl){citEl.style.cursor='pointer';citEl.addEventListener('click',function(e){e.preventDefault();citIdx=(citIdx+1)%citations.length;citEl.style.opacity='0';setTimeout(function(){citEl.innerHTML=citations[citIdx];citEl.style.opacity='1';},150);citEl.style.transition='opacity 0.15s';});}
 
