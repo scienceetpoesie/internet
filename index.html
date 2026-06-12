@@ -870,7 +870,7 @@ function triggerKonamiEgg(){
 }
 
 /* ══ Citations ══ */
-var citations=['&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;','&laquo;&nbsp;Les gourous ont les mains savonneuses.&nbsp;&raquo;','&laquo;&nbsp;La réponse était dans la question.&nbsp;&raquo;','&laquo;&nbsp;On a le temps les mecs&nbsp;&excl; Le soleil explose pas avant&nbsp;&lbrack;x&rbrack;.&nbsp;&raquo;''&laquo;&nbsp;La vie est un jambon, un jambon sans couenne.&nbsp;&raquo;','&laquo;&nbsp;&laquo;&nbsp;quand je dis ..x.. vous dites ..y..&nbsp;!<br>... x&nbsp;!<br>- z&nbsp;!!<br>- x&nbsp;?!<br>- z&nbsp;!!&nbsp;&raquo;.&nbsp;&raquo;','&laquo;&nbsp;ϪꙮʘɮҨȢɮꙚ&nbsp;&raquo;','&laquo;&nbsp;Avoir les dents longues, c\'est pas pratiques pour lécher des culs.&nbsp;&raquo;'];
+var citations=['&laquo;&nbsp;Je ne pense pas.&nbsp;&raquo;','&laquo;&nbsp;Les gourous ont les mains savonneuses.&nbsp;&raquo;','&laquo;&nbsp;La réponse était dans la question.&nbsp;&raquo;','&laquo;&nbsp;On a le temps les mecs&nbsp;&excl; Le soleil explose pas avant&nbsp;&lbrack;x&rbrack;.&nbsp;&raquo;','&laquo;&nbsp;La vie est un jambon, un jambon sans couenne.&nbsp;&raquo;','&laquo;&nbsp;&laquo;&nbsp;quand je dis ..x.. vous dites ..y..&nbsp;!<br>... x&nbsp;!<br>- z&nbsp;!!<br>- x&nbsp;?!<br>- z&nbsp;!!&nbsp;&raquo;.&nbsp;&raquo;','&laquo;&nbsp;ϪꙮʘɮҨȢɮꙚ&nbsp;&raquo;','&laquo;&nbsp;Avoir les dents longues, c\'est pas pratiques pour lécher des culs.&nbsp;&raquo;'];
 var citIdx=0,citEl=document.getElementById('citation-text');
 if(citEl){citEl.style.cursor='pointer';citEl.addEventListener('click',function(e){e.preventDefault();citIdx=(citIdx+1)%citations.length;citEl.style.opacity='0';setTimeout(function(){citEl.innerHTML=citations[citIdx];citEl.style.opacity='1';},150);citEl.style.transition='opacity 0.15s';});}
 
