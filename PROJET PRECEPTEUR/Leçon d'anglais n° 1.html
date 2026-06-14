@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1 — Tell Me About Yourself</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Outfit:wght@300;400;500;600&display=swap');
+
+  :root {
+    --ink: #1c1a17;
+    --paper: #f4ede0;
+    --paper-deep: #e8dcc8;
+    --accent: #c8553d;
+    --accent-soft: #e9a17c;
+    --teal: #2a7f7a;
+    --teal-soft: #bcdbd8;
+    --gold: #d9a441;
+    --green: #4a7c4e;
+    --red: #b3402f;
+    --shadow: rgba(28,26,23,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: #d8e6e2;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(42,127,122,0.16) 0, transparent 46%),
+      radial-gradient(circle at 88% 82%, rgba(217,164,65,0.14) 0, transparent 48%);
+    color: var(--ink);
+    line-height: 1.6;
+    padding: 0 0 80px;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- HEADER ---------- */
+  header {
+    padding: 56px 0 40px;
+    text-align: center;
+    position: relative;
+  }
+  .kicker {
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  h1 em { font-style: italic; color: var(--teal); }
+  .subtitle {
+    margin-top: 16px;
+    font-size: 1.05rem;
+    color: #5c554b;
+    font-weight: 300;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* ---------- SECTION CARD ---------- */
+  section {
+    background: #fffaf2;
+    border: 1px solid var(--paper-deep);
+    border-radius: 20px;
+    padding: 34px 32px;
+    margin-bottom: 26px;
+    box-shadow: 0 8px 30px -18px var(--shadow);
+    position: relative;
+  }
+  .sec-tag {
+    position: absolute;
+    top: -13px;
+    left: 28px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .sec-tag.fun { background: var(--teal); }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin: 8px 0 18px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 22px 0 10px;
+    color: var(--accent);
+  }
+  p { margin-bottom: 12px; }
+  .aside {
+    font-size: 0.92rem;
+    color: #6b6358;
+    font-style: italic;
+    border-left: 3px solid var(--accent-soft);
+    padding-left: 14px;
+    margin: 14px 0;
+  }
+
+  /* ---------- VOCAB ---------- */
+  .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+  @media (max-width: 560px){ .vocab-grid { grid-template-columns: 1fr; } }
+  .vocab {
+    background: var(--paper);
+    border-radius: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--paper-deep);
+  }
+  .vocab .en { font-weight: 600; }
+  .vocab .fr { font-size: 0.86rem; color: #74695b; }
+  .vocab .ipa { font-size: 0.78rem; color: var(--teal); font-style: italic; }
+
+  /* ---------- DIALOGUE ---------- */
+  .dialogue { background: var(--paper); border-radius: 14px; padding: 18px 20px; }
+  .line { display: flex; gap: 10px; margin-bottom: 10px; }
+  .who { font-weight: 600; min-width: 58px; color: var(--teal); }
+  .line.b .who { color: var(--accent); }
+
+  /* ---------- EXERCISES ---------- */
+  .ex { margin-top: 18px; }
+  .q { font-weight: 500; margin-bottom: 12px; }
+  .q .num {
+    display: inline-block; background: var(--accent); color: #fff;
+    width: 24px; height: 24px; border-radius: 50%; text-align: center;
+    font-size: 0.82rem; line-height: 24px; margin-right: 8px; font-weight: 600;
+  }
+  .opts { display: flex; flex-direction: column; gap: 8px; margin: 0 0 6px 32px; }
+  .opt {
+    text-align: left; background: var(--paper); border: 1.5px solid var(--paper-deep);
+    border-radius: 10px; padding: 11px 16px; font-family: inherit; font-size: 0.96rem;
+    cursor: pointer; transition: all .18s; color: var(--ink);
+  }
+  .opt:hover { border-color: var(--accent-soft); transform: translateX(3px); }
+  .opt.correct { background: #e3f0e4; border-color: var(--green); color: var(--green); font-weight: 600; }
+  .opt.wrong { background: #f6e0dc; border-color: var(--red); color: var(--red); }
+  .opt:disabled { cursor: default; }
+  .feedback {
+    margin: 8px 0 0 32px; font-size: 0.9rem; padding: 8px 14px;
+    border-radius: 8px; display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.ok { background: #e3f0e4; color: var(--green); }
+  .feedback.no { background: #dceaf0; color: #20566b; border-left: 3px solid #3d8aa8; }
+
+  /* fill in the blank */
+  .fill input {
+    font-family: inherit; font-size: 0.96rem; padding: 8px 12px;
+    border: 1.5px solid var(--paper-deep); border-radius: 8px; background: var(--paper);
+    width: 160px; margin: 0 6px;
+  }
+  .fill input:focus { outline: none; border-color: var(--teal); }
+  .check-btn {
+    background: var(--ink); color: var(--paper); border: none; border-radius: 8px;
+    padding: 8px 18px; font-family: inherit; font-size: 0.9rem; cursor: pointer;
+    margin-left: 4px; transition: transform .15s;
+  }
+  .check-btn:hover { transform: translateY(-2px); }
+
+  /* ---------- FOOTER ---------- */
+  footer { text-align: center; margin-top: 40px; color: #8a8073; font-size: 0.88rem; }
+  .nextbox {
+    background: var(--ink); color: var(--paper); border-radius: 18px;
+    padding: 28px 32px; text-align: center; margin-top: 30px;
+    display: none;
+  }
+  .nextbox.show { display: block; animation: pop .5s ease; }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .nextbox h2 { color: var(--paper); margin-bottom: 6px; }
+  .nextbox p { color: #c9c0b2; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">English for HR · Phase 1 · Lesson 1</div>
+    <h1>Tell Me About <em>Yourself</em></h1>
+    <p class="subtitle">Décrire ta boîte, ton équipe et qui fait quoi — sans réciter ton CV comme un robot, et en choisissant le bon présent.</p>
+  </header>
+
+  <!-- WARM UP -->
+  <section>
+    <span class="sec-tag">Warm-up</span>
+    <h2>Qui fait quoi, ici ?</h2>
+    <p>Décrire son travail, c'est jongler entre deux présents : ce qui est vrai <strong>en général</strong> (ton rôle, ta boîte) et ce qui se passe <strong>en ce moment</strong> (un remplacement, un projet en cours). L'anglais ne les dit pas pareil — et c'est tout l'enjeu du jour.</p>
+    <div class="dialogue">
+      <div class="line"><span class="who">Priya</span><span>So, tell me about yourself — what do you do here?</span></div>
+      <div class="line b"><span class="who">Léo</span><span>I work in HR, I look after recruitment. But this month I'm also covering for my manager — she's on leave.</span></div>
+      <div class="line"><span class="who">Priya</span><span>Busy times. And how big is the team?</span></div>
+      <div class="line b"><span class="who">Léo</span><span>We're six. Well, five and a half — the intern only comes in on Tuesdays.</span></div>
+    </div>
+    <p class="aside">Note : « Tell me about yourself » au bureau n'attend pas ta biographie depuis la maternelle. On veut ton rôle, ton équipe, peut-être un mot sur ce qui t'occupe en ce moment. Trois phrases bien choisies valent mieux qu'un monologue.</p>
+  </section>
+
+  <!-- VOCAB -->
+  <section>
+    <span class="sec-tag">Toolbox</span>
+    <h2>Le vocabulaire du jour</h2>
+    <div class="vocab-grid">
+      <div class="vocab"><div class="en">to report to (someone)</div><div class="ipa">/rɪˈpɔːt tuː/</div><div class="fr">avoir pour responsable, dépendre de</div></div>
+      <div class="vocab"><div class="en">a line manager</div><div class="ipa">/laɪn ˈmænɪdʒə/</div><div class="fr">le responsable direct (N+1)</div></div>
+      <div class="vocab"><div class="en">head office / headquarters</div><div class="ipa">/ˈhedˌkwɔːtəz/</div><div class="fr">le siège (social)</div></div>
+      <div class="vocab"><div class="en">staff</div><div class="ipa">/stɑːf/</div><div class="fr">le personnel, les effectifs</div></div>
+      <div class="vocab"><div class="en">to be based in</div><div class="ipa">/beɪst ɪn/</div><div class="fr">être basé·e à, situé·e à</div></div>
+      <div class="vocab"><div class="en">a branch</div><div class="ipa">/brɑːntʃ/</div><div class="fr">une agence, une succursale</div></div>
+    </div>
+    <h3>La structure clé : present simple vs present continuous</h3>
+    <p>Deux présents, deux usages — et c'est le piège n°1 des francophones :</p>
+    <p>→ <strong>Present simple</strong> pour ce qui est vrai en général, ton rôle, une habitude :<br>
+    <strong>I work</strong> in HR. Our company <strong>has</strong> three branches. <span class="fr" style="color:#74695b">(C'est mon poste, c'est notre boîte — toujours vrai.)</span></p>
+    <p>→ <strong>Present continuous</strong> (<em>be + verbe-ing</em>) pour ce qui se passe maintenant ou de façon temporaire :<br>
+    I'm <strong>covering</strong> for a colleague this week. We're <strong>hiring</strong> two new people right now. <span class="fr" style="color:#74695b">(En ce moment, pas pour toujours.)</span></p>
+    <p class="aside">Le réflexe à attraper : « ce que je fais dans la vie » = present simple. « ce que je fais là, ces jours-ci » = present continuous. <em>I manage the payroll team</em> (mon rôle) ≠ <em>I'm managing three projects at the moment</em> (la charge du moment).</p>
+  </section>
+
+  <!-- EXERCISE 1 : QCM RH -->
+  <section>
+    <span class="sec-tag">Exercise 1</span>
+    <h2>À toi de jouer</h2>
+    <div class="ex">
+      <div class="q"><span class="num">1</span>Tu décris ton poste <strong>en général</strong>, ton rôle habituel. Quelle phrase choisis-tu ?</div>
+      <div class="opts" data-correct="1" data-why="Pour une vérité générale — ton rôle de tous les jours — c'est le present simple : « I work ». « I'm working » insisterait sur « en ce moment / temporairement » (par exemple un remplacement), ce qui n'est pas le sens voulu. Et « I working » oublie tout simplement l'auxiliaire.">
+        <button class="opt">I'm working in the HR department.</button>
+        <button class="opt">I work in the HR department.</button>
+        <button class="opt">I working in the HR department.</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex">
+      <div class="q"><span class="num">2</span>Une collègue dit : « I <strong>report to</strong> the Head of HR. » Qu'est-ce que ça signifie ?</div>
+      <div class="opts" data-correct="1" data-why="« To report to someone » n'a rien à voir avec « rédiger un rapport » (le faux-ami qui piège tout le monde). Ça veut dire avoir cette personne comme supérieur·e hiérarchique direct·e : ici, le DRH est son N+1.">
+        <button class="opt">Elle rédige des rapports pour le DRH.</button>
+        <button class="opt">Le DRH est son responsable hiérarchique.</button>
+        <button class="opt">Elle remplace le DRH cette semaine.</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex">
+      <div class="q"><span class="num">3</span>L'entreprise recrute deux personnes <strong>en ce moment</strong> — c'est en cours et temporaire. Quelle phrase est correcte ?</div>
+      <div class="opts" data-correct="1" data-why="Une action en cours, ponctuelle (« right now »), demande le present continuous : be + verbe-ing → « we're hiring ». « We hire » décrirait une habitude permanente, et « we are hire » colle l'auxiliaire à la base verbale sans le -ing.">
+        <button class="opt">We hire two new people right now.</button>
+        <button class="opt">We're hiring two new people right now.</button>
+        <button class="opt">We are hire two new people right now.</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <!-- EXERCISE 2 : FILL IN -->
+  <section>
+    <span class="sec-tag">Exercise 2</span>
+    <h2>Complète la présentation</h2>
+    <p>Tape le mot manquant, puis clique sur <em>Check</em>. (L'orthographe compte, mais on te pardonne la majuscule.)</p>
+    <div class="ex fill">
+      <div class="q"><span class="num">1</span>I work in HR, and I report <input data-answer="to"> the Head of HR.</div>
+      <button class="check-btn" onclick="checkFill(this)">Check</button>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex fill">
+      <div class="q"><span class="num">2</span>Our company is <input data-answer="based"> in Lyon, with two branches abroad.</div>
+      <button class="check-btn" onclick="checkFill(this)">Check</button>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex fill">
+      <div class="q"><span class="num">3</span>Right now, we <input data-answer="are"> hiring two new people.</div>
+      <button class="check-btn" onclick="checkFill(this)">Check</button>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <!-- EXERCISE 3 : expressions et culture utile -->
+  <section>
+    <span class="sec-tag">Exercise 3</span>
+    <h2>Reading in context</h2>
+    <p>On reste sur le thème de l'équipe, mais avec des expressions qu'on entend vraiment circuler dans les bureaux anglophones. Le but : les reconnaître au vol et ne pas les prendre au pied de la lettre.</p>
+    <div class="ex">
+      <div class="q"><span class="num">1</span>A colleague emails: <em>"I'll handle the contracts — just <strong>keep me in the loop</strong>."</em> What is she asking for?</div>
+      <div class="opts" data-correct="0" data-why="« To keep someone in the loop » signifie tenir quelqu'un au courant, l'inclure dans les informations qui circulent. Elle ne réclame ni une copie papier ni qu'on la laisse tranquille : elle veut juste rester informée de l'avancement.">
+        <button class="opt">To keep her updated and informed</button>
+        <button class="opt">To make her a paper copy</button>
+        <button class="opt">To leave her alone with it</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex">
+      <div class="q"><span class="num">2</span>After a long meeting, your manager says: <em>"Good — I think we're all <strong>on the same page</strong> now."</em> She means…</div>
+      <div class="opts" data-correct="1" data-why="« To be on the same page » veut dire être d'accord, partager la même compréhension d'une situation. Il n'est pas question d'une vraie page : elle se réjouit qu'après la réunion, tout le monde soit aligné.">
+        <button class="opt">Everyone is reading the same document</button>
+        <button class="opt">Everyone agrees and understands the same thing</button>
+        <button class="opt">Everyone has reached the same page number</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex">
+      <div class="q"><span class="num">3</span>About a teammate, someone mutters: <em>"Honestly, he doesn't really <strong>pull his weight</strong>."</em> This means he…</div>
+      <div class="opts" data-correct="2" data-why="« To pull your weight » signifie faire sa juste part du travail dans une équipe. Le reproche n'a rien de physique : on lui reproche de ne pas assumer sa part de l'effort collectif, de se reposer sur les autres.">
+        <button class="opt">is too heavy to lift</button>
+        <button class="opt">lifts weights at the gym every day</button>
+        <button class="opt">doesn't do his fair share of the work</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <div class="nextbox" id="done">
+    <h2>C'est terminé 🎉</h2>
+    <p>Tu sais décrire ta boîte, ton équipe et qui fait quoi — au present simple comme au present continuous.</p>
+  </div>
+
+  <footer>English for HR · Lesson 1 of the journey</footer>
+
+</div>
+
+<script>
+  // QCM
+  document.querySelectorAll('.opts').forEach(group => {
+    const correct = +group.dataset.correct;
+    const fb = group.parentElement.querySelector('.feedback');
+    const buttons = [...group.querySelectorAll('.opt')];
+    buttons.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.disabled = true);
+        if (i === correct) {
+          btn.classList.add('correct');
+          fb.textContent = "✓ Exactement ! Bien joué.";
+          fb.className = "feedback show ok";
+        } else {
+          btn.classList.add('wrong');
+          buttons[correct].classList.add('correct');
+          fb.textContent = group.dataset.why || "La bonne réponse est surlignée en vert.";
+          fb.className = "feedback show no";
+        }
+        recordResult(group.closest('.ex'), i === correct);
+        markAnswered(group.closest('.ex'));
+      });
+    });
+  });
+
+  // FILL IN
+  function checkFill(btn){
+    const ex = btn.closest('.ex');
+    const input = ex.querySelector('input');
+    const fb = ex.querySelector('.feedback');
+    const ans = input.dataset.answer.toLowerCase();
+    const val = input.value.trim().toLowerCase();
+    if (val === ans){
+      fb.textContent = "✓ Parfait !";
+      fb.className = "feedback show ok";
+      input.style.borderColor = "var(--green)";
+      recordResult(ex, true);
+      markAnswered(ex);
+    } else if (val === "") {
+      fb.textContent = "Écris quelque chose d'abord 😉";
+      fb.className = "feedback show no";
+    } else {
+      fb.textContent = "Pas tout à fait. Indice : ça commence par « " + ans[0] + " ».";
+      fb.className = "feedback show no";
+      input.style.borderColor = "var(--red)";
+      recordResult(ex, false);
+    }
+  }
+
+  // COMPLETION : reveal once every question is answered
+  const answeredSet = new Set();
+  const totalQuestions = document.querySelectorAll('.ex').length;
+  function markAnswered(ex){
+    answeredSet.add(ex);
+    if (answeredSet.size >= totalQuestions){
+      const done = document.getElementById('done');
+      if (done && !done.classList.contains('show')){
+        done.classList.add('show');
+        done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }
+
+  // SCORE : on enregistre le résultat (première tentative) de chaque question
+  // et on le persiste pour que index.html colore la leçon selon le score.
+  const LESSON_ID = 1;
+  const resultMap = new Map();
+  function recordResult(ex, correct){
+    if (resultMap.has(ex)) return;          // seule la première tentative compte
+    resultMap.set(ex, !!correct);
+    saveProgress();
+  }
+  function saveProgress(){
+    let good = 0;
+    resultMap.forEach(v => { if (v) good++; });
+    const total = totalQuestions;
+    const pct = total ? Math.round((good / total) * 100) : 0;
+    const done = resultMap.size >= total;
+    let store = {};
+    try { store = JSON.parse(localStorage.getItem('hr-en-progress')) || {}; } catch(e){}
+    store[LESSON_ID] = { correct: good, total, pct, done, attempted: resultMap.size, ts: Date.now() };
+    try { localStorage.setItem('hr-en-progress', JSON.stringify(store)); } catch(e){}
+  }
+</script>
+</body>
+</html>

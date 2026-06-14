@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2 — The People Around You</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Outfit:wght@300;400;500;600&display=swap');
+
+  :root {
+    --ink: #1c1a17;
+    --paper: #f4ede0;
+    --paper-deep: #e8dcc8;
+    --accent: #c8553d;
+    --accent-soft: #e9a17c;
+    --teal: #2a7f7a;
+    --teal-soft: #bcdbd8;
+    --gold: #d9a441;
+    --green: #4a7c4e;
+    --red: #b3402f;
+    --shadow: rgba(28,26,23,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(217,164,65,0.12) 0, transparent 44%),
+      radial-gradient(circle at 88% 82%, rgba(42,127,122,0.08) 0, transparent 46%);
+    color: var(--ink);
+    line-height: 1.6;
+    padding: 0 0 80px;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- HEADER ---------- */
+  header {
+    padding: 56px 0 40px;
+    text-align: center;
+    position: relative;
+  }
+  .kicker {
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .subtitle {
+    margin-top: 16px;
+    font-size: 1.05rem;
+    color: #5c554b;
+    font-weight: 300;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* ---------- SECTION CARD ---------- */
+  section {
+    background: #fffaf2;
+    border: 1px solid var(--paper-deep);
+    border-radius: 20px;
+    padding: 34px 32px;
+    margin-bottom: 26px;
+    box-shadow: 0 8px 30px -18px var(--shadow);
+    position: relative;
+  }
+  .sec-tag {
+    position: absolute;
+    top: -13px;
+    left: 28px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .sec-tag.fun { background: var(--teal); }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin: 8px 0 18px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 22px 0 10px;
+    color: var(--accent);
+  }
+  p { margin-bottom: 12px; }
+  .aside {
+    font-size: 0.92rem;
+    color: #6b6358;
+    font-style: italic;
+    border-left: 3px solid var(--accent-soft);
+    padding-left: 14px;
+    margin: 14px 0;
+  }
+
+  /* ---------- FOCUS (carte enseignante) ---------- */
+  /* Distincte des cartes d'exercice : fond teal léger + étiquette teal.
+     But : qu'on distingue d'un coup d'œil « j'apprends » de « je suis testée ». */
+  section.lesson {
+    background: #eef6f5;
+    border-color: var(--teal-soft);
+  }
+  section.lesson h2 { color: var(--teal); }
+  section.lesson h3 { color: var(--teal); }
+  section.lesson .aside { border-left-color: var(--teal); }
+  .focus-eg {
+    background: #fffaf2;
+    border: 1px solid var(--teal-soft);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  .focus-eg p:last-child { margin-bottom: 0; }
+  .focus-eg .fr { font-size: 0.86rem; color: #74695b; }
+
+  /* ---------- VOCAB ---------- */
+  .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+  @media (max-width: 560px){ .vocab-grid { grid-template-columns: 1fr; } }
+  .vocab {
+    background: var(--paper);
+    border-radius: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--paper-deep);
+  }
+  .vocab .en { font-weight: 600; }
+  .vocab .fr { font-size: 0.86rem; color: #74695b; }
+  .vocab .ipa { font-size: 0.78rem; color: var(--teal); font-style: italic; }
+
+  /* ---------- DIALOGUE ---------- */
+  .dialogue { background: var(--paper); border-radius: 14px; padding: 18px 20px; }
+  .line { display: flex; gap: 10px; margin-bottom: 10px; }
+  .who { font-weight: 600; min-width: 58px; color: var(--teal); }
+  .line.b .who { color: var(--accent); }
+
+  /* ---------- EXERCISES ---------- */
+  .ex { margin-top: 18px; }
+  .q { font-weight: 500; margin-bottom: 12px; }
+  .q .num {
+    display: inline-block; background: var(--accent); color: #fff;
+    width: 24px; height: 24px; border-radius: 50%; text-align: center;
+    font-size: 0.82rem; line-height: 24px; margin-right: 8px; font-weight: 600;
+  }
+  .opts { display: flex; flex-direction: column; gap: 8px; margin: 0 0 6px 32px; }
+  .opt {
+    text-align: left; background: var(--paper); border: 1.5px solid var(--paper-deep);
+    border-radius: 10px; padding: 11px 16px; font-family: inherit; font-size: 0.96rem;
+    cursor: pointer; transition: all .18s; color: var(--ink);
+  }
+  .opt:hover { border-color: var(--accent-soft); transform: translateX(3px); }
+  .opt.correct { background: #e3f0e4; border-color: var(--green); color: var(--green); font-weight: 600; }
+  .opt.wrong { background: #f6e0dc; border-color: var(--red); color: var(--red); }
+  .opt:disabled { cursor: default; }
+  .feedback {
+    margin: 8px 0 0 32px; font-size: 0.9rem; padding: 8px 14px;
+    border-radius: 8px; display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.ok { background: #e3f0e4; color: var(--green); }
+  .feedback.no { background: #dceaf0; color: #20566b; border-left: 3px solid #3d8aa8; }
+
+  /* fill in the blank */
+  .fill input {
+    font-family: inherit; font-size: 0.96rem; padding: 8px 12px;
+    border: 1.5px solid var(--paper-deep); border-radius: 8px; background: var(--paper);
+    width: 160px; margin: 0 6px;
+  }
+  .fill input:focus { outline: none; border-color: var(--teal); }
+  .check-btn {
+    background: var(--ink); color: var(--paper); border: none; border-radius: 8px;
+    padding: 8px 18px; font-family: inherit; font-size: 0.9rem; cursor: pointer;
+    margin-left: 4px; transition: transform .15s;
+  }
+  .check-btn:hover { transform: translateY(-2px); }
+
+  /* ---------- FOOTER ---------- */
+  footer { text-align: center; margin-top: 40px; color: #8a8073; font-size: 0.88rem; }
+  .nextbox {
+    background: var(--ink); color: var(--paper); border-radius: 18px;
+    padding: 28px 32px; text-align: center; margin-top: 30px;
+    display: none;
+  }
+  .nextbox.show { display: block; animation: pop .5s ease; }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .nextbox h2 { color: var(--paper); margin-bottom: 6px; }
+  .nextbox p { color: #c9c0b2; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">English for HR · Phase 1 · Lesson 2</div>
+    <h1>The People <em>Around</em> You</h1>
+    <p class="subtitle">Nommer les gens au travail, présenter qui est qui, et dire qui dépend de qui — sans se tromper entre « his » et « her ».</p>
+  </header>
+
+  <!-- WARM UP -->
+  <section>
+    <span class="sec-tag">Warm-up</span>
+    <h2>Qui est qui, dans tout ça ?</h2>
+    <p>Premier jour de quelqu'un : il faut faire les présentations et situer chacun. <strong>Présenter une personne</strong>, <strong>dire son rôle</strong>, <strong>indiquer qui dépend de qui</strong> — trois gestes simples, et tout le monde s'y retrouve.</p>
+    <div class="dialogue">
+      <div class="line"><span class="who">Sam</span><span>Nadia, welcome! This is Tom — he's your supervisor for the daily stuff.</span></div>
+      <div class="line b"><span class="who">Nadia</span><span>Nice to meet you, Tom. And who do I report to, officially?</span></div>
+      <div class="line"><span class="who">Sam</span><span>You report to Priya, our Head of HR. She manages the whole team.</span></div>
+      <div class="line b"><span class="who">Nadia</span><span>Got it. And the person behind the three screens?</span></div>
+      <div class="line"><span class="who">Sam</span><span>That's Léo, our apprentice. He's only in on Tuesdays, but he keeps us sane.</span></div>
+    </div>
+    <p class="aside">Note : dans beaucoup de bureaux anglophones, on appelle son responsable par son prénom — « Priya », pas « Mrs Sharma ». Le prénom ne veut pas dire qu'on est intime : c'est juste le ton courant du quotidien.</p>
+  </section>
+
+  <!-- VOCAB -->
+  <section>
+    <span class="sec-tag">Toolbox</span>
+    <h2>Le vocabulaire du jour</h2>
+    <div class="vocab-grid">
+      <div class="vocab"><div class="en">a supervisor</div><div class="ipa">/ˈsuːpəvaɪzə/</div><div class="fr">un·e responsable de proximité, chef·fe d'équipe</div></div>
+      <div class="vocab"><div class="en">an apprentice</div><div class="ipa">/əˈprentɪs/</div><div class="fr">un·e alternant·e, apprenti·e</div></div>
+      <div class="vocab"><div class="en">an intern</div><div class="ipa">/ˈɪntɜːn/</div><div class="fr">un·e stagiaire</div></div>
+      <div class="vocab"><div class="en">a coworker</div><div class="ipa">/ˈkəʊwɜːkə/</div><div class="fr">un·e collègue (de travail)</div></div>
+      <div class="vocab"><div class="en">a team</div><div class="ipa">/tiːm/</div><div class="fr">une équipe</div></div>
+      <div class="vocab"><div class="en">the Head of…</div><div class="ipa">/hed/</div><div class="fr">le·la responsable de… (Head of HR = DRH)</div></div>
+    </div>
+    <h3>La structure clé : présenter et demander</h3>
+    <p>Pour <strong>présenter</strong> quelqu'un, l'anglais ne dit pas « He is… » mais :</p>
+    <p>→ <strong>This is</strong> Tom, he's our supervisor. <span class="fr" style="color:#74695b">(Je te présente Tom.)</span><br>
+    → <strong>Who's</strong> your line manager? — Priya <strong>is</strong>. <span class="fr" style="color:#74695b">(« Who's » = « Who is » : qui est… ?)</span></p>
+    <p class="aside">« This is… » sert à <em>présenter</em> (la première fois) ; ensuite, on enchaîne avec « he/she » pour <em>décrire</em> : « This is Tom. <strong>He</strong> works in payroll. »</p>
+  </section>
+
+  <!-- FOCUS : possessifs his / her -->
+  <section class="lesson">
+    <span class="sec-tag fun">Focus</span>
+    <h2>His ou her ? Le piège du genre</h2>
+    <p>C'est <em>le</em> réflexe à inverser. En français, « son / sa » s'accorde avec la <strong>chose possédée</strong> : <em>son</em> manager, <em>sa</em> manager — on ne sait pas à qui « son » renvoie. En anglais, le possessif s'accorde avec le <strong>possesseur</strong> :</p>
+    <div class="focus-eg">
+      <p>→ Nadia loves <strong>her</strong> team. <span class="fr">(l'équipe <em>de Nadia</em> — Nadia est une femme → <strong>her</strong>)</span></p>
+      <p>→ Tom is showing <strong>his</strong> new coworker around. <span class="fr">(le collègue <em>de Tom</em> — Tom est un homme → <strong>his</strong>)</span></p>
+      <p>→ Every employee has <strong>their</strong> own badge. <span class="fr">(<strong>their</strong> = neutre, quand on ne précise pas le genre)</span></p>
+    </div>
+    <p>Le mot qui suit (manager, team, badge…) ne change rien : on regarde uniquement <strong>à qui ça appartient</strong>.</p>
+    <p class="aside">Piège classique : dire « his manager » en parlant d'une femme, parce que « manager » « sonne masculin ». Non — si c'est <em>elle</em>, c'est <strong>her</strong> manager, même si ce manager est un homme.</p>
+  </section>
+
+  <!-- EXERCISE 1 : QCM RH (test en douceur du Focus) -->
+  <section>
+    <span class="sec-tag">Exercise 1</span>
+    <h2>À toi de jouer</h2>
+    <div class="ex">
+      <div class="q"><span class="num">1</span>Tu parles de Priya et de l'équipe qu'elle dirige. Quelle phrase est correcte ?</div>
+      <div class="opts" data-correct="1" data-why="Le possessif s'accorde avec le possesseur, pas avec le mot qui suit. Priya est une femme → « her team ». « his » renverrait à un homme, et « their » à un groupe ou à une personne dont on tait le genre — pas le cas ici, on parle bien d'elle.">
+        <button class="opt">Priya is very proud of his team.</button>
+        <button class="opt">Priya is very proud of her team.</button>
+        <button class="opt">Priya is very proud of their team.</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex">
+      <div class="q"><span class="num">2</span>Tu présentes Tom à la nouvelle recrue, pour la première fois. Quelle phrase est naturelle ?</div>
+      <div class="opts" data-correct="1" data-why="Pour présenter quelqu'un, l'anglais dit « This is… », pas « He is… » (qui sert à le décrire, une fois présenté) ni « It is… » (réservé aux choses). On dit « This is Tom », puis on enchaîne : « he works in payroll ».">
+        <button class="opt">He is Tom, he works in payroll.</button>
+        <button class="opt">This is Tom, he works in payroll.</button>
+        <button class="opt">It is Tom, he works in payroll.</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex">
+      <div class="q"><span class="num">3</span>« Léo is our apprentice, but this week he <strong>___</strong> Priya while she's away. » (un remplacement, juste cette semaine)</div>
+      <div class="opts" data-correct="1" data-why="Un remplacement temporaire, en cours (« this week »), demande le present continuous : be + -ing → « he's covering ». « covers » décrirait un rôle permanent, et « cover » oublie le -s de la 3ᵉ personne. (Tu as vu ces deux présents en leçon 1 — ici, sans filet.)">
+        <button class="opt">covers</button>
+        <button class="opt">is covering</button>
+        <button class="opt">cover</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <!-- EXERCISE 2 : FILL IN (plus exigeant) -->
+  <section>
+    <span class="sec-tag">Exercise 2</span>
+    <h2>Complète les présentations</h2>
+    <p>Tape le mot manquant, puis clique sur <em>Check</em>. (L'orthographe compte, mais on te pardonne la majuscule.)</p>
+    <div class="ex fill">
+      <div class="q"><span class="num">1</span>Nadia manages the payroll team, so Tom reports to <input data-answer="her">.</div>
+      <button class="check-btn" onclick="checkFill(this)">Check</button>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex fill">
+      <div class="q"><span class="num">2</span>Tom just started in this role — this is <input data-answer="his"> first week too.</div>
+      <button class="check-btn" onclick="checkFill(this)">Check</button>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex fill">
+      <div class="q"><span class="num">3</span>Right now, Priya <input data-answer="is"> covering for the Head of HR.</div>
+      <button class="check-btn" onclick="checkFill(this)">Check</button>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <!-- EXERCISE 3 : expressions et culture utile -->
+  <section>
+    <span class="sec-tag">Exercise 3</span>
+    <h2>Reading in context</h2>
+    <p>On reste sur les gens et la hiérarchie, mais avec des expressions qu'on entend vraiment circuler dans les bureaux anglophones. Le but : les reconnaître au vol, sans les prendre au pied de la lettre.</p>
+    <div class="ex">
+      <div class="q"><span class="num">1</span>About a candidate for reception, a manager says: <em>"She'd be perfect — she's a real <strong>people person</strong>."</em> What does she mean?</div>
+      <div class="opts" data-correct="1" data-why="« A people person » décrit quelqu'un d'à l'aise avec les autres, qui aime le contact humain — un vrai atout en RH ou à l'accueil. Ce n'est ni une question de carnet d'adresses, ni de taille d'équipe.">
+        <button class="opt">She knows a lot of people</button>
+        <button class="opt">She's good with people and enjoys dealing with them</button>
+        <button class="opt">She manages a large team</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex">
+      <div class="q"><span class="num">2</span>Someone explains: <em>"Tom has been the director's <strong>right-hand man</strong> for years."</em> This means Tom is…</div>
+      <div class="opts" data-correct="0" data-why="« Someone's right-hand man » (ou « right-hand woman ») = son bras droit, la personne de confiance sur qui il s'appuie le plus. Rien à voir avec une place à sa droite, ni avec un remplaçant.">
+        <button class="opt">the director's most trusted assistant</button>
+        <button class="opt">the person who sits on the director's right</button>
+        <button class="opt">the person replacing the director</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="ex">
+      <div class="q"><span class="num">3</span>An employee sighs: <em>"I'd love to help, but it's up to the <strong>higher-ups</strong> now."</em> Who are they?</div>
+      <div class="opts" data-correct="2" data-why="« The higher-ups » désigne, de façon familière, les responsables haut placés — la direction. C'est une question de rang dans la hiérarchie, pas de taille, et certainement pas les petits nouveaux.">
+        <button class="opt">the tallest people in the office</button>
+        <button class="opt">the newest recruits</button>
+        <button class="opt">the senior managers, the bosses</button>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <div class="nextbox" id="done">
+    <h2>C'est terminé 🎉</h2>
+    <p>Tu sais nommer les gens au travail, présenter qui est qui, dire qui dépend de qui — et choisir <em>his</em> ou <em>her</em> sans hésiter. Prochaine étape : raconter ce que tu fais de tes journées.</p>
+  </div>
+
+  <footer>English for HR · Lesson 2 of the journey</footer>
+
+</div>
+
+<script>
+  // QCM
+  document.querySelectorAll('.opts').forEach(group => {
+    const correct = +group.dataset.correct;
+    const fb = group.parentElement.querySelector('.feedback');
+    const buttons = [...group.querySelectorAll('.opt')];
+    buttons.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.disabled = true);
+        if (i === correct) {
+          btn.classList.add('correct');
+          fb.textContent = "✓ Exactement ! Bien joué.";
+          fb.className = "feedback show ok";
+        } else {
+          btn.classList.add('wrong');
+          buttons[correct].classList.add('correct');
+          fb.textContent = group.dataset.why || "La bonne réponse est surlignée en vert.";
+          fb.className = "feedback show no";
+        }
+        recordResult(group.closest('.ex'), i === correct);
+        markAnswered(group.closest('.ex'));
+      });
+    });
+  });
+
+  // FILL IN
+  function checkFill(btn){
+    const ex = btn.closest('.ex');
+    const input = ex.querySelector('input');
+    const fb = ex.querySelector('.feedback');
+    const ans = input.dataset.answer.toLowerCase();
+    const val = input.value.trim().toLowerCase();
+    if (val === ans){
+      fb.textContent = "✓ Parfait !";
+      fb.className = "feedback show ok";
+      input.style.borderColor = "var(--green)";
+      recordResult(ex, true);
+      markAnswered(ex);
+    } else if (val === "") {
+      fb.textContent = "Écris quelque chose d'abord 😉";
+      fb.className = "feedback show no";
+    } else {
+      fb.textContent = "Pas tout à fait. Indice : ça commence par « " + ans[0] + " ».";
+      fb.className = "feedback show no";
+      input.style.borderColor = "var(--red)";
+      recordResult(ex, false);
+    }
+  }
+
+  // COMPLETION : reveal once every question is answered
+  const answeredSet = new Set();
+  const totalQuestions = document.querySelectorAll('.ex').length;
+  function markAnswered(ex){
+    answeredSet.add(ex);
+    if (answeredSet.size >= totalQuestions){
+      const done = document.getElementById('done');
+      if (done && !done.classList.contains('show')){
+        done.classList.add('show');
+        done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }
+
+  // SCORE : on enregistre le résultat (première tentative) de chaque question
+  // et on le persiste pour que index.html colore la leçon selon le score.
+  const LESSON_ID = 2;
+  const resultMap = new Map();
+  function recordResult(ex, correct){
+    if (resultMap.has(ex)) return;          // seule la première tentative compte
+    resultMap.set(ex, !!correct);
+    saveProgress();
+  }
+  function saveProgress(){
+    let good = 0;
+    resultMap.forEach(v => { if (v) good++; });
+    const total = totalQuestions;
+    const pct = total ? Math.round((good / total) * 100) : 0;
+    const done = resultMap.size >= total;
+    let store = {};
+    try { store = JSON.parse(localStorage.getItem('hr-en-progress')) || {}; } catch(e){}
+    store[LESSON_ID] = { correct: good, total, pct, done, attempted: resultMap.size, ts: Date.now() };
+    try { localStorage.setItem('hr-en-progress', JSON.stringify(store)); } catch(e){}
+  }
+</script>
+</body>
+</html>

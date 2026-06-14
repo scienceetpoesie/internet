@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cerveau &amp; IA — Béquille ou sparring partner</title>
+<style>
+  /* ===================================================================
+     EARLY WEB — esthétique sobre des débuts d'Internet (~1996).
+     Fond gris uni, Times New Roman, bordures fines, accents bordeaux.
+     Aucune animation, aucun dégradé. (Couche visuelle ; texte intact.)
+  =================================================================== */
+  :root{
+    --bg:#9a9a9a;            /* gris de fond classique */
+    --page:#c8c8c8;          /* colonne de contenu */
+    --panel:#bcbcbc;         /* encadrés */
+    --panel-2:#b2b2b2;
+    --ink:#101010;           /* texte noir */
+    --ink-soft:#3a3a3a;
+    --rule:#555;
+    --line:#777;
+    --maroon:#800000;        /* bordeaux early-web */
+    --navy:#000080;          /* bleu marine liens */
+    --green:#1a5a1a;         /* vert sobre */
+    --term-bg:#eeeeee;       /* fenêtre prompt claire */
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Times New Roman",Times,Georgia,serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  .wrap{
+    max-width:760px;margin:0 auto;
+    background:var(--page);
+    border-left:1px solid #777;border-right:1px solid #777;
+    padding:0 32px 80px;
+  }
+
+  /* ---- masthead ---- */
+  header.mast{
+    border-bottom:3px solid var(--rule);
+    margin-top:0;padding:26px 0 16px;
+  }
+  .kicker{
+    font-family:"Courier New",monospace;
+    text-transform:uppercase;letter-spacing:.12em;
+    font-size:11px;color:var(--maroon);
+    margin:0 0 10px;
+  }
+  h1.title{
+    font-size:38px;
+    line-height:1.05;margin:0;
+    font-weight:700;color:var(--ink);
+  }
+  .subtitle{
+    font-style:italic;color:var(--ink-soft);
+    font-size:18px;
+    margin:8px 0 0;
+  }
+  .dateline{
+    font-family:"Courier New",monospace;
+    font-size:11px;letter-spacing:.04em;
+    color:var(--ink-soft);margin-top:14px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;
+  }
+
+  /* ---- thesis lede ---- */
+  .lede{
+    font-size:17px;line-height:1.55;
+    margin:24px 0 10px;
+  }
+  .lede .drop{
+    float:none;display:inline;
+    font-size:1em;font-weight:700;color:var(--maroon);
+  }
+
+  /* ---- section heads ---- */
+  h2{
+    font-family:"Times New Roman",Times,serif;
+    font-size:20px;font-weight:700;
+    color:var(--ink);
+    margin:40px 0 6px;
+    padding-bottom:4px;border-bottom:2px solid var(--rule);
+  }
+  h2 .no{color:var(--maroon);font-weight:700;margin-right:.3em;}
+  h3{
+    font-size:19px;margin:26px 0 6px;font-weight:700;line-height:1.25;
+    color:var(--ink);
+  }
+  h4{
+    font-family:"Courier New",monospace;
+    font-size:12px;
+    letter-spacing:.04em;text-transform:uppercase;
+    color:var(--maroon);margin:22px 0 8px;
+  }
+  p{margin:0 0 14px;text-align:left;}
+  strong{font-weight:700;color:var(--ink);}
+  em{font-style:italic;}
+
+  /* ---- the linked mechanism|practice pairing ---- */
+  .pair{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    border:1px solid var(--rule);
+    margin:18px 0;
+    background:var(--panel);
+  }
+  .pair > div{padding:14px 16px;}
+  .pair .brain{
+    border-right:1px solid var(--line);
+    background:#b6b6b6;
+  }
+  .pair .label{
+    font-family:"Courier New",monospace;font-size:10px;
+    letter-spacing:.08em;text-transform:uppercase;
+    margin:0 0 6px;
+  }
+  .pair .brain .label{color:var(--maroon);}
+  .pair .do .label{color:var(--green);}
+  .pair h5{margin:0 0 5px;font-size:16px;font-weight:700;color:var(--ink);}
+  .pair p{font-size:14px;margin:0;line-height:1.5;}
+  @media(max-width:600px){
+    .pair{grid-template-columns:1fr;}
+    .pair .brain{border-right:none;border-bottom:1px solid var(--line);}
+  }
+
+  /* ---- two-track table ---- */
+  .tracks{
+    display:grid;grid-template-columns:1fr 1fr;
+    border:1px solid var(--rule);margin:20px 0;
+  }
+  .tracks .head{
+    font-family:"Courier New",monospace;text-transform:uppercase;
+    letter-spacing:.04em;font-size:12px;font-weight:700;
+    padding:9px 14px;border-bottom:1px solid var(--rule);
+  }
+  .tracks .h-bad{background:#b8a0a0;color:var(--maroon);border-right:1px solid var(--rule);}
+  .tracks .h-good{background:#a0b4a0;color:var(--green);}
+  .tracks .row{padding:8px 14px;border-bottom:1px solid var(--line);font-size:14px;background:var(--panel);}
+  .tracks .c-bad{border-right:1px solid var(--rule);}
+  .tracks .row:last-of-type,.tracks .row:nth-last-of-type(2){border-bottom:none;}
+
+  /* ---- callout ---- */
+  .note{
+    border:1px solid var(--rule);
+    background:var(--panel-2);
+    padding:16px 18px;margin:20px 0;
+    position:relative;
+  }
+  .note::before{
+    content:attr(data-tag);
+    position:absolute;top:-8px;left:12px;
+    background:var(--page);padding:0 6px;
+    font-family:"Courier New",monospace;font-size:10px;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--maroon);
+  }
+  .note.good::before{color:var(--green);}
+  .note p{margin:0 0 8px;}.note p:last-child{margin:0;}
+  .quote{font-size:17px;line-height:1.4;font-style:italic;}
+
+  /* ---- prompt window ---- */
+  .prompt{
+    margin:18px 0;border:1px solid var(--rule);
+    background:var(--term-bg);
+  }
+  .prompt .bar{
+    display:flex;align-items:center;gap:8px;
+    padding:6px 10px;border-bottom:1px solid var(--rule);
+    background:#cfcfcf;
+  }
+  .prompt .dot{width:9px;height:9px;border:1px solid #555;background:#aaa;}
+  .d1,.d2,.d3{background:#9a9a9a;}
+  .prompt .barname{
+    font-family:"Courier New",monospace;font-size:11px;
+    color:var(--ink-soft);letter-spacing:.02em;margin-left:2px;flex:1;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .prompt .copy{
+    font-family:"Courier New",monospace;font-size:10px;
+    letter-spacing:.04em;text-transform:uppercase;
+    background:#ddd;color:var(--ink);
+    border:1px solid #555;
+    padding:3px 9px;cursor:pointer;
+  }
+  .prompt .copy:hover{background:#fff;}
+  .prompt .copy.done{background:#cfe0cf;color:var(--green);}
+  .prompt pre{
+    margin:0;padding:13px 15px;
+    font-family:"Courier New",monospace;font-size:13px;line-height:1.5;
+    color:#101010;white-space:pre-wrap;word-break:break-word;
+  }
+  .prompt pre .c{color:#777;}
+
+  /* ---- numbered list ---- */
+  ol.clean{counter-reset:n;list-style:none;padding:0;margin:14px 0;}
+  ol.clean li{
+    counter-increment:n;position:relative;
+    padding:8px 0 8px 38px;
+    border-bottom:1px solid var(--line);
+  }
+  ol.clean li:last-child{border-bottom:none;}
+  ol.clean li::before{
+    content:counter(n) ".";
+    position:absolute;left:0;top:8px;
+    font-family:"Courier New",monospace;font-weight:700;
+    color:var(--maroon);font-size:14px;
+  }
+  ul.tick{list-style:none;padding:0;margin:14px 0;}
+  ul.tick li{padding:6px 0 6px 22px;position:relative;font-size:15px;}
+  ul.tick li::before{content:"»";position:absolute;left:0;color:var(--maroon);font-weight:700;}
+
+  .pull{
+    font-size:20px;line-height:1.35;font-style:italic;
+    text-align:center;margin:32px auto;max-width:560px;
+    color:var(--ink);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:16px 0;
+  }
+
+  hr{border:none;border-top:1px solid var(--line);margin:24px 0;}
+
+  footer{
+    margin-top:46px;padding-top:14px;border-top:3px solid var(--rule);
+    font-family:"Courier New",monospace;font-size:11px;
+    color:var(--ink-soft);line-height:1.6;
+  }
+  .stat{font-family:"Courier New",monospace;font-weight:700;color:var(--maroon);}
+  a.toc-skip{color:var(--navy);}
+  ::selection{background:#666;color:#fff;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <p class="kicker">Note de terrain · Cognition &amp; outils</p>
+    <h1 class="title">Cerveau &amp; IA</h1>
+    <p class="subtitle">Béquille ou sparring partner — le même outil, deux destins</p>
+    <div class="dateline">
+      <span>Guide pratique personnel</span>
+      <span>Mécanique du cerveau × usage concret</span>
+    </div>
+  </header>
+
+  <p class="lede"><span class="drop">L</span>e vrai risque de l'IA n'est pas Terminator. Ce n'est pas qu'elle prenne le contrôle — c'est qu'elle devienne si pratique qu'on lui délègue toute friction mentale, jusqu'à ce que notre cerveau s'atrophie. On ne va pas être rendus stupides. On va se rendre stupides tout seuls, si on choisit systématiquement le chemin le plus court.</p>
+
+  <p>Bonne nouvelle : c'est un choix. Il se refait chaque jour, à chaque prompt. Ce document relie deux choses qu'on présente d'habitude séparément — <strong>ce qui se passe dans ton cerveau</strong> et <strong>ce que tu tapes dans la fenêtre de chat</strong> — parce que c'est exactement là que le destin bascule.</p>
+
+  <div class="tracks">
+    <div class="head h-bad">Le chemin béquille →</div>
+    <div class="head h-good">Le chemin tuteur →</div>
+    <div class="row c-bad">Demander la réponse finale</div>
+    <div class="row">Demander à être guidé vers la réponse</div>
+    <div class="row c-bad">Copier-coller sans comprendre</div>
+    <div class="row">Produire soi-même, puis faire vérifier</div>
+    <div class="row c-bad">Délestage cognitif → cerveau en pause</div>
+    <div class="row">Effort cognitif → connexions renforcées</div>
+    <div class="row c-bad">Dépendance qui grandit</div>
+    <div class="row">Compétence qui se démultiplie</div>
+  </div>
+
+  <!-- ============ SECTION 1 ============ -->
+  <h2><span class="no">01</span> Trois piliers — et celui que l'IA te fait sauter</h2>
+  <p>Apprendre n'est pas « obtenir un résultat ». C'est un circuit en trois temps dans le cerveau. L'IA t'aide volontiers sur deux d'entre eux et te fait discrètement sauter le troisième — le plus important. Voici chaque pilier, et juste à côté, le geste concret qui le protège.</p>
+
+  <div class="pair">
+    <div class="brain">
+      <p class="label">● Dans le cerveau</p>
+      <h5>Théorie → encodage</h5>
+      <p>L'hippocampe (la « tête d'écriture » du disque dur) et le cortex préfrontal (ta mémoire vive) se câblent ensemble pour inscrire l'information.</p>
+    </div>
+    <div class="do">
+      <p class="label">▸ Ce que tu fais</p>
+      <h5>Lis la source AVANT de prompter</h5>
+      <p>Demande à l'IA de t'<em>expliquer</em> un concept, jamais de résumer à ta place un texte que tu n'as pas ouvert. Sinon tu encodes le résumé, pas le sujet.</p>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="brain">
+      <p class="label">● Dans le cerveau</p>
+      <h5>Pratique → automatisme</h5>
+      <p>La remémoration active (exercices, restitution) fait intervenir les ganglions de la base, qui transforment l'effort conscient en réflexe par répétition.</p>
+    </div>
+    <div class="do">
+      <p class="label">▸ Ce que tu fais</p>
+      <h5>Produis une 1ʳᵉ version toi-même</h5>
+      <p>Même imparfaite. <strong>C'est l'étape que l'IA dévore.</strong> Ne fais réagir le modèle qu'<em>après</em> avoir buté toi-même sur le problème.</p>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div class="brain">
+      <p class="label">● Dans le cerveau</p>
+      <h5>Métacognition → mise à jour</h5>
+      <p>En corrigeant une erreur, les neurones dopaminergiques émettent un « signal d'erreur de prédiction » qui dit quelles connexions garder et lesquelles élaguer.</p>
+    </div>
+    <div class="do">
+      <p class="label">▸ Ce que tu fais</p>
+      <h5>Cherche le bug seul d'abord</h5>
+      <p>Face à un blocage, retourne dans la doc, ligne par ligne. L'erreur trouvée seul ancre bien plus fort que la réponse servie sur un plateau.</p>
+    </div>
+  </div>
+
+  <div class="note" data-tag="Le symptôme">
+    <p>Un élève rend une copie notée <strong>17/20</strong> — et se révèle <strong>incapable de définir les mots qu'il a employés.</strong> Il a sauté la pratique : le résultat est là, l'apprentissage non.</p>
+  </div>
+
+  <!-- ============ SECTION 2 ============ -->
+  <h2><span class="no">02</span> La dette cognitive — le Google Effect, puissance 1000</h2>
+  <p>Ton cerveau est radin : réfléchir consomme de l'oxygène et du glucose, donc il prend tous les raccourcis possibles. <strong>La paresse n'est pas un bug, c'est une fonctionnalité</strong> — héritée de centaines de milliers d'années d'évolution. L'IA branche cette tendance sur une pente vertigineuse.</p>
+
+  <div class="pair">
+    <div class="brain">
+      <p class="label">● Le mécanisme</p>
+      <h5>Le Google Effect</h5>
+      <p>Le GPS dispense l'hippocampe de cartographier : pas d'activation, pas de carte mentale. Les taxis londoniens, eux, ont un hippocampe <em>hypertrophié</em> à force de mémoriser les rues.</p>
+    </div>
+    <div class="do">
+      <p class="label">▸ Pourquoi c'est pire ici</p>
+      <h5>Tu délègues le raisonnement</h5>
+      <p>Les infos en mémoire sont la <strong>matière première de la pensée</strong>. Moins tu stockes, moins le cortex préfrontal a de quoi penser. Avec l'IA, ce n'est plus la mémoire qu'on sous-traite : c'est le raisonnement entier.</p>
+    </div>
+  </div>
+
+  <div class="note" data-tag="La preuve · MIT, juin 2025">
+    <p>54 participants, 3 groupes, EEG à l'appui, écrivent des essais sur 3 sessions :</p>
+    <ul class="tick" style="margin:10px 0 0;">
+      <li><strong>Groupe ChatGPT</strong> (GPT-4o seul) → activité cérébrale <em>la plus faible</em>.</li>
+      <li><strong>Groupe Internet</strong> (web, pas de LLM) → activité intermédiaire.</li>
+      <li><strong>Groupe « Brain Only »</strong> (rien) → activité <em>la plus intense</em>.</li>
+    </ul>
+    <p style="margin-top:12px;">Les auteurs parlent de <strong>« dette cognitive »</strong> : comme la dette technique, on règle un problème immédiat avec une méthode qui déclenche une avalanche d'ennuis plus tard.</p>
+  </div>
+
+  <!-- ============ SECTION 3 ============ -->
+  <h2><span class="no">03</span> Pourquoi l'expérience change tout</h2>
+  <p>Contre-intuitif : une enquête sur <span class="stat">791</span> développeurs montre que ce sont les <strong>seniors</strong> (10+ ans) qui utilisent le plus de code généré par l'IA. Mais ils passent bien plus de temps à le vérifier, le débugger, se le réapproprier.</p>
+
+  <div class="pair">
+    <div class="brain">
+      <p class="label">● La métaphore</p>
+      <h5>Coder = diriger une brigade</h5>
+      <p>Pas un orchestre — une cuisine. Commis (éplucher), chef de partie (les sauces), sous-chef. Pour diriger, il faut être passé par tous les postes.</p>
+    </div>
+    <div class="do">
+      <p class="label">▸ La leçon pour toi</p>
+      <h5>Délègue ce que tu sais faire</h5>
+      <p>Le junior dirige une brigade IA sans avoir fait les postes du bas → il se noie. Le senior repère le plat raté car il sait cuisiner. <strong>L'IA démultiplie ce qui est déjà ancré ; elle ne crée pas la base.</strong></p>
+    </div>
+  </div>
+
+  <p class="pull">L'IA est une équipe de juniors à ton service, pas une béquille qui pense à ta place</p>
+
+  <!-- ============ SECTION 4 ============ -->
+  <h2><span class="no">04</span> Boîte à outils — les prompts</h2>
+  <p>Par défaut, les LLM sont optimisés pour <em>minimiser ton effort</em> : ils te servent la réponse. Pour les forcer en mode tuteur, il faut le leur imposer explicitement. Trois prompts, un par usage. Le bouton <strong>copier</strong> les met dans ton presse-papier d'un clic.</p>
+
+  <h4>Avant tout — le filtre en une question</h4>
+  <div class="note good" data-tag="Auto-diagnostic">
+    <p class="quote">« Est-ce que je veux que l'IA <strong>fasse ça à ma place</strong>, ou qu'elle <strong>m'apprenne à le faire</strong> ? »</p>
+    <p style="margin-top:10px;">Tâche jetable, hors de ton cœur de métier → délègue sans culpabilité. Compétence qui compte pour toi → mode tuteur, sans exception.</p>
+  </div>
+
+  <h3>1 · Mode tuteur socratique</h3>
+  <p>Quand tu veux <em>apprendre</em> un sujet, pas obtenir un livrable.</p>
+  <div class="prompt">
+    <div class="bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="barname">tuteur-socratique.txt</span><button class="copy" data-target="p1">Copier</button></div>
+    <pre id="p1">Tu es mon tuteur, pas mon assistant. Mon objectif est
+d'APPRENDRE [SUJET], pas d'obtenir un résultat fini.
+
+Règles strictes :
+- Ne me donne JAMAIS la réponse directement.
+- Pose-moi des questions pour me faire raisonner.
+- Propose-moi des exercices progressifs, un à la fois.
+- Attends ma réponse avant de continuer.
+- Quand je me trompe, ne corrige pas : indique-moi
+  où chercher et pourquoi mon raisonnement coince.
+- Valide seulement quand j'ai trouvé moi-même.
+
+Commence par un exercice de niveau débutant.</pre>
+  </div>
+
+  <h3>2 · Cartographie avant de plonger</h3>
+  <p>Pour aborder un domaine inconnu sans déléguer la compréhension — voir « le dessous de l'iceberg » avant de commencer.</p>
+  <div class="prompt">
+    <div class="bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="barname">cartographie.txt</span><button class="copy" data-target="p2">Copier</button></div>
+    <pre id="p2">Je vais devoir [TÂCHE / PROJET] et je n'y connais rien.
+Ne fais PAS le travail. À la place :
+
+1. Montre-moi la carte du territoire : quels concepts
+   je dois maîtriser, dans quel ordre.
+2. Pour chacun, dis-moi pourquoi il compte
+   (le "dessous de l'iceberg").
+3. Signale les pièges classiques des débutants.
+
+Je veux comprendre où je mets les pieds avant
+de commencer.</pre>
+  </div>
+
+  <h3>3 · Vérification active (mode senior)</h3>
+  <p>Quand tu acceptes du contenu généré, ne le copie pas en aveugle — réapproprie-le, comme le ferait le chef étoilé.</p>
+  <div class="prompt">
+    <div class="bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="barname">verification-active.txt</span><button class="copy" data-target="p3">Copier</button></div>
+    <pre id="p3">Voici ce que tu m'as produit : [CONTENU].
+Avant que je l'utilise :
+
+- Explique-moi POURQUOI tu as fait ces choix.
+- Quelles sont les 2-3 hypothèses fragiles ?
+- Que se passerait-il si [cas limite] ?
+
+Je veux pouvoir défendre ce résultat comme si
+je l'avais fait seul.</pre>
+  </div>
+
+  <!-- ============ SECTION 5 ============ -->
+  <h2><span class="no">05</span> Hygiène anti-dépendance</h2>
+  <p>La volonté seule ne suffit pas (compare ceux qui prennent l'escalier à ceux qui prennent l'ascenseur). Il faut de la <strong>structure</strong> qui force l'effort — exactement comme un devoir sur table crée la motivation que la fatigue du soir ne donne pas.</p>
+
+  <ul class="tick">
+    <li><strong>La cure de désintox.</strong> Interdis-toi tout LLM sur un projet pendant une période. La productivité chute, mais les fondamentaux se reconstruisent — et le plaisir de créer revient. (Testé : 3 mois sans IA, puis réintroduction progressive → compétence ET plaisir retrouvés.)</li>
+    <li><strong>Le devoir sur table, version perso.</strong> Des sessions papier-crayon ou sans assistance. La contrainte d'un futur désagréable (« zéro pointé ») fabrique la motivation instantanément.</li>
+    <li><strong>Le test « à qui appartient ce travail ? »</strong> Si tu ne sais plus quelle partie est de toi, tu as basculé du côté béquille.</li>
+    <li><strong>Garde l'esprit critique armé.</strong> Les hallucinations baissent (taux divisé par ~8 chez OpenAI ; de <span class="stat">~40%</span> à <span class="stat">~5%</span> sur sujet médical entre GPT-3.5 et GPT-5) mais ne disparaîtront pas. Le savoir t'oblige à vérifier.</li>
+  </ul>
+
+  <div class="note good" data-tag="Ce qui marche vraiment · tuteur de Harvard">
+    <p>L'assistant « PS2 Pal » (conçu par des physiciens) a donné des résultats spectaculaires : plus de progrès, plus vite, élèves plus concentrés. Mais à <strong>trois conditions</strong> non négociables :</p>
+    <ol class="clean" style="margin-top:12px;">
+      <li><strong>Un cadre posé en amont</strong> — prompt complexe, vraie progression pédagogique (pas un LLM nu).</li>
+      <li><strong>Engagement actif</strong> — l'outil fait raisonner, ne sert pas les réponses.</li>
+      <li><strong>Growth mindset</strong> — viser le progrès malgré la difficulté, pas un résultat figé.</li>
+    </ol>
+    <p style="margin-top:12px;"><em>Sans ce cadre, les élèves laissés avec un GPT classique apprennent moins bien qu'avec un prof humain.</em></p>
+  </div>
+
+  <p class="pull">L'effort sculpte le cerveau, pas le résultat</p>
+
+  <p>Tu auras toujours deux chemins devant le même outil. Celui de la béquille tend vers la lobotomie ; celui du tuteur te rend un peu meilleur chaque jour. La question n'a jamais été de savoir si l'IA est intelligente.</p>
+  <p style="font-size:20px;font-weight:700;">C'est de savoir si nous, on veut encore le rester.</p>
+
+  <footer>
+    <p>NOTE DE TERRAIN — synthèse personnelle d'après le podcast « Cerveau &amp; IA ».</p>
+    <p>Les données chiffrées (étude MIT 2025, enquête 791 développeurs, taux d'hallucination, 80% des lycéens) sont reprises telles qu'énoncées dans la source et méritent vérification avant tout usage formel.</p>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.dataset.target);
+      var text = el.innerText;
+      var done = function(){
+        var old = btn.textContent;
+        btn.textContent = '✓ Copié';
+        btn.classList.add('done');
+        setTimeout(function(){ btn.textContent = old; btn.classList.remove('done'); }, 1600);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done, function(){ fallback(text, done); });
+      } else { fallback(text, done); }
+    });
+  });
+  function fallback(text, cb){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); cb(); }catch(e){}
+    document.body.removeChild(ta);
+  }
+</script>
+</body>
+</html>
