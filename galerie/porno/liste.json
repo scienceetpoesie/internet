@@ -6,12 +6,14 @@
     "ABSTRAIT",
     "AMERICANA",
     "ART DECO",
+    "CARTOGRAPHIE",
     "DIVERS",
-    "ESOTERIQUE",
+    "FUTURISME",
     "GROTESQUE",
     "HORREUR",
     "LÉGUMES",
     "MUTANT",
+    "MÉTAPHYSIQUE",
     "PUBLICITÉ",
     "SCIENCE",
     "TINTIN"
@@ -294,198 +296,6 @@
       "tags": []
     },
     {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 001.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 003.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 005.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 006.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 007.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 008.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 009.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 010.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 011.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 012.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 013.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 014.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 015.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 016.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 017.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 018.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 019.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 020.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 021.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 022.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 023.jpg",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 024.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 025.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 026.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 027.jpg",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 028.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 029.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 030.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 031.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 032.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 033.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ESOTERIQUE",
-      "fichier": "ESOTERIQUE/ESOTERIQUE 034.png",
-      "titre": "",
-      "tags": []
-    },
-    {
       "categorie": "GROTESQUE",
       "fichier": "GROTESQUE/GROTESQUE 001.png",
       "titre": "",
@@ -636,14 +446,14 @@
       "tags": []
     },
     {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 001.png",
+      "categorie": "GROTESQUE",
+      "fichier": "GROTESQUE/GROTESQUE 026.png",
       "titre": "",
       "tags": []
     },
     {
       "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 002.png",
+      "fichier": "HORREUR/HORREUR 001.png",
       "titre": "",
       "tags": []
     },
@@ -1070,6 +880,198 @@
     {
       "categorie": "MUTANT",
       "fichier": "MUTANT/MUTANT 057.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 001.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 002.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 003.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 004.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 005.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 006.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 007.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 008.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 009.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 010.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 011.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 012.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 013.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 014.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 015.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 016.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 017.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 018.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 019.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 020.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 021.jpg",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 022.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 023.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 024.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 025.jpg",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 026.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 027.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 028.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 029.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 030.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 031.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MÉTAPHYSIQUE",
+      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 032.png",
       "titre": "",
       "tags": []
     },
