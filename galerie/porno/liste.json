@@ -12,7 +12,6 @@
     "HORREUR",
     "LÉGUMES",
     "MUTANT",
-    "PORNO",
     "PUBLICITÉ",
     "SCIENCE",
     "TINTIN"
@@ -993,84 +992,6 @@
     {
       "categorie": "MUTANT",
       "fichier": "MUTANT/MUTANT (56).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (1).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (2).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (4).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (5).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (6).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (7).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (8).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (10).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (11).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (17).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (18).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (20).png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PORNO",
-      "fichier": "PORNO/Tintin (24).png",
       "titre": "",
       "tags": []
     },
