@@ -6,9 +6,11 @@
     "ABSTRAIT",
     "AMERICANA",
     "ART DECO",
+    "BRICOLAGE",
     "CARTOGRAPHIE",
     "DIVERS",
     "FUTURISME",
+    "GARFIELD",
     "GROTESQUE",
     "HORREUR",
     "LÉGUMES",
@@ -20,6 +22,18 @@
     "TINTIN"
   ],
   "images": [
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 001.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 002.png",
+      "titre": "",
+      "tags": []
+    },
     {
       "categorie": "AMERICANA",
       "fichier": "AMERICANA/AMERICANA 003.png",
@@ -95,48 +109,6 @@
     {
       "categorie": "AMERICANA",
       "fichier": "AMERICANA/AMERICANA 015.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 016.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 017.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ART DECO",
-      "fichier": "ART DECO/ART DECO 001.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ART DECO",
-      "fichier": "ART DECO/ART DECO 002.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ART DECO",
-      "fichier": "ART DECO/ART DECO 003.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ART DECO",
-      "fichier": "ART DECO/ART DECO 004.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ART DECO",
-      "fichier": "ART DECO/ART DECO 005.png",
       "titre": "",
       "tags": []
     },
@@ -315,6 +287,144 @@
       "tags": []
     },
     {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 001.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 002.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 003.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 004.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 005.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 006.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 007.jpg",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 008.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 009.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 010.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 011.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 012.jpg",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 013.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 014.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 015.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 016.jpg",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 017.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 018.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 019.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 020.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 021.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 022.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "GARFIELD",
+      "fichier": "GARFIELD/GARFIELD 023.png",
+      "titre": "",
+      "tags": []
+    },
+    {
       "categorie": "GROTESQUE",
       "fichier": "GROTESQUE/GROTESQUE 001.png",
       "titre": "",
@@ -478,6 +588,48 @@
     },
     {
       "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 002.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 003.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 004.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 005.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 006.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 007.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 008.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 009.png",
       "titre": "",
       "tags": []
@@ -502,6 +654,24 @@
     },
     {
       "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 013.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 014.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 015.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 016.png",
       "titre": "",
       "tags": []
@@ -519,8 +689,20 @@
       "tags": []
     },
     {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 019.png",
+      "categorie": "LÉGUMES",
+      "fichier": "LÉGUMES/LÉGUMES 001.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "LÉGUMES",
+      "fichier": "LÉGUMES/LÉGUMES 002.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "LÉGUMES",
+      "fichier": "LÉGUMES/LÉGUMES 003.png",
       "titre": "",
       "tags": []
     },
