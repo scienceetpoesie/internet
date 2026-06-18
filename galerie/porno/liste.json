@@ -9,17 +9,17 @@
     "BRICOLAGE",
     "CARTOGRAPHIE",
     "DIVERS",
-    "FUTURISME",
     "GARFIELD",
-    "GROTESQUE",
     "HORREUR",
     "LÉGUMES",
     "MANGA",
+    "MASCOTTES",
     "MUTANT",
     "MÉTAPHYSIQUE",
     "PUBLICITÉ",
     "SCIENCE",
-    "TINTIN"
+    "TINTIN",
+    "X - DÉGEULASSE"
   ],
   "images": [
     {
@@ -96,12 +96,6 @@
     },
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 013.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
       "fichier": "AMERICANA/AMERICANA 014.png",
       "titre": "",
       "tags": []
@@ -109,6 +103,66 @@
     {
       "categorie": "AMERICANA",
       "fichier": "AMERICANA/AMERICANA 015.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 016.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 017.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 018.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 019.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "ART DECO",
+      "fichier": "ART DECO/ART DECO 001.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "ART DECO",
+      "fichier": "ART DECO/ART DECO 002.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "ART DECO",
+      "fichier": "ART DECO/ART DECO 003.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "ART DECO",
+      "fichier": "ART DECO/ART DECO 004.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "ART DECO",
+      "fichier": "ART DECO/ART DECO 005.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "ART DECO",
+      "fichier": "ART DECO/ART DECO 006.png",
       "titre": "",
       "tags": []
     },
@@ -425,158 +479,8 @@
       "tags": []
     },
     {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 001.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 002.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 003.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 004.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 005.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 006.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 007.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 008.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 009.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 010.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 011.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 012.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 013.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 014.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 015.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 016.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 017.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 018.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 019.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 020.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 021.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 022.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 023.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 024.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 025.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GROTESQUE",
-      "fichier": "GROTESQUE/GROTESQUE 026.png",
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/CONSPI PORNRO X-ILLUS (4).png",
       "titre": "",
       "tags": []
     },
@@ -685,6 +589,18 @@
     {
       "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 018.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/white monster (1).png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/xxx (10).png",
       "titre": "",
       "tags": []
     },
@@ -823,6 +739,228 @@
     {
       "categorie": "MANGA",
       "fichier": "MANGA/MANGA 020.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 001.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 002.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 003.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 004.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 005.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 006.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 007.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 008.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 009.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 010.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 011.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 012.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 013.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 014.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 015.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 016.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 017.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 018.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 019.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 020.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 021.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 022.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 023.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 024.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 025.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 026.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 027.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 028.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 029.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 030.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 031.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 032.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 033.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 034.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 035.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 036.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MASCOTTES",
+      "fichier": "MASCOTTES/MASCOTTES 037.png",
       "titre": "",
       "tags": []
     },
@@ -1165,6 +1303,222 @@
     {
       "categorie": "MUTANT",
       "fichier": "MUTANT/MUTANT 057.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 058.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 059.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 060.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 061.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 062.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 063.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 064.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 065.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 066.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 067.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 068.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 069.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 070.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 071.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 072.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 073.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 074.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 075.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 076.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 077.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 078.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 079.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 080.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 081.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 082.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 083.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 084.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 085.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 086.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 087.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 088.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 089.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 090.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 091.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 092.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "MUTANT",
+      "fichier": "MUTANT/MUTANT 093.png",
       "titre": "",
       "tags": []
     },
@@ -2221,6 +2575,18 @@
     {
       "categorie": "TINTIN",
       "fichier": "TINTIN/TINTIN 013.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "X - DÉGEULASSE",
+      "fichier": "X - DÉGEULASSE/X - DÉGEULASSE 001.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "X - DÉGEULASSE",
+      "fichier": "X - DÉGEULASSE/X - DÉGEULASSE 002.png",
       "titre": "",
       "tags": []
     }
