@@ -53,7 +53,8 @@ button {
 }
 
 button:active {
-    border: 2px inset black;
+    border: 2px inset #dfdfdf;   /* léger enfoncement gris, façon Win95, pas de carré noir */
+    background: #b8b8b8;
 }
 
 .footer {
@@ -186,9 +187,24 @@ button:active {
 }
 
 .categories button.active {
-    border: 2px inset black;
-    background: #b0b0b0;
+    border: 2px inset #dfdfdf;   /* même enfoncement gris doux, pas de carré noir */
+    background: #b8b8b8;
     font-weight: bold;
+}
+
+/* Catégorie vide : texte grisé, curseur neutre, le clic ne change rien */
+.categories button.vide {
+    color: #7a7a7a;
+    cursor: default;
+}
+
+/* État transitoire au clic d'une catégorie vide : « À VENIR » en rouge,
+   et le bouton reste enfoncé tant que le texte est affiché. */
+.categories button.vide.avenir {
+    color: #d6002e;
+    font-weight: bold;
+    border: 2px inset #dfdfdf;
+    background: #b8b8b8;
 }
 </style>
 </head>
@@ -402,15 +418,39 @@ function selectCategory(i) {
     });
 }
 
+// Une catégorie est vide si aucune image ne porte sa valeur.
+// (« TOUT », value === null, n'est jamais considérée comme vide.)
+function categorieVide(cat) {
+    if (!cat || cat.value === null) return false;
+    return imageCats.indexOf(cat.value) === -1;
+}
+
 // Génère les boutons de catégories
 function buildCategories() {
     var list = document.getElementById("catList");
     list.innerHTML = "";
     categories.forEach(function (cat, i) {
         var b = document.createElement("button");
-        b.textContent = cat.label;
-        if (i === currentCategory) b.classList.add("active");
-        b.onclick = function () { selectCategory(i); };
+        if (categorieVide(cat)) {
+            // Catégorie vide : grisée, clic inactif (on reste sur la catégorie
+            // précédente). Au clic, le nom est remplacé un instant par « À VENIR »
+            // en rouge, puis revient ; :active donne le retour à l'enfoncement.
+            b.classList.add("vide");
+            b.textContent = cat.label;
+            b.onclick = function () {
+                if (b._timer) { clearTimeout(b._timer); }
+                b.classList.add("avenir");
+                b.textContent = "À VENIR";
+                b._timer = setTimeout(function () {
+                    b.classList.remove("avenir");
+                    b.textContent = cat.label;
+                }, 1100);
+            };
+        } else {
+            b.textContent = cat.label;
+            if (i === currentCategory) b.classList.add("active");
+            b.onclick = function () { selectCategory(i); };
+        }
         list.appendChild(b);
     });
 }
