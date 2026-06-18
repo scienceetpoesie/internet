@@ -21,18 +21,6 @@
   "images": [
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 001.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 002.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
       "fichier": "AMERICANA/AMERICANA 003.png",
       "titre": "",
       "tags": []
@@ -130,6 +118,36 @@
     {
       "categorie": "ART DECO",
       "fichier": "ART DECO/ART DECO 002.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "ART DECO",
+      "fichier": "ART DECO/ART DECO 003.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "ART DECO",
+      "fichier": "ART DECO/ART DECO 004.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "ART DECO",
+      "fichier": "ART DECO/ART DECO 005.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "CARTOGRAPHIE",
+      "fichier": "CARTOGRAPHIE/CARTOGRAPHIE 001.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "CARTOGRAPHIE",
+      "fichier": "CARTOGRAPHIE/CARTOGRAPHIE 002.png",
       "titre": "",
       "tags": []
     },
@@ -292,6 +310,24 @@
     {
       "categorie": "DIVERS",
       "fichier": "DIVERS/DIVERS 027.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "FUTURISME",
+      "fichier": "FUTURISME/FUTURISME 001.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "FUTURISME",
+      "fichier": "FUTURISME/FUTURISME 002.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "FUTURISME",
+      "fichier": "FUTURISME/FUTURISME 003.png",
       "titre": "",
       "tags": []
     },
@@ -459,42 +495,6 @@
     },
     {
       "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 003.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 004.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 005.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 006.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 007.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 008.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 009.png",
       "titre": "",
       "tags": []
@@ -514,24 +514,6 @@
     {
       "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 012.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 013.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 014.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 015.png",
       "titre": "",
       "tags": []
     },
