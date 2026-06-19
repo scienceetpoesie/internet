@@ -12,7 +12,6 @@
     "GARFIELD",
     "HORREUR",
     "LÉGUMES",
-    "MANGA",
     "MASCOTTES",
     "MUTANT",
     "MÉTAPHYSIQUE",
@@ -96,6 +95,12 @@
     },
     {
       "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 013.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
       "fichier": "AMERICANA/AMERICANA 014.png",
       "titre": "",
       "tags": []
@@ -131,6 +136,36 @@
       "tags": []
     },
     {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 020.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 021.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 022.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 023.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/AMERICANA 024.png",
+      "titre": "",
+      "tags": []
+    },
+    {
       "categorie": "ART DECO",
       "fichier": "ART DECO/ART DECO 001.png",
       "titre": "",
@@ -151,12 +186,6 @@
     {
       "categorie": "ART DECO",
       "fichier": "ART DECO/ART DECO 004.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "ART DECO",
-      "fichier": "ART DECO/ART DECO 005.png",
       "titre": "",
       "tags": []
     },
@@ -329,18 +358,6 @@
       "tags": []
     },
     {
-      "categorie": "DIVERS",
-      "fichier": "DIVERS/DIVERS 026.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "DIVERS",
-      "fichier": "DIVERS/DIVERS 027.png",
-      "titre": "",
-      "tags": []
-    },
-    {
       "categorie": "GARFIELD",
       "fichier": "GARFIELD/GARFIELD 001.png",
       "titre": "",
@@ -492,19 +509,7 @@
     },
     {
       "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 003.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 004.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 005.png",
       "titre": "",
       "tags": []
     },
@@ -582,12 +587,6 @@
     },
     {
       "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 018.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 019.png",
       "titre": "",
       "tags": []
@@ -601,6 +600,12 @@
     {
       "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 021.png",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 022.png",
       "titre": "",
       "tags": []
     },
@@ -619,126 +624,6 @@
     {
       "categorie": "LÉGUMES",
       "fichier": "LÉGUMES/LÉGUMES 003.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 001.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 002.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 003.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 004.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 005.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 006.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 007.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 008.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 009.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 010.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 011.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 012.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 013.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 014.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 015.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 016.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 017.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 018.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 019.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MANGA",
-      "fichier": "MANGA/MANGA 020.png",
       "titre": "",
       "tags": []
     },
@@ -1716,12 +1601,6 @@
     },
     {
       "categorie": "PUBLICITÉ",
-      "fichier": "PUBLICITÉ/PUBLICITÉ 001.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PUBLICITÉ",
       "fichier": "PUBLICITÉ/PUBLICITÉ 002.png",
       "titre": "",
       "tags": []
@@ -1759,12 +1638,6 @@
     {
       "categorie": "PUBLICITÉ",
       "fichier": "PUBLICITÉ/PUBLICITÉ 008.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PUBLICITÉ",
-      "fichier": "PUBLICITÉ/PUBLICITÉ 009.png",
       "titre": "",
       "tags": []
     },
@@ -2575,12 +2448,6 @@
     {
       "categorie": "TINTIN",
       "fichier": "TINTIN/TINTIN 013.png",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "X - DÉGEULASSE",
-      "fichier": "X - DÉGEULASSE/X - DÉGEULASSE 001.png",
       "titre": "",
       "tags": []
     },
