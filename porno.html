@@ -342,23 +342,51 @@ function initShuffle() {
 
 // Cache de préchargement : on garde les objets Image déjà demandés.
 var preloadCache = {};
-function preload(url) {
+function preload(url, prioritaire) {
     if (!url || preloadCache[url]) return;
     var im = new Image();
+    im.decoding = "async";
+    // Les voisines immédiates passent en priorité haute pour le navigateur.
+    if (prioritaire) { try { im.fetchPriority = "high"; } catch (e) {} }
     im.src = url;                 // déclenche le téléchargement en arrière-plan
     preloadCache[url] = im;
 }
 
-// Précharge les prochaines images de la file (et la précédente).
+// Précharge les prochaines images de la file (et la précédente), en priorité.
 function preloadAround() {
-    for (var k = 1; k <= 3; k++) {
+    for (var k = 1; k <= 4; k++) {
         if (currentIndex + k < shuffledIndices.length) {
-            preload(images[shuffledIndices[currentIndex + k]]);
+            preload(images[shuffledIndices[currentIndex + k]], k <= 2);
         }
     }
     if (currentIndex - 1 >= 0) {
-        preload(images[shuffledIndices[currentIndex - 1]]);
+        preload(images[shuffledIndices[currentIndex - 1]], true);
     }
+}
+
+// Précharge en tâche de fond TOUTE la catégorie courante, une image à la fois
+// (avec une petite pause entre chaque) pour ne pas saturer la connexion ni gêner
+// l'image qu'on regarde. Au bout de quelques secondes, tout est en cache → plus
+// aucune attente en feuilletant.
+var bgPreloadTimer = null;
+function preloadAllInBackground() {
+    if (bgPreloadTimer) { clearTimeout(bgPreloadTimer); bgPreloadTimer = null; }
+    var ordre = shuffledIndices.slice();
+    var q = 0;
+    function etape() {
+        while (q < ordre.length && preloadCache[images[ordre[q]]]) { q++; }
+        if (q >= ordre.length) return;          // tout est demandé
+        var url = images[ordre[q]];
+        q++;
+        var im = new Image();
+        im.decoding = "async";
+        preloadCache[url] = im;
+        im.onload = im.onerror = function () {
+            bgPreloadTimer = setTimeout(etape, 120);  // souffle entre deux
+        };
+        im.src = url;
+    }
+    etape();
 }
 
 // Affiche l'image courante
@@ -367,10 +395,22 @@ function showImage() {
     var img = document.getElementById("gallery");
     var loader = document.getElementById("lb-loader");
     document.getElementById("lb-error").classList.remove("visible"); // efface une erreur précédente
-    img.style.visibility = "hidden";   // l'image en cache ne reste pas
-    loader.classList.add("visible");   // cœurs de chargement
-    img.src = images[shuffledIndices[currentIndex]];  // si déjà préchargée → instantané
-    preloadAround();                   // prépare les images voisines
+    var url = images[shuffledIndices[currentIndex]];
+    var cache = preloadCache[url];
+
+    if (cache && cache.complete && cache.naturalWidth > 0) {
+        // Déjà en mémoire → affichage immédiat, AUCUN loader (donc plus de « flash »
+        // de chargement quand l'image était déjà préchargée).
+        loader.classList.remove("visible");
+        img.src = url;
+        img.style.visibility = "visible";
+    } else {
+        // Pas encore prête → on montre les cœurs le temps du téléchargement.
+        img.style.visibility = "hidden";
+        loader.classList.add("visible");
+        img.src = url;
+    }
+    preloadAround();                   // prépare les voisines immédiates (prioritaire)
 }
 
 // Extrait un nom de fichier lisible depuis l'URL
@@ -413,6 +453,7 @@ function selectCategory(i) {
     currentCategory = i;
     initShuffle();
     showImage();
+    preloadAllInBackground();
     document.querySelectorAll(".categories button").forEach(function (b, idx) {
         b.classList.toggle("active", idx === i);
     });
@@ -486,6 +527,7 @@ function chargerCatalogue() {
             initShuffle();
             if (images.length > 0) {
                 showImage();
+                preloadAllInBackground();
             } else {
                 messageCadre("Catalogue vide",
                     "Aucune image dans liste.json. Publie ta bibliothèque depuis l'appli.");
