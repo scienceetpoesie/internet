@@ -20,7 +20,8 @@
     "TINTIN",
     "DÉGEULASSE",
     "CLASSIQUE",
-    "MODERNE"
+    "MODERNE",
+    "PEINTURES à REFAIRE"
   ],
   "images": [
     {
@@ -823,6 +824,24 @@
     },
     {
       "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 003.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 004.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
+      "fichier": "HORREUR/HORREUR 005.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 006.webp",
       "titre": "",
       "tags": []
@@ -865,31 +884,7 @@
     },
     {
       "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 013.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 014.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 015.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 021.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 022.webp",
       "titre": "",
       "tags": []
     },
@@ -2442,6 +2437,12 @@
       "tags": []
     },
     {
+      "categorie": "DÉGEULASSE",
+      "fichier": "DÉGEULASSE/DÉGEULASSE 002.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
       "categorie": "CLASSIQUE",
       "fichier": "CLASSIQUE/CLASSIQUE 001.webp",
       "titre": "",
@@ -3110,198 +3111,6 @@
     {
       "categorie": "CLASSIQUE",
       "fichier": "CLASSIQUE/CLASSIQUE 112.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 113.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 114.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 115.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 116.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 117.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 118.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 119.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 120.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 121.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 122.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 123.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 124.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 125.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 126.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 127.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 128.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 129.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 130.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 131.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 132.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 133.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 134.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 135.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 136.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 137.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 138.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 139.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 140.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 141.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 142.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 143.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CLASSIQUE",
-      "fichier": "CLASSIQUE/CLASSIQUE 144.webp",
       "titre": "",
       "tags": []
     },
@@ -3998,6 +3807,192 @@
     {
       "categorie": "MODERNE",
       "fichier": "MODERNE/MODERNE 116.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 001.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 002.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 003.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 004.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 005.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 006.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 007.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 008.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 009.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 010.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 011.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 012.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 013.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 014.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 015.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 016.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 017.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 018.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 019.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 020.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 021.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 022.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 023.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 024.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 025.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 026.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 027.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 028.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 029.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 030.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "PEINTURES à REFAIRE",
+      "fichier": "PEINTURES à REFAIRE/PEINTURES à REFAIRE 031.webp",
       "titre": "",
       "tags": []
     }
