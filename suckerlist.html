@@ -1,0 +1,490 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/crane%202.ico" type="image/x-icon">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SUCKERLIST :: Bienvenue en Enfer</title>
+<style type="text/css">
+
+  body {
+    margin: 0; padding: 0;
+    background-color: #000000;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Crect width='6' height='6' fill='%23000'/%3E%3Crect width='3' height='3' fill='%23110000'/%3E%3Crect x='3' y='3' width='3' height='3' fill='%23110000'/%3E%3C/svg%3E");
+    font-family: "Times New Roman", Times, serif;
+    color: #CC0000;
+ cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto !important;}
+
+  .top-bar {
+    background: #000000;
+    height: 25px;
+    border-bottom: 1px solid #330000;
+  }
+/* curseur global */
+body {
+  cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
+}
+
+/* exceptions utiles */
+input, textarea {
+cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
+}
+  /* Conteneur ancré : hauteur 0, les flammes débordent vers le HAUT, toujours devant */
+  #flames-anchor {
+    position: relative;
+    height: 0;
+    width: 100%;
+    z-index: 200;
+    pointer-events: none;
+  }
+
+  .flame-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex; flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+    background: transparent; overflow: hidden;
+    line-height: 0; font-size: 0;
+    gap: 0;
+    transition: height 0.25s ease;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
+  }
+  .flame-border img {
+    display: block; flex-shrink: 0;
+    width: auto;
+  }
+
+  .marquee-strip {
+    background: #CC0000; color: #FFFF00;
+    font-family: "Times New Roman", serif;
+    font-size: 16px; font-weight: bold; letter-spacing: 3px;
+    padding: 5px 0; overflow: hidden; white-space: nowrap;
+  }
+  .marquee-inner { display: inline-block; animation: marquee 28s linear infinite; }
+  @keyframes marquee {
+    from { transform: translateX(100vw); }
+    to   { transform: translateX(-100%); }
+  }
+
+  .header {
+    background: #000000; text-align: center;
+    padding: 20px 12px 16px;
+    border-bottom: 4px ridge #CC0000;
+  }
+  hr.gazette {
+    border: none;
+    border-top: 2px solid #CC0000;
+    border-bottom: 1px solid #660000;
+    width: 75%; margin: 8px auto;
+  }
+  .site-title {
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold; color: #CC0000;
+    text-transform: uppercase;
+    display: block; line-height: 1;
+    text-shadow: 3px 3px 0 #440000;
+  }
+  .title-sucker {
+    font-size: 80px;
+    letter-spacing: 16px;
+    display: inline;
+  }
+  .title-list {
+    font-size: 80px;
+    letter-spacing: 16px;
+    display: inline;
+    margin-left: 24px;
+  }
+
+  .gallery {
+    background: #000;
+    border-top: 3px ridge #880000;
+    border-bottom: 3px ridge #880000;
+    padding: 14px 0; overflow: hidden;
+    position: relative;
+    z-index: 2;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
+  }
+  .scroll-inner {
+    display: inline-flex; gap: 12px;
+    animation: scrollCards 55s linear infinite; white-space: nowrap;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
+  }
+  .scroll-inner:hover { animation-play-state: paused; }
+  @keyframes scrollCards {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* === PORTRAIT CARD === */
+  .portrait-card {
+    display: inline-block; width: 130px; vertical-align: top;
+    background: #1a0000; border: 3px outset #884444;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
+    font-family: "Times New Roman", serif;
+    position: relative; /* needed for ribbon */
+    overflow: hidden;   /* clip the ribbon corners */
+  }
+  .portrait-card:hover { border-style: inset; background: #220000; }
+
+  /* === BANDEAU "MORT" — solution simple : stamp texte en coin === */
+  .ribbon-mort {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    color: #CC0000;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 2px solid #CC0000;
+    padding: 1px 5px;
+    transform: rotate(12deg);
+    transform-origin: top right;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.85;
+    background: rgba(0,0,0,0.55);
+  }
+
+  .card-photo-area {
+    background: #110000; width: 100%; height: 170px;
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 2px inset #550000; position: relative; overflow: hidden;
+  }
+  .card-photo-area img.portrait-img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  .portrait-placeholder {
+    width: 100%; height: 100%;
+    background: #1a0000;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border: 2px dashed #CC0000;
+    box-sizing: border-box;
+  }
+  .portrait-placeholder .ph-icon { font-size: 44px; line-height: 1; color: #CC0000; margin-bottom: 6px; }
+  .portrait-placeholder .ph-label { font-family: "Courier New", monospace; font-size: 9px; color: #884400; text-transform: uppercase; letter-spacing: 2px; text-align: center; line-height: 1.4; }
+
+  .card-body { padding: 6px 7px 8px; background: #150000; }
+  .card-nom { font-size: 11px; color: #FF6600; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; line-height: 1.2; }
+  .card-date { font-size: 10px; color: #884400; font-family: "Courier New", monospace; margin-bottom: 3px; letter-spacing: 1px; }
+  .card-crime {
+    font-size: 10px; color: #CC0000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    border-top: 1px dashed #440000;
+    padding-top: 3px; line-height: 1.4;
+  }
+
+  /* === POPUP === */
+  .popup-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; }
+  .popup-overlay.open { display: flex; }
+  .popup-window { background: #D4D0C8; border: 3px outset #FFFFFF; width: 370px; font-family: "Times New Roman", serif; }
+  .popup-titlebar { background: linear-gradient(90deg, #000080, #1084D0); color: #FFF; font-size: 12px; font-weight: bold; font-family: Arial, sans-serif; padding: 3px 6px; display: flex; justify-content: space-between; align-items: center; }
+  .popup-close-btn { background: #D4D0C8; border: 2px outset #FFF; font-size: 10px; font-family: Arial, sans-serif; width: 17px; height: 15px; cursor: pointer; padding: 0; }
+  .popup-close-btn:active { border-style: inset; }
+  .popup-content { padding: 16px; text-align: center; background: #1a0000; border: 3px inset #550000; }
+
+  .popup-portrait-wrap {
+    width: 110px; height: 140px;
+    border: 2px inset #550000;
+    margin: 0 auto 12px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: #0a0000;
+  }
+  .popup-portrait-wrap img.portrait-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .popup-portrait-wrap .portrait-placeholder { width: 100%; height: 100%; background: #0a0000; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #CC0000; box-sizing: border-box; }
+  .popup-portrait-wrap .portrait-placeholder .ph-icon { font-size: 50px; color: #CC0000; margin-bottom: 4px; }
+  .popup-portrait-wrap .portrait-placeholder .ph-label { font-family: "Courier New", monospace; font-size: 9px; color: #884400; text-transform: uppercase; letter-spacing: 2px; }
+
+  .popup-nom { font-size: 20px; color: #FF6600; font-weight: bold; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4px; }
+  .popup-dob { font-size: 11px; color: #884400; font-family: "Courier New", monospace; letter-spacing: 2px; margin-bottom: 10px; }
+  .popup-inculpation { background: #CC0000; color: #FFFF00; font-size: 13px; font-family: Arial, Helvetica, sans-serif; font-style: normal; padding: 6px 10px; margin: 6px 0; letter-spacing: 1px; border: 2px inset #880000; }
+  .popup-peine { font-size: 11px; color: #FF6600; margin-top: 8px; font-style: italic; letter-spacing: 1px; }
+  .popup-id { font-size: 9px; color: #550000; font-family: "Courier New", monospace; margin-top: 10px; border-top: 1px solid #330000; padding-top: 6px; letter-spacing: 1px; }
+  .ok-btn { background: #D4D0C8; border: 2px outset #FFF; padding: 3px 18px; font-family: Arial, sans-serif; font-size: 12px; cursor: pointer; margin-top: 12px; }
+  .ok-btn:active { border-style: inset; }
+
+  /* === VARIATEUR DE FLAMMES === */
+  #flame-controller {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 8888;
+    background: #1a0000;
+    border: 3px outset #884444;
+    padding: 10px 12px 12px;
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    color: #FF6600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 130px;
+    box-shadow: 0 0 18px #CC0000aa;
+  }
+  #flame-controller .fc-title {
+    text-align: center;
+    color: #FFFF00;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #440000;
+    padding-bottom: 5px;
+  }
+  #flame-controller .fc-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 9px;
+    color: #884400;
+  }
+  #flame-controller .fc-value {
+    color: #FF6600;
+    font-weight: bold;
+    font-size: 11px;
+  }
+
+  /* Slider custom style */
+  #flameSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #330000;
+    border: 1px inset #660000;
+    outline: none;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
+    margin: 4px 0 8px;
+  }
+  #flameSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #CC0000;
+    border: 2px outset #FF4400;
+    cursor: url("https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/Link%20Select.cur"), auto;
+  }
+  #flameSlider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: #CC0000;
+    border: 2px outset #FF4400;
+    cursor: pointer;
+  }
+
+  .fc-btn-row {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .fc-btn {
+    flex: 1;
+    background: #1a0000;
+    border: 2px outset #884444;
+    color: #FF6600;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px 0;
+    text-align: center;
+  }
+  .fc-btn:active { border-style: inset; }
+  .fc-inferno {
+    margin-top: 6px;
+    text-align: center;
+    font-size: 9px;
+    color: #550000;
+    letter-spacing: 1px;
+  }
+
+  .footer { background: #000; border-top: 4px ridge #CC0000; text-align: center; padding: 12px; }
+
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<div class="marquee-strip">
+  <span class="marquee-inner">
+    SUCKER LIST &nbsp; &#x2620; &nbsp; ATTENTION &nbsp; &#x2620; &nbsp; SUCKER LIST &nbsp; &#x2620; &nbsp; ATTENTION &nbsp; &#x2620; &nbsp; SUCKER LIST &nbsp; &#x2620; &nbsp; ATTENTION &nbsp; &#x2620; &nbsp; SUCKER LIST &nbsp; &#x2620; &nbsp; ATTENTION &nbsp; &#x2620; &nbsp;
+  </span>
+</div>
+
+<div class="header">
+  <hr class="gazette">
+  <span class="site-title">
+    <span class="title-sucker">SUCKER</span>
+    <span class="title-list">LIST</span>
+  </span>
+  <hr class="gazette">
+</div>
+
+<div class="gallery">
+  <div class="scroll-inner" id="stripInner"></div>
+</div>
+
+<div id="flames-anchor"><div class="flame-border" id="flamesBot"></div></div>
+
+<div class="footer">
+  <hr class="gazette" style="width:45%">
+  <p style="color:#CC0000;font-size:13px;letter-spacing:4px;text-transform:uppercase;margin:6px 0;">
+    &#x2620; &nbsp; Archives Chthoniennes &copy; MCMXCVI &nbsp; &#x2620;
+  </p>
+  <p style="color:#550000;font-size:10px;font-family:'Courier New',monospace;margin-top:3px;letter-spacing:1px;">
+    SUCKERLIST PRODUCTIONS &middot; WEBMASTER : BELZÉBUTH
+  </p>
+  <hr class="gazette" style="width:45%">
+</div>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-window">
+    <div class="popup-titlebar">
+      <span>&#x2620; Archives Chthoniennes</span>
+      <button class="popup-close-btn" onclick="closePopup()">&#10005;</button>
+    </div>
+    <div class="popup-content">
+      <div class="popup-portrait-wrap" id="p-portrait"></div>
+      <div class="popup-nom" id="p-nom"></div>
+      <div class="popup-dob" id="p-dob"></div>
+      <div class="popup-inculpation" id="p-inculpation"></div>
+      <div class="popup-peine" id="p-peine"></div>
+      <div class="popup-id" id="p-id"></div>
+      <br>
+      <button class="ok-btn" onclick="closePopup()">&nbsp; OK &nbsp;</button>
+    </div>
+  </div>
+</div>
+
+<!-- VARIATEUR DE FLAMMES -->
+<div id="flame-controller">
+  <div class="fc-title"> Variateur de flammes</div>
+  <div class="fc-label">
+    <span>hauteur</span>
+    <span class="fc-value" id="flameValDisplay">60px</span>
+  </div>
+  <input type="range" id="flameSlider" min="60" max="300" value="60" step="5"
+         oninput="updateFlames(this.value)">
+  <div class="fc-btn-row">
+    <button class="fc-btn" onclick="updateFlames(60)" title="minimum">▼</button>
+    <button class="fc-btn" onclick="updateFlames(150)" title="normal">◉</button>
+    <button class="fc-btn" onclick="updateFlames(300)" title="inferno">▲</button>
+  </div>
+
+  <div class="fc-inferno">variateur d'enfer</div>
+</div>
+
+<script type="text/javascript">
+
+var GIF_FLAMME = "https://raw.githubusercontent.com/scienceetpoesie/internet/refs/heads/main/assets/gif/flamme";
+var currentFlameHeight = 60;
+function buildFlames(id, height) {
+  var el = document.getElementById(id);
+  el.style.height = height + 'px';
+  // Le gif a un ratio ~0.5 (30px large / 60px haut à taille native)
+  // On recalcule la largeur proportionnelle pour couvrir tout l'écran
+  var imgW = Math.round(height * 0.5);
+  var count = Math.ceil(window.innerWidth / imgW) + 6;
+  var html = '';
+  for (var i = 0; i < count; i++) {
+    html += '<img src="' + GIF_FLAMME + '" height="' + height + '" style="height:' + height + 'px;width:' + imgW + 'px;" alt="">';
+  }
+  el.innerHTML = html;
+}
+
+function updateFlames(val) {
+  val = parseInt(val);
+  currentFlameHeight = val;
+  document.getElementById('flameSlider').value = val;
+  document.getElementById('flameValDisplay').textContent = val + 'px';
+  buildFlames('flamesBot', val);
+}
+
+buildFlames('flamesBot', 60);
+
+var DAMNES = [
+  { nom:"Michel Onfray",        date:"† 1959", crime:"a volé les lunettes de Christophe Willem, dégénéréscence volkisch",                                            peine:"Lèche-bottes éternel, 7e cercle",  id:"INF-001", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/MICHEL-ONFRAY_Photo_Joelle-Dolle.jpg?raw=true", mort:false },
+  { nom:"Carl André",           date:"† 1935", crime:"défenestra sa femme trop talentueuse pour lui, lui qui ne faisait que des dalles plates",                      peine:"Copiste des ténèbres, 12 éons",     id:"INF-002", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/CarlAndre.jpeg?raw=true", mort:true },
+  { nom:"Enki Bilal",           date:"† 1951", crime:"islamophobie, bonnet de hipster, dessins moches",                                                              peine:"Jury perpétuel en sous-sol",        id:"INF-003", img:"https://github.com/scienceetpoesie/internet/raw/refs/heads/main/personnages/suckelist/enkibilal", mort:false },
+  { nom:"Jean-Claude Michéa",   date:"† 1950", crime:"social-chauvin, cite encore 1984",                                                                             peine:"",                                  id:"INF-004", img:"https://github.com/scienceetpoesie/internet/raw/refs/heads/main/personnages/suckelist/mich%C3%A9a", mort:false },
+  { nom:"Pierre Bellanger",     date:"† 1958", crime:"exploitation du rap français, détournement de mineure",                                                        peine:"Réunion PowerPoint éternelle",      id:"INF-005", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/le-fondateur-de-skyrock-pierre-bellanger-donne-une-conference-de-presse-dans-son-bureau-de-la-station-aprs-avoir-t-dmis-de-ses-fonctions-de-pdg-hier-par-son-conseil-dadministration-paris-france-le-14-avril-2011-phot.jpg?raw=true", mort:false },
+  { nom:"Alain Soral",          date:"† 1958", crime:"antisémite payé par le Mossad pour ruiner la réputation de l'antisionisme",                                   peine:"forcé de débattre avec lui-même",  id:"INF-006", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/1ebc253_10961-yxptsb.t3lii442t9.png?raw=true", mort:false },
+  { nom:"Philippe Val",         date:"† 1952", crime:"islamophobie, gachîs de l'humour française",                                                                  peine:"sodomisé perpétuellement par Choron sur Mahanthan Kaboul", id:"INF-007", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/ABACA_901283_066.png?raw=true", mort:false },
+  { nom:"Gérard Bally",         date:"† 1946", crime:"plieur de banane",                                                                                            peine:"Cum Eating Instructions au chlordécone",                id:"INF-008", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/G%C3%A9rard%20Bally.png?raw=true", mort:false },
+  { nom:"Michel Maffessoli",    date:"† 1944", crime:"pseudo-sociologie pour fils de riche skinhead",                                                               peine:"",                                  id:"INF-009", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/Michel_maffesoli_in_world_humanities_festival%20-%20Copie.jpg?raw=true", mort:false },
+  { nom:"Jacques Henric",       date:"† 1938", crime:"pédophile, directeur d'art-press",                                                                            peine:"",                                  id:"INF-010", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/jacques%20henric.png?raw=true", mort:false },
+  { nom:"Jean-Marc Morandini",  date:"† 1965", crime:"pédocriminalité organisée",                                                                                   peine:"",                                  id:"INF-011", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/photo-jean-marc-morandini-cette-tradition-familiale-a-laquelle-l-animateur-renonce-avec-tristesse-pour-noel.jpg?raw=true", mort:false },
+  { nom:"Francis Cousin",       date:"† 1950", crime:"racisme situationniste heideggero-débile",                                                                    peine:"Miroir brisé, 6e cercle",           id:"INF-012", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/hqdefault%20-%20Copie.jpg?raw=true", mort:false },
+  { nom:"Emil Cioran",          date:"† 1911", crime:"s'est plaint toute sa vie et poussé des lecteurs au suicide pour crever à 84 ans dans son appartement parisien. Ami de Matzneff, il persuadera Vanessa Springora de continuer sa relation avec le pédocriminel", peine:"réincarné en pneu", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/cioran%20color.png?raw=true", mort:true },
+  { nom:"Jean Roucas",          date:"† 1952", crime:"médiocrité",                                                                                                  peine:"",                                  id:"INF-015", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/jean-roucas.jpg?raw=true", mort:false },
+  { nom:"Gilles Lellouche",     date:"† 1972", crime:"harceleur réacréatif, négrophobobe dégénéré",                                                                 peine:"déjà mort depuis quinze ans",       id:"INF-016", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/Gilles-Lellouche_0.jpg?raw=true", mort:false },
+  { nom:"Laurent Obertone",     date:"† 1984", crime:"théoricien de la guerre civile raciale, raciste décomplexé, prose de gendarme frustré",                       peine:"écorché vif puis roulé dans le sel par les damnés qu'il a calomniés, à répétition, 9e cercle", id:"INF-017", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/suckelist/Laurent%20Obertone.png?raw=true", mort:false },
+];
+
+function photoHTML(img) {
+  if (img && img !== "") {
+    return '<img class="portrait-img" src="' + img + '" alt="">';
+  }
+  return '<div class="portrait-placeholder">'
+    + '<span class="ph-icon">&#x2620;</span>'
+    + '<span class="ph-label">photo<br>ici</span>'
+    + '</div>';
+}
+
+function makeCard(d) {
+  var div = document.createElement('div');
+  div.className = 'portrait-card';
+
+  var ribbonHTML = '';
+  if (d.mort) {
+    ribbonHTML = '<div class="ribbon-mort">mort</div>';
+  }
+
+  div.innerHTML =
+    ribbonHTML +
+    '<div class="card-photo-area">' +
+      photoHTML(d.img) +
+    '</div>' +
+    '<div class="card-body">' +
+      '<div class="card-nom">' + d.nom + '</div>' +
+      '<div class="card-date">; ' + d.date + '</div>' +
+      '<div class="card-crime">' + d.crime + '</div>' +
+    '</div>';
+  div.onclick = function() { openPopup(d); };
+  return div;
+}
+
+var strip = document.getElementById('stripInner');
+var ALL = DAMNES.concat(DAMNES).concat(DAMNES).concat(DAMNES);
+for (var i = 0; i < ALL.length; i++) strip.appendChild(makeCard(ALL[i]));
+
+function openPopup(d) {
+  document.getElementById('p-portrait').innerHTML = photoHTML(d.img);
+  document.getElementById('p-nom').textContent = d.nom;
+  document.getElementById('p-dob').textContent = d.date;
+  document.getElementById('p-inculpation').textContent = d.crime;
+  document.getElementById('p-peine').textContent = d.peine;
+  document.getElementById('p-id').textContent = 'Dossier ' + (d.id || '???') + ' \xB7 Archives Chthoniennes \xA9 MCMXCVI';
+  document.getElementById('popup').classList.add('open');
+}
+
+function closePopup() {
+  document.getElementById('popup').classList.remove('open');
+}
+
+document.getElementById('popup').addEventListener('click', function(e) {
+  if (e.target === this) closePopup();
+});
+</script>
+</body>
+</html>
