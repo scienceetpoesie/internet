@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Membres - Science &amp; Poésie</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/%20antiart.ico" type="image/x-icon">
+  <link rel="icon" href="https://raw.githubusercontent.com/scienceetpoesie/internet/main/assets/icons/antisuprematisme.png" type="image/png" sizes="192x192">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Membres - Science et Poésie" />
+  <meta property="og:url" content="https://scienceetpoesie.github.io/internet/membres.html" />
+  <meta property="og:type" content="website" />
+
+<style type="text/css">
+::-webkit-scrollbar { width: 16px; background-color: #C0C0C0; }
+::-webkit-scrollbar-track { background-color: #C0C0C0; border-left: 1px solid #888888; border-right: 1px solid #FFFFFF; }
+::-webkit-scrollbar-thumb { background-color: #C0C0C0; border-top: 2px solid #FFFFFF; border-left: 2px solid #FFFFFF; border-right: 2px solid #444444; border-bottom: 2px solid #444444; box-shadow: inset 1px 1px 0 #DFDFDF, inset -1px -1px 0 #808080; min-height: 20px; }
+
+body { background-color: #FFFF00; margin: 0; padding: 0; font-family: "Times New Roman", Times, serif; }
+#page-wrapper { width: 900px; margin: 0 auto; background-color: #FFFF00; }
+
+.marquee-band { background-color: #000080; color: #FFFF00; font-family: "Courier New", Courier, monospace; font-size: 13px; font-weight: bold; padding: 4px 0; overflow: hidden; white-space: nowrap; }
+.marquee-inner { display: inline-block; animation: marquee 22s linear infinite; }
+@keyframes marquee { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
+
+/* ===== Bandeau titre de la page ===== */
+.page-title-band { background-color: #FFFF00; text-align: center; padding: 16px 20px; }
+.page-title-band h1 { font-family: "Times New Roman", Times, serif; font-size: 46px; font-weight: bold; color: #000080; margin: 0; letter-spacing: 4px; text-decoration: underline; }
+.page-title-band .sub { font-family: "Courier New", Courier, monospace; font-size: 13px; color: #00FFFF; margin-top: 6px; letter-spacing: 2px; }
+
+/* ===== Bouton retour ===== */
+.return-bar { background-color: #FFFF00; padding: 10px 16px 4px 16px; }
+a.btn-return { display: inline-block; background-color: #000080; color: #FFFF00; font-family: "Arial Black", Arial, sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 1px; text-decoration: none; padding: 8px 18px; border: 3px outset #8888FF; }
+a.btn-return:hover { background-color: #0000CC; }
+a.btn-return:active { border-style: inset; }
+
+/* ===================== ORGANIGRAMME — FOND JAUNE UNI ===================== */
+.org-zone { background-color: #FFFF00; padding: 30px 20px 40px 20px; }
+.org-zone .org-intro { text-align: center; font-family: "Arial Black", Arial, sans-serif; font-size: 18px; font-weight: 900; color: #000080; letter-spacing: 2px; text-transform: uppercase; margin: 0 0 28px 0; border-bottom: 3px solid #000080; padding-bottom: 8px; }
+
+/* La carte d'un membre (lien cliquable) */
+.org-card { display: inline-block; background-color: #FFFFFF; border: 3px outset #888888; min-width: 150px; box-shadow: 4px 4px 0 rgba(0,0,0,0.35); text-decoration: none; color: inherit; transition: box-shadow 0.12s, transform 0.12s; }
+.org-card:hover { box-shadow: 6px 6px 0 rgba(0,0,0,0.5); transform: translate(-2px,-2px); }
+.org-card:active { border-style: inset; transform: none; }
+.org-card .role { font-family: "Arial Black", Arial, sans-serif; font-size: 10px; font-weight: 900; letter-spacing: 1px; color: #FFFFFF; padding: 4px 8px; text-transform: uppercase; }
+.org-card .name { font-family: "Times New Roman", serif; font-size: 14px; font-weight: bold; color: #000000; padding: 6px 10px; background-color: #F0F0F0; }
+
+/* Emplacement image de la carte (format rectangulaire portrait) */
+.org-card .photo { display: block; width: 100%; height: 150px; object-fit: cover; background-color: #000080; border-bottom: 3px inset #555555; image-rendering: auto; }
+.org-card .photo[src=""] , .org-card .photo:not([src]) { background-color: #000080; }
+
+/* Avatar par défaut (silhouette grise) en attendant la vraie photo */
+.org-card .photo-default { display: block; width: 100%; height: 150px; border-bottom: 3px inset #555555; background-color: #d8d8d8; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='22' r='12' fill='%23a8a8a8'/%3E%3Cpath d='M11 60c0-12 9-20 21-20s21 8 21 20z' fill='%23a8a8a8'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center bottom; background-size: 92px 92px; }
+
+/* Le guru : même taille que les autres, mais cadre bordeaux */
+.org-guru { width: 130px; min-width: 0; box-shadow: 4px 4px 0 rgba(0,0,0,0.35), 0 0 0 3px #FFFFFF, 0 0 0 6px #990000; }
+.org-guru:hover { box-shadow: 6px 6px 0 rgba(0,0,0,0.5), 0 0 0 3px #FFFFFF, 0 0 0 6px #990000; }
+.org-guru .role { background-color: #990000; }
+.org-guru .name { background-color: #FFF5F5; }
+
+/* Les membres */
+.org-member { width: 130px; min-width: 0; }
+.org-member .role { background-color: #000080; }
+
+/* Les affiliés (3e rangée) */
+.org-affil { width: 130px; min-width: 0; }
+.org-affil .role { background-color: #006600; }
+
+/* ===================== STAGE EXPÉRIMENTAL (cloisonnement / réseau FLN) ===================== */
+.org-stage-wrap { overflow-x: auto; padding: 0; margin: 0 -20px; }
+.org-stage { position: relative; width: 900px; height: 760px; margin: 0 auto; }
+
+/* nœud : MÊME carte que le haut (photo + rôle + nom), taille uniforme */
+.snode { position: absolute; width: 112px; background: #FFFFFF; border: 3px outset #888888; box-shadow: 4px 4px 0 rgba(0,0,0,0.35); text-decoration: none; color: inherit; z-index: 5; transition: box-shadow 0.12s, transform 0.12s; }
+.snode:hover { box-shadow: 6px 6px 0 rgba(0,0,0,0.5); transform: translate(-2px,-2px); z-index: 9; }
+.snode .photo { display: block; width: 100%; height: 118px; object-fit: cover; background-color: #000080; border-bottom: 3px inset #555555; }
+.snode .role { font-family: "Arial Black", Arial, sans-serif; font-size: 9px; font-weight: 900; letter-spacing: 1px; color: #FFFFFF; padding: 3px 7px; text-transform: uppercase; }
+.snode .name { font-family: "Times New Roman", serif; font-size: 12px; font-weight: bold; color: #000000; background: #F0F0F0; padding: 5px 8px; }
+.snode.is-member .role { background: #000080; }
+.snode.is-affil  .role { background: #006600; }
+
+/* petites cellules clandestines (purement graphiques) */
+.scell { position: absolute; width: 64px; background: #1A1A1A; border: 2px outset #555555; box-shadow: 2px 2px 0 rgba(0,0,0,0.4); z-index: 5; text-decoration: none; }
+.scell .name { font-family: "Courier New", monospace; font-size: 10px; font-weight: bold; color: #FFFF00; text-align: center; padding: 5px 2px; letter-spacing: 1px; }
+
+/* lignes : CSS pur (div fin pivoté), purement esthétiques */
+.ln { position: absolute; height: 0; transform-origin: 0 0; z-index: 1; pointer-events: none; }
+.ln-solid  { border-top: 2px solid  #000080; }
+.ln-solid3 { border-top: 3px solid  #000080; }
+.ln-dash   { border-top: 2px dashed  #000080; }
+.ln-dot    { border-top: 2px dotted  #006600; }
+.ln-double { border-top: 4px double  #000080; }
+.ln-thin   { border-top: 1px dotted  #555555; }
+.ln-trunk  { border-top: 4px solid   #000080; }
+
+/* ===== Structure de l'arbre (lignes de connexion) ===== */
+.org-tree { text-align: center; }
+.org-top { text-align: center; }
+
+/* trait vertical sous le guru */
+.org-connector-down { width: 4px; height: 30px; background-color: #000080; margin: 0 auto; }
+
+/* rangée des membres en bas */
+.org-children { display: flex; justify-content: center; align-items: flex-start; gap: 0; }
+.org-child { position: relative; padding: 30px 6px 0 6px; }
+/* trait horizontal reliant les enfants */
+.org-child::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background-color: #000080; }
+/* coupe la moitié du trait pour les extrémités */
+.org-child:first-child::before { left: 50%; }
+.org-child:last-child::before { right: 50%; }
+/* petit trait vertical descendant vers chaque carte */
+.org-child::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 4px; height: 30px; background-color: #000080; }
+
+/* connecteur "bus partagé" entre 3e (membres) et 4e (affiliés) rangée */
+.busrow { display: flex; justify-content: center; }
+.busrow .cell { width: 130px; padding: 0 6px; height: 16px; position: relative; }
+.busrow .cell::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 4px; background-color: #000080; }
+.busrow.down .cell::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background-color: #000080; }
+.busrow.down .cell:first-child::before { left: 50%; }
+.busrow.down .cell:last-child::before { right: 50%; }
+/* la rangée d'affiliés ne dessine plus son propre connecteur du haut */
+.org-children.no-top-connect .org-child::before,
+.org-children.no-top-connect .org-child::after { display: none; }
+
+/* ===== Footer ===== */
+.footer-band { background-color: #FFFF00; color: #000000; text-align: center; padding: 10px; font-family: "Courier New", Courier, monospace; font-size: 12px; }
+.footer-band a { color: #000000; }
+
+@media (max-width: 920px) {
+  #page-wrapper { width: 100%; }
+  .org-children { flex-wrap: wrap; gap: 20px; }
+  .org-child::before, .org-child::after { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="page-wrapper">
+
+  <!-- Bouton retour -->
+  <div class="return-bar">
+    <a class="btn-return" href="index.html">&#11164; Retour à l'accueil</a>
+  </div>
+
+  <!-- Titre de page -->
+  <div class="page-title-band">
+    <h1>MEMBRES</h1>
+  </div>
+
+  <!-- ===================== ORGANIGRAMME ===================== -->
+  <div class="org-zone">
+
+    <div class="org-tree">
+
+      <!-- Guru -->
+      <div class="org-top">
+        <a class="org-card org-guru" href="#" title="Mélyss Langlois">
+          <img class="photo" src="https://raw.githubusercontent.com/scienceetpoesie/internet/main/galerie/MEMBRES/guru%20(2).jpg" alt="Mélyss Langlois">
+          <div class="role">Guru</div>
+          <div class="name">Mélyss Langlois</div>
+        </a>
+      </div>
+
+      <!-- trait vertical descendant -->
+      <div class="org-connector-down"></div>
+
+      <!-- Membres -->
+      <div class="org-children">
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Jahed Prevost">
+            <img class="photo" src="https://raw.githubusercontent.com/scienceetpoesie/internet/main/galerie/MEMBRES/Jahed%20Prevost.jpg" alt="Jahed Prevost">
+            <div class="role">Membre</div>
+            <div class="name">Jahed Prevost</div>
+          </a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Pablo S.">
+            <img class="photo" src="https://raw.githubusercontent.com/scienceetpoesie/internet/main/galerie/MEMBRES/Pablo%20S.jpg" alt="Pablo S.">
+            <div class="role">Membre</div>
+            <div class="name">Pablo S.</div>
+          </a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Clémence C.">
+            <span class="photo-default" role="img" aria-label="Clémence C."></span>
+            <div class="role">Membre</div>
+            <div class="name">Clémence C.</div>
+          </a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="M. La Hajj">
+            <span class="photo-default" role="img" aria-label="M. La Hajj"></span>
+            <div class="role">Membre</div>
+            <div class="name">M. La Hajj</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- trait vertical descendant -->
+      <div class="org-connector-down"></div>
+
+      <!-- Membres (2e rangée) -->
+      <div class="org-children">
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Lucas M."><span class="photo-default" role="img" aria-label="Lucas M."></span><div class="role">Membre</div><div class="name">Lucas M.</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Bao Tremblay"><span class="photo-default" role="img" aria-label="Bao Tremblay"></span><div class="role">Membre</div><div class="name">Bao Tremblay</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Soraya K."><span class="photo-default" role="img" aria-label="Soraya K."></span><div class="role">Membre</div><div class="name">Soraya K.</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Idriss Vanneau"><span class="photo-default" role="img" aria-label="Idriss Vanneau"></span><div class="role">Membre</div><div class="name">Idriss Vanneau</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Tomas Iliev"><span class="photo-default" role="img" aria-label="Tomas Iliev"></span><div class="role">Membre</div><div class="name">Tomas Iliev</div></a>
+        </div>
+      </div>
+
+      <!-- bus partagé : 3e rangée (membres) <-> 4e rangée (affiliés) -->
+      <div class="busrow up">
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      </div>
+      <div class="busrow down">
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      </div>
+
+      <!-- Affiliés -->
+      <div class="org-children no-top-connect">
+        <div class="org-child">
+          <a class="org-card org-affil" href="#" title="Théo G."><span class="photo-default" role="img" aria-label="Théo G."></span><div class="role">Affilié</div><div class="name">Théo G.</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-affil" href="#" title="Côme Vasseur"><span class="photo-default" role="img" aria-label="Côme Vasseur"></span><div class="role">Affilié</div><div class="name">Côme Vasseur</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-affil" href="#" title="Ixchel Norg"><span class="photo-default" role="img" aria-label="Ixchel Norg"></span><div class="role">Affilié</div><div class="name">Ixchel Norg</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-affil" href="#" title="Zlatan Mwangi"><span class="photo-default" role="img" aria-label="Zlatan Mwangi"></span><div class="role">Affilié</div><div class="name">Zlatan Mwangi</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-affil" href="#" title="Oksana B."><span class="photo-default" role="img" aria-label="Oksana B."></span><div class="role">Affilié</div><div class="name">Oksana B.</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-affil" href="#" title="Rina S."><span class="photo-default" role="img" aria-label="Rina S."></span><div class="role">Affilié</div><div class="name">Rina S.</div></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-band">
+    &copy; Science &amp; Poésie
+  </div>
+
+</div>
+</body>
+</html>
