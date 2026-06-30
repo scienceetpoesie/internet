@@ -1,0 +1,694 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/couronne%202.ico" type="image/x-icon">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>HALL OF FAME :: Archives Célestes :: Bienvenue au Paradis</title>
+<style type="text/css">
+
+  body {
+    margin: 0; padding: 0;
+    font-family: "Times New Roman", Times, serif;
+    color: #3a1a00;
+    background-color: #7aaad0;
+    background-image: url("https://github.com/scienceetpoesie/internet/blob/main/background/ciel%20bleu.jpg?raw=true");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+
+  .gif-border {
+    width: 100%;
+    overflow: hidden; line-height: 0; font-size: 0;
+    background: transparent;
+    white-space: nowrap;
+  }
+  .gif-border img {
+    display: inline-block; flex-shrink: 0; width: auto;
+  }
+  #gifTop    img { height: 60px; }
+  #gifMiddle img { height: 50px; }
+  #gifBot    img { height: 60px; }
+
+  .marquee-wrap {
+    border-top: 3px double #FFD700;
+    border-bottom: 3px double #cc8800;
+    background: linear-gradient(180deg, #fff8cc 0%, #FFD700 40%, #cc8800 60%, #fff8aa 100%);
+  }
+  .marquee-strip {
+    padding: 5px 0; overflow: hidden; white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    font-size: 16px; font-weight: bold; letter-spacing: 5px;
+    font-family: "Times New Roman", serif;
+    color: #3a1a00;
+    text-shadow: 0 1px 0 #fff8a0aa, 1px 1px 0 #aa660077;
+    animation: marqueeReverse 36s linear infinite;
+  }
+  @keyframes marqueeReverse {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(100vw); }
+  }
+
+  .header {
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.55) 0%,
+      rgba(255,248,200,0.45) 40%,
+      rgba(200,160,80,0.20) 100%);
+    text-align: center;
+    padding: 30px 12px 22px;
+  }
+
+  hr.gazette-double {
+    border: none;
+    height: 6px;
+    background: linear-gradient(180deg, #FFD700 0%, #cc8800 49%, #FFD700 100%);
+    width: 85%; margin: 10px auto;
+    box-shadow: 0 2px 6px #FFD70055;
+  }
+  hr.gazette-ornament {
+    border: none;
+    border-top:    1px solid #FFD70088;
+    border-bottom: 1px solid #cc880044;
+    width: 65%; margin: 4px auto;
+  }
+
+  .site-title {
+    display: block; line-height: 0.9;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold; text-transform: uppercase;
+  }
+  .title-hall {
+    font-size: 90px; letter-spacing: 18px; display: inline;
+    color: #FFD700;
+    text-shadow:
+      3px  3px 0 #7a3a00,
+      -1px -1px 0 #fff8a0;
+  }
+  .title-of {
+    font-size: 40px; letter-spacing: 10px; display: block;
+    color: #cc8800;
+    text-shadow: 2px 2px 0 #5a2a00;
+    margin: -8px 0 -4px;
+  }
+  .title-fame {
+    font-size: 90px; letter-spacing: 18px; display: inline;
+    color: #cc8800;
+    text-shadow:
+      3px  3px 0 #5a2a00,
+      -1px -1px 0 #fff5a0;
+  }
+
+  /* ===== GALLERY ===== */
+  .gallery-wrap {
+    /* border-top supprimé */
+    border-bottom: 4px double #FFD700;
+  }
+  .gallery-inner-border {
+    border-top: 2px solid #cc880055;
+    border-bottom: 2px solid #cc880055;
+    background: rgba(255,255,255,0.18);
+  }
+  .gallery {
+    padding: 32px 0 16px; overflow: hidden;
+  }
+  .scroll-inner {
+    display: inline-flex; gap: 16px;
+    white-space: nowrap;
+    animation: scrollCardsReverse 70s linear infinite;
+    align-items: flex-end;
+  }
+  .scroll-inner:hover { animation-play-state: paused; }
+  @keyframes scrollCardsReverse {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0%); }
+  }
+
+  /* ===== CARD WRAPPER (includes halo space above) ===== */
+  .card-outer {
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+    flex-shrink: 0;
+    padding-top: 42px;
+    align-items: stretch;
+  }
+
+  /* ===== AURÉOLE CANVAS ===== */
+  .aureole-canvas {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 52px;
+    pointer-events: none;
+    z-index: 10;
+    animation: haloPulse 3.5s ease-in-out infinite alternate;
+  }
+  @keyframes haloPulse {
+    from { opacity: 0.72; }
+    to   { opacity: 1; }
+  }
+  .card-outer:nth-child(2n)  .aureole-canvas { animation-delay: -0.8s; }
+  .card-outer:nth-child(3n)  .aureole-canvas { animation-delay: -1.7s; }
+  .card-outer:nth-child(4n)  .aureole-canvas { animation-delay: -2.5s; }
+  .card-outer:nth-child(5n)  .aureole-canvas { animation-delay: -0.4s; }
+
+  /* ===== PORTRAIT CARD ===== */
+  .portrait-card {
+    display: flex;
+    flex-direction: column;
+    width: 135px;
+    background: linear-gradient(180deg, #fffef5 0%, #fff8d0 100%);
+    border-left:   3px outset #FFD700;
+    border-right:  3px outset #cc9900;
+    border-bottom: 3px outset #aa7700;
+    border-top: none;
+    cursor: pointer; white-space: normal;
+    font-family: "Times New Roman", serif;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.25), inset 0 0 6px #FFD70011;
+  }
+  .portrait-card:hover {
+    background: linear-gradient(180deg, #fffce0 0%, #fff0aa 100%);
+    box-shadow: 0 0 18px #FFD70088, 3px 3px 10px rgba(0,0,0,0.3);
+    border-left-style: inset; border-right-style: inset; border-bottom-style: inset;
+  }
+
+  .card-photo-area {
+    background: linear-gradient(180deg, #e8f0ff 0%, #c8daf5 100%);
+    width: 100%; height: 175px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    border-bottom: 2px ridge #FFD700;
+  }
+  .card-photo-area img.portrait-img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: sepia(10%) saturate(1.1) brightness(1.04);
+  }
+  .portrait-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #ddeeff 0%, #bbccee 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; box-sizing: border-box;
+    border: 2px dashed #FFD70099;
+  }
+  .portrait-placeholder .ph-icon {
+    font-size: 44px; line-height: 1; margin-bottom: 6px;
+    color: #FFD700;
+    text-shadow: 0 0 10px #FFD700bb, 2px 2px 0 #aa660055;
+    animation: iconBreath 4s ease-in-out infinite alternate;
+  }
+  @keyframes iconBreath {
+    from { transform: scale(0.93); opacity: 0.7; }
+    to   { transform: scale(1.07); opacity: 1; text-shadow: 0 0 18px #FFD700, 2px 2px 0 #aa660077; }
+  }
+  .portrait-placeholder .ph-label {
+    font-family: "Courier New", monospace; font-size: 8px;
+    color: #6688aa; text-transform: uppercase; letter-spacing: 2px;
+    text-align: center; line-height: 1.6;
+  }
+
+  .card-body {
+    padding: 5px 6px 7px;
+    background: linear-gradient(180deg, #fffef5 0%, #fff8cc 100%);
+    border-top: 1px solid #FFD70044;
+    height: 80px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .card-nom {
+    font-size: 10.5px; font-weight: bold; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 2px; line-height: 1.2;
+    color: #994400; text-shadow: 0 1px 0 #fff8a0aa;
+  }
+  .card-date {
+    font-size: 9px; font-family: "Courier New", monospace;
+    margin-bottom: 3px; letter-spacing: 1px; color: #886600;
+  }
+  .card-merite {
+    font-size: 9.5px; color: #553300;
+    font-family: Arial, Helvetica, sans-serif;
+    border-top: 1px dashed #FFD70077;
+    padding-top: 3px; line-height: 1.4;
+  }
+
+  /* ===== POPUP ===== */
+  .popup-overlay {
+    display: none; position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(20, 40, 80, 0.82);
+    z-index: 9999; align-items: center; justify-content: center;
+  }
+  .popup-overlay.open { display: flex; }
+  .popup-window {
+    background: #D4D0C8; border: 3px outset #FFFFFF; width: 380px;
+    font-family: "Times New Roman", serif;
+    box-shadow: 0 0 50px #FFD70099, 0 0 100px #FFD70033;
+  }
+  .popup-titlebar {
+    background: linear-gradient(90deg, #774400, #cc8800, #FFD700, #fff5a0, #FFD700, #cc8800, #774400);
+    background-size: 300% 100%;
+    animation: goldTitlebar 6s ease-in-out infinite alternate;
+    color: #3a1a00; font-size: 12px; font-weight: bold;
+    font-family: Arial, sans-serif; padding: 4px 8px;
+    display: flex; justify-content: space-between; align-items: center;
+    text-shadow: 0 1px 0 #fff8a0;
+    border-bottom: 2px ridge #aa7700;
+  }
+  @keyframes goldTitlebar {
+    from { background-position: 0% 0%; }
+    to   { background-position: 300% 0%; }
+  }
+  .popup-close-btn {
+    background: #D4D0C8; border: 2px outset #FFF; font-size: 10px;
+    font-family: Arial, sans-serif; width: 17px; height: 15px; cursor: pointer; padding: 0;
+  }
+  .popup-close-btn:active { border-style: inset; }
+  .popup-content {
+    padding: 18px 16px; text-align: center;
+    background: linear-gradient(180deg, #e8f0ff 0%, #ddeeff 40%, #c8d8f8 100%);
+    border: 3px inset #aabbdd;
+  }
+  .popup-portrait-wrap {
+    width: 115px; height: 145px;
+    border: 3px ridge #FFD700;
+    box-shadow: 0 0 14px #FFD70099, 0 0 30px #FFAA0044, inset 0 0 6px #FFD70022;
+    margin: 0 auto 14px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(160deg, #ddeeff 0%, #bbccee 100%);
+  }
+  .popup-portrait-wrap img.portrait-img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: sepia(10%) saturate(1.1) brightness(1.04);
+  }
+  .popup-portrait-wrap .portrait-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #ddeeff 0%, #bbccee 100%);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; box-sizing: border-box;
+  }
+  .popup-portrait-wrap .portrait-placeholder .ph-icon {
+    font-size: 54px; color: #FFD700; margin-bottom: 4px;
+    text-shadow: 0 0 16px #FFD700bb, 2px 2px 0 #aa660055;
+  }
+  .popup-portrait-wrap .portrait-placeholder .ph-label {
+    font-family: "Courier New", monospace; font-size: 9px;
+    color: #6688aa; text-transform: uppercase; letter-spacing: 2px;
+  }
+  .popup-nom {
+    font-size: 19px; color: #994400; font-weight: bold;
+    text-transform: uppercase; letter-spacing: 3px; margin-bottom: 3px;
+    text-shadow: 0 1px 0 #fff8a0, 2px 2px 0 #aa660055;
+  }
+  .popup-dob {
+    font-size: 11px; color: #886600;
+    font-family: "Courier New", monospace; letter-spacing: 2px; margin-bottom: 10px;
+  }
+  .popup-merite {
+    background: rgba(255,248,200,0.8); color: #3a1a00;
+    font-size: 12px; font-family: Arial, Helvetica, sans-serif;
+    padding: 7px 10px; margin: 6px 0; letter-spacing: 0.5px;
+    border: 1px solid #FFD70077;
+    border-left: 4px solid #FFD700;
+    border-right: 4px solid #FFD700;
+    text-align: left;
+    box-shadow: inset 0 0 8px #FFD70011;
+  }
+  .popup-recompense {
+    font-size: 11px; color: #886600; margin-top: 8px;
+    font-style: italic; letter-spacing: 1px;
+    border-top: 1px dashed #FFD70055; padding-top: 6px;
+  }
+  .popup-id {
+    font-size: 9px; color: #7799bb;
+    font-family: "Courier New", monospace; margin-top: 10px;
+    border-top: 1px solid #aabbdd55; padding-top: 6px; letter-spacing: 1px;
+  }
+  .ok-btn {
+    background: #D4D0C8; border: 2px outset #FFF;
+    padding: 3px 20px; font-family: Arial, sans-serif;
+    font-size: 12px; cursor: pointer; margin-top: 12px;
+  }
+  .ok-btn:active { border-style: inset; }
+
+  /* ===== FOOTER ===== */
+  .footer-wrap {
+    border-top: 5px double #FFD700;
+    background: linear-gradient(180deg,
+      rgba(255,248,180,0.6) 0%,
+      rgba(255,240,120,0.4) 50%,
+      rgba(200,160,80,0.2) 100%);
+  }
+  .footer {
+    text-align: center; padding: 18px 12px 20px;
+  }
+  .footer-text {
+    font-size: 14px; letter-spacing: 5px; text-transform: uppercase; margin: 6px 0;
+    color: #994400;
+    text-shadow: 0 1px 0 #fff8a0aa, 2px 2px 0 #aa660033;
+  }
+  .footer-sub {
+    font-size: 10px; font-family: "Courier New", monospace;
+    margin-top: 5px; letter-spacing: 2px; color: #886600;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="gif-border" id="gifTop"></div>
+
+<div class="marquee-wrap">
+  <div class="marquee-strip">
+    <span class="marquee-inner">
+      &#x2726; HALL OF FAME &#x2726; GLOIRE &Eacute;TERNELLE &#x2726; ARCHIVES C&Eacute;LESTES &#x2726; HALL OF FAME &#x2726; GLOIRE &Eacute;TERNELLE &#x2726; ARCHIVES C&Eacute;LESTES &#x2726; HALL OF FAME &#x2726; GLOIRE &Eacute;TERNELLE &#x2726; ARCHIVES C&Eacute;LESTES &#x2726;
+    </span>
+  </div>
+</div>
+
+<div class="gif-border" id="gifMiddle"></div>
+
+<div class="header">
+  <hr class="gazette-double">
+  <hr class="gazette-ornament">
+  <span class="site-title">
+    <span class="title-hall">HALL OF FAME</span>
+    <span class="title-of">&#x2014; &#x2014;</span>
+  </span>
+  <hr class="gazette-ornament">
+  <hr class="gazette-double">
+</div>
+
+<div class="gallery-wrap">
+  <div class="gallery-inner-border">
+    <div class="gallery">
+      <div class="scroll-inner" id="stripInner"></div>
+    </div>
+  </div>
+</div>
+
+<div class="gif-border" id="gifBot"></div>
+
+<div class="footer-wrap">
+  <div class="footer">
+    <hr class="gazette-double">
+    <p class="footer-text">&#x2726; &nbsp; Archives C&eacute;lestes &copy; MCMXCVI &nbsp; &#x2726;</p>
+    <p class="footer-sub">HALL OF FAME &middot; WEBMASTERS &nbsp; : &nbsp; PIERRE, GABRIEL</p>
+    <hr class="gazette-double">
+  </div>
+</div>
+
+<div class="popup-overlay" id="popup">
+  <div class="popup-window">
+    <div class="popup-titlebar">
+      <span>&#x2726; &nbsp; Archives C&eacute;lestes &nbsp; &#x2726;</span>
+      <button class="popup-close-btn" onclick="closePopup()">&#10005;</button>
+    </div>
+    <div class="popup-content">
+      <div class="popup-portrait-wrap" id="p-portrait"></div>
+      <div class="popup-nom" id="p-nom"></div>
+      <div class="popup-dob" id="p-dob"></div>
+      <div class="popup-merite" id="p-merite"></div>
+      <div class="popup-recompense" id="p-recompense"></div>
+      <div class="popup-id" id="p-id"></div>
+      <br>
+      <button class="ok-btn" onclick="closePopup()">&nbsp; OK &nbsp;</button>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+var GIF_FRISE_A = "https://github.com/scienceetpoesie/internet/blob/main/assets/gif/turning%20star.gif?raw=true";
+var GIF_FRISE_B = "https://github.com/scienceetpoesie/internet/blob/main/assets/gif/greengem.gif?raw=true";
+var GIF_FRISE_C = "https://github.com/scienceetpoesie/internet/blob/main/assets/gif/turning%20star.gif?raw=true";
+
+var FALLBACKS = {
+  gifTop:    { h:"60px", bg:"rgba(255,248,180,0.25)", msg:"[ GIF FRISE A ]", col:"#cc8800" },
+  gifMiddle: { h:"50px", bg:"rgba(220,240,255,0.30)", msg:"[ GIF FRISE B ]", col:"#6688aa" },
+  gifBot:    { h:"60px", bg:"rgba(255,248,180,0.25)", msg:"[ GIF FRISE C ]", col:"#cc8800" }
+};
+
+/* Frise GIF : 80 images fixes — largement assez pour couvrir n'importe
+   quel écran même en 4K avec de petits GIFs. overflow:hidden coupe proprement. */
+function buildGif(id, url, height) {
+  var el = document.getElementById(id);
+  var fb = FALLBACKS[id];
+  if (!url || url.indexOf("__") === 0) {
+    el.style.cssText =
+      "display:block;width:100%;text-align:center;padding:10px 0;" +
+      "background:" + fb.bg + ";" +
+      "font-size:11px;font-family:'Courier New',monospace;letter-spacing:3px;" +
+      "color:" + fb.col + ";border-top:1px dashed " + fb.col + "55;" +
+      "border-bottom:1px dashed " + fb.col + "55;";
+    el.innerHTML = fb.msg;
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < 80; i++) {
+    html += '<img src="' + url + '" height="' + height + '" alt="">';
+  }
+  el.innerHTML = html;
+}
+
+buildGif('gifTop',    GIF_FRISE_A, 60);
+buildGif('gifMiddle', GIF_FRISE_B, 50);
+buildGif('gifBot',    GIF_FRISE_C, 60);
+
+
+/* =========================================================================
+   AURÉOLE CANVAS — ellipse creuse avec flou gaussien
+   ========================================================================= */
+var _haloCounter = 0;
+function makeHaloCanvas() {
+  var id = 'halo-' + (_haloCounter++);
+  var canvas = document.createElement('canvas');
+  canvas.className = 'aureole-canvas';
+  canvas.width = 320;
+  canvas.height = 104;
+  canvas.style.width = '140px';
+  canvas.style.height = '52px';
+  canvas.id = id;
+
+  setTimeout(function() {
+    var ctx = canvas.getContext('2d');
+    var w = 320, h = 104;
+    var cx = w / 2, cy = h / 2;
+    var rx = 130, ry = 22;
+
+    ctx.clearRect(0, 0, w, h);
+
+    var layers = [
+      { blur: 18, width: 22, color: 'rgba(160,210,255,0.18)' },
+      { blur: 12, width: 14, color: 'rgba(200,230,255,0.28)' },
+      { blur: 8,  width: 9,  color: 'rgba(220,240,255,0.45)' },
+      { blur: 5,  width: 5,  color: 'rgba(240,248,255,0.65)' },
+      { blur: 3,  width: 3,  color: 'rgba(255,255,255,0.80)' },
+      { blur: 1,  width: 1.5,color: 'rgba(255,255,255,0.95)' },
+    ];
+
+    for (var i = 0; i < layers.length; i++) {
+      var l = layers[i];
+      ctx.save();
+      ctx.shadowBlur = l.blur * 2;
+      ctx.shadowColor = l.color;
+      ctx.strokeStyle = l.color;
+      ctx.lineWidth = l.width;
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    ctx.save();
+    ctx.shadowBlur = 6;
+    ctx.shadowColor = 'rgba(255,230,80,0.6)';
+    ctx.strokeStyle = 'rgba(255,228,100,0.55)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+
+  }, 0);
+
+  return canvas;
+}
+
+var ELUS = [
+  { nom:"Andre Williams",             date:"\u2746 1936 - 2019",
+    merite:"premier MC, premier punk, psychopathologue des bas-fonds de Chicago et de l'\xe2me humaine. Transforme l'abjection en jouissance de sa voix souterraine. D\xe9mon au service du bien. Indestructible",
+    recompense:"DJ du Paradis, sono parfaite, \xe9ternit\xe9",                                            id:"CEL-001", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/andre%20williams.jpg?raw=true" },
+
+  { nom:"Bernadette Lafont",          date:"\u2746 1938 - 2013",
+    merite:"la vamp villageoise, surnomm\xe9e la \xab Bardot N\xe8gre \xbb par Herv\xe9 Guibert. \xc9g\xe9rie d'une Nouvelle Vague qui la croyait d\xe9corative et ne comprit jamais qu'elle riait la premi\xe8re",
+    recompense:"Sc\xe9nario \xe9ternel o\xf9 elle n'est jamais la figurante",                              id:"CEL-002", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Bernadette-Lafont.jpg?raw=true" },
+
+  { nom:"Lucien de Samosate",         date:"\u2746 125 - 180",
+    merite:"Rh\xe9teur syrien \xe9crivant en langue imp\xe9riale. Inventeur de l'ironie. Thanatologue du pouvoir, il interrogera les hommes et les Dieux comme des suspects.",
+    recompense:"Dialogue \xe9ternel avec les dieux qu'il a moqu\xe9s",                                      id:"CEL-003", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Capture%20d'%C3%A9cran%202026-03-22%20071530.png?raw=true" },
+
+  { nom:"Zitk\xe1la-\u0160\xe1",       date:"\u2746 1876 - 1938",
+    merite:"Oiseau Rouge des Yankton Sioux, arrach\xe9e enfant \xe0 sa m\xe8re par les missionnaires pour qu'on lui coupe les cheveux et la langue. Retournera le violon et l'anglais qu'on lui a impos\xe9s contre la machine \xe0 civiliser. \xc9crira la premi\xe8re autobiographie am\xe9rindienne de sa propre main et fera graver un tipi sur sa tombe d'Arlington \u2014 derni\xe8re insolence dans le marbre de l'oppresseur.",
+    recompense:"Op\xe9ra interdit jou\xe9 \xe0 jamais, langue maternelle rendue intacte",                  id:"CEL-004", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Zitkala-Sa.jpg?raw=true" },
+
+  { nom:"Yorgos Batis",               date:"\u2746 1885 - 1967",
+    merite:"reb\xe9tiko des bas-fonds, \xe2me du Pir\xe9e, musique des proscrits",
+    recompense:"Bouzouki accord\xe9 \xe0 jamais, taverne c\xe9leste",                                       id:"CEL-005", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/%CE%93%CE%B9%CF%8E%CF%81%CE%B3%CE%BF%CF%82%20%CE%9C%CF%80%CE%AC%CF%84%CE%B7%CF%82.jpg?raw=true" },
+
+  { nom:"Le\xefla Khaled",            date:"\u2746 1944 - ",
+    merite:"f\xe9dayine palestinienne, premi\xe8re femme \xe0 d\xe9tourner un avion, ic\xf4ne arm\xe9e de la lutte anticoloniale",
+    recompense:"Ciel libre, keffieh c\xe9leste, d\xe9tour vers l'\xe9ternit\xe9",                          id:"CEL-006", vivant:true, img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/LeilaKhaled.png?raw=true" },
+
+  { nom:"Athanasius Kircher",         date:"\u2746 1602 - 1680",
+    merite:"encyclop\xe9diste baroque, d\xe9chiffreur de l'ind\xe9chiffrable",
+    recompense:"Mus\xe9e des curiosit\xe9s universelles, acc\xe8s illimit\xe9",                              id:"CEL-007", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Athanasius_Kircher_(cropped).jpg?raw=true" },
+
+  { nom:"Divine",                     date:"\u2746 1945 - 1988",
+    merite:"drag pionni\xe8re, ic\xf4ne du trash sublim\xe9, a mang\xe9 des excr\xe9ments de chien pour l'art et n'a pas cill\xe9",
+    recompense:"Robe cosmique taille unique, tapis c\xe9leste permanent",                                  id:"CEL-008", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/2544.png?raw=true" },
+ 
+  { nom:"Bruce Haack",                date:"\u2746 1931 - 1988",
+    merite:"n\xe9 au fond de l'Alberta, o\xf9 la modernit\xe9 parvient en bribes, il aura pass\xe9 sa vie \xe0 allier le bricolage \xe9lectronique \xe0 la comptine, fabriquant ses synth\xe9tiseurs \xe0 la main pour chanter aux enfants ce que les adultes n'osaient pas r\xeaver",
+    recompense:"Party machine s\xe9l\xe9nique d'un orchestre pour 10 000 oscillateurs",                    id:"CEL-024", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Bruce%20Haack.png?raw=true" },
+  
+  { nom:"Hans le Malin",              date:"\u2746 1895 - 1916",
+    merite:"trickster philosophique, premier situationniste de l'histoire",
+    recompense:"Cour des miracles c\xe9leste, licence perp\xe9tuelle",                                       id:"CEL-009", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Hans%201910.jpg?raw=true" },
+
+  { nom:"Kimpa Vita",                 date:"\u2746 1684 - 1706",
+    merite:"militante pour l'expulsion des missionnaires, elle d\xe9fiera l'\xc9glise et la couronne espagnole en pleine colonisation du Congo. Proph\xe9tesse d'un syncr\xe9tisme qui lui vaudra d'\xeatre condamn\xe9e au b\xfbcher",
+    recompense:"B\xe9atitude avec Antoine de Padoue",                                                       id:"CEL-010", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/kimpa.vita.jpg?raw=true" },
+
+  { nom:"Tony Clifton",               date:"\u2746 1949 - 1984",
+    merite:"insulte au principe de r\xe9alit\xe9. Chanteur de cabaret agressif, ami de Andy Kaufman scind\xe9 en une entit\xe9 autonome.",
+    recompense:"Sc\xe8ne permanente, public captif, alcool \xe0 flot",                                      id:"CEL-011", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/tonye%20clifton.jpg?raw=true" },
+
+  { nom:"Valerie Solanas",            date:"\u2746 1936 - 1988",
+    merite:"mal comprise par ses propres admirateurs",
+    recompense:"Salle de r\xe9daction sans r\xe9daction, \xe9ternit\xe9",                                    id:"CEL-012", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/valerie-solanas.jpg?raw=true" },
+
+  { nom:"Jean-Pierre Petit",          date:"\u2746 1937",
+    merite:"astrophysicien h\xe9r\xe9tique, bandes dessin\xe9es cosmologiques pour les enfants et les sages",
+    recompense:"T\xe9lescope infini, 1er rang",                                                            id:"CEL-013", vivant:true, img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/MV5BYTFlMjZmYzQtZjVmMS00OTI5LWE5ZDEtMDJiODdkMTQ0Y2E3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg?raw=true" },
+
+  { nom:"Claude Cahun",               date:"\u2746 1894 - 1954",
+    merite:"auto-portrait comme arme, identit\xe9 liquide avant le concept, r\xe9sistance surr\xe9aliste",
+    recompense:"Miroir infini, chambre noire \xe9ternelle",                                                id:"CEL-014", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/grandFormat_Cahun_Moore_visuel_1.jpg?raw=true" },
+
+  { nom:"E. von Freytag-Loringhoven", date:"\u2746 1874 - 1927",
+    merite:"Arpentant les rues de New York des timbres-poste coll\xe9s sur les joues et une passoire en guise de chapeau, parce que le monde lui semblait r\xe9clamer cette correction esth\xe9tique urgente. Duchamp qui la fr\xe9quentait dit d'elle : <em>She's not a futurist. She is the future.</em> \u2014 peut-\xeatre moins un compliment gracieux que la reconnaissance inconfortable d'une dette : La Baronne ramasse un anneau de m\xe9tal rouill\xe9 et le d\xe9clare art un an avant le premier readymade de Duchamp. M\xeame la <em>Fontaine</em> sign\xe9e R. Mutt est probablement sienne : Duchamp, dans une lettre \xe0 sa s\u0153ur, pr\xe9cise que c'est une <em>amie</em> qui a envoy\xe9 la pissoti\xe8re.",
+    recompense:"Atelier cosmique, mat\xe9riaux illimit\xe9s",                                                id:"CEL-015", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Barrone%20Elsa%20von%20Freytag-Loringhoven.jpg?raw=true" },
+
+  { nom:"Norm MacDonald",             date:"\u2746 1959 - 2021",
+    merite:"Inv\xe9t\xe9r\xe9 connaisseur des scripts comiques et sociaux. L'anti-punchline \xe9rig\xe9e en syst\xe8me, science de l'erreur, seul \xe0 avoir vaincu le rire par le rire",
+    recompense:"Talk-show infini, invit\xe9s illimit\xe9s",                                                 id:"CEL-016", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/rs-181627-141035522%20(1).png?raw=true" },
+
+  { nom:"Francis Bebey",              date:"\u2746 1929 - 2001",
+    merite:"polymathe camerounais, romancier, guitariste, ethnomusicologue, g\xe9nie discret",
+    recompense:"Orchestre cosmique, biblioth\xe8que infinie",                                               id:"CEL-017", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/7996534a-c4e3-4439-af90-08f34239b94f_1006x782.jpg?raw=true" },
+
+  { nom:"Herrade de Landsberg",       date:"\u2746 ~1130 - 1195",
+    merite:"Hortus Deliciarum, encyclop\xe9die enlumin\xe9e du monde, abbesse visionnaire du XIIe si\xe8cle",
+    recompense:"Scriptorium \xe9ternel, encre qui ne s\xe8che jamais",                                      id:"CEL-018", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Herrade%20de%20Landsberg.jpg?raw=true" },
+
+  { nom:"Korla Pandit",               date:"\u2746 1921 - 1998",
+    merite:"organiste hypnotique, identit\xe9 invent\xe9e et maintenue 40 ans, exotisme comme performance pure",
+    recompense:"Orgue cosmique, audience perp\xe9tuellement envo\xfbt\xe9e",                                id:"CEL-019", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/korla%20pandit.jpg?raw=true" },
+
+  { nom:"Patrick Dewaere",            date:"\u2746 1947 - 1982",
+    merite:"acteur br\xfbl\xe9 vif, incarnation totale, a jou\xe9 sa propre mort dans chaque r\xf4le",
+    recompense:"R\xf4le unique et infini dans notre coeur, sans fin de tournage",                           id:"CEL-020", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/646388070_25978197881791388_9126798458497327349_n.jpg?raw=true" },
+
+    { nom:"Lucy Parsons",               date:"\u2746 1851 - 1942",
+    merite:"n\xe9e esclave en Virginie, veuve d'un martyr de Haymarket pendu sans preuve. Anarcho-communiste, oratrice de feu, fondatrice de l'IWW \u2014 \xab plus dangereuse que mille \xe9meutiers \xbb selon la police de Chicago. A transform\xe9 le deuil en arme et harangu\xe9 les foules un demi-si\xe8cle durant. Morte dans l'incendie de sa maison, ses papiers aussit\xf4t saisis par l'\xc9tat",
+    recompense:"Tribune \xe9ternelle, foule attentive, papiers jamais confisqu\xe9s",                       id:"CEL-025", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Lucy%20Parsons.jpg?raw=true" },
+  
+  { nom:"T\xe9l\xe9sille d'Argos",     date:"\u2746 Ve av. J.-C.",
+    merite:"Po\xe9tesse grecque d'Argos, elle aurait arm\xe9 les femmes de la ville pour repousser l'arm\xe9e spartiate \u2014 faisant de la r\xe9sistance militaire un acte indissociable de son identit\xe9 de po\xe8te. Ses fragments lyriques rares mesurent une voix qui ne s\xe9pare pas le chant de l'action.",
+    recompense:"Rempart de vers, cit\xe9 imprenable, lyre arm\xe9e",                                        id:"CEL-021", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/T%C3%A9ll%C3%A9sis.jpg?raw=true" },
+
+  { nom:"Phoolan Devi",               date:"\u2746 1963 - 2001",
+    merite:"mari\xe9e de force \xe0 onze ans, bris\xe9e par les Thakur de Behmai, ressurgie des ravins du Chambal en reine des bandits. A retourn\xe9 la vengeance en justice de caste, fait surrender devant 8 000 personnes, purg\xe9 onze ans sans proc\xe8s, puis si\xe9g\xe9 au Parlement comme voix des opprim\xe9s. Assassin\xe9e devant chez elle \xe0 Delhi",
+    recompense:"Ravins libres, gang c\xe9leste, vengeance enfin rendue justice",                          id:"CEL-026", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Phoolan%20Devi.png?raw=true" },
+
+{ nom:"Delia Derbyshire",           date:"\u2746 1937 - 2001",
+    merite:"enfant du blitz de Coventry, elle disait que les sir\xe8nes anti-a\xe9riennes furent sa premi\xe8re musique \xe9lectronique. Refus\xe9e chez Decca car \xab le studio n'est pas une place pour une femme \xbb, elle entre au Radiophonic Workshop de la BBC et y \xab r\xe9alise \xbb le th\xe8me de Doctor Who \u2014 chaque note d\xe9coup\xe9e, ralentie et recoll\xe9e \xe0 la main sur bande analogique \xe0 partir d'oscillateurs de calibrage. C'est elle qui donna \xe0 la s\xe9rie tout son aspect science-fiction et son envo\xfbtement, mais la BBC ne la cr\xe9dita jamais de son vivant : seul Ron Grainer, qui en entendant l'\u0153uvre demanda \xab c'est moi qui ai \xe9crit \xe7a ? \xbb, restait sign\xe9. Pr\xe8s de 200 \u0153uvres pour la radio et la t\xe9l\xe9, jingles comme des po\xe8mes de botanique \xe9lectronique \u2014 toute une g\xe9n\xe9ration britannique gagn\xe9e \xe0 la musique \xe9lectronique par une \xe9mission pour enfants",
+    recompense:"Cr\xe9dit \xe9ternel enfin grav\xe9, bande qui ne se coupe jamais, doctorat c\xe9leste",     id:"CEL-027", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/delia.jpg?raw=true" },
+  
+  { nom:"Marvin Heemeyer",            date:"\u2746 1951 - 2004",
+    merite:"soudeur du Colorado, a blind\xe9 seul son bulldozer pendant 18 mois et d\xe9moli la ville qui l'avait \xe9cras\xe9",
+    recompense:"Garage infini, acier illimit\xe9, personne pour l'emmerder",                                id:"CEL-022", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/marvin-with_rounds.jpg?raw=true" },
+
+  { nom:"Princess Loko",              date:"\u2746 1979 - 2020",
+    merite:"souteneuse de souteneurs, d\xe9nonce la violence sociale \xe0 Whitehaven, Memphis en double tempo syncop\xe9, Street Smart",
+    recompense:"Still pimpin the seraphs 4-ever",                                                          id:"CEL-023", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/loko.png?raw=true" },
+
+  { nom:"Noor Inayat Khan",          date:"\u2746 1914 - 1944",
+    merite:"princesse soufie et musicienne, devenue op\xe9ratrice radio clandestine dans le Paris occup\xe9 \u2014 le poste le plus mortel de la R\xe9sistance. R\xe9seau d\xe9mantel\xe9 autour d'elle, elle refusera de rentrer et tiendra seule des semaines, transmettant sous la traque. Trahie, tortur\xe9e, mur\xe9e dans le silence, elle ne livrera rien et lancera <em>Libert\xe9</em> avant la balle de Dachau",
+    recompense:"Fr\xe9quence \xe9ternelle, message qui passe toujours, silence jamais bris\xe9",                id:"CEL-025", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Noor%20Inayat%20Khan,%20c.1943.jpg?raw=true" },
+
+  { nom:"Sarah Winchester",          date:"\u2746 1839 - 1922",
+    merite:"veuve de l'empire du fusil \xe0 r\xe9p\xe9tition, elle fera b\xe2tir nuit et jour pendant 38 ans une demeure aux escaliers montant vers des murs, aux portes ouvrant sur le vide, pour \xe9garer les fant\xf4mes de tous ceux que la Winchester avait tu\xe9s. Architecture comme exorcisme, fortune du sang retourn\xe9e en labyrinthe contre les morts",
+    recompense:"Chantier perp\xe9tuel, plan sans fin, maison enfin assez vaste pour loger tous les fant\xf4mes",  id:"CEL-026", img:"https://github.com/scienceetpoesie/internet/blob/main/personnages/hallofame/Sarah%20Winchester.jpg?raw=true" },
+  
+];
+function photoHTML(img) {
+  if (img && img !== "") {
+    return '<img class="portrait-img" src="' + img + '" alt="">';
+  }
+  return '<div class="portrait-placeholder">'
+    + '<span class="ph-icon">&#x2726;</span>'
+    + '<span class="ph-label">portrait<br>c\xe9leste</span>'
+    + '</div>';
+}
+
+function makeCard(d) {
+  var outer = document.createElement('div');
+  outer.className = 'card-outer';
+
+  if (!d.vivant) outer.appendChild(makeHaloCanvas());
+
+  var div = document.createElement('div');
+  div.className = 'portrait-card';
+  div.innerHTML =
+    '<div class="card-photo-area">' + photoHTML(d.img) + '</div>' +
+    '<div class="card-body">' +
+      '<div class="card-nom">' + d.nom + '</div>' +
+      '<div class="card-date">' + d.date + '</div>' +
+      '<div class="card-merite">' + d.merite + '</div>' +
+    '</div>';
+  div.onclick = function() { openPopup(d); };
+
+  outer.appendChild(div);
+  return outer;
+}
+
+var strip = document.getElementById('stripInner');
+var ALL = ELUS.concat(ELUS).concat(ELUS).concat(ELUS);
+for (var i = 0; i < ALL.length; i++) strip.appendChild(makeCard(ALL[i]));
+
+function openPopup(d) {
+  document.getElementById('p-portrait').innerHTML = photoHTML(d.img);
+  document.getElementById('p-nom').textContent = d.nom;
+  document.getElementById('p-dob').textContent = d.date;
+  document.getElementById('p-merite').textContent = d.merite;
+  document.getElementById('p-recompense').textContent = d.recompense;
+  document.getElementById('p-id').textContent = 'Dossier ' + d.id + ' \xB7 Archives C\xE9lestes \xA9 MCMXCVI';
+  document.getElementById('popup').classList.add('open');
+}
+
+function closePopup() {
+  document.getElementById('popup').classList.remove('open');
+}
+
+document.getElementById('popup').addEventListener('click', function(e) {
+  if (e.target === this) closePopup();
+});
+
+</script>
+</body>
+</html>
