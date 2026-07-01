@@ -22,14 +22,9 @@
 body { background-color: #FFFF00; margin: 0; padding: 0; font-family: "Times New Roman", Times, serif; }
 #page-wrapper { width: 900px; margin: 0 auto; background-color: #FFFF00; }
 
-.marquee-band { background-color: #000080; color: #FFFF00; font-family: "Courier New", Courier, monospace; font-size: 13px; font-weight: bold; padding: 4px 0; overflow: hidden; white-space: nowrap; }
-.marquee-inner { display: inline-block; animation: marquee 22s linear infinite; }
-@keyframes marquee { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
-
 /* ===== Bandeau titre de la page ===== */
 .page-title-band { background-color: #FFFF00; text-align: center; padding: 16px 20px; }
 .page-title-band h1 { font-family: "Times New Roman", Times, serif; font-size: 46px; font-weight: bold; color: #000080; margin: 0; letter-spacing: 4px; text-decoration: underline; }
-.page-title-band .sub { font-family: "Courier New", Courier, monospace; font-size: 13px; color: #00FFFF; margin-top: 6px; letter-spacing: 2px; }
 
 /* ===== Bouton retour ===== */
 .return-bar { background-color: #FFFF00; padding: 10px 16px 4px 16px; }
@@ -39,7 +34,6 @@ a.btn-return:active { border-style: inset; }
 
 /* ===================== ORGANIGRAMME — FOND JAUNE UNI ===================== */
 .org-zone { background-color: #FFFF00; padding: 30px 20px 40px 20px; }
-.org-zone .org-intro { text-align: center; font-family: "Arial Black", Arial, sans-serif; font-size: 18px; font-weight: 900; color: #000080; letter-spacing: 2px; text-transform: uppercase; margin: 0 0 28px 0; border-bottom: 3px solid #000080; padding-bottom: 8px; }
 
 /* La carte d'un membre (lien cliquable) */
 .org-card { display: inline-block; background-color: #FFFFFF; border: 3px outset #888888; min-width: 150px; box-shadow: 4px 4px 0 rgba(0,0,0,0.35); text-decoration: none; color: inherit; transition: box-shadow 0.12s, transform 0.12s; }
@@ -69,33 +63,6 @@ a.btn-return:active { border-style: inset; }
 .org-affil { width: 130px; min-width: 0; }
 .org-affil .role { background-color: #006600; }
 
-/* ===================== STAGE EXPÉRIMENTAL (cloisonnement / réseau FLN) ===================== */
-.org-stage-wrap { overflow-x: auto; padding: 0; margin: 0 -20px; }
-.org-stage { position: relative; width: 900px; height: 760px; margin: 0 auto; }
-
-/* nœud : MÊME carte que le haut (photo + rôle + nom), taille uniforme */
-.snode { position: absolute; width: 112px; background: #FFFFFF; border: 3px outset #888888; box-shadow: 4px 4px 0 rgba(0,0,0,0.35); text-decoration: none; color: inherit; z-index: 5; transition: box-shadow 0.12s, transform 0.12s; }
-.snode:hover { box-shadow: 6px 6px 0 rgba(0,0,0,0.5); transform: translate(-2px,-2px); z-index: 9; }
-.snode .photo { display: block; width: 100%; height: 118px; object-fit: cover; background-color: #000080; border-bottom: 3px inset #555555; }
-.snode .role { font-family: "Arial Black", Arial, sans-serif; font-size: 9px; font-weight: 900; letter-spacing: 1px; color: #FFFFFF; padding: 3px 7px; text-transform: uppercase; }
-.snode .name { font-family: "Times New Roman", serif; font-size: 12px; font-weight: bold; color: #000000; background: #F0F0F0; padding: 5px 8px; }
-.snode.is-member .role { background: #000080; }
-.snode.is-affil  .role { background: #006600; }
-
-/* petites cellules clandestines (purement graphiques) */
-.scell { position: absolute; width: 64px; background: #1A1A1A; border: 2px outset #555555; box-shadow: 2px 2px 0 rgba(0,0,0,0.4); z-index: 5; text-decoration: none; }
-.scell .name { font-family: "Courier New", monospace; font-size: 10px; font-weight: bold; color: #FFFF00; text-align: center; padding: 5px 2px; letter-spacing: 1px; }
-
-/* lignes : CSS pur (div fin pivoté), purement esthétiques */
-.ln { position: absolute; height: 0; transform-origin: 0 0; z-index: 1; pointer-events: none; }
-.ln-solid  { border-top: 2px solid  #000080; }
-.ln-solid3 { border-top: 3px solid  #000080; }
-.ln-dash   { border-top: 2px dashed  #000080; }
-.ln-dot    { border-top: 2px dotted  #006600; }
-.ln-double { border-top: 4px double  #000080; }
-.ln-thin   { border-top: 1px dotted  #555555; }
-.ln-trunk  { border-top: 4px solid   #000080; }
-
 /* ===== Structure de l'arbre (lignes de connexion) ===== */
 .org-tree { text-align: center; }
 .org-top { text-align: center; }
@@ -114,9 +81,9 @@ a.btn-return:active { border-style: inset; }
 /* petit trait vertical descendant vers chaque carte */
 .org-child::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 4px; height: 30px; background-color: #000080; }
 
-/* connecteur "bus partagé" entre 3e (membres) et 4e (affiliés) rangée */
+/* connecteur "bus partagé" : relie deux rangées entre elles (traits distribués sur toute la largeur) */
 .busrow { display: flex; justify-content: center; }
-.busrow .cell { width: 130px; padding: 0 6px; height: 16px; position: relative; }
+.busrow .cell { width: 136px; padding: 0 6px; height: 16px; position: relative; flex-shrink: 0; }
 .busrow .cell::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 4px; background-color: #000080; }
 .busrow.down .cell::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background-color: #000080; }
 .busrow.down .cell:first-child::before { left: 50%; }
@@ -124,6 +91,8 @@ a.btn-return:active { border-style: inset; }
 /* la rangée d'affiliés ne dessine plus son propre connecteur du haut */
 .org-children.no-top-connect .org-child::before,
 .org-children.no-top-connect .org-child::after { display: none; }
+/* ...et n'a plus besoin de la marge réservée à ce connecteur : la carte vient coller au bus */
+.org-children.no-top-connect .org-child { padding-top: 0; }
 
 /* ===== Footer ===== */
 .footer-band { background-color: #FFFF00; color: #000000; text-align: center; padding: 10px; font-family: "Courier New", Courier, monospace; font-size: 12px; }
@@ -196,41 +165,16 @@ a.btn-return:active { border-style: inset; }
             <div class="name">M. La Hajj</div>
           </a>
         </div>
-           <div class="org-child">
-          <a class="org-card org-member" href="#" title="M. La Hajj">
-            <span class="photo-default" role="img" aria-label="M. La Hajj"></span>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Louis Cortes">
+            <span class="photo-default" role="img" aria-label="Louis Cortes"></span>
             <div class="role">Membre</div>
             <div class="name">Louis Cortes</div>
           </a>
         </div>
       </div>
 
-      <!-- trait vertical descendant -->
-      <div class="org-connector-down"></div>
-
-      <!-- Membres (2e rangée) -->
-      <div class="org-children">
-        <div class="org-child">
-          <a class="org-card org-member" href="#" title="Lucas M."><span class="photo-default" role="img" aria-label="Lucas M."></span><div class="role">Membre</div><div class="name">Agnès V.</div></a>
-        </div>
-        <div class="org-child">
-          <a class="org-card org-member" href="#" title="Bao Tremblay"><span class="photo-default" role="img" aria-label="Bao Tremblay"></span><div class="role">Membre</div><div class="name">Ambre H.</div></a>
-        </div>
-        <div class="org-child">
-          <a class="org-card org-member" href="#" title="Soraya K."><span class="photo-default" role="img" aria-label="Soraya K."></span><div class="role">Membre</div><div class="name">J. Barzic.</div></a>
-        </div>
-        <div class="org-child">
-          <a class="org-card org-member" href="#" title="Idriss Vanneau"><span class="photo-default" role="img" aria-label="Idriss Vanneau"></span><div class="role">Membre</div><div class="name">Camille Nguyen</div></a>
-        </div>
-        <div class="org-child">
-          <a class="org-card org-member" href="#" title="Idriss Vanneau"><span class="photo-default" role="img" aria-label="Idriss Vanneau"></span><div class="role">Membre</div><div class="name">Marc-Aurèle N'Goma</div></a>
-        </div>
-        <div class="org-child">
-          <a class="org-card org-member" href="#" title="Tomas Iliev"><span class="photo-default" role="img" aria-label="Tomas Iliev"></span><div class="role">Membre</div><div class="name">Aurélie H.</div></a>
-        </div>
-      </div>
-
-      <!-- bus partagé : 3e rangée (membres) <-> 4e rangée (affiliés) -->
+      <!-- bus partagé : 1re rangée (membres) <-> 2e rangée (membres) -->
       <div class="busrow up">
         <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
       </div>
@@ -238,28 +182,58 @@ a.btn-return:active { border-style: inset; }
         <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
       </div>
 
+      <!-- Membres (2e rangée) -->
+      <div class="org-children no-top-connect">
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Agnès V."><span class="photo-default" role="img" aria-label="Agnès V."></span><div class="role">Membre</div><div class="name">Agnès V.</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Ambre H."><span class="photo-default" role="img" aria-label="Ambre H."></span><div class="role">Membre</div><div class="name">Ambre H.</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="J. Barzic."><span class="photo-default" role="img" aria-label="J. Barzic."></span><div class="role">Membre</div><div class="name">J. Barzic.</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Camille Nguyen"><span class="photo-default" role="img" aria-label="Camille Nguyen"></span><div class="role">Membre</div><div class="name">Camille Nguyen</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="M-A. N'Goma"><span class="photo-default" role="img" aria-label="M-A. N'Goma"></span><div class="role">Membre</div><div class="name">M-A. N'Goma</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-member" href="#" title="Aurélie H."><span class="photo-default" role="img" aria-label="Aurélie H."></span><div class="role">Membre</div><div class="name">Aurélie H.</div></a>
+        </div>
+      </div>
+
+      <!-- bus partagé : 3e rangée (membres) <-> 4e rangée (affiliés) -->
+      <div class="busrow up">
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      </div>
+      <div class="busrow down">
+        <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      </div>
+
       <!-- Affiliés -->
       <div class="org-children no-top-connect">
         <div class="org-child">
-          <a class="org-card org-affil" href="#" title="Théo G."><span class="photo-default" role="img" aria-label="Théo G."></span><div class="role">Affilié</div><div class="name">Scout Chikondi</div></a>
+          <a class="org-card org-affil" href="#" title="Scout Chikondi"><span class="photo-default" role="img" aria-label="Scout Chikondi"></span><div class="role">Affilié</div><div class="name">Scout Chikondi</div></a>
         </div>
         <div class="org-child">
-          <a class="org-card org-affil" href="#" title="Côme Vasseur"><span class="photo-default" role="img" aria-label="Côme Vasseur"></span><div class="role">Affilié</div><div class="name">Samuel E.K</div></a>
+          <a class="org-card org-affil" href="#" title="Samuel E.K"><span class="photo-default" role="img" aria-label="Samuel E.K"></span><div class="role">Affilié</div><div class="name">Samuel E.K</div></a>
         </div>
         <div class="org-child">
-          <a class="org-card org-affil" href="#" title="Ixchel Norg"><span class="photo-default" role="img" aria-label="Ixchel Norg"></span><div class="role">Affilié</div><div class="name">Léna S.</div></a>
+          <a class="org-card org-affil" href="#" title="Léna S."><span class="photo-default" role="img" aria-label="Léna S."></span><div class="role">Affilié</div><div class="name">Léna S.</div></a>
         </div>
         <div class="org-child">
-          <a class="org-card org-affil" href="#" title="Zlatan Mwangi"><span class="photo-default" role="img" aria-label="Zlatan Mwangi"></span><div class="role">Affilié</div><div class="name">Kevin G.</div></a>
+          <a class="org-card org-affil" href="#" title="Kevin G."><span class="photo-default" role="img" aria-label="Kevin G."></span><div class="role">Affilié</div><div class="name">Kevin G.</div></a>
         </div>
         <div class="org-child">
-          <a class="org-card org-affil" href="#" title="Oksana B."><span class="photo-default" role="img" aria-label="Oksana B."></span><div class="role">Affilié</div><div class="name">Sami Maison</div></a>
-        </div>
-             <div class="org-child">
-          <a class="org-card org-affil" href="#" title="Oksana B."><span class="photo-default" role="img" aria-label="Oksana B."></span><div class="role">Affilié</div><div class="name">Sami Maison</div></a>
+          <a class="org-card org-affil" href="#" title="Corentin J."><span class="photo-default" role="img" aria-label="Corentin J."></span><div class="role">Affilié</div><div class="name">Corentin J.</div></a>
         </div>
         <div class="org-child">
-          <a class="org-card org-affil" href="#" title="Rina S."><span class="photo-default" role="img" aria-label="Rina S."></span><div class="role">Affilié</div><div class="name">Anna B.</div></a>
+          <a class="org-card org-affil" href="#" title="Sami Maison"><span class="photo-default" role="img" aria-label="Sami Maison"></span><div class="role">Affilié</div><div class="name">Sami Maison</div></a>
+        </div>
+        <div class="org-child">
+          <a class="org-card org-affil" href="#" title="Anna B."><span class="photo-default" role="img" aria-label="Anna B."></span><div class="role">Affilié</div><div class="name">Anna B.</div></a>
         </div>
       </div>
 
