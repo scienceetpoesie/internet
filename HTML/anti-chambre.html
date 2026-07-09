@@ -1,76 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
 <head>
-    <link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/18.ico" type="image/x-icon">    
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>anti-chambre</title>
+
+    <link rel="icon" href="https://github.com/scienceetpoesie/internet/raw/refs/heads/main/assets/icons/18.ico" type="image/x-icon">
 
     <style>
         body {
             margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #b55987;
-            text-align: center;
+            font-family: sans-serif;
+            background: #b55987;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .container {
             width: 450px;
-            margin: 150px auto;
-            background-color: #d3d3d3; /* gris */
-            border: 2px solid #999;
+            max-width: 90%;
             padding: 20px;
+            text-align: center;
+            background: #d3d3d3;
+            border: 2px solid #999;
+            box-sizing: border-box;
         }
 
         h1 {
+            margin: 0 0 20px;
             font-size: 28px;
-            margin-bottom: 15px;
         }
 
         p {
+            margin: 12px 0;
             font-size: 13px;
-            margin: 10px 0;
         }
 
-        button {
-            margin: 10px;
-            padding: 5px 15px;
+        .buttons {
+            margin: 20px 0;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 6px 18px;
             font-size: 12px;
+            color: #000;
+            text-decoration: none;
+            background: #eee;
             border: 1px solid #666;
-            background-color: #eee;
             cursor: pointer;
         }
-        button:hover {background-color: #ccc;}
-        .small {font-size: 10px; margin-top: 15px; color: #333;}
-        .warning {font-size: 10px;}
+
+        .button:hover {
+            background: #ccc;
+        }
+
+        .warning {
+            font-size: 10px;
+            color: #333;
+        }
     </style>
-
-    <script>
-        function enterSite() {
-            window.location.href = "porno.html";
-        }
-
-        function leaveSite() {
-            window.location.href = "https://www.publicdomainpictures.net/en/hledej.php?hleda=cute";
-        }
-    </script>
 </head>
-    
-<body>
-    <div class="container">
-       <h1>⚠ CONTENU POUR ADULTE ⚠</h1>
-        <p>Cette partie du site contient des images érotiques, voire gores, ou juste dérangeantes<p>
-        
-        <p><strong>Avez vous plus de 18 ans?</strong></p>
 
-        <button onclick="leaveSite()">NON </button>
-        <button onclick="enterSite()">OUI </button>
+<body>
+
+    <div class="container">
+        <h1>⚠ CONTENU POUR ADULTE ⚠</h1>
+
+        <p>Cette partie du site contient des images érotiques, gores ou simplement dérangeantes.</p>
+
+        <p><strong>Avez-vous plus de 18 ans&nbsp;?</strong></p>
+
+        <div class="buttons">
+            <a class="button" href="https://www.publicdomainpictures.net/en/hledej.php?hleda=cute">NON</a>
+            <a class="button" href="porno.html">OUI</a>
+        </div>
 
         <div class="warning">
-            En entrant, vous certifiez avoir + de 18 ans.<br>
+            En entrant, vous certifiez avoir plus de 18 ans.
         </div>
     </div>
 
 </body>
-</html>
 
+</html>
