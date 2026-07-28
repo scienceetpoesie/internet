@@ -915,7 +915,7 @@ document.addEventListener('click',function(e){
 })();
 
 /* ══ Nav speech ══ */
-var navData=[{text:"Review",pitch:1},{text:"Pamphlets",pitch:0.85},{text:"Encyclopaedia",pitch:1.15},{text:null,pitch:0},{text:"Publications",pitch:1.2},{text:"Sociogony",pitch:0.9}];
+var navData=[{text:"Journal",pitch:1},{text:"Pamphlets",pitch:0.85},{text:"Encyclopaedia",pitch:1.15},{text:null,pitch:0},{text:"Publications",pitch:1.2},{text:"Sociogony",pitch:0.9}];
 var iframeCode=['<!DOCTYPE html><html><body><script>','var vx=[];function lv(){vx=speechSynthesis.getVoices();}lv();','if(speechSynthesis.onvoiceschanged!==undefined)speechSynthesis.onvoiceschanged=lv;','window.addEventListener("message",function(e){','  if(!e.data||e.data.t!=="s")return;','  speechSynthesis.cancel();','  var u=new SpeechSynthesisUtterance(e.data.w);','  u.lang=e.data.lg||"fr-FR";u.pitch=e.data.p;u.rate=e.data.r;u.volume=1;','  var fr=vx.find(function(v){return v.lang.startsWith((e.data.lg||"fr").slice(0,2));});','  if(fr)u.voice=fr;speechSynthesis.speak(u);','});<\/script></body></html>'].join('');
 var blob=new Blob([iframeCode],{type:'text/html'});
 var burl=URL.createObjectURL(blob);
