@@ -272,6 +272,11 @@ var LISTE_CDN = "https://cdn.jsdelivr.net/gh/" + REPO + "@" + BRANCH + "/" + BAS
 
 // Valeurs effectives (relues depuis liste.json s'il les fournit)
 var repo = REPO, branch = BRANCH, basePath = BASE_PATH;
+// Référence utilisée dans les URLs d'images : le commit publié avec le
+// catalogue si l'appli le fournit, sinon la branche. Une image renumérotée
+// garde son nom en changeant de contenu ; épinglée sur le commit, elle change
+// d'URL à chaque publication, donc aucun cache ne peut resservir l'ancienne.
+var ref = BRANCH;
 
 // Remplis dynamiquement depuis le catalogue
 var images = [];          // URLs d'images finales (CDN)
@@ -288,7 +293,7 @@ var currentIndex = 0;
 // segment (espaces, accents…) tout en gardant les "/".
 function urlImage(fichier) {
     var chemin = (basePath + "/" + fichier).split("/").map(encodeURIComponent).join("/");
-    return "https://cdn.jsdelivr.net/gh/" + repo + "@" + branch + "/" + chemin;
+    return "https://cdn.jsdelivr.net/gh/" + repo + "@" + ref + "/" + chemin;
 }
 
 // Transforme le catalogue JSON en listes exploitables (images + catégories).
@@ -296,6 +301,7 @@ function construireDepuisCatalogue(data) {
     repo     = data.repo      || REPO;
     branch   = data.branch    || BRANCH;
     basePath = data.base_path || BASE_PATH;
+    ref      = data.commit    || branch;   // commit précis si l'appli l'a publié
 
     var items = Array.isArray(data.images) ? data.images : [];
     images = [];
@@ -517,7 +523,8 @@ function chargerCatalogue() {
     document.getElementById("lb-loader").classList.add("visible");
     fetch(LISTE_RAW, { cache: "no-store" })
         .then(function (r) { if (!r.ok) throw new Error("raw"); return r.json(); })
-        .catch(function () { return fetch(LISTE_CDN).then(function (r) {
+        .catch(function () { return fetch(LISTE_CDN + "?t=" + Date.now(),
+                                          { cache: "no-store" }).then(function (r) {
             if (!r.ok) throw new Error("cdn"); return r.json();
         }); })
         .then(function (data) {
