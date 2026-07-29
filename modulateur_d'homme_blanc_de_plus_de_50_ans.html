@@ -21,6 +21,8 @@
   --bord-hi:   #b03048;
   --bord-dk:   #3e0a12;
   --sep:       #a09070;
+  /* largeur de l'écran (canvas) — sert aussi au cadre et au bandeau */
+  --screenW:   min(720px, calc(100vw - 132px));
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -87,6 +89,7 @@ body {
   border-right:  3px solid var(--shadow);
   box-shadow: 2px 2px 8px rgba(0,0,0,0.35);
   /* Le cadre ne dépasse pas la largeur disponible */
+  width: calc(var(--screenW) + 18px);   /* écran + padding 6 + bordures 3, des deux côtés */
   max-width: calc(100vw - 120px); /* 120px = place pour les deux boutons + gaps */
   flex-shrink: 1;
 }
@@ -94,7 +97,7 @@ body {
 canvas {
   display: block;
   /* Largeur fluide : 720px max, mais réduit si nécessaire */
-  width: min(720px, calc(100vw - 132px));
+  width: var(--screenW);
   /* Hauteur proportionnelle au ratio 720×480 = 3:2 */
   aspect-ratio: 3 / 2;
   height: auto;
@@ -107,12 +110,55 @@ canvas {
   border-top:  3px solid #ff6666; border-left:  3px solid #ff4444;
   border-bottom:3px solid #660000; border-right: 3px solid #880000;
   cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  padding:0;
+}
+/* Flèche = glyphe d'une typo sérif, pas de tracé maison */
+#imgBtn .arrow {
+  display: block;
+  font-family: 'Times New Roman', Georgia, 'Nimbus Roman', serif;
+  font-size: 40px;
+  line-height: 1;
+  color: #000;
+  user-select: none;
 }
 #imgBtn:active {
   border-top:  3px solid #660000; border-left:  3px solid #880000;
   border-bottom:3px solid #ff6666; border-right: 3px solid #ff4444;
   background: #aa0000;
 }
+/* push in : la flèche s'enfonce avec le bouton et change de couleur */
+#imgBtn:active .arrow {
+  color: #f2e2c0;
+  transform: translate(2px, 2px);
+}
+
+/* ── Infobulles fond blanc / texte noir sérif ── */
+.tip { position: relative; }
+.tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  color: #000000;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 13px;
+  font-style: normal;
+  letter-spacing: 0;
+  white-space: nowrap;
+  padding: 3px 8px;
+  border: 1px solid #000;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .12s;
+  z-index: 20;
+}
+.tip:hover::after { opacity: 1; }
+/* le bouton de droite : bulle alignée à droite pour ne pas sortir de l'écran */
+#imgBtn.tip::after { left: auto; right: 0; transform: none; }
 
 #soundBtn {
   width:60px; height:60px; flex-shrink:0;
@@ -224,30 +270,57 @@ canvas {
   display: inline-block;
 }
 
+/* ── Bandeau : plaque de titre + bloc nom/patch, style plaque gravée 90's ── */
 #infoLine {
   font-family: Helvetica, Arial, sans-serif;
-  width: min(720px, calc(100vw - 132px));
-  max-width: 90vw;
-  /* Supprimé le padding-left fixe de 272px — on utilise flexbox avec gap */
+  /* exactement la largeur du cadre de l'écran */
+  width: calc(var(--screenW) + 18px);
+  max-width: calc(100vw - 120px);
   padding: 0;
-  height: 32px;
   display: flex;
-  align-items: center;
-  gap: 16px;
+  align-items: stretch;
+  gap: 0;
   flex-shrink: 0;
+  background: var(--bg2);
+  border-top:   2px solid var(--shadow);
+  border-left:  2px solid var(--shadow);
+  border-bottom:2px solid var(--bg3);
+  border-right: 2px solid var(--bg3);
+  box-shadow: inset 1px 1px 4px rgba(0,0,0,0.18);
 }
 
 #mainTitle {
-  /* Aligné à gauche, séparé du reste par une barre fine */
-  border-right: 1px solid var(--sep);
-  padding-right: 16px;
+  /* Plaque gravée à gauche du bandeau */
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
+  padding: 8px 14px;
+  background: var(--bg3);
+  border-right: 2px solid var(--shadow);
+  border-top:   2px solid #ede0cc;
+  border-left:  2px solid #ede0cc;
+  border-bottom:2px solid var(--shadow);
+  color: var(--gold-dk);
+  opacity: 1;
+}
+
+#nameBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 14px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 #imgLabel {
-  font-size:13px; color: var(--text-dim);
-  letter-spacing:.04em; font-style:italic;
+  font-size:17px; color: var(--text);
+  letter-spacing:.02em; font-style:normal;
+  font-weight: bold;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.35);
   white-space:nowrap;
+  overflow: hidden; text-overflow: ellipsis;
 }
 #synthInfo {
   font-size:10px; color: var(--text-info);
@@ -258,31 +331,76 @@ canvas {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* ── Sliders « vintage 90's » : rail creusé carré + curseur biseauté ── */
 .slider-row input[type=range] {
   flex:1; cursor:pointer;
   -webkit-appearance:none; appearance:none;
-  height:5px;
-  border-radius:3px;
+  height:18px;
+  border-radius:0;
   outline:none;
   touch-action: none;        /* ← empêche le scroll pendant le glissement */
-  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4);
+  padding: 0 2px;
+  border-top:  2px solid var(--shadow);
+  border-left: 2px solid var(--shadow);
+  border-bottom:2px solid #ede0cc;
+  border-right: 2px solid #ede0cc;
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.45);
   background: linear-gradient(to right, var(--shadow) 0%, var(--shadow) 0%, var(--gold) 0%, var(--gold) 100%);
 }
-  .slider-row input[type=range]::-webkit-slider-thumb {
+.slider-row input[type=range]::-webkit-slider-thumb {
   -webkit-appearance:none; appearance:none;
-  width:22px; height:22px;
-  border-radius:50%;
-  background: var(--bord);
-  border: 2px solid var(--bord-hi);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12);
+  width:14px; height:22px;
+  border-radius:0;
+  background: var(--bg3);
+  border-top:  2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-bottom:2px solid #4a3d28;
+  border-right: 2px solid #4a3d28;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
   cursor:pointer;
 }
 .slider-row input[type=range]::-moz-range-thumb {
-  width:22px; height:22px; border-radius:50%;
-  background: var(--bord);
-  border: 2px solid var(--bord-hi);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.55);
+  width:14px; height:22px;
+  border-radius:0;
+  background: var(--bg3);
+  border-top:  2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-bottom:2px solid #4a3d28;
+  border-right: 2px solid #4a3d28;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
   cursor:pointer;
+}
+.slider-row input[type=range]:active::-webkit-slider-thumb {
+  border-top:  2px solid #4a3d28;
+  border-left: 2px solid #4a3d28;
+  border-bottom:2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  background: var(--bg2);
+}
+
+/* ── Lisibilité : libellés et valeurs plus grands ── */
+.slider-row label, .btn-row label { font-size:13px; letter-spacing:.06em; }
+.slider-row span { font-size:14px; width:52px; }
+.section-label { font-size:12px; letter-spacing:.14em; color: var(--gold-dk); }
+
+/* ── Bouton dé ── */
+/* « Hasard : [dé] » : symétrique de l'axe, aligné sur la fin des sliders
+   (16px de gap + 52px de valeur numérique = 68px depuis le bord droit) */
+#randLabel { width:auto !important; margin-left:auto; text-align:right; }
+#randBtn {
+  width:48px; height:48px; font-size:34px; line-height:1;
+  margin-right: 68px;
+  background: var(--bg); color: var(--text);
+  border-top:2px solid var(--bg3); border-left:2px solid var(--bg3);
+  border-bottom:2px solid var(--shadow); border-right:2px solid var(--shadow);
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+}
+#randBtn:active {
+  border-top:2px solid var(--shadow); border-left:2px solid var(--shadow);
+  border-bottom:2px solid var(--bg3); border-right:2px solid var(--bg3);
+  background: var(--bg2);
+  color: var(--bord);
 }
 @media (max-width: 640px) {
   body {
@@ -341,35 +459,37 @@ canvas {
 </head>
 <body>
 <div class="scene">
-  <button id="soundBtn">&#9834;</button>
+  <button id="soundBtn" class="tip" data-tip="Activer la musique">&#9834;</button>
   <div class="canvas-frame">
     <canvas id="c" width="720" height="480"></canvas>
   </div>
-  <button id="imgBtn"></button>
+  <button id="imgBtn" class="tip" data-tip="Choisir un autre homme blanc"><span class="arrow">&#8594;</span></button>
 </div>
 
 <div id="infoLine">
   <span id="mainTitle">Modulateur d'homme blanc de 50+</span>
-  <span id="imgLabel">—</span>
-  <span id="synthInfo"></span>
+  <span id="nameBlock">
+    <span id="imgLabel">—</span>
+    <span id="synthInfo"></span>
+  </span>
 </div>
 
 <div class="controls">
   <div class="section-label">Taille :</div>
-  <div class="slider-row"><label>Hauteur :</label><input type="range" id="scaleY" min="0.3" max="3" step="0.01" value="1.00"><span id="scaleYVal">1.00</span></div>
-  <div class="slider-row"><label>Largeur :</label><input type="range" id="scaleX" min="0.3" max="3" step="0.01" value="1.45"><span id="scaleXVal">1.45</span></div>
+  <div class="slider-row"><label>Hauteur :</label><input type="range" id="scaleY" min="0.3" max="3" step="0.01" value="1.04"><span id="scaleYVal">1.04</span></div>
+  <div class="slider-row"><label>Largeur :</label><input type="range" id="scaleX" min="0.3" max="3" step="0.01" value="0.94"><span id="scaleXVal">0.94</span></div>
   <hr class="separator">
   <div class="section-label">Ondulation :</div>
-  <div class="slider-row"><label>Répétition :</label><input type="range" id="rep" min="1" max="60" step="0.5" value="7"><span id="repVal">7.0</span></div>
-  <div class="slider-row"><label>Vitesse :</label><input type="range" id="spd" min="0" max="50" step="0.1" value="3"><span id="spdVal">3.0</span></div>
-  <div class="slider-row"><label>Amplitude :</label><input type="range" id="amp" min="0" max="0.35" step="0.005" value="0.04"><span id="ampVal">0.04</span></div>
-  <div class="btn-row"><label>Axe :</label><button id="dirBtn">Y</button></div>
+  <div class="slider-row"><label>Répétition :</label><input type="range" id="rep" min="1" max="60" step="0.5" value="17"><span id="repVal">17.0</span></div>
+  <div class="slider-row"><label>Vitesse :</label><input type="range" id="spd" min="0" max="50" step="0.1" value="4.9"><span id="spdVal">4.9</span></div>
+  <div class="slider-row"><label>Amplitude :</label><input type="range" id="amp" min="0" max="0.35" step="0.005" value="0.12"><span id="ampVal">0.12</span></div>
+  <div class="btn-row"><label>Axe :</label><button id="dirBtn">Y</button><label id="randLabel">Hasard :</label><button id="randBtn" title="Réglages au hasard">&#9860;</button></div>
   <div class="section-label">Chaos :</div>
-  <div class="slider-row"><input type="range" id="randomSlider" min="0" max="1.8" step="0.01" value="0"><span id="randomVal">0.00</span></div>
+  <div class="slider-row"><input type="range" id="randomSlider" min="0" max="1.8" step="0.01" value="1.11"><span id="randomVal">1.11</span></div>
 </div>
 
 <script>
-var DEF = { scaleY:1.00, scaleX:1.45, rep:7, spd:3, amp:0.04, dir:1, chaos:0 };
+var DEF = { scaleY:1.04, scaleX:0.94, rep:17, spd:4.9, amp:0.12, dir:1, chaos:1.11 };
 
 var BASE = 'https://raw.githubusercontent.com/scienceetpoesie/notre-entente/main/modulove%20portaits/';
 
@@ -537,7 +657,11 @@ function applyParams(p){
 function updateSliderFill(el){
   var min=+el.min, max=+el.max, val=+el.value;
   var pct = ((val - min) / (max - min) * 100).toFixed(1);
-  el.style.background = 'linear-gradient(to right, #7a6a52 0%, #7a6a52 '+pct+'%, #9a7c3a '+pct+'%, #9a7c3a 100%)';
+  /* le slider de chaos est gris pour le distinguer des autres */
+  var chaos = (el.id === 'randomSlider');
+  var fill  = chaos ? '#3b0a5e' : '#7a6a52';   /* traînée violet foncé pour le chaos */
+  var rest  = chaos ? '#9e9e9e' : '#9a7c3a';
+  el.style.background = 'linear-gradient(to right, '+fill+' 0%, '+fill+' '+pct+'%, '+rest+' '+pct+'%, '+rest+' 100%)';
 }
 function initAllSliders(){
   document.querySelectorAll('input[type=range]').forEach(function(s){ updateSliderFill(s); });
@@ -550,6 +674,26 @@ document.getElementById('scaleX').oninput = function(e){ gScaleX=+e.target.value
 document.getElementById('scaleY').oninput = function(e){ gScaleY=+e.target.value; document.getElementById('scaleYVal').textContent=(+gScaleY).toFixed(2); updateSliderFill(e.target); };
 document.getElementById('randomSlider').oninput = function(e){ gChaos=+e.target.value; document.getElementById('randomVal').textContent=(+gChaos).toFixed(2); updateSliderFill(e.target); };
 document.getElementById('imgBtn').onclick = function(){ imgIndex=(imgIndex+1)%images.length; loadImage(imgIndex,false); };
+
+/* ── Bouton dé : réglages au hasard (1 chance sur 3 d'avoir chaos = 0) ── */
+function rnd(min,max,step){
+  var n = Math.floor(Math.random()*((max-min)/step+1));
+  return +(min + n*step).toFixed(4);
+}
+document.getElementById('randBtn').onclick = function(){
+  var p = {
+    scaleY: rnd(0.3, 3, 0.01),
+    scaleX: rnd(0.3, 3, 0.01),
+    rep:    rnd(1, 60, 0.5),
+    spd:    rnd(0, 50, 0.1),
+    amp:    rnd(0, 0.35, 0.005),
+    dir:    Math.random() < 0.5 ? 0 : 1,
+    chaos:  Math.random() < 1/3 ? 0 : rnd(0, 1.8, 0.01)
+  };
+  applyParams(p);
+  applyWaveformSwitch(images[imgIndex].synth||'steiniger');
+  updatePatchLabel(images[imgIndex].synth||'steiniger');
+};
 
 document.getElementById('dirBtn').onclick = function(){
   gDir = gDir<0.5 ? 1 : 0;
