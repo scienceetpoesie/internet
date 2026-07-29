@@ -10,6 +10,7 @@
     "HORREUR",
     "SCIENCE",
     "LÉGUMES",
+    "PROPAGANDE",
     "MASCOTTES",
     "GARFIELD",
     "PUBLICITÉ",
@@ -20,6 +21,7 @@
     "TINTIN",
     "DÉGEULASSE",
     "CLASSIQUE",
+    "MATHÉMATIQUE",
     "MODERNE"
   ],
   "images": [
@@ -498,42 +500,6 @@
       "tags": []
     },
     {
-      "categorie": "COMPLOTISTE",
-      "fichier": "COMPLOTISTE/COMPLOTISTE 080.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "COMPLOTISTE",
-      "fichier": "COMPLOTISTE/COMPLOTISTE 081.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "COMPLOTISTE",
-      "fichier": "COMPLOTISTE/COMPLOTISTE 082.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "COMPLOTISTE",
-      "fichier": "COMPLOTISTE/COMPLOTISTE 083.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "COMPLOTISTE",
-      "fichier": "COMPLOTISTE/COMPLOTISTE 085.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "COMPLOTISTE",
-      "fichier": "COMPLOTISTE/COMPLOTISTE 086.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
       "categorie": "CARTOGRAPHIE",
       "fichier": "CARTOGRAPHIE/CARTOGRAPHIE 001.webp",
       "titre": "",
@@ -596,18 +562,6 @@
     {
       "categorie": "CARTOGRAPHIE",
       "fichier": "CARTOGRAPHIE/CARTOGRAPHIE 011.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CARTOGRAPHIE",
-      "fichier": "CARTOGRAPHIE/CARTOGRAPHIE 012.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "CARTOGRAPHIE",
-      "fichier": "CARTOGRAPHIE/CARTOGRAPHIE 013.webp",
       "titre": "",
       "tags": []
     },
@@ -836,18 +790,6 @@
     {
       "categorie": "HORREUR",
       "fichier": "HORREUR/HORREUR 013.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 014.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "HORREUR",
-      "fichier": "HORREUR/HORREUR 015.webp",
       "titre": "",
       "tags": []
     },
@@ -1704,18 +1646,6 @@
       "tags": []
     },
     {
-      "categorie": "GARFIELD",
-      "fichier": "GARFIELD/GARFIELD 022.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "GARFIELD",
-      "fichier": "GARFIELD/GARFIELD 023.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
       "categorie": "PUBLICITÉ",
       "fichier": "PUBLICITÉ/PUBLICITÉ 001.webp",
       "titre": "",
@@ -1843,12 +1773,6 @@
     },
     {
       "categorie": "PUBLICITÉ",
-      "fichier": "PUBLICITÉ/PUBLICITÉ 022.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "PUBLICITÉ",
       "fichier": "PUBLICITÉ/PUBLICITÉ 023.webp",
       "titre": "",
       "tags": []
@@ -1903,49 +1827,67 @@
     },
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 001.webp",
+      "fichier": "AMERICANA/__tmp_0__.webp",
       "titre": "",
       "tags": []
     },
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 002.webp",
+      "fichier": "AMERICANA/__tmp_1__.webp",
       "titre": "",
       "tags": []
     },
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 003.webp",
+      "fichier": "AMERICANA/__tmp_2__.webp",
       "titre": "",
       "tags": []
     },
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 004.webp",
+      "fichier": "AMERICANA/__tmp_3__.webp",
       "titre": "",
       "tags": []
     },
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 005.webp",
+      "fichier": "AMERICANA/__tmp_4__.webp",
       "titre": "",
       "tags": []
     },
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 006.webp",
+      "fichier": "AMERICANA/__tmp_5__.webp",
       "titre": "",
       "tags": []
     },
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 007.webp",
+      "fichier": "AMERICANA/__tmp_6__.webp",
       "titre": "",
       "tags": []
     },
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 008.webp",
+      "fichier": "AMERICANA/__tmp_7__.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/__tmp_8__.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/__tmp_9__.webp",
+      "titre": "",
+      "tags": []
+    },
+    {
+      "categorie": "AMERICANA",
+      "fichier": "AMERICANA/__tmp_10__.webp",
       "titre": "",
       "tags": []
     },
@@ -1957,85 +1899,7 @@
     },
     {
       "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 010.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 011.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
       "fichier": "AMERICANA/AMERICANA 013.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 014.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 015.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 016.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 017.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 018.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 019.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 020.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 021.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 022.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 023.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "AMERICANA",
-      "fichier": "AMERICANA/AMERICANA 024.webp",
       "titre": "",
       "tags": []
     },
@@ -2216,18 +2080,6 @@
     {
       "categorie": "MÉTAPHYSIQUE",
       "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 030.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MÉTAPHYSIQUE",
-      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 031.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MÉTAPHYSIQUE",
-      "fichier": "MÉTAPHYSIQUE/MÉTAPHYSIQUE 032.webp",
       "titre": "",
       "tags": []
     },
@@ -3680,12 +3532,6 @@
     {
       "categorie": "MODERNE",
       "fichier": "MODERNE/MODERNE 115.webp",
-      "titre": "",
-      "tags": []
-    },
-    {
-      "categorie": "MODERNE",
-      "fichier": "MODERNE/MODERNE 116.webp",
       "titre": "",
       "tags": []
     }
